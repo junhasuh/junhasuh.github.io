@@ -1,0 +1,774 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="DevOps·Cloud Engineer 신입 서준하의 포트폴리오. Cloud Run·온프레미스 배포 조율과 부분 실패 롤백(Hibiscus), Jenkins·Ansible·Kubernetes 파이프라인(영주로그), Terraform·CKA.">
+<meta name="author" content="서준하 (Junha Suh)">
+<link rel="canonical" href="https://junhasuh.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="서준하 포트폴리오">
+<meta property="og:title" content="서준하 · DevOps / Cloud Engineer 포트폴리오">
+<meta property="og:description" content="DevOps·Cloud Engineer 신입 서준하의 포트폴리오. Cloud Run·온프레미스 배포 조율과 부분 실패 롤백(Hibiscus), Jenkins·Ansible·Kubernetes 파이프라인(영주로그), Terraform·CKA.">
+<meta property="og:url" content="https://junhasuh.github.io/">
+<meta property="og:image" content="https://junhasuh.github.io/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#fbfcfb" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f1413" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+/* base reset (the artifact host used to supply this) */
+html{-webkit-text-size-adjust:100%}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<title>서준하 포트폴리오</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600&display=swap">
+<style>
+/* Layout: one reading column (max 880px) that keeps the PDF's page rhythm; each PDF page becomes a chapter, diagrams are CSS grids that restack at phone width */
+:root{
+  --bg:#fbfcfb;
+  --surface:#f1f4f3;
+  --surface-ok:#eaf3f0;
+  --line-ok:#c8ddd6;
+  --surface-bad:#fbefeb;
+  --line-bad:#ecd2c8;
+  --bad:#a9432a;
+  --fg:#1a2421;
+  --muted:#5a6662;
+  --faint:#86908c;
+  --line:#dbe2df;
+  --accent:#0e6c5e;
+  --accent-soft:#0e6c5e1f;
+  --shot-bg:#ffffff;
+  --f-sans:"IBM Plex Sans KR","Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1413; --surface:#171e1c; --surface-ok:#12221e; --line-ok:#24433b;
+    --surface-bad:#271915; --line-bad:#4a2c22; --bad:#ee9a82;
+    --fg:#e3eae7; --muted:#9ba8a3; --faint:#6e7a76; --line:#26302d;
+    --accent:#56c4ad; --accent-soft:#56c4ad24; --shot-bg:#ffffff;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f1413; --surface:#171e1c; --surface-ok:#12221e; --line-ok:#24433b;
+  --surface-bad:#271915; --line-bad:#4a2c22; --bad:#ee9a82;
+  --fg:#e3eae7; --muted:#9ba8a3; --faint:#6e7a76; --line:#26302d;
+  --accent:#56c4ad; --accent-soft:#56c4ad24; --shot-bg:#ffffff;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{
+  background:var(--bg); color:var(--fg);
+  font-family:var(--f-sans); font-size:16px; line-height:1.75;
+  word-break:keep-all; overflow-wrap:anywhere;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,p,ul,ol,dl,dd,figure{margin:0}
+ul,ol{padding:0;list-style:none}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+code,.mono{font-family:var(--f-mono);font-size:.9em}
+.wrap{max-width:880px;margin-inline:auto;padding-inline:20px}
+
+/* ---------- top bar ---------- */
+.bar{
+  position:sticky; top:env(safe-area-inset-top,0px); z-index:10;
+  background:var(--bg);
+  background:color-mix(in srgb,var(--bg) 90%,transparent);
+  -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.bar-id{font-size:.82rem;color:var(--muted);white-space:nowrap}
+.bar-id b{color:var(--fg);font-weight:500}
+.bar nav{display:flex;gap:18px;font-size:.84rem}
+.bar nav a{color:var(--muted);text-decoration:none;white-space:nowrap}
+.bar nav a:hover{color:var(--accent)}
+@media (max-width:560px){.bar-id span{display:none}.bar nav{gap:14px}}
+
+/* ---------- hero ---------- */
+.hero{padding-block:48px 56px;display:flex;flex-direction:column;gap:40px}
+.kicker{font-size:.78rem;letter-spacing:.06em;color:var(--faint)}
+.idrow{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:28px}
+.who{display:flex;flex-direction:column;gap:10px}
+.name{font-size:clamp(2.4rem,7vw,3.2rem);font-weight:300;line-height:1.1;letter-spacing:-.01em}
+.role{color:var(--accent);font-size:1.05rem}
+.contact{display:grid;grid-template-columns:auto auto;gap:8px 18px;font-size:.9rem;align-items:center}
+.contact .c-val{font-family:var(--f-mono);font-size:.86rem;user-select:all}
+.contact .c-label{color:var(--faint);font-size:.78rem;letter-spacing:.04em}
+.contact-links{grid-column:1 / -1;display:flex;gap:20px;padding-top:4px}
+.contact-links a,.refs a,.proj-card .go{text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px}
+.c-item{display:flex;align-items:center;gap:8px}
+.copy{
+  font:inherit;font-size:.72rem;color:var(--muted);background:transparent;
+  border:1px solid var(--line);border-radius:4px;padding:1px 7px;cursor:pointer;line-height:1.6;
+}
+.copy:hover{color:var(--accent);border-color:var(--accent)}
+.headline{font-size:clamp(1.8rem,4.6vw,2.55rem);font-weight:300;line-height:1.3;text-wrap:balance;letter-spacing:-.01em}
+.lead{font-size:1.06rem;color:var(--fg);max-width:44em}
+
+.sub-label{font-size:.84rem;font-weight:600;color:var(--accent);letter-spacing:.02em}
+.proj-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:720px){.proj-cards{grid-template-columns:1fr}}
+.proj-card{
+  display:flex;flex-direction:column;gap:8px;padding:22px 22px 20px;
+  background:var(--surface);border-radius:8px;color:var(--fg);text-decoration:none;
+  border:1px solid transparent;transition:border-color .15s;
+}
+.proj-card:hover{border-color:var(--line-ok)}
+.proj-card .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.proj-card h3{font-size:1.3rem;font-weight:400}
+.proj-card .go{font-size:.78rem;color:var(--accent);white-space:nowrap}
+.proj-card .meta{font-size:.8rem;color:var(--faint)}
+.proj-card .theme{font-size:.92rem;font-weight:500;color:var(--accent)}
+.proj-card p.body{font-size:.94rem;line-height:1.7}
+
+.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.skills > div{padding:4px 20px;border-left:1px solid var(--line);display:flex;flex-direction:column;gap:6px}
+.skills > div:first-child{border-left:0;padding-left:0}
+.skills h3{font-size:.98rem;font-weight:500}
+.skills h3 a{color:var(--fg);text-decoration:none;border-bottom:1px solid var(--line-ok)}
+.skills h3 a:hover{color:var(--accent);border-color:currentColor}
+.skills li{font-size:.9rem;color:var(--muted);line-height:1.6}
+.skills li a{color:inherit;text-decoration:underline;text-decoration-color:var(--line-ok);text-underline-offset:3px}
+.skills li a:hover{color:var(--accent)}
+@media (max-width:600px){
+  .skills{grid-template-columns:1fr;gap:14px}
+  .skills > div{border-left:0;padding:14px 0 0;border-top:1px solid var(--line)}
+  .skills > div:first-child{border-top:0;padding-top:0}
+}
+.creds{display:flex;flex-direction:column;gap:4px;padding-top:18px;border-top:1px solid var(--line)}
+.creds .certs{color:var(--accent);font-size:.94rem}
+.creds .edu{color:var(--muted);font-size:.88rem}
+
+/* ---------- chapters ---------- */
+.project{border-top:1.5px solid var(--fg);scroll-margin-top:50px}
+.chapter{padding-block:56px;display:flex;flex-direction:column;gap:30px;scroll-margin-top:56px}
+.chapter + .chapter{border-top:1px solid var(--line)}
+.ch-head{display:flex;flex-direction:column;gap:12px}
+.eyebrow{font-size:.78rem;font-weight:600;color:var(--accent);letter-spacing:.03em}
+.ch-head h2{font-size:clamp(1.6rem,4vw,2.15rem);font-weight:300;line-height:1.3;text-wrap:balance;letter-spacing:-.01em}
+.ch-meta{font-size:.85rem;color:var(--faint)}
+.block{display:flex;flex-direction:column;gap:8px}
+.block h3{font-size:1.1rem;font-weight:500;color:var(--accent);line-height:1.5}
+.note{font-size:.85rem;color:var(--muted)}
+.stack-tags{font-size:.82rem;color:var(--faint);font-family:var(--f-mono)}
+.refs{display:flex;flex-wrap:wrap;gap:10px 22px;font-size:.88rem}
+.refs a::after{content:" ↗";font-size:.8em}
+
+figure.fig{display:flex;flex-direction:column;gap:10px}
+figcaption{font-size:.8rem;color:var(--faint)}
+
+/* node primitives */
+.node{
+  border-radius:6px;border:1px solid var(--line-ok);background:var(--surface-ok);
+  color:var(--accent);padding:12px 14px;text-align:center;font-size:.92rem;line-height:1.5;
+}
+.node small{display:block;color:var(--muted);font-size:.78rem;margin-top:3px}
+.node.team{background:var(--surface);border-color:var(--line);color:var(--muted)}
+.node .tag{font-weight:600}
+.node .tag::after{content:"|";margin:0 .6em;font-weight:300;opacity:.5}
+
+/* page-2 fork flow */
+.flow{display:flex;flex-direction:column}
+.v-arrow{height:26px;position:relative}
+.v-arrow::before,.fork i::before,.join::after{
+  content:"";position:absolute;left:50%;top:0;bottom:6px;width:1.5px;margin-left:-.75px;background:var(--accent);
+}
+.v-arrow::after,.fork i::after,.join i{
+  content:"";position:absolute;left:50%;bottom:0;margin-left:-4.5px;
+  border-left:4.5px solid transparent;border-right:4.5px solid transparent;border-top:6px solid var(--accent);
+}
+.fork{height:34px;position:relative}
+.fork::before{content:"";position:absolute;left:50%;top:0;height:12px;width:1.5px;margin-left:-.75px;background:var(--accent)}
+.fork::after{content:"";position:absolute;top:12px;left:calc(25% - 4px);right:calc(25% - 4px);height:1.5px;background:var(--accent)}
+.fork i{position:absolute;top:12px;bottom:0;width:0}
+.fork i:first-child{left:calc(25% - 4px)}
+.fork i:last-child{left:calc(75% + 4px)}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.join{height:34px;position:relative}
+.join::before{content:"";position:absolute;top:0;height:20px;left:calc(25% - 4px);right:calc(25% - 4px);border:1.5px solid var(--accent);border-top:0;border-radius:0 0 2px 2px}
+.join::after{top:20px}
+.join i{bottom:0}
+
+/* sequence: left steps with failure branches */
+.seq{display:flex;flex-direction:column;gap:22px}
+.seq-row{display:grid;grid-template-columns:minmax(0,1fr) 44px minmax(0,1fr);align-items:stretch}
+.seq .step{position:relative;display:flex;flex-direction:column;justify-content:center}
+.seq-row + .seq-row .step::before{
+  content:"";position:absolute;left:50%;top:-23px;height:17px;width:1.5px;margin-left:-.75px;background:var(--accent);
+}
+.seq-row + .seq-row .step::after{
+  content:"";position:absolute;left:50%;top:-8px;margin-left:-4.5px;
+  border-left:4.5px solid transparent;border-right:4.5px solid transparent;border-top:6px solid var(--accent);
+}
+.h-arrow{position:relative;align-self:center;height:10px;--c:var(--bad)}
+.h-arrow.ok{--c:var(--accent)}
+.h-arrow::before{content:"";position:absolute;left:8px;right:12px;top:50%;height:1.5px;margin-top:-.75px;background:var(--c)}
+.h-arrow::after{content:"";position:absolute;right:6px;top:50%;margin-top:-4.5px;border-top:4.5px solid transparent;border-bottom:4.5px solid transparent;border-left:6px solid var(--c)}
+.out{
+  border-radius:6px;padding:12px 14px;text-align:center;font-size:.92rem;line-height:1.5;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--line-bad);background:var(--surface-bad);color:var(--bad);
+}
+.out.ok{border-color:var(--line-ok);background:var(--surface-ok);color:var(--accent)}
+.out.none{visibility:hidden}
+.step .num{font-family:var(--f-mono);margin-right:.5em}
+@media (max-width:520px){
+  .seq-row{grid-template-columns:minmax(0,1.1fr) 28px minmax(0,1fr)}
+  .node,.out{font-size:.84rem;padding:10px}
+  .h-arrow::before{left:4px;right:8px}.h-arrow::after{right:3px}
+}
+
+/* label/value rows */
+.kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px 22px}
+.kv dt{font-weight:600;color:var(--accent);font-size:.92rem;line-height:1.75}
+.kv dd{line-height:1.75}
+.kv.boxed{gap:0;border:1px solid var(--line);border-radius:8px;background:var(--surface);overflow:hidden}
+.kv.boxed dt,.kv.boxed dd{padding:11px 16px;border-top:1px solid var(--line);font-size:.92rem}
+.kv.boxed dt{background:var(--accent-soft)}
+.kv.boxed dt:first-of-type,.kv.boxed dd:first-of-type{border-top:0}
+
+/* timeline (page 4) */
+.tl{display:grid;grid-template-columns:88px minmax(0,1fr);gap:14px 12px;align-items:center}
+.tl-label{font-size:.85rem;color:var(--muted)}
+.tl-steps,.tl-track{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px}
+.tl-steps li{
+  position:relative;border:1px solid var(--line);background:var(--surface);border-radius:6px;
+  padding:10px 6px;font-size:.82rem;line-height:1.45;text-align:center;
+  display:flex;flex-direction:column;justify-content:center;min-height:72px;
+}
+.tl-steps li time{font-family:var(--f-mono);font-size:.8rem;display:block;color:var(--fg)}
+.tl-steps li.end{background:var(--surface-ok);border-color:var(--line-ok);color:var(--accent);font-family:var(--f-mono)}
+.tl-steps li + li::before{
+  content:"";position:absolute;left:-13px;top:50%;width:8px;height:1.5px;background:var(--fg);
+}
+.tl-steps li + li::after{
+  content:"";position:absolute;left:-6px;top:50%;margin-top:-3.5px;
+  border-top:3.5px solid transparent;border-bottom:3.5px solid transparent;border-left:4.5px solid var(--fg);
+}
+.tl-bar{grid-column:2 / 6;border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:8px;text-align:center;font-size:.86rem}
+.tl-note{font-size:.9rem}
+.tl-note b{font-weight:500;color:var(--accent)}
+@media (max-width:680px){
+  .tl{grid-template-columns:1fr;gap:6px}
+  .tl-label{padding-top:10px}
+  .tl-label:first-child{padding-top:0}
+  .tl-steps{grid-template-columns:1fr;gap:18px}
+  .tl-steps li{min-height:0;padding:9px 12px}
+  .tl-steps li + li::before{left:50%;top:-15px;width:1.5px;height:9px;margin-left:-.75px}
+  .tl-steps li + li::after{left:50%;top:-7px;margin-top:0;margin-left:-3.5px;border:0;border-left:3.5px solid transparent;border-right:3.5px solid transparent;border-top:4.5px solid var(--fg)}
+  .tl-track{display:block}
+}
+
+/* tables */
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.9rem;line-height:1.6}
+th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+th{background:var(--surface);font-weight:500;color:var(--muted);font-size:.84rem}
+td:first-child{white-space:nowrap}
+td a.mono{font-size:.86rem;white-space:nowrap;overflow-wrap:normal}
+@media (max-width:600px){
+  table.rt,table.rt tbody,table.rt tr,table.rt td{display:block}
+  table.rt thead{display:none}
+  table.rt tr{border:1px solid var(--line);border-radius:6px;margin-bottom:10px;overflow:hidden}
+  table.rt td{border:0;border-top:1px solid var(--line);white-space:normal;padding:9px 14px}
+  table.rt td:first-child{border-top:0;background:var(--surface);font-weight:500}
+  table.rt td:first-child::before{content:none}
+  table.rt td::before{content:attr(data-label);display:block;color:var(--faint);font-size:.74rem;font-weight:400;letter-spacing:.02em}
+}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.stat span{font-size:.88rem}
+.stat b{font-size:1.9rem;font-weight:300;font-variant-numeric:tabular-nums;line-height:1}
+@media (max-width:520px){.stats{grid-template-columns:1fr}}
+.callout{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px;font-size:.9rem}
+
+/* evidence */
+.log{
+  margin:0;background:var(--surface);border:1px solid var(--line);border-radius:6px;
+  padding:14px 16px;overflow-x:auto;font-family:var(--f-mono);font-size:.82rem;line-height:1.75;
+  color:var(--fg);word-break:normal;overflow-wrap:normal;white-space:pre;
+}
+.log + .log{margin-top:6px}
+.log .fail{color:var(--bad)}
+.shot{overflow-x:auto;background:var(--shot-bg);border:1px solid var(--line);border-radius:6px;padding:10px 12px}
+.shot img{display:block;width:100%;min-width:540px;height:auto}
+.stuck{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.stuck{grid-template-columns:1fr}}
+.stuck > div{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.stuck h4{margin:0;font-size:.9rem;font-weight:500;color:var(--muted)}
+.stuck p{font-size:.9rem;line-height:1.7}
+.bad-txt{color:var(--bad)}
+.closing{padding-top:22px;border-top:1px solid var(--line)}
+
+/* footer */
+footer{border-top:1.5px solid var(--fg);padding-block:36px 56px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;font-size:.88rem;color:var(--muted)}
+footer .f-name{color:var(--fg);font-weight:500}
+footer .f-links{display:flex;flex-wrap:wrap;gap:8px 20px}
+footer .f-links a{text-decoration:none;border-bottom:1px solid currentColor}
+</style>
+</head>
+<body>
+<header class="bar">
+  <div class="wrap">
+    <div class="bar-id"><b>서준하</b><span> / DevOps · Cloud Engineer</span></div>
+    <nav aria-label="섹션">
+      <a href="#hibiscus">Hibiscus</a>
+      <a href="#yeongjulog">영주로그</a>
+      <a href="#foundation">기반 역량</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- ===== intro ===== -->
+  <section class="wrap hero" aria-label="소개">
+    <div class="idrow">
+      <div class="who">
+        <p class="kicker">PORTFOLIO / 2026.10</p>
+        <h1 class="name">서준하</h1>
+        <p class="role">DevOps / Cloud Engineer · 신입</p>
+      </div>
+      <div class="contact">
+        <span class="c-label">EMAIL</span>
+        <span class="c-item"><a class="c-val" id="email-val" href="mailto:jungjunhayo@gmail.com">jungjunhayo@gmail.com</a><button class="copy" type="button" id="copy-email" data-target="email-val">복사</button></span>
+        <div class="contact-links">
+          <a href="https://github.com/junhasuh" target="_blank" rel="noopener">GitHub / junhasuh</a>
+          <a href="https://policerjack.tistory.com/" target="_blank" rel="noopener">기술 블로그</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="block" style="gap:18px">
+      <h2 class="headline">Cloud Run·온프레미스 배포 단계와<br>Jenkins·Kubernetes 파이프라인</h2>
+      <p class="lead">클라우드 인프라를 구성하고 배포를 자동화했습니다. 후보 버전의 상태 확인부터 환경별 전환 순서, 부분 실패 시 복구까지 구현하고 시험했습니다.</p>
+    </div>
+
+    <div class="block" style="gap:14px">
+      <h2 class="sub-label">대표 프로젝트</h2>
+      <div class="proj-cards">
+        <a class="proj-card" href="#hibiscus">
+          <div class="top"><h3>Hibiscus</h3><span class="go">자세히 보기</span></div>
+          <p class="meta">소프트뱅크 해커톤 · 6인 팀 · 2026.09.28~10.04</p>
+          <p class="theme">서로 다른 환경의 배포 순서와 부분 실패 복구</p>
+          <p class="body">Python 배포 조율기를 팀 NestJS 백엔드의 배포 단계로 옮기고, 후보 검사·순차 전환·부분 실패 롤백을 구현했습니다. 데모 배포 17건 중 8건은 후보 단계에서 멈춰 기존 버전을 유지했습니다.</p>
+        </a>
+        <a class="proj-card" href="#yeongjulog">
+          <div class="top"><h3>영주로그 CI/CD</h3><span class="go">자세히 보기</span></div>
+          <p class="meta">팀 백엔드에서 확장한 개인 프로젝트 · 2026.09 구축·검증 기록</p>
+          <p class="theme">품질 기준과 실행 상태에 따른 배포 차단·롤백</p>
+          <p class="body">Jenkins·Ansible·Kubernetes를 연결하고, 품질 기준 미달 시 후속 단계 차단과 배포 대기 시간 초과 시 롤백 실행을 확인했습니다.</p>
+        </a>
+      </div>
+    </div>
+
+    <div class="block" style="gap:14px">
+      <h2 class="sub-label">경험으로 연결한 역량</h2>
+      <div class="skills">
+        <div><h3><a href="#hibiscus">배포 조율</a></h3><ul><li>후보 검사·순차 전환</li><li>롤백·회귀 테스트</li></ul></div>
+        <div><h3><a href="#yeongjulog">파이프라인</a></h3><ul><li>Jenkins·Ansible</li><li>Kubernetes·SonarQube</li></ul></div>
+        <div><h3><a href="#foundation">클라우드 기반</a></h3><ul><li>GCP 실행 환경</li><li><a href="https://github.com/junhasuh/aws-terraform-infra" target="_blank" rel="noopener">AWS·Terraform 구성</a></li></ul></div>
+      </div>
+      <div class="creds">
+        <p class="certs">AWS SAA 2026.02 취득 · CKA 2026.08 취득</p>
+        <p class="edu">가톨릭대학교 컴퓨터정보공학부 · 2027.02 졸업예정</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 01 Hibiscus ===== -->
+  <section class="project" id="hibiscus" aria-label="Hibiscus">
+    <article class="wrap chapter">
+      <div class="ch-head">
+        <p class="eyebrow">01 / HIBISCUS · 구조와 담당 범위</p>
+        <h2>Python 배포 조율기를 팀 NestJS 백엔드로 이식</h2>
+        <p class="ch-meta">2026.09.28~10.04 · 소프트뱅크 해커톤 · 6인 팀</p>
+      </div>
+      <p>Hibiscus는 기록된 HTTP 요청으로 앱을 검증하고, 정책 판단·승인·서명을 거친 이미지를 Cloud Run 또는 온프레미스에 배포하는 서비스입니다. 하이브리드 배포 방향을 제안하고 배포 조율·롤백·GCP 인프라를 맡았습니다.</p>
+
+      <figure class="fig">
+        <div class="flow" role="img" aria-label="팀 기능(요청 재생 검사·정책 판단·서명 생성) 다음에 본인 구현(배포 전 서명·이미지 확인), 이어서 Cloud Run 후보와 온프레미스 후보를 각각 실행·검사하고, 모두 통과하면 환경별 전환 후 대표 경로를 전환">
+          <div class="node team"><span class="tag">팀 기능</span>요청 재생 검사 · 정책 판단 · 서명 생성</div>
+          <div class="v-arrow"></div>
+          <div class="node"><span class="tag">본인 구현</span>배포 전 서명·이미지 확인</div>
+          <div class="fork"><i></i><i></i></div>
+          <div class="pair">
+            <div class="node">Cloud Run 후보 실행·검사<small>본인: 후보 배포·검사 로직</small></div>
+            <div class="node">온프레미스 후보 실행·검사<small>본인: 조율·API 연동 / 팀: Agent</small></div>
+          </div>
+          <div class="join"><i></i></div>
+          <div class="node"><span class="tag">본인 구현</span>모두 통과하면 환경별 전환 → 대표 경로 전환</div>
+        </div>
+        <figcaption>양쪽 배포 시의 흐름. 대표 경로는 사용자가 접속하는 공개 주소가 가리키는 대상입니다.</figcaption>
+      </figure>
+
+      <div class="block">
+        <h3>팀 백엔드의 배포 단계로 통합</h3>
+        <p>Python으로 만든 배포 조율기를 NestJS로 옮겼습니다. 팀의 검증·정책·서명 결과를 받아, 대상별 클라이언트와 대표 경로 전환 기능을 통해 배포를 진행하도록 연결했습니다.</p>
+      </div>
+      <div class="block">
+        <h3>현재 배포에 대한 서명인지 먼저 확인</h3>
+        <p>cosign 공개키 검증과 함께 이미지 저장소·식별값(digest), 실행 ID·정책 결정 해시를 대조했습니다. 잘못된 이미지나 다른 실행의 서명이면 후보 생성 전에 중단하도록 했습니다.</p>
+      </div>
+      <div class="block">
+        <h3>재시도와 이미지 추적을 고려한 Cloud Run 스크립트</h3>
+        <p>이미지 식별값과 배포 ID로 배포 버전(revision) 이름을 만들어 같은 배포의 재시도에서 기존 버전을 재사용했습니다. 멀티 아키텍처 이미지의 원본 식별값도 별도로 남겨 추적할 수 있게 했습니다.</p>
+      </div>
+
+      <p class="stack-tags">TypeScript · NestJS · Python · Bash · Docker · Cloud Run · cosign</p>
+      <nav class="refs" aria-label="Hibiscus 구조 관련 링크">
+        <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/deploy.orchestrator.ts#L109-L229" target="_blank" rel="noopener">배포 조율 코드</a>
+        <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/signature.verifier.ts#L27-L68" target="_blank" rel="noopener">서명 확인 코드</a>
+        <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/eae12bd199f0d85945ece5fb0c3a2bdfabba8321/deploy/cloudrun/candidate.sh#L13-L29" target="_blank" rel="noopener">Cloud Run 스크립트</a>
+        <a href="https://policerjack.tistory.com/5" target="_blank" rel="noopener">구축 회고</a>
+      </nav>
+    </article>
+
+    <article class="wrap chapter">
+      <div class="ch-head">
+        <p class="eyebrow">01 / HIBISCUS · 설계 판단과 실패 복구</p>
+        <h2>Hibiscus Cloud Run·온프레미스 순차 전환</h2>
+      </div>
+      <p>새 버전은 양쪽에 트래픽 0%로 먼저 띄우고, 둘 다 헬스 검사를 통과해야 전환합니다. 한쪽만 새 버전이 되는 상태를 막으려고, 한쪽만 실패해도 배포 전체를 보류하는 쪽을 택했습니다. 전환 순서는 Cloud Run → 온프레미스 → 대표 경로입니다. Cloud Run은 트래픽을 이전 revision으로 돌리기만 하면 되돌릴 수 있어 먼저 바꿨고, 사용자가 보는 대표 경로는 마지막에 바꿔 두 환경의 전환 시차가 드러나지 않게 했습니다.</p>
+
+      <figure class="fig">
+        <div class="seq">
+          <div class="seq-row">
+            <div class="node step">양쪽 후보 준비·검사</div>
+            <div class="h-arrow"></div>
+            <div class="out">한쪽 후보 실패 → 후보 정리·기존 버전 유지</div>
+          </div>
+          <div class="seq-row">
+            <div class="node step">Cloud Run 활성화 후 온프레미스 활성화</div>
+            <div class="h-arrow"></div>
+            <div class="out">온프레미스 실패 → Cloud Run 복구·후보 정리</div>
+          </div>
+          <div class="seq-row">
+            <div class="node step">양쪽 활성화 후 대표 경로 전환</div>
+            <div class="h-arrow"></div>
+            <div class="out">경로 실패 → 양쪽 환경 복구·실패 기록</div>
+          </div>
+          <div class="seq-row">
+            <div class="node step">대표 경로 전환 완료</div>
+            <div class="h-arrow ok"></div>
+            <div class="out ok">배포 성공 기록</div>
+          </div>
+        </div>
+        <figcaption>순차 전환 중 실패한 단계에 따라 이미 바뀐 환경을 복구하도록 구성했습니다.</figcaption>
+      </figure>
+
+      <div class="block" style="gap:16px">
+        <h3>Hibiscus PR #26 팀원 리뷰 결함 수정</h3>
+        <dl class="kv">
+          <dt>문제</dt><dd>팀원이 리뷰에서 재현해 지적한 결함: 경로 전환이 실패해도 <code>activated</code>로 남고 롤백이 호출되지 않았습니다.</dd>
+          <dt>수정</dt><dd>경로 전환이 실패하면 Cloud Run은 이전 revision으로, 온프레미스는 이전 컨테이너로 되돌리고 <code>rolled_back</code>으로 기록하게 고쳤습니다. 되돌릴 컨테이너가 없으면 <code>error</code>로 남겨 수동 처리합니다.</dd>
+          <dt>검증</dt><dd>단위 테스트 3개와 통합 테스트 1개를 추가하고 다른 팀원의 승인을 받아 병합했습니다.</dd>
+        </dl>
+      </div>
+
+      <nav class="refs" aria-label="PR #26 관련 링크">
+        <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/26#discussion_r4164102670" target="_blank" rel="noopener">팀원 리뷰 코멘트</a>
+        <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/specs/deploy-orchestrator.spec.ts#L287-L350" target="_blank" rel="noopener">회귀 테스트</a>
+        <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/26#pullrequestreview-5393827637" target="_blank" rel="noopener">리뷰 승인</a>
+      </nav>
+    </article>
+
+    <article class="wrap chapter">
+      <div class="ch-head">
+        <p class="eyebrow">01 / HIBISCUS · 실환경 검증과 인프라</p>
+        <h2>Hibiscus 장애 주입 시험과 GCP VM 구성</h2>
+      </div>
+
+      <div class="block" style="gap:16px">
+        <h3>온프레미스 활성화 실패를 유도한 롤백 시험</h3>
+        <div class="tl">
+          <div class="tl-label">Cloud Run</div>
+          <ol class="tl-steps">
+            <li>양쪽 후보 통과</li>
+            <li><time>14:01:22</time>새 revision 100%</li>
+            <li>온프레미스 활성화 30초 기한 초과</li>
+            <li><time>14:01:56</time>이전 revision 복귀</li>
+            <li>온프레미스 후보 정리</li>
+            <li class="end">rolled_back</li>
+          </ol>
+          <div class="tl-label">조작</div>
+          <div class="tl-track"><div class="tl-bar">Agent API 503 차단 (47초)</div></div>
+          <div class="tl-label">공개 주소</div>
+          <p class="tl-note">대표 경로는 기존 온프레미스 유지 · 1초 간격 <b>109건 모두 200</b></p>
+        </div>
+        <div class="tbl-wrap">
+          <table class="rt">
+            <thead><tr><th scope="col">선택</th><th scope="col">이유</th></tr></thead>
+            <tbody>
+              <tr><td data-label="선택">Agent API만 503</td><td data-label="이유">앱 헬스체크를 500으로 만들면 후보 검사에서 걸려 보류로 끝남. 전환 단계 실패를 만들려고 Agent가 재시도하는 503 사용</td></tr>
+              <tr><td data-label="선택">관측 한계</td><td data-label="이유">Cloud Run 상태는 5초 간격으로만 봐서 새 revision 100% 구간은 29~39초 범위로만 말할 수 있음</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="block" style="gap:14px">
+        <h3>데모 배포 결과</h3>
+        <div class="stats">
+          <div class="stat"><span>전환</span><b>8</b></div>
+          <div class="stat"><span>후보 단계 보류</span><b>8</b></div>
+          <div class="stat"><span>정책 차단</span><b>1</b></div>
+        </div>
+        <p class="note">보류 사유에 헬스 경로 404·후보 생성 실패 포함</p>
+        <p class="callout">Cloud Run 후보에서만 <code>/healthz</code>가 404(같은 이미지가 온프레미스에선 통과). Cloud Run이 z로 끝나는 일부 경로를 예약해 생긴 일로, 두 후보를 정리하고 기존 버전을 유지했고 앱에 <code>/health</code>를 추가해 해결.</p>
+      </div>
+
+      <div class="block" style="gap:14px">
+        <h3>배포 기능이 실행될 GCP 기반 구성</h3>
+        <div class="tbl-wrap">
+          <table class="rt">
+            <thead><tr><th scope="col">구성</th><th scope="col">한 일</th><th scope="col">이유</th></tr></thead>
+            <tbody>
+              <tr><td data-label="구성">GCE VM</td><td data-label="한 일">고정 IP, 방화벽(80·443, Agent SSH 터널 2222)</td><td data-label="이유">지속적인 Agent SSH 연결, 백엔드 DB 파일, 이미지 빌드</td></tr>
+              <tr><td data-label="구성">HTTPS</td><td data-label="한 일">Caddy + Let's Encrypt</td><td data-label="이유">주소별 인증서 자동 발급</td></tr>
+              <tr><td data-label="구성">프로세스</td><td data-label="한 일">systemd 서비스 등록</td><td data-label="이유">재부팅 후 실행, 프로세스 장애 시 재시작</td></tr>
+              <tr><td data-label="구성">비밀값</td><td data-label="한 일">서명 키·GitHub 비밀값을 Secret Manager로</td><td data-label="이유">VM 서비스 계정만 읽기</td></tr>
+              <tr><td data-label="구성">권한</td><td data-label="한 일">Cloud Run 배포, 지정 이미지 저장소 쓰기, 실행 계정 사용, 비밀값 읽기</td><td data-label="이유">작업 단위로 부여</td></tr>
+              <tr><td data-label="구성">한계</td><td data-label="한 일">백엔드 VM이 단일 장애점</td><td data-label="이유">이미 배포된 앱은 각 위치에서 계속 동작</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">본인 범위는 배포 조율·GCP 구성과 팀 기능 연결입니다. Agent·Gateway·서명 생성·자동 장애 전환 기능 자체는 팀원이 구현했습니다.</p>
+      </div>
+
+      <nav class="refs" aria-label="Hibiscus 저장소 링크">
+        <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus" target="_blank" rel="noopener">프로젝트 저장소</a>
+        <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/26" target="_blank" rel="noopener">배포 단계 통합 PR</a>
+      </nav>
+    </article>
+  </section>
+
+  <!-- ===== 02 영주로그 ===== -->
+  <section class="project" id="yeongjulog" aria-label="영주로그">
+    <article class="wrap chapter">
+      <div class="ch-head">
+        <p class="eyebrow">02 / 영주로그 · 개인 CI/CD 확장</p>
+        <h2>영주로그 Jenkins·Kubernetes 파이프라인 구축</h2>
+        <p class="ch-meta">2026.09 구축·검증 기록 · Jenkins / Ansible / Kubernetes / SonarQube</p>
+      </div>
+      <p>영주로그는 영주시의 역사 탐방 서비스입니다. 팀 프로젝트에서 EC2·RDS 배포와 도메인 연결을 맡았고, 이후 팀 백엔드를 포크해 개인적으로 CI/CD를 구축했습니다.</p>
+
+      <figure class="fig">
+        <div class="seq">
+          <div class="seq-row">
+            <div class="node step"><span><span class="num">1</span>테스트</span><small>H2·테스트용 설정</small></div>
+            <div class="h-arrow"></div>
+            <div class="out">실패 → 후속 단계 중단</div>
+          </div>
+          <div class="seq-row">
+            <div class="node step"><span><span class="num">2</span>SonarQube 분석·품질 판정</span><small>설정한 코드 커버리지 기준 확인</small></div>
+            <div class="h-arrow"></div>
+            <div class="out">미달 → 후속 단계 중단</div>
+          </div>
+          <div class="seq-row">
+            <div class="node step"><span><span class="num">3</span>JAR·이미지 생성 및 업로드</span><small>커밋 해시로 배포 이미지 구분</small></div>
+            <div></div>
+            <div class="out none" aria-hidden="true"></div>
+          </div>
+          <div class="seq-row">
+            <div class="node step"><span><span class="num">4</span>Ansible → Kubernetes 배포</span><small>준비 상태·배포 완료 확인</small></div>
+            <div class="h-arrow"></div>
+            <div class="out">대기 초과 → 롤백·실패 전달</div>
+          </div>
+        </div>
+        <figcaption>개인적으로 추가한 CI/CD 흐름. 실패 지점에 따라 후속 단계 중단 또는 롤백을 실행합니다.</figcaption>
+      </figure>
+
+      <div class="block">
+        <h3>테스트 환경과 운영 설정 분리</h3>
+        <p>CI 테스트는 H2 데이터베이스와 테스트용 설정으로 실행하도록 구성했습니다. 운영 설정은 환경변수로 분리하고, 이미지에 커밋 해시를 붙여 배포 버전을 구분했습니다.</p>
+      </div>
+      <div class="block">
+        <h3>새 파드가 요청을 받을 준비가 됐는지 확인</h3>
+        <p>Deployment 매니페스트에 readinessProbe와 롤링 업데이트(<code>maxSurge 1</code>, <code>maxUnavailable 0</code>)를 설정했습니다. 배포 때는 Ansible이 <code>kubectl set image</code>로 이미지 태그만 바꾸고, 새 파드가 준비 상태가 돼야 기존 파드를 내립니다.</p>
+      </div>
+      <div class="block">
+        <h3>EC2 Docker 헬스체크와 Kubernetes readinessProbe</h3>
+        <p>EC2 Docker 배포 때는 DB와 상관없이 UP을 주던 <code>/v1/health</code> 대신 <code>/actuator/health</code>를 6초 간격으로 최대 20번 확인했습니다. 운영 DB 환경변수를 뺀 커밋에서 이 확인이 실패해 직전 이미지(<code>cfe545d</code>)로 돌아갔습니다. Kubernetes로 옮긴 뒤 readinessProbe는 <code>/actuator/health/readiness</code>를 봅니다.</p>
+      </div>
+
+      <nav class="refs" aria-label="영주로그 링크">
+        <a href="https://github.com/junhasuh/yeongjuLog-BE" target="_blank" rel="noopener">프로젝트 저장소</a>
+        <a href="https://policerjack.tistory.com/2" target="_blank" rel="noopener">구축 과정·실행 기록</a>
+      </nav>
+    </article>
+
+    <article class="wrap chapter">
+      <div class="ch-head">
+        <p class="eyebrow">02 / 영주로그 · 실패 시험 근거</p>
+        <h2>영주로그 실패 시험: 롤백·품질 게이트·빌드 누락</h2>
+      </div>
+
+      <div class="block" style="gap:10px">
+        <div class="tbl-wrap">
+          <table class="rt">
+            <thead><tr><th scope="col">단계</th><th scope="col">일부러 한 조작</th><th scope="col">결과</th><th scope="col">커밋</th></tr></thead>
+            <tbody>
+              <tr>
+                <td data-label="단계">① 테스트</td>
+                <td data-label="조작">HealthCheckTest 기대값을 UP → DOWN</td>
+                <td data-label="결과">Test 실패, JAR·이미지·배포 실행 안 됨</td>
+                <td data-label="커밋"><a class="mono" href="https://github.com/junhasuh/yeongjuLog-BE/commit/5eba31c" target="_blank" rel="noopener">5eba31c</a></td>
+              </tr>
+              <tr>
+                <td data-label="단계">② 품질 판정</td>
+                <td data-label="조작">품질 게이트에 '전체 커버리지 80% 이상'</td>
+                <td data-label="결과">전체 15.4%로 Quality Gate 실패, Build Jar·Docker Build·Deploy <span class="bad-txt">스킵</span>(신규 코드는 100%, 측정 대상 1줄)</td>
+                <td data-label="커밋"><a class="mono" href="https://github.com/junhasuh/yeongjuLog-BE/commit/d6d3f30" target="_blank" rel="noopener">d6d3f30</a></td>
+              </tr>
+              <tr>
+                <td data-label="단계">④ 배포</td>
+                <td data-label="조작">운영 DB 환경변수 참조를 DB_URL_V3로 변경(H2 테스트는 통과)</td>
+                <td data-label="결과">rollout status 180초 초과 → rescue의 rollout undo → Jenkins <span class="bad-txt">FAILURE</span></td>
+                <td data-label="커밋"><a class="mono" href="https://github.com/junhasuh/yeongjuLog-BE/commit/a38db57" target="_blank" rel="noopener">a38db57</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">undo 뒤 <code>/actuator/health</code> UP은 확인했지만, 모든 파드가 이전 이미지로 돌아왔는지는 따로 보지 않았습니다.</p>
+      </div>
+
+      <figure class="fig">
+        <h3 class="sub-label">④ 증거</h3>
+        <div>
+<pre class="log" aria-label="Ansible 롤백 작업 로그">TASK [기동 실패 시 이전 버전으로 즉시 롤백] ************************************
+changed: [cp1]</pre>
+<pre class="log" aria-label="Ansible PLAY RECAP">PLAY RECAP *********************************************************************
+cp1                        : ok=3    changed=2    unreachable=0    <span class="fail">failed=1</span>
+skipped=0    rescued=1    ignored=0</pre>
+<pre class="log" aria-label="Jenkins 최종 결과">ERROR: script returned exit code 2
+<span class="fail">Finished: FAILURE</span></pre>
+        </div>
+        <figcaption>실행 로그 발췌: 롤백 작업 실행과 최종 FAILURE. 중간 로그 일부 생략.</figcaption>
+      </figure>
+
+      <figure class="fig">
+        <h3 class="sub-label">② 증거</h3>
+        <div class="shot">
+          <img src="assets/jenkins-stages.png" width="1150" height="117" alt="Jenkins 단계 화면: Test·SonarQube 통과, Quality Gate 실패, Build Jar·Docker Build·Deploy 스킵">
+        </div>
+        <figcaption>Jenkins 단계 화면 발췌: Test·SonarQube 통과, Quality Gate 실패, 이후 단계 스킵.</figcaption>
+      </figure>
+
+      <div class="block" style="gap:12px">
+        <h3>막혔던 것</h3>
+        <div class="stuck">
+          <div>
+            <h4>빌드 #5</h4>
+            <p>빌드 #5 SUCCESS인데 Deploy 단계 없음 → <code>ansible/</code> 안에서 <code>git add .</code> 해서 Jenkinsfile 수정이 빠짐 → 이후 실행 단계와 서버 이미지까지 확인</p>
+          </div>
+          <div>
+            <h4>SonarQube CORS</h4>
+            <p>SonarQube 첫 분석에서 CORS 허용 출처 와일드카드가 보안 이슈 → 허용 출처 명시(Security C·1건 → A·0건)</p>
+          </div>
+        </div>
+      </div>
+
+      <nav class="refs" aria-label="영주로그 원본 기록 링크">
+        <a href="https://policerjack.tistory.com/2" target="_blank" rel="noopener">전체 구축 기록·원본 화면</a>
+      </nav>
+    </article>
+  </section>
+
+  <!-- ===== 03 기반 역량 ===== -->
+  <section class="project" id="foundation" aria-label="기반 역량">
+    <article class="wrap chapter">
+      <div class="ch-head">
+        <p class="eyebrow">03 / 기반 역량 · Terraform 실습 및 CKA 기출 풀이</p>
+        <h2>Terraform으로 구성한 AWS 네트워크·IAM과 CKA 기출 장애</h2>
+      </div>
+
+      <div class="block" style="gap:16px">
+        <h3>Terraform AWS 네트워크·IAM 구성</h3>
+        <p>VPC·퍼블릭/프라이빗 서브넷·인터넷/NAT 게이트웨이·라우팅과 EC2용 IAM 역할·인스턴스 프로파일을 코드로 구성했습니다. IAM·S3 실습의 상태 파일은 S3 원격 백엔드로 옮기고 DynamoDB 테이블로 잠금을 걸었고, VPC 디렉터리는 로컬 상태로 남아 있습니다.</p>
+        <dl class="kv boxed">
+          <dt>발생</dt><dd>Terraform이 상태를 새로 읽다가(Refreshing state) <code>iam:GetRole</code>에서 AccessDenied</dd>
+          <dt>단서</dt><dd>직전에 <code>~/.aws/credentials</code>를 지웠는데 다른 AWS 명령은 계속 동작</dd>
+          <dt>확인</dt><dd><code>aws sts get-caller-identity</code> 결과가 IAM 사용자가 아니라 assumed-role</dd>
+          <dt>원인</dt><dd>자격 증명 파일이 사라지자 체인의 마지막인 인스턴스 메타데이터로 내려가, s3·dynamodb 권한만 있는 인스턴스 역할로 실행됨</dd>
+          <dt>조치</dt><dd>콘솔에서 역할에 조회 권한을 붙인 뒤 같은 코드로 통과</dd>
+        </dl>
+      </div>
+
+      <div class="block" style="gap:18px">
+        <h3>CKA 준비 중 기출 문제로 풀어본 장애</h3>
+        <div class="block">
+          <h4 class="sub-label" style="margin:0;font-size:.98rem;font-weight:500">파드가 Pending에 머무는 상황</h4>
+          <p><code>kubectl describe node</code>의 Allocated resources로 이미 잡힌 요청량을 보고, Allocatable에서 뺀 여유가 새 파드의 요청보다 작다는 걸 확인했습니다. 스케줄러는 실사용량이 아니라 선언된 요청량을 봅니다.</p>
+        </div>
+        <div class="block">
+          <h4 class="sub-label" style="margin:0;font-size:.98rem;font-weight:500">API 서버가 응답하지 않는 상황</h4>
+          <p><code>journalctl -u kubelet</code>로 kubelet 로그를 보고, kube-apiserver 정적 파드의 <code>--etcd-servers</code>가 etcd의 advertise-client-url과 다른 IP를 가리키던 것을 고쳤습니다.</p>
+        </div>
+      </div>
+
+      <p class="closing">CKA를 딴 뒤(2026.08) 영주로그를 Kubernetes로 옮기며 롤링 업데이트·readinessProbe·rollout undo를 직접 설정했습니다. 인스턴스 프로파일은 Terraform으로 만들어 봤지만, 영주로그 앱은 아직 S3 접근에 액세스 키를 환경변수로 받습니다. EC2 IAM 역할로 바꾸는 게 남은 일입니다.</p>
+
+      <nav class="refs" aria-label="기반 역량 링크">
+        <a href="https://github.com/junhasuh/aws-terraform-infra" target="_blank" rel="noopener">Terraform 저장소</a>
+        <a href="https://policerjack.tistory.com/" target="_blank" rel="noopener">기술 블로그</a>
+      </nav>
+    </article>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <p class="f-name">서준하 · DevOps / Cloud Engineer</p>
+      <p><a class="mono f-email" href="mailto:jungjunhayo@gmail.com">jungjunhayo@gmail.com</a></p>
+    </div>
+    <div class="f-links">
+      <a href="https://github.com/junhasuh" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://policerjack.tistory.com/" target="_blank" rel="noopener">기술 블로그</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.querySelectorAll('.copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var el = document.getElementById(btn.getAttribute('data-target'));
+      if(!el) return;
+      var text = el.textContent.trim();
+      function selectIt(){
+        try{
+          var r = document.createRange(); r.selectNodeContents(el);
+          var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+          btn.textContent = '선택됨';
+        }catch(e){}
+        reset();
+      }
+      function reset(){ setTimeout(function(){ btn.textContent = '복사'; }, 1600); }
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(function(){ btn.textContent = '복사됨'; reset(); }, selectIt);
+      } else { selectIt(); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
