@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="DevOps·Cloud Engineer 신입 서준하의 포트폴리오. Cloud Run·온프레미스 배포 조율과 부분 실패 롤백(Hibiscus), Jenkins·Ansible·Kubernetes 파이프라인(영주로그), Terraform·CKA.">
+<meta name="description" content="IT인프라(DevOps) 신입 서준하의 포트폴리오. Cloud Run·온프레미스 배포 단계의 부분 실패 롤백 시험(Hibiscus), Jenkins·Ansible·Kubernetes 파이프라인 실패 시험(영주로그), GCP 권한 구성, Terraform 실습·CKA 기출 풀이.">
 <meta name="author" content="서준하 (Junha Suh)">
 <link rel="canonical" href="https://junhasuh.github.io/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="서준하 포트폴리오">
-<meta property="og:title" content="서준하 · DevOps / Cloud Engineer 포트폴리오">
-<meta property="og:description" content="DevOps·Cloud Engineer 신입 서준하의 포트폴리오. Cloud Run·온프레미스 배포 조율과 부분 실패 롤백(Hibiscus), Jenkins·Ansible·Kubernetes 파이프라인(영주로그), Terraform·CKA.">
+<meta property="og:title" content="서준하 · IT인프라(DevOps) 신입 포트폴리오">
+<meta property="og:description" content="IT인프라(DevOps) 신입 서준하의 포트폴리오. Cloud Run·온프레미스 배포 단계의 부분 실패 롤백 시험(Hibiscus), Jenkins·Ansible·Kubernetes 파이프라인 실패 시험(영주로그), GCP 권한 구성, Terraform 실습·CKA 기출 풀이.">
 <meta property="og:url" content="https://junhasuh.github.io/">
 <meta property="og:image" content="https://junhasuh.github.io/assets/og.png">
 <meta property="og:image:width" content="1200">
@@ -162,7 +162,7 @@ code,.mono{font-family:var(--f-mono);font-size:.9em}
 .eyebrow{font-size:.78rem;font-weight:600;color:var(--accent);letter-spacing:.03em}
 .ch-head h2{font-size:clamp(1.6rem,4vw,2.15rem);font-weight:300;line-height:1.3;text-wrap:balance;letter-spacing:-.01em}
 .ch-meta{font-size:.85rem;color:var(--faint)}
-.block{display:flex;flex-direction:column;gap:8px}
+.block{display:flex;flex-direction:column;gap:12px}
 .block h3{font-size:1.1rem;font-weight:500;color:var(--accent);line-height:1.5}
 .note{font-size:.85rem;color:var(--muted)}
 .stack-tags{font-size:.82rem;color:var(--faint);font-family:var(--f-mono)}
@@ -279,7 +279,7 @@ figcaption{font-size:.8rem;color:var(--faint)}
 table{width:100%;border-collapse:collapse;font-size:.9rem;line-height:1.6}
 th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
 th{background:var(--surface);font-weight:500;color:var(--muted);font-size:.84rem}
-td:first-child{white-space:nowrap}
+table.nw td:first-child{white-space:nowrap}
 td a.mono{font-size:.86rem;white-space:nowrap;overflow-wrap:normal}
 @media (max-width:600px){
   table.rt,table.rt tbody,table.rt tr,table.rt td{display:block}
@@ -322,28 +322,81 @@ footer{border-top:1.5px solid var(--fg);padding-block:36px 56px}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;font-size:.88rem;color:var(--muted)}
 footer .f-name{color:var(--fg);font-weight:500}
 footer .f-links{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 20px}
+
+/* ---------- added for the P1~P7 manuscript ---------- */
+.pref{text-decoration:underline;text-decoration-color:var(--line-ok);text-underline-offset:3px}
+ul.dots{display:flex;flex-direction:column;gap:6px}
+ul.dots li{position:relative;padding-left:1.1em}
+ul.dots li::before{content:"";position:absolute;left:.2em;top:.78em;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.ev-list{display:flex;flex-direction:column;gap:14px;padding:0;margin:0;list-style:none}
+.ev{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 16px;padding:22px 22px 20px;background:var(--surface);border-radius:8px}
+.ev-num{font-size:1.5rem;font-weight:300;color:var(--accent);line-height:1.3}
+.ev-body{display:flex;flex-direction:column;gap:8px;min-width:0}
+.ev h3{font-size:1.14rem;font-weight:500;line-height:1.5}
+.ev-meta{font-size:.82rem;color:var(--faint)}
+.ev .refs{padding-top:2px}
+.refs-label{color:var(--faint);font-size:.8rem;letter-spacing:.04em}
+@media (max-width:520px){.ev{grid-template-columns:1fr;padding:18px 16px}}
+.skill-group{display:flex;flex-direction:column;gap:8px}
+.sub-h{font-size:.92rem;font-weight:500;color:var(--muted)}
+.creds-kv{gap:6px 18px}
+.creds-kv dt{font-size:.88rem}
+.creds-kv dd{font-size:.94rem}
+.page-order a{color:inherit}
+.chapter > p{max-width:46em}
+.block > p{max-width:46em}
+details.more{border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:10px 14px}
+details.more summary{cursor:pointer;font-size:.88rem;color:var(--muted)}
+details.more[open] summary{margin-bottom:12px}
+details.more .tbl-wrap + .tbl-wrap{margin-top:12px}
+details.more table{background:var(--bg)}
+.shots-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.shots-2 img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:4px;background:#fff}
+@media (max-width:640px){.shots-2{grid-template-columns:1fr}}
+.shot.shot-tall img{min-width:0}
+.src-link{font-size:.86rem;color:var(--muted);border-left:2px solid var(--line-ok);padding:2px 0 2px 12px}
+.src-link span{color:var(--faint);font-size:.78rem;letter-spacing:.04em;margin-right:4px}
+.chain-wrap{display:flex;flex-direction:column;gap:8px}
+.chain-label{font-size:.84rem;color:var(--muted)}
+.chain{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:10px 22px;padding:0;margin:0;list-style:none}
+.chain li{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;font-size:.84rem;line-height:1.5;padding:8px 10px;border-radius:6px;border:1px solid var(--line-ok);background:var(--surface-ok);color:var(--accent)}
+.chain li.bad{border-color:var(--line-bad);background:var(--surface-bad);color:var(--bad)}
+.chain li + li::before{content:"→";position:absolute;left:-17px;top:50%;transform:translateY(-50%);color:var(--faint);font-size:.9rem}
+@media (max-width:640px){
+  .chain{grid-auto-flow:row;grid-auto-columns:auto;grid-template-columns:1fr;gap:20px}
+  .chain li + li::before{content:"↓";left:50%;top:-19px;transform:translateX(-50%)}
+}
+.skills-t td:last-child{white-space:nowrap}
+table.rt th,table.rt td{overflow-wrap:break-word}
+@media (min-width:601px){table.rt th,table.rt td{min-width:6em}}
+.diagram .flow + .seq{margin-top:0}
+.v-arrow.lb{height:32px}
+.v-arrow .lbl{position:absolute;left:calc(50% + 12px);top:50%;transform:translateY(-55%);font-size:.76rem;color:var(--muted);white-space:nowrap;line-height:1}
+.node code{font-size:.84em;overflow-wrap:anywhere}
+.node .tag{font-weight:600}
+.seq .step > span{display:block}
+table code{overflow-wrap:anywhere}
 </style>
 </head>
 <body>
 <header class="bar">
   <div class="wrap">
-    <div class="bar-id"><b>서준하</b><span> / DevOps · Cloud Engineer</span></div>
+    <div class="bar-id"><b>서준하</b><span> / IT인프라(DevOps) 신입</span></div>
     <nav aria-label="섹션">
-      <a href="#hibiscus">Hibiscus</a>
-      <a href="#yeongjulog">영주로그</a>
-      <a href="#foundation">기반 역량</a>
+      <a href="#p2">Hibiscus</a>
+      <a href="#p5">영주로그</a>
+      <a href="#p7">기반 역량</a>
     </nav>
   </div>
 </header>
 
 <main>
-  <!-- ===== intro ===== -->
-  <section class="wrap hero" aria-label="소개">
+  <section class="wrap hero" id="p1" aria-label="소개">
     <div class="idrow">
       <div class="who">
         <p class="kicker">PORTFOLIO / 2026.10</p>
         <h1 class="name">서준하</h1>
-        <p class="role">DevOps / Cloud Engineer · 신입</p>
+        <p class="role">IT인프라(DevOps) · 신입</p>
       </div>
       <div class="contact">
         <span class="c-label">EMAIL</span>
@@ -356,387 +409,217 @@ footer .f-links{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 20px}
     </div>
 
     <div class="block" style="gap:18px">
-      <h2 class="headline">Cloud Run·온프레미스 배포 단계와<br>Jenkins·Kubernetes 파이프라인</h2>
-      <p class="lead">클라우드 인프라를 구성하고 배포를 자동화했습니다. 후보 버전의 상태 확인부터 환경별 전환 순서, 부분 실패 시 복구까지 구현하고 시험했습니다.</p>
+      <h2 class="headline">배포가 실패할 때 어디까지 되돌릴지 먼저 정하고, 일부러 실패시켜 확인합니다.</h2>
+      <p class="lead">해커톤 6인 팀에서 온프레미스와 Cloud Run에 함께 배포하는 단계를 맡아 구현했습니다. 개인 프로젝트에서는 팀 백엔드를 포크해 Jenkins·Ansible·Kubernetes 배포 파이프라인을 구성했습니다.</p>
     </div>
 
     <div class="block" style="gap:14px">
-      <h2 class="sub-label">대표 프로젝트</h2>
-      <div class="proj-cards">
-        <a class="proj-card" href="#hibiscus">
-          <div class="top"><h3>Hibiscus</h3><span class="go">자세히 보기</span></div>
-          <p class="meta">소프트뱅크 해커톤 · 6인 팀 · 2026.09.28~10.04</p>
-          <p class="theme">서로 다른 환경의 배포 순서와 부분 실패 복구</p>
-          <p class="body">Python 배포 조율기를 팀 NestJS 백엔드의 배포 단계로 옮기고, 후보 검사·순차 전환·부분 실패 롤백을 구현했습니다. 데모 배포 17건 중 8건은 후보 단계에서 멈춰 기존 버전을 유지했습니다.</p>
-        </a>
-        <a class="proj-card" href="#yeongjulog">
-          <div class="top"><h3>영주로그 CI/CD</h3><span class="go">자세히 보기</span></div>
-          <p class="meta">팀 백엔드에서 확장한 개인 프로젝트 · 2026.09 구축·검증 기록</p>
-          <p class="theme">품질 기준과 실행 상태에 따른 배포 차단·롤백</p>
-          <p class="body">Jenkins·Ansible·Kubernetes를 연결하고, 품질 기준 미달 시 후속 단계 차단과 배포 대기 시간 초과 시 롤백 실행을 확인했습니다.</p>
-        </a>
-      </div>
+      <h2 class="sub-label">대표 근거</h2>
+      <ol class="ev-list">
+        <li class="ev"><p class="ev-num" aria-hidden="true">①</p><div class="ev-body"><h3>온프레미스 전환을 일부러 실패시켜 Cloud Run 복귀를 확인했습니다</h3><p class="ev-meta">Hibiscus(<a class="pref" href="#p2">P2</a>~<a class="pref" href="#p4">P4</a>)</p><ul class="dots"><li>온프레미스 Agent가 쓰는 API만 503으로 막아 전환 작업을 실패시켰습니다.</li><li>Cloud Run은 14:01:22에 새 revision으로 바뀌었습니다. 14:01:56에는 이전 revision으로 돌아와 있었습니다(5초 간격 관측).</li><li>배포는 대표 경로를 바꾸기 전에 멈췄습니다. 그동안 공개 주소에 1초 간격으로 보낸 요청 109건은 모두 HTTP 200이었습니다.</li></ul><nav class="refs" aria-label="온프레미스 전환을 일부러 실패시켜 Cloud Run 복귀를 확인했습니다 확인 링크"><span class="refs-label">확인</span><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/deploy.orchestrator.ts#L154-L229" target="_blank" rel="noopener">전환·복구 코드</a><a href="https://policerjack.tistory.com/5" target="_blank" rel="noopener">구축 회고 4절</a></nav></div></li><li class="ev"><p class="ev-num" aria-hidden="true">②</p><div class="ev-body"><h3>Kubernetes 배포 실패를 되돌리고 빌드를 실패로 남겼습니다</h3><p class="ev-meta">영주로그 CI/CD(<a class="pref" href="#p5">P5</a>~<a class="pref" href="#p6">P6</a>)</p><ul class="dots"><li>운영 DB 환경변수 참조를 일부러 틀린 커밋 a38db57을 배포했습니다. H2로 도는 CI 테스트는 통과했습니다.</li><li><code>rollout status</code>가 180초를 기다린 뒤 시간 초과로 실패했습니다.</li><li>Ansible이 <code>rollout undo</code>를 실행했습니다. Jenkins 빌드는 FAILURE로 끝났습니다.</li></ul><nav class="refs" aria-label="Kubernetes 배포 실패를 되돌리고 빌드를 실패로 남겼습니다 확인 링크"><span class="refs-label">확인</span><a href="https://github.com/junhasuh/yeongjuLog-BE/commit/a38db57d82cae6031cf5b1f93ba178689251f3e7" target="_blank" rel="noopener">커밋 a38db57</a><a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/ansible/k8s-deploy.yml#L1-L17" target="_blank" rel="noopener">배포 플레이북</a><a href="https://policerjack.tistory.com/2" target="_blank" rel="noopener">구축 기록 3절</a></nav></div></li><li class="ev"><p class="ev-num" aria-hidden="true">③</p><div class="ev-body"><h3>배포 서버 계정에는 프로젝트 역할을 두 개만 주고, 서명 키는 그 계정만 읽게 했습니다</h3><p class="ev-meta">Hibiscus GCP 구성(<a class="pref" href="#p4">P4</a>)</p><ul class="dots"><li>백엔드 서비스 계정의 프로젝트 수준 역할은 Cloud Run Developer와 Logs Viewer 두 개입니다.</li><li>이미지 저장소 쓰기와 Cloud Run 실행 계정 사용 권한은 리소스 단위로만 주었습니다.</li><li>cosign 서명 키는 Secret Manager에 두었습니다. 읽기 권한(Secret Accessor)은 이 서비스 계정 하나에만 주었습니다.</li></ul><nav class="refs" aria-label="배포 서버 계정에는 프로젝트 역할을 두 개만 주고, 서명 키는 그 계정만 읽게 했습니다 확인 링크"><span class="refs-label">확인</span><a href="https://policerjack.tistory.com/5" target="_blank" rel="noopener">구축 회고 6절의 권한 화면</a></nav></div></li>
+      </ol>
     </div>
 
     <div class="block" style="gap:14px">
-      <h2 class="sub-label">경험으로 연결한 역량</h2>
-      <div class="skills">
-        <div><h3><a href="#hibiscus">배포 조율</a></h3><ul><li>후보 검사·순차 전환</li><li>롤백·회귀 테스트</li></ul></div>
-        <div><h3><a href="#yeongjulog">파이프라인</a></h3><ul><li>Jenkins·Ansible</li><li>Kubernetes·SonarQube</li></ul></div>
-        <div><h3><a href="#foundation">클라우드 기반</a></h3><ul><li>GCP 실행 환경</li><li><a href="https://github.com/junhasuh/aws-terraform-infra" target="_blank" rel="noopener">AWS·Terraform 구성</a></li></ul></div>
-      </div>
-      <div class="creds">
-        <p class="certs">AWS SAA 2026.02 취득 · CKA 2026.08 취득</p>
-        <p class="edu">가톨릭대학교 컴퓨터정보공학부 · 2027.02 졸업예정</p>
-      </div>
+      <h2 class="sub-label">기술</h2>
+      <div class="skill-group"><h3 class="sub-h">프로젝트에서 직접 다룸</h3><div class="tbl-wrap"><table class="rt nw skills-t"><thead><tr><th scope="col">영역</th><th scope="col">다룬 것</th><th scope="col">쪽</th></tr></thead><tbody><tr><td data-label="영역">배포 단계</td><td data-label="다룬 것">Cloud Run(revision·태그 트래픽 전환), cosign 서명 확인, gcloud·Bash 스크립트, TypeScript·NestJS·Vitest, Python</td><td data-label="쪽"><a class="pref" href="#p2">P2</a>~<a class="pref" href="#p3">P3</a></td></tr><tr><td data-label="영역">GCP 구성</td><td data-label="다룬 것">Compute Engine VM·방화벽, Caddy(HTTPS), systemd, Secret Manager, IAM 서비스 계정, Artifact Registry, Cloud SQL, Cloud NAT</td><td data-label="쪽"><a class="pref" href="#p4">P4</a></td></tr><tr><td data-label="영역">CI/CD</td><td data-label="다룬 것">Jenkins, SonarQube·JaCoCo, Docker, Ansible, Kubernetes(kubeadm, Deployment·Service·Secret·Probe)</td><td data-label="쪽"><a class="pref" href="#p5">P5</a>~<a class="pref" href="#p6">P6</a></td></tr><tr><td data-label="영역">AWS</td><td data-label="다룬 것">EC2·RDS 배포와 도메인 연결(팀 프로젝트), EC2(개인 CI 서버·앱 서버·클러스터 노드)</td><td data-label="쪽"><a class="pref" href="#p5">P5</a></td></tr></tbody></table></div></div><div class="skill-group"><h3 class="sub-h">실습·학습</h3><div class="tbl-wrap"><table class="rt skills-t"><thead><tr><th scope="col">영역</th><th scope="col">다룬 것</th><th scope="col">쪽</th></tr></thead><tbody><tr><td data-label="영역">Terraform 실습 저장소</td><td data-label="다룬 것">AWS VPC·서브넷·라우팅·NAT, IAM 역할·인스턴스 프로파일, S3 원격 상태</td><td data-label="쪽"><a class="pref" href="#p7">P7</a></td></tr><tr><td data-label="영역">CKA 기출 풀이</td><td data-label="다룬 것">컨트롤 플레인 장애, 자원 요청과 스케줄링</td><td data-label="쪽"><a class="pref" href="#p7">P7</a></td></tr><tr><td data-label="영역">Jenkins 강의 실습</td><td data-label="다룬 것">SSH 원격 실행, Docker 데몬, DinD·DooD</td><td data-label="쪽"><a class="pref" href="#p7">P7</a></td></tr></tbody></table></div></div>
+    </div>
+
+    <div class="block" style="gap:10px">
+      <h2 class="sub-label">자격·학력·병역</h2>
+      <dl class="kv creds-kv"><dt>자격</dt><dd>AWS SAA(2026.02) · CKA(2026.08)</dd><dt>학력</dt><dd>가톨릭대학교 컴퓨터정보공학부 · 2027.02 졸업예정</dd><dt>병역</dt><dd>공군 전산장비정비병(<a class="pref" href="#p7">P7</a>)</dd></dl>
+      <p class="note page-order">페이지 순서: <a class="pref" href="#p2">P2</a>~<a class="pref" href="#p4">P4</a> Hibiscus · <a class="pref" href="#p5">P5</a>~<a class="pref" href="#p6">P6</a> 영주로그 CI/CD · <a class="pref" href="#p7">P7</a> 기반 역량</p>
     </div>
   </section>
 
-  <!-- ===== 01 Hibiscus ===== -->
   <section class="project" id="hibiscus" aria-label="Hibiscus">
-    <article class="wrap chapter">
-      <div class="ch-head">
-        <p class="eyebrow">01 / HIBISCUS · 구조와 담당 범위</p>
-        <h2>Python 배포 조율기를 팀 NestJS 백엔드로 이식</h2>
-        <p class="ch-meta">2026.09.28~10.04 · 소프트뱅크 해커톤 · 6인 팀</p>
-      </div>
-      <p>Hibiscus는 기록된 HTTP 요청으로 앱을 검증하고, 정책 판단·승인·서명을 거친 이미지를 Cloud Run 또는 온프레미스에 배포하는 서비스입니다. 하이브리드 배포 방향을 제안하고 배포 조율·롤백·GCP 인프라를 맡았습니다.</p>
-
-      <figure class="fig">
-        <div class="flow" role="img" aria-label="팀 기능(요청 재생 검사·정책 판단·서명 생성) 다음에 본인 구현(배포 전 서명·이미지 확인), 이어서 Cloud Run 후보와 온프레미스 후보를 각각 실행·검사하고, 모두 통과하면 환경별 전환 후 대표 경로를 전환">
-          <div class="node team"><span class="tag">팀 기능</span>요청 재생 검사 · 정책 판단 · 서명 생성</div>
-          <div class="v-arrow"></div>
-          <div class="node"><span class="tag">본인 구현</span>배포 전 서명·이미지 확인</div>
-          <div class="fork"><i></i><i></i></div>
-          <div class="pair">
-            <div class="node">Cloud Run 후보 실행·검사<small>본인: 후보 배포·검사 로직</small></div>
-            <div class="node">온프레미스 후보 실행·검사<small>본인: 조율·API 연동 / 팀: Agent</small></div>
-          </div>
-          <div class="join"><i></i></div>
-          <div class="node"><span class="tag">본인 구현</span>모두 통과하면 환경별 전환 → 대표 경로 전환</div>
-        </div>
-        <figcaption>양쪽 배포 시의 흐름. 대표 경로는 사용자가 접속하는 공개 주소가 가리키는 대상입니다.</figcaption>
-      </figure>
-
-      <div class="block">
-        <h3>팀 백엔드의 배포 단계로 통합</h3>
-        <p>Python으로 만든 배포 조율기를 NestJS로 옮겼습니다. 팀의 검증·정책·서명 결과를 받아, 대상별 클라이언트와 대표 경로 전환 기능을 통해 배포를 진행하도록 연결했습니다.</p>
-      </div>
-      <div class="block">
-        <h3>현재 배포에 대한 서명인지 먼저 확인</h3>
-        <p>cosign 공개키 검증과 함께 이미지 저장소·식별값(digest), 실행 ID·정책 결정 해시를 대조했습니다. 잘못된 이미지나 다른 실행의 서명이면 후보 생성 전에 중단하도록 했습니다.</p>
-      </div>
-      <div class="block">
-        <h3>재시도와 이미지 추적을 고려한 Cloud Run 스크립트</h3>
-        <p>이미지 식별값과 배포 ID로 배포 버전(revision) 이름을 만들어 같은 배포의 재시도에서 기존 버전을 재사용했습니다. 멀티 아키텍처 이미지의 원본 식별값도 별도로 남겨 추적할 수 있게 했습니다.</p>
-      </div>
-
-      <p class="stack-tags">TypeScript · NestJS · Python · Bash · Docker · Cloud Run · cosign</p>
-      <nav class="refs" aria-label="Hibiscus 구조 관련 링크">
-        <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/deploy.orchestrator.ts#L109-L229" target="_blank" rel="noopener">배포 조율 코드</a>
-        <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/signature.verifier.ts#L27-L68" target="_blank" rel="noopener">서명 확인 코드</a>
-        <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/eae12bd199f0d85945ece5fb0c3a2bdfabba8321/deploy/cloudrun/candidate.sh#L13-L29" target="_blank" rel="noopener">Cloud Run 스크립트</a>
-        <a href="https://policerjack.tistory.com/5" target="_blank" rel="noopener">구축 회고</a>
-      </nav>
-    </article>
-
-    <article class="wrap chapter">
-      <div class="ch-head">
-        <p class="eyebrow">01 / HIBISCUS · 설계 판단과 실패 복구</p>
-        <h2>Hibiscus Cloud Run·온프레미스 순차 전환</h2>
-      </div>
-      <p>새 버전은 양쪽에 트래픽 0%로 먼저 띄우고, 둘 다 헬스 검사를 통과해야 전환합니다. 한쪽만 새 버전이 되는 상태를 막으려고, 한쪽만 실패해도 배포 전체를 보류하는 쪽을 택했습니다. 전환 순서는 Cloud Run → 온프레미스 → 대표 경로입니다. Cloud Run은 트래픽을 이전 revision으로 돌리기만 하면 되돌릴 수 있어 먼저 바꿨고, 사용자가 보는 대표 경로는 마지막에 바꿔 두 환경의 전환 시차가 드러나지 않게 했습니다.</p>
-
-      <figure class="fig">
-        <div class="seq">
-          <div class="seq-row">
-            <div class="node step">양쪽 후보 준비·검사</div>
-            <div class="h-arrow"></div>
-            <div class="out">한쪽 후보 실패 → 후보 정리·기존 버전 유지</div>
-          </div>
-          <div class="seq-row">
-            <div class="node step">Cloud Run 활성화 후 온프레미스 활성화</div>
-            <div class="h-arrow"></div>
-            <div class="out">온프레미스 실패 → Cloud Run 복구·후보 정리</div>
-          </div>
-          <div class="seq-row">
-            <div class="node step">양쪽 활성화 후 대표 경로 전환</div>
-            <div class="h-arrow"></div>
-            <div class="out">경로 실패 → 양쪽 환경 복구·실패 기록</div>
-          </div>
-          <div class="seq-row">
-            <div class="node step">대표 경로 전환 완료</div>
-            <div class="h-arrow ok"></div>
-            <div class="out ok">배포 성공 기록</div>
-          </div>
-        </div>
-        <figcaption>순차 전환 중 실패한 단계에 따라 이미 바뀐 환경을 복구하도록 구성했습니다.</figcaption>
-      </figure>
-
-      <div class="block" style="gap:16px">
-        <h3>Hibiscus PR #26 팀원 리뷰 결함 수정</h3>
-        <dl class="kv">
-          <dt>문제</dt><dd>팀원이 리뷰에서 재현해 지적한 결함: 경로 전환이 실패해도 <code>activated</code>로 남고 롤백이 호출되지 않았습니다.</dd>
-          <dt>수정</dt><dd>경로 전환이 실패하면 Cloud Run은 이전 revision으로, 온프레미스는 이전 컨테이너로 되돌리고 <code>rolled_back</code>으로 기록하게 고쳤습니다. 되돌릴 컨테이너가 없으면 <code>error</code>로 남겨 수동 처리합니다.</dd>
-          <dt>검증</dt><dd>단위 테스트 3개와 통합 테스트 1개를 추가하고 다른 팀원의 승인을 받아 병합했습니다.</dd>
-        </dl>
-      </div>
-
-      <nav class="refs" aria-label="PR #26 관련 링크">
-        <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/26#discussion_r4164102670" target="_blank" rel="noopener">팀원 리뷰 코멘트</a>
-        <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/specs/deploy-orchestrator.spec.ts#L287-L350" target="_blank" rel="noopener">회귀 테스트</a>
-        <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/26#pullrequestreview-5393827637" target="_blank" rel="noopener">리뷰 승인</a>
-      </nav>
-    </article>
-
-    <article class="wrap chapter">
-      <div class="ch-head">
-        <p class="eyebrow">01 / HIBISCUS · 실환경 검증과 인프라</p>
-        <h2>Hibiscus 장애 주입 시험과 GCP VM 구성</h2>
-      </div>
-
-      <div class="block" style="gap:16px">
-        <h3>온프레미스 활성화 실패를 유도한 롤백 시험</h3>
-        <div class="tl">
-          <div class="tl-label">Cloud Run</div>
-          <ol class="tl-steps">
-            <li>양쪽 후보 통과</li>
-            <li><time>14:01:22</time>새 revision 100%</li>
-            <li>온프레미스 활성화 30초 기한 초과</li>
-            <li><time>14:01:56</time>이전 revision 복귀</li>
-            <li>온프레미스 후보 정리</li>
-            <li class="end">rolled_back</li>
-          </ol>
-          <div class="tl-label">조작</div>
-          <div class="tl-track"><div class="tl-bar">Agent API 503 차단 (47초)</div></div>
-          <div class="tl-label">공개 주소</div>
-          <p class="tl-note">대표 경로는 기존 온프레미스 유지 · 1초 간격 <b>109건 모두 200</b></p>
-        </div>
-        <div class="tbl-wrap">
-          <table class="rt">
-            <thead><tr><th scope="col">선택</th><th scope="col">이유</th></tr></thead>
-            <tbody>
-              <tr><td data-label="선택">Agent API만 503</td><td data-label="이유">앱 헬스체크를 500으로 만들면 후보 검사에서 걸려 보류로 끝남. 전환 단계 실패를 만들려고 Agent가 재시도하는 503 사용</td></tr>
-              <tr><td data-label="선택">관측 한계</td><td data-label="이유">Cloud Run 상태는 5초 간격으로만 봐서 새 revision 100% 구간은 29~39초 범위로만 말할 수 있음</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="block" style="gap:14px">
-        <h3>데모 배포 결과</h3>
-        <div class="stats">
-          <div class="stat"><span>전환</span><b>8</b></div>
-          <div class="stat"><span>후보 단계 보류</span><b>8</b></div>
-          <div class="stat"><span>정책 차단</span><b>1</b></div>
-        </div>
-        <p class="note">보류 사유에 헬스 경로 404·후보 생성 실패 포함</p>
-        <p class="callout">Cloud Run 후보에서만 <code>/healthz</code>가 404(같은 이미지가 온프레미스에선 통과). Cloud Run이 z로 끝나는 일부 경로를 예약해 생긴 일로, 두 후보를 정리하고 기존 버전을 유지했고 앱에 <code>/health</code>를 추가해 해결.</p>
-      </div>
-
-      <div class="block" style="gap:14px">
-        <h3>배포 기능이 실행될 GCP 기반 구성</h3>
-        <div class="tbl-wrap">
-          <table class="rt">
-            <thead><tr><th scope="col">구성</th><th scope="col">한 일</th><th scope="col">이유</th></tr></thead>
-            <tbody>
-              <tr><td data-label="구성">GCE VM</td><td data-label="한 일">고정 IP, 방화벽(80·443, Agent SSH 터널 2222)</td><td data-label="이유">지속적인 Agent SSH 연결, 백엔드 DB 파일, 이미지 빌드</td></tr>
-              <tr><td data-label="구성">HTTPS</td><td data-label="한 일">Caddy + Let's Encrypt</td><td data-label="이유">주소별 인증서 자동 발급</td></tr>
-              <tr><td data-label="구성">프로세스</td><td data-label="한 일">systemd 서비스 등록</td><td data-label="이유">재부팅 후 실행, 프로세스 장애 시 재시작</td></tr>
-              <tr><td data-label="구성">비밀값</td><td data-label="한 일">서명 키·GitHub 비밀값을 Secret Manager로</td><td data-label="이유">VM 서비스 계정만 읽기</td></tr>
-              <tr><td data-label="구성">권한</td><td data-label="한 일">Cloud Run 배포, 지정 이미지 저장소 쓰기, 실행 계정 사용, 비밀값 읽기</td><td data-label="이유">작업 단위로 부여</td></tr>
-              <tr><td data-label="구성">한계</td><td data-label="한 일">백엔드 VM이 단일 장애점</td><td data-label="이유">이미 배포된 앱은 각 위치에서 계속 동작</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="note">본인 범위는 배포 조율·GCP 구성과 팀 기능 연결입니다. Agent·Gateway·서명 생성·자동 장애 전환 기능 자체는 팀원이 구현했습니다.</p>
-      </div>
-
-      <nav class="refs" aria-label="Hibiscus 저장소 링크">
-        <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus" target="_blank" rel="noopener">프로젝트 저장소</a>
-        <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/26" target="_blank" rel="noopener">배포 단계 통합 PR</a>
-      </nav>
-    </article>
+<article class="wrap chapter" id="p2">
+<div class="ch-head"><p class="eyebrow">P2 / HIBISCUS ①</p><h2>양쪽 후보가 모두 통과해야 순서대로 전환합니다</h2></div>
+<div class="tbl-wrap"><table class="rt"><thead><tr><th scope="col">기간</th><th scope="col">인원</th><th scope="col">내 역할</th></tr></thead><tbody><tr><td data-label="기간">2026.09.28~10.04 · 소프트뱅크 해커톤 2026</td><td data-label="인원">6명</td><td data-label="내 역할">배포 단계(조율·부분 실패 롤백), GCP 실행 환경 구성, 팀 기능 연결</td></tr></tbody></table></div>
+<p>Hibiscus는 기록된 HTTP 요청으로 앱을 검증하는 배포 서비스입니다. 정책 판단·승인·서명을 거친 이미지만 Cloud Run이나 온프레미스에 배포합니다.</p>
+<p>하이브리드 배포 방향은 제가 초기 회의에서 제안했습니다. 실무에서 쓰는 환경과 비슷하다고 봤습니다. 한쪽에 장애가 나면 다른 쪽으로 넘길 수 있다는 점도 이유였습니다. 처음에는 배포 조율기를 Python으로 따로 만들었습니다. 팀 백엔드가 NestJS로 다시 정리되면서 조율기를 백엔드의 배포 단계로 옮겼습니다.</p>
+<div class="block"><h3>내가 한 것과 팀원이 한 것</h3>
+<div class="tbl-wrap"><table class="rt nw"><thead><tr><th scope="col">구분</th><th scope="col">한 일</th><th scope="col">근거</th></tr></thead><tbody><tr><td data-label="구분">본인</td><td data-label="한 일">Python 배포 조율기 v0, Cloud Run 후보·전환·롤백·정리 스크립트 작성</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/9" target="_blank" rel="noopener">PR #9</a></td></tr><tr><td data-label="구분">본인</td><td data-label="한 일">배포 전 서명 확인 추가</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/18" target="_blank" rel="noopener">PR #18</a></td></tr><tr><td data-label="구분">본인</td><td data-label="한 일">기존 백엔드의 배포 단계가 조율기를 호출하도록 연결</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/19" target="_blank" rel="noopener">PR #19</a></td></tr><tr><td data-label="구분">본인</td><td data-label="한 일">조율기를 NestJS 백엔드의 배포 단계로 이식. 온프레미스 Agent 작업 API 클라이언트와 대표 경로 전환 연결</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/26" target="_blank" rel="noopener">PR #26</a></td></tr><tr><td data-label="구분">본인</td><td data-label="한 일">배포 단계가 돌아갈 GCP 실행 환경 구성</td><td data-label="근거"><a class="pref" href="#p4">P4</a></td></tr><tr><td data-label="구분">팀원</td><td data-label="한 일">요청 재생 검사, 정책 엔진, 서명 생성, 프론트엔드</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/2a0d6298b594d7155aa97829830c4ef07f8107b1/README.md#L19-L29" target="_blank" rel="noopener">README 담당표</a></td></tr><tr><td data-label="구분">팀원</td><td data-label="한 일">온프레미스 Agent, 작업 전달, SSH 터널, Gateway, 라우팅, 헬스 모니터·자동 장애 전환, GitHub Webhook</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/2a0d6298b594d7155aa97829830c4ef07f8107b1/TASK.md#L1-L5" target="_blank" rel="noopener">팀원 작업 범위</a>, <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/commit/9417fd0ca1b6943e1edd5ec7b3ee53f5a178dff5" target="_blank" rel="noopener">장애 전환 커밋</a></td></tr></tbody></table></div>
+<p>본인 범위는 배포 조율·GCP 구성과 팀 기능 연결입니다. Agent·Gateway·서명 생성·자동 장애 전환 기능 자체는 팀원이 구현했습니다.</p>
+</div>
+<div class="block">
+<h3>양쪽에 배포할 때의 흐름</h3>
+<figure class="fig diagram">
+  <div class="flow" role="img" aria-label="A 팀 기능(요청 재생 검사, 정책 판단, 서명 생성)에서 서명 결과를 받아 B 배포 전 확인. 이어서 C Cloud Run 후보와 D 온프레미스 후보를 동시에 실행하고 E에서 판정. 모두 통과하면 F 전환, 이어서 G 대표 경로 전환. 각 단계에서 실패하면 held 또는 rolled_back으로 끝남">
+    <div class="node team"><span class="tag">A · 팀</span>요청 재생 검사 → 정책 판단 → 서명 생성</div>
+    <div class="v-arrow lb"><span class="lbl">서명 결과(JSON 파일)</span></div>
+    <div class="node"><span class="tag">B · 본인</span>배포 전 확인<small>실행 ID·digest 대조, 저장소·dry-run 서명 확인, <code>cosign verify -a run_id -a plan_hash</code></small></div>
+    <div class="fork"><i></i><i></i></div>
+    <div class="pair">
+      <div class="node"><span class="tag">C · 본인</span>Cloud Run 후보<small>트래픽 0% revision, <code>cand</code> 태그 주소로 헬스 검사</small></div>
+      <div class="node"><span class="tag">D</span>온프레미스 후보<small>Agent 작업 <code>&lt;run_id&gt;-candidate-01</code>, 기한 2분 · 본인: 조율·API 연동 / 팀: Agent</small></div>
+    </div>
+    <div class="join"><i></i></div>
+  </div>
+  <div class="seq">
+    <div class="seq-row">
+      <div class="node step"><span><span class="tag">E · 본인</span>판정</span><small>C·D의 검사 결과</small></div>
+      <div class="h-arrow"></div>
+      <div class="out">하나라도 실패하면 두 후보 정리 → held</div>
+    </div>
+    <div class="seq-row">
+      <div class="node step"><span><span class="tag">F · 본인</span>전환</span><small>모두 통과하면 Cloud Run 먼저, 다음 온프레미스(작업 기한 30초)</small></div>
+      <div class="h-arrow"></div>
+      <div class="out">온프레미스 전환 실패: Cloud Run 이전 revision 복귀, 온프레미스 후보 정리 → rolled_back</div>
+    </div>
+    <div class="seq-row">
+      <div class="node step"><span><span class="tag">G · 본인</span>대표 경로 전환</span><small>양쪽 전환 뒤. 온프레미스가 있으면 온프레미스, 없으면 Cloud Run</small></div>
+      <div class="h-arrow"></div>
+      <div class="out">대표 경로 전환 실패: 양쪽을 이전 상태로 되돌림 → rolled_back. 되돌리기에 실패하면 error</div>
+    </div>
+  </div>
+  <figcaption>대표 경로는 사용자가 접속하는 공개 주소가 가리키는 대상입니다. C와 D는 동시에 실행합니다. 두 검사를 모두 통과해야 F로 넘어갑니다.</figcaption>
+</figure>
+<p class="src-link"><span>원본 화면</span> <a href="https://policerjack.tistory.com/5" target="_blank" rel="noopener">구축 회고</a> 3·4절 — Hibiscus 콘솔의 배포 결과 화면. 전환(v17)과 보류(/healthz 404 때)</p>
+<details class="more"><summary>단계·연결별 근거(코드 행 링크)</summary><div class="tbl-wrap"><table class="rt nw"><thead><tr><th scope="col">상자</th><th scope="col">라벨</th><th scope="col">담당</th><th scope="col">근거</th></tr></thead><tbody><tr><td data-label="상자">A</td><td data-label="라벨">요청 재생 검사 → 정책 판단 → 서명 생성</td><td data-label="담당">팀</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/2a0d6298b594d7155aa97829830c4ef07f8107b1/README.md#L8-L29" target="_blank" rel="noopener">README 전체 흐름·담당표</a></td></tr><tr><td data-label="상자">B</td><td data-label="라벨">배포 전 확인: 실행 ID·digest 대조, 저장소·dry-run 서명 확인, <code>cosign verify -a run_id -a plan_hash</code></td><td data-label="담당">본인</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/deploy.orchestrator.ts#L76-L109" target="_blank" rel="noopener">조율기 76~109행</a>, <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/signature.verifier.ts#L27-L68" target="_blank" rel="noopener">서명 확인 27~68행</a></td></tr><tr><td data-label="상자">C</td><td data-label="라벨">Cloud Run 후보: 트래픽 0% revision, <code>cand</code> 태그 주소로 헬스 검사</td><td data-label="담당">본인</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/eae12bd199f0d85945ece5fb0c3a2bdfabba8321/deploy/cloudrun/candidate.sh#L13-L29" target="_blank" rel="noopener">candidate.sh 13~29행</a>, <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/deploy.orchestrator.ts#L111-L144" target="_blank" rel="noopener">조율기 111~144행</a></td></tr><tr><td data-label="상자">D</td><td data-label="라벨">온프레미스 후보: Agent 작업 <code>&lt;run_id&gt;-candidate-01</code>, 기한 2분</td><td data-label="담당">본인: 조율·API 연동 / 팀: Agent</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/onprem.client.ts#L19-L53" target="_blank" rel="noopener">onprem.client.ts 19~53행</a>, <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/config/configs/deploy.config.ts#L21-L26" target="_blank" rel="noopener">기한 설정 21~26행</a></td></tr><tr><td data-label="상자">E</td><td data-label="라벨">판정: 하나라도 실패하면 두 후보 정리 → held</td><td data-label="담당">본인</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/deploy.orchestrator.ts#L145-L152" target="_blank" rel="noopener">조율기 145~152행</a></td></tr><tr><td data-label="상자">F</td><td data-label="라벨">전환: Cloud Run 먼저, 다음 온프레미스(작업 기한 30초)</td><td data-label="담당">본인</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/deploy.orchestrator.ts#L154-L201" target="_blank" rel="noopener">조율기 154~201행</a></td></tr><tr><td data-label="상자">G</td><td data-label="라벨">대표 경로 전환: 온프레미스가 있으면 온프레미스, 없으면 Cloud Run</td><td data-label="담당">본인</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/deploy.orchestrator.ts#L213-L214" target="_blank" rel="noopener">조율기 213~214행</a></td></tr></tbody></table></div><div class="tbl-wrap"><table class="rt nw"><thead><tr><th scope="col">화살표</th><th scope="col">라벨</th><th scope="col">근거</th></tr></thead><tbody><tr><td data-label="화살표">A → B</td><td data-label="라벨">서명 결과(JSON 파일)</td><td data-label="근거">README 14행, 조율기 76~83행</td></tr><tr><td data-label="화살표">B → C, B → D</td><td data-label="라벨">동시에 실행</td><td data-label="근거">조율기 111~119행</td></tr><tr><td data-label="화살표">C, D → E</td><td data-label="라벨">검사 결과</td><td data-label="근거">조율기 133~144행</td></tr><tr><td data-label="화살표">E → F</td><td data-label="라벨">모두 통과</td><td data-label="근거">조율기 145~152행</td></tr><tr><td data-label="화살표">F → G</td><td data-label="라벨">양쪽 전환 뒤</td><td data-label="근거">조율기 213행</td></tr><tr><td data-label="화살표">F ⇢ 복구</td><td data-label="라벨">온프레미스 전환 실패: Cloud Run 이전 revision 복귀, 온프레미스 후보 정리 → rolled_back</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/deploy.orchestrator.ts#L202-L210" target="_blank" rel="noopener">조율기 202~210행</a></td></tr><tr><td data-label="화살표">G ⇢ 복구</td><td data-label="라벨">대표 경로 전환 실패: 양쪽을 이전 상태로 되돌림 → rolled_back. 되돌리기에 실패하면 error</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/deploy.orchestrator.ts#L215-L227" target="_blank" rel="noopener">조율기 215~227행</a></td></tr></tbody></table></div></details>
+</div>
+<div class="block"><h3>설계 판단</h3>
+<div class="tbl-wrap"><table class="rt nw"><thead><tr><th scope="col">상황</th><th scope="col">고른 방식</th><th scope="col">고르지 않은 방식</th><th scope="col">이유</th><th scope="col">대가</th></tr></thead><tbody><tr><td data-label="상황">한쪽 후보 실패</td><td data-label="고른 방식">두 후보를 정리하고 기존 버전 유지(held)</td><td data-label="고르지 않은 방식">통과한 쪽만 전환</td><td data-label="이유">한쪽만 새 버전이 되는 상태를 만들지 않으려고</td><td data-label="대가">한쪽 문제로 전체 배포가 보류됩니다</td></tr><tr><td data-label="상황">전환 순서</td><td data-label="고른 방식">Cloud Run → 온프레미스 → 대표 경로</td><td data-label="고르지 않은 방식">온프레미스 먼저</td><td data-label="이유">Cloud Run은 트래픽 비율만 바꾸면 되돌릴 수 있어 먼저 바꿨습니다. 대표 경로는 마지막에 바꿔 두 환경의 전환 시차가 사용자에게 드러나지 않게 했습니다.</td><td data-label="대가">온프레미스 전환이 실패하면 이미 바꾼 Cloud Run을 되돌려야 합니다(<a class="pref" href="#p3">P3</a>에서 시험)</td></tr><tr><td data-label="상황">같은 배포 재시도</td><td data-label="고른 방식">revision 이름에 digest 앞 12자와 실행 ID 해시 6자를 넣음. 같은 이름이 있으면 태그만 다시 붙임. 온프레미스 작업 ID는 <code>&lt;run_id&gt;-&lt;action&gt;-01</code>로 고정</td><td data-label="고르지 않은 방식">시도마다 새 이름</td><td data-label="이유">재시도해도 revision을 새로 만들지 않습니다. 서버가 재시작돼도 같은 작업의 결과를 이어서 기다립니다.</td><td data-label="대가">—</td></tr><tr><td data-label="상황">서명 확인</td><td data-label="고른 방식">실행 ID·정책 결정 해시까지 맞는 서명만 통과</td><td data-label="고르지 않은 방식">이미지 서명만 확인</td><td data-label="이유">다른 실행의 서명이면 후보를 만들기 전에 중단합니다.</td><td data-label="대가">—</td></tr></tbody></table></div>
+</div>
+</article>
+<article class="wrap chapter" id="p3">
+<div class="ch-head"><p class="eyebrow">P3 / HIBISCUS ②</p><h2>온프레미스 전환을 일부러 실패시켜 Cloud Run 복귀를 확인했습니다</h2></div>
+<p>rolled_back은 전환이 시작된 뒤에 실패해야만 나오는 결과입니다. 일부러 만들지 않으면 확인할 방법이 없어서, 2026-10-03에 실제 Cloud Run·온프레미스 환경에서 시험했습니다.</p>
+<div class="block"><h3>실패를 만드는 방법</h3>
+<div class="tbl-wrap"><table class="rt"><thead><tr><th scope="col">방법</th><th scope="col">예상 결과</th><th scope="col">선택</th></tr></thead><tbody><tr><td data-label="방법">앱 헬스 검사가 500을 반환</td><td data-label="예상 결과">후보 검사에서 걸려 held로 끝남. 전환 단계까지 가지 않음</td><td data-label="선택">쓰지 않음</td></tr><tr><td data-label="방법">Agent API가 401·403을 반환</td><td data-label="예상 결과">Agent가 스스로 종료함</td><td data-label="선택">쓰지 않음</td></tr><tr><td data-label="방법">Agent API만 503으로 차단</td><td data-label="예상 결과">Agent가 재시도하는 사이 전환 작업이 30초 기한을 넘김</td><td data-label="선택"><strong>사용</strong></td></tr></tbody></table></div>
+<p>Agent가 401·403에서 종료하는 동작은 <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/2a0d6298b594d7155aa97829830c4ef07f8107b1/onprem-agent/src/backend-client.ts#L97-L100" target="_blank" rel="noopener">팀원이 작성한 Agent 코드 97~100행</a>에서 확인했습니다.</p>
+<p>온프레미스 후보가 통과한 직후 VM의 Caddy에서 Agent가 쓰는 API만 503으로 막았습니다. 공개 주소와 상태 확인은 SSH 터널로 가므로 이 차단의 영향을 받지 않습니다. Cloud Run 되돌리기가 끝난 뒤 차단을 풀었습니다(차단 47초).</p>
+</div>
+<div class="block"><h3>타임라인</h3>
+<div class="tbl-wrap"><table class="rt nw"><thead><tr><th scope="col">시점</th><th scope="col">Cloud Run</th><th scope="col">온프레미스</th><th scope="col">공개 주소(대표 경로)</th></tr></thead><tbody><tr><td data-label="시점">후보 단계</td><td data-label="Cloud Run">후보 통과</td><td data-label="온프레미스">후보 통과. 직후 Agent API 503 차단 시작</td><td data-label="공개 주소(대표 경로)">기존 온프레미스가 응답</td></tr><tr><td data-label="시점">14:01:22</td><td data-label="Cloud Run">새 revision으로 바뀐 것을 관측</td><td data-label="온프레미스">전환 작업을 받지 못함</td><td data-label="공개 주소(대표 경로)">기존 온프레미스가 응답</td></tr><tr><td data-label="시점">작업 기한 30초 경과</td><td data-label="Cloud Run">—</td><td data-label="온프레미스">백엔드가 전환 실패로 판단</td><td data-label="공개 주소(대표 경로)">기존 온프레미스가 응답</td></tr><tr><td data-label="시점">14:01:56</td><td data-label="Cloud Run">이전 revision으로 돌아온 것을 관측</td><td data-label="온프레미스">후보 정리</td><td data-label="공개 주소(대표 경로)">기존 온프레미스가 응답</td></tr><tr><td data-label="시점">결과</td><td data-label="Cloud Run">배포 기록 rolled_back</td><td data-label="온프레미스">Cloud Run 복귀 뒤 차단 해제</td><td data-label="공개 주소(대표 경로)">1초 간격 요청 109건 모두 HTTP 200</td></tr></tbody></table></div>
+<div class="chain-wrap"><p class="chain-label">배포 기록의 단계 순서</p><ol class="chain"><li>후보 2개 성공</li><li>Cloud Run 전환 성공</li><li class="bad">온프레미스 전환 실패(기한 초과)</li><li>Cloud Run 되돌림 성공</li><li>온프레미스 후보 정리 성공</li></ol></div>
+<p class="src-link"><span>원본 화면</span> <a href="https://policerjack.tistory.com/5" target="_blank" rel="noopener">구축 회고</a> 4절 — 시간축 그림. 14:01:22 새 버전 100% 확인, 14:01:56 되돌림 확인, 공개 주소 109/109 응답 200</p>
+</div>
+<div class="block"><h3>이 수치를 읽는 법</h3>
+<ul class="dots"><li>공개 주소는 약 1초마다 요청했습니다(109회). Cloud Run 상태는 약 5초마다 gcloud로 확인했습니다(26회).</li><li>대표 경로는 테스트 전에 기록하고 테스트 뒤 콘솔에서 다시 확인했습니다. 경로는 그대로였습니다.</li><li>Cloud Run 상태는 5초 간격으로만 확인했습니다. 그래서 새 revision이 트래픽 100%를 받은 구간은 29~39초 범위로만 말할 수 있습니다.</li><li>30초는 Agent 전환 작업의 기한입니다. 전체 복구 시간이 아닙니다.</li><li>109건은 대표 경로를 바꾸기 전에 멈춘 이 시험 한 번의 관측입니다. 모든 배포의 무중단을 뜻하지 않습니다.</li><li>같은 실패 경로는 <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/specs/deploy-orchestrator.spec.ts#L255-L285" target="_blank" rel="noopener">단위 테스트</a>로도 정의해 두었습니다.</li></ul>
+</div>
+<div class="block"><h3>PR #26: 팀원 리뷰에서 드러난 결함 수정</h3>
+<p>팀원이 리뷰에서 재현해 지적한 결함입니다. 대표 경로 전환이 실패해도 결과가 activated로 남고 롤백이 호출되지 않았습니다(<a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/26#discussion_r4164102670" target="_blank" rel="noopener">리뷰 코멘트</a>). 원인은 순서였습니다. 양쪽 전환이 끝난 시점에 이미 성공을 기록하고, 그 뒤에 대표 경로를 바꾸고 있었습니다.</p>
+<div class="tbl-wrap"><table class="rt nw"><thead><tr><th scope="col">대표 경로 전환이 실패했을 때</th><th scope="col">수정 전</th><th scope="col">수정 후(본인)</th></tr></thead><tbody><tr><td data-label="대표 경로 전환이 실패했을 때">배포 기록</td><td data-label="수정 전">activated</td><td data-label="수정 후(본인)">rolled_back</td></tr><tr><td data-label="대표 경로 전환이 실패했을 때">롤백</td><td data-label="수정 전">호출되지 않음</td><td data-label="수정 후(본인)">Cloud Run은 이전 revision으로, 온프레미스는 이전 컨테이너로 되돌림</td></tr></tbody></table></div>
+<p>되돌릴 컨테이너가 없으면 error로 남겨 수동으로 처리합니다. 이 경우를 다루는 단위 테스트 3개와 통합 테스트 1개를 추가했습니다(<a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/specs/deploy-orchestrator.spec.ts#L287-L350" target="_blank" rel="noopener">단위 테스트 287~350행</a>, <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/test/deploy.e2e-spec.ts#L396-L436" target="_blank" rel="noopener">통합 테스트 396~436행</a>). 다른 팀원의 승인을 받아 병합했습니다(<a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/26#pullrequestreview-5393827637" target="_blank" rel="noopener">리뷰 승인</a>, <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/commit/882d4a766fce1bef0636f09e0d9dac78f43e4a73" target="_blank" rel="noopener">수정 커밋</a>).</p>
+</div>
+</article>
+<article class="wrap chapter" id="p4">
+<div class="ch-head"><p class="eyebrow">P4 / HIBISCUS ③</p><h2>GCP 실행 환경의 접근 경로와 권한을 구성했습니다</h2></div>
+<p>배포 단계가 실행될 백엔드 서버와 그 주변을 구성했습니다. 과정은 <a href="https://policerjack.tistory.com/5" target="_blank" rel="noopener">구축 회고 6절</a>에 화면과 함께 정리했습니다.</p>
+<p>백엔드는 Compute Engine VM에 올렸습니다. Agent SSH 터널 서버(TCP 2222), Docker 멀티 플랫폼 빌드, 상시 동작하는 작업 처리기, SQLite가 필요했기 때문입니다. 대신 VM이 단일 장애점이 됩니다.</p>
+<div class="block"><h3>구성 명세</h3>
+<div class="tbl-wrap"><table class="rt nw"><thead><tr><th scope="col">구성</th><th scope="col">설정</th><th scope="col">이유</th><th scope="col">근거</th></tr></thead><tbody><tr><td data-label="구성">백엔드 VM</td><td data-label="설정">e2-standard-4, Ubuntu 24.04, 고정 IP</td><td data-label="이유">위 문단</td><td data-label="근거">회고 6절</td></tr><tr><td data-label="구성">방화벽</td><td data-label="설정">80·443과 2222만 열기</td><td data-label="이유">80·443은 Gateway·API·콘솔, 2222는 Agent SSH 터널</td><td data-label="근거">회고 6절</td></tr><tr><td data-label="구성">백엔드 API 포트</td><td data-label="설정">8080은 백엔드가 VM 안에서 받는 포트. 127.0.0.1 전용이고 방화벽에도 열지 않음</td><td data-label="이유">외부 요청은 443에서 Caddy가 HTTPS로 받아 넘김. 8080을 밖에 열지 않아 HTTPS를 거치지 않고 백엔드에 닿는 경로가 없음</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/2a0d6298b594d7155aa97829830c4ef07f8107b1/frontend/.env.example#L7-L8" target="_blank" rel="noopener">팀원 설정 문서 7~8행</a></td></tr><tr><td data-label="구성">HTTPS</td><td data-label="설정">Caddy + Let's Encrypt</td><td data-label="이유">주소별 인증서 자동 발급</td><td data-label="근거">회고 6절</td></tr><tr><td data-label="구성">프로세스</td><td data-label="설정">systemd 서비스 등록</td><td data-label="이유">재부팅 뒤 실행, 프로세스 장애 시 재시작</td><td data-label="근거">수행 기록(공개 근거 없음)</td></tr><tr><td data-label="구성">비밀값</td><td data-label="설정">cosign 개인키·비밀번호와 GitHub 비밀값을 Secret Manager에 보관. 서명 키 읽기 권한(Secret Accessor)은 백엔드 서비스 계정 하나</td><td data-label="이유">실행할 때만 /run 아래 0700 폴더에 풀어 디스크에 남지 않게 함</td><td data-label="근거">회고 6절, 수행 기록</td></tr><tr><td data-label="구성">권한</td><td data-label="설정">프로젝트 수준 역할은 Cloud Run Developer·Logs Viewer 두 개. 이미지 저장소 쓰기와 Cloud Run 실행 계정 사용은 리소스 단위로만 부여</td><td data-label="이유">배포 작업에 필요한 범위로 제한</td><td data-label="근거">회고 6절</td></tr><tr><td data-label="구성">DB</td><td data-label="설정">Cloud SQL(MySQL) 공인 IP, 허용 IP 2개, TLS 필수</td><td data-label="이유">허용 IP는 Cloud NAT 고정 IP와 온프레미스 IP</td><td data-label="근거">회고 6절</td></tr><tr><td data-label="구성">출구 IP</td><td data-label="설정">Cloud NAT</td><td data-label="이유">Cloud Run은 출구 IP가 바뀌어 허용 목록에 넣을 고정 IP가 필요</td><td data-label="근거">회고 6절</td></tr><tr><td data-label="구성">VM의 저장소 접근</td><td data-label="설정">VM에 GitHub 자격 증명을 두지 않고 공개 저장소를 익명으로 받음</td><td data-label="이유">개인 계정 권한이 VM에 남지 않게</td><td data-label="근거">회고 6절</td></tr><tr><td data-label="구성">비용</td><td data-label="설정">10/1~10/5 사용액 약 1만 7천 원</td><td data-label="이유">무료 체험 크레딧으로 처리, 실제 청구 0원</td><td data-label="근거">회고 6절</td></tr></tbody></table></div>
+<p class="src-link"><span>원본 화면</span> <a href="https://policerjack.tistory.com/5" target="_blank" rel="noopener">구축 회고</a> 6절 — 서비스 계정 역할 화면과 Secret Manager 권한 화면</p>
+</div>
+<div class="block"><h3>막혔던 것</h3>
+<p><strong>Cloud Run에서만 <code>/healthz</code>가 404였습니다.</strong> 데모 앱의 첫 배포는 정책 단계에서 막혔습니다. 앱은 <code>/healthz</code>를 쓰는데 등록 기본값이 <code>/health</code>여서 테스트가 실패했습니다. 경로를 <code>/healthz</code>로 맞추자 이번에는 Cloud Run 후보 검사만 404를 세 번 받았습니다. 온프레미스 후보는 같은 이미지로 통과했습니다. Cloud Run은 z로 끝나는 일부 URL 경로를 예약해 두고 있어 요청이 컨테이너에 닿기 전에 404가 났습니다. 배포 단계는 두 후보를 정리하고 기존 버전을 유지했습니다(held). 앱에 <code>/health</code>를 추가하고 헬스 경로를 바꾼 뒤로는 같은 문제가 나지 않았습니다.</p>
+<div class="tbl-wrap"><table class="rt"><thead><tr><th scope="col">증상</th><th scope="col">원인</th><th scope="col">조치</th></tr></thead><tbody><tr><td data-label="증상">VM의 Docker 29에서 빌드 확인 실패</td><td data-label="원인">기본 containerd 스냅샷 저장소 때문에 이미지 ID가 index digest로 나옴</td><td data-label="조치">overlay2로 바꿈</td></tr><tr><td data-label="증상">새 앱 첫 배포에서 <code>--no-traffic</code> 거부</td><td data-label="원인">Cloud Run 서비스가 아직 없으면 <code>--no-traffic</code>으로 배포할 수 없음</td><td data-label="조치">서비스를 미리 만들어 둠. 이 과정은 아직 자동화하지 못함</td></tr><tr><td data-label="증상">Cloud Run 화면의 digest가 서명한 digest와 다름</td><td data-label="원인">amd64·arm64를 묶은 index digest로 서명하는데 Cloud Run은 amd64 digest를 기록</td><td data-label="조치">revision 이름에 index digest를 넣고, 실행 ID와 index digest를 환경변수(HIB_RUN_ID, HIB_DIGEST)로 남김(<a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/eae12bd199f0d85945ece5fb0c3a2bdfabba8321/deploy/cloudrun/candidate.sh#L1-L16" target="_blank" rel="noopener">candidate.sh 1~16행</a>)</td></tr></tbody></table></div>
+</div>
+<div class="block"><h3>데모 배포 기록</h3>
+<div class="stats"><div class="stat"><span>전환</span><b>8</b></div><div class="stat"><span>후보 단계 보류</span><b>8</b></div><div class="stat"><span>정책 차단</span><b>1</b></div></div>
+<p>배포 기록 DB의 데모 앱 배포 17건은 전환 8건, 후보 단계 보류 8건, 정책 차단 1건입니다. 보류 사유에는 헬스 경로 404와 후보 생성 실패가 있습니다. 해커톤 기간 데모 실행의 집계라서 성공률로 읽지 않습니다.</p>
+</div>
+<div class="block"><h3>한계</h3>
+<ul class="dots"><li>백엔드 VM이 단일 장애점입니다. 이미 배포된 앱은 각 위치에서 계속 동작합니다.</li><li>마지막 배포에서 대표 경로 전환이 SSH 포워드 열림보다 0.9초 빨랐습니다. 그 사이 들어온 요청은 502를 받을 수 있는 구간입니다. 실제로 502가 났는지는 확인하지 못했습니다.</li><li>자동 장애 전환(팀 기능) 뒤 온프레미스로 돌아오는 작업은 수동입니다.</li><li>부하가 걸린 상태의 전환·되돌림 시간은 측정하지 않았습니다.</li></ul>
+</div>
+</article>
   </section>
 
-  <!-- ===== 02 영주로그 ===== -->
-  <section class="project" id="yeongjulog" aria-label="영주로그">
-    <article class="wrap chapter">
-      <div class="ch-head">
-        <p class="eyebrow">02 / 영주로그 · 개인 CI/CD 확장</p>
-        <h2>영주로그 Jenkins·Kubernetes 파이프라인 구축</h2>
-        <p class="ch-meta">2026.09 구축·검증 기록 · Jenkins / Ansible / Kubernetes / SonarQube</p>
-      </div>
-      <p>영주로그는 영주시의 역사 탐방 서비스입니다. 팀 프로젝트에서 EC2·RDS 배포와 도메인 연결을 맡았고, 이후 팀 백엔드를 포크해 개인적으로 CI/CD를 구축했습니다.</p>
+  <section class="project" id="yeongjulog" aria-label="영주로그 CI/CD">
+<article class="wrap chapter" id="p5">
+<div class="ch-head"><p class="eyebrow">P5 / 영주로그 CI/CD ①</p><h2>실패한 단계에 따라 다음 단계를 막거나 되돌립니다</h2></div>
+<div class="tbl-wrap"><table class="rt"><thead><tr><th scope="col">구분</th><th scope="col">기간</th><th scope="col">인원</th><th scope="col">내 역할</th></tr></thead><tbody><tr><td data-label="구분">팀 프로젝트(창업동아리 팀)</td><td data-label="기간">2026.03~06</td><td data-label="인원">4명</td><td data-label="내 역할">EC2·RDS 배포, 도메인 연결</td></tr><tr><td data-label="구분">개인 CI/CD(팀 백엔드 포크)</td><td data-label="기간">2026.09.22~09.24(구축·검증 커밋 기준)</td><td data-label="인원">1명</td><td data-label="내 역할">파이프라인 구성, 실패 시험</td></tr></tbody></table></div>
+<p>영주로그는 영주시의 역사 탐방 서비스입니다. 앱 기능은 팀 작업물이라 성과에 넣지 않았습니다. CI/CD는 AI 대화로 단계별 안내를 받으며 구성했습니다. 각 단계가 실제로 동작했는지는 실행 화면과 커밋으로 확인했습니다.</p>
+<div class="block"><h3>파이프라인 명세</h3>
+<div class="tbl-wrap"><table class="rt nw"><thead><tr><th scope="col">순서</th><th scope="col">단계</th><th scope="col">실패하면</th><th scope="col">근거</th></tr></thead><tbody><tr><td data-label="순서">0</td><td data-label="단계">변경 감지: Jenkins Poll SCM, 2분 주기</td><td data-label="실패하면">—</td><td data-label="근거"><a href="https://policerjack.tistory.com/2" target="_blank" rel="noopener">구축 기록 2절</a></td></tr><tr><td data-label="순서">1</td><td data-label="단계">Init: 커밋 해시 앞 7자를 이미지 태그로 지정</td><td data-label="실패하면">—</td><td data-label="근거"><a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/Jenkinsfile#L15-L23" target="_blank" rel="noopener">Jenkinsfile 15~23행</a></td></tr><tr><td data-label="순서">2</td><td data-label="단계">Test: <code>./gradlew clean test</code>(H2·테스트용 설정)</td><td data-label="실패하면">이후 단계 실행 안 함</td><td data-label="근거"><a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/Jenkinsfile#L25-L36" target="_blank" rel="noopener">Jenkinsfile 25~36행</a></td></tr><tr><td data-label="순서">3</td><td data-label="단계">SonarQube 분석 → Quality Gate</td><td data-label="실패하면">기준 미달이면 파이프라인 중단</td><td data-label="근거"><a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/Jenkinsfile#L38-L54" target="_blank" rel="noopener">Jenkinsfile 38~54행</a></td></tr><tr><td data-label="순서">4</td><td data-label="단계">Build Jar → Docker 이미지 빌드·push(<code>seojunhayo/yeonjulog:&lt;커밋 해시&gt;</code>)</td><td data-label="실패하면">—</td><td data-label="근거"><a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/Jenkinsfile#L56-L75" target="_blank" rel="noopener">Jenkinsfile 56~75행</a></td></tr><tr><td data-label="순서">5a</td><td data-label="단계">Deploy(09-22, EC2 Docker): 현재 이미지 기록 → 새 이미지 pull → 컨테이너 교체 → <code>/actuator/health</code>를 6초 간격 최대 20번 확인</td><td data-label="실패하면">직전 이미지로 재기동한 뒤 실패 처리</td><td data-label="근거"><a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/ansible/deploy.yml#L11-L46" target="_blank" rel="noopener">deploy.yml 11~46행</a></td></tr><tr><td data-label="순서">5b</td><td data-label="단계">Deploy(09-23부터, Kubernetes): <code>kubectl set image</code> → <code>rollout status --timeout=180s</code></td><td data-label="실패하면"><code>rollout undo</code> 실행 뒤 실패 처리</td><td data-label="근거"><a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/Jenkinsfile#L76-L88" target="_blank" rel="noopener">Jenkinsfile 76~88행</a>, <a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/ansible/k8s-deploy.yml#L1-L17" target="_blank" rel="noopener">k8s-deploy.yml</a></td></tr></tbody></table></div>
+<p>Docker Hub 토큰과 SSH 키는 Jenkins Credentials에서 주입했습니다. 실행 로그에는 <code>****</code>로 가려져 나옵니다.</p>
+</div>
+<div class="block"><h3>배포 대상(Kubernetes) 명세</h3>
+<div class="tbl-wrap"><table class="rt"><thead><tr><th scope="col">항목</th><th scope="col">값</th><th scope="col">근거</th></tr></thead><tbody><tr><td data-label="항목">Deployment</td><td data-label="값">replicas 2, RollingUpdate maxSurge 1·maxUnavailable 0</td><td data-label="근거"><a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/k8s/deployment.yaml#L6-L11" target="_blank" rel="noopener">deployment.yaml 6~11행</a></td></tr><tr><td data-label="항목">readinessProbe</td><td data-label="값"><code>/actuator/health/readiness</code>, 20초 뒤부터 5초 간격</td><td data-label="근거"><a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/k8s/deployment.yaml#L36-L41" target="_blank" rel="noopener">36~41행</a></td></tr><tr><td data-label="항목">livenessProbe</td><td data-label="값"><code>/actuator/health/liveness</code>, 60초 뒤부터 10초 간격</td><td data-label="근거"><a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/k8s/deployment.yaml#L42-L47" target="_blank" rel="noopener">42~47행</a></td></tr><tr><td data-label="항목">운영 설정</td><td data-label="값">Secret <code>yeongju-env</code>를 envFrom으로 주입</td><td data-label="근거"><a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/k8s/deployment.yaml#L27-L29" target="_blank" rel="noopener">27~29행</a></td></tr><tr><td data-label="항목">Service</td><td data-label="값">NodePort 30080 → port 80 → 컨테이너 8080</td><td data-label="근거"><a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/k8s/deployment.yaml#L54-L60" target="_blank" rel="noopener">54~60행</a></td></tr></tbody></table></div>
+<p>클러스터는 EC2 위에 kubeadm으로 구성했습니다. 노드 수와 인스턴스 사양을 보여 주는 화면은 없습니다. 매니페스트 파일은 시험 다음 날인 09-24에 저장소에 올렸습니다.</p>
+<figure class="fig"><div class="shot"><img src="assets/yeongju-b22-stages.png" width="1400" height="151" loading="lazy" alt="Jenkins 단계 화면: 2026년 9월 23일 빌드 #22, Checkout부터 Deploy까지 모든 단계 통과"></div><figcaption>Jenkins 단계 화면(09-23): #22에서 Test부터 Deploy까지 정상 실행</figcaption></figure>
+</div>
+<div class="block"><h3>헬스체크를 바꾼 이유</h3>
+<div class="tbl-wrap"><table class="rt nw"><thead><tr><th scope="col"></th><th scope="col">기존 <code>/v1/health</code></th><th scope="col">바꾼 <code>/actuator/health</code></th></tr></thead><tbody><tr><td data-label="">DB 연결이 끊겼을 때</td><td data-label="기존 /v1/health">항상 UP(하드코딩)</td><td data-label="바꾼 /actuator/health">DB 점검이 실패하면 DOWN, HTTP 503</td></tr><tr><td data-label="">배포 확인 단계의 판정</td><td data-label="기존 /v1/health">실패를 잡지 못함</td><td data-label="바꾼 /actuator/health">상태 코드로 실패를 잡음</td></tr></tbody></table></div>
+<p>기존 <code>/v1/health</code>는 DB가 살아 있든 죽어 있든 UP을 돌려줬습니다. Actuator는 DataSource가 있으면 DB 헬스 점검을 자동으로 등록합니다. 점검이 실패하면 전체 상태를 DOWN으로 바꾸고 HTTP 503을 반환합니다. 배포 확인 단계는 HTTP 상태 코드로 성공을 판단합니다. 그래서 DB 상태가 상태 코드에 반영되는 <code>/actuator/health</code>로 기준을 바꿨습니다.</p>
+<p>Kubernetes로 옮긴 뒤 readinessProbe는 <code>/actuator/health/readiness</code>를 봅니다. 이 앱의 <a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/src/main/resources/application.yml#L1-L55" target="_blank" rel="noopener">설정 파일</a>에는 readiness 그룹 지정이 없어 Spring Boot 기본 구성을 따릅니다. 기본 readiness 그룹에는 DB 점검이 들어가지 않습니다. 그래서 기동한 뒤 DB 연결이 끊기는 상황은 readinessProbe가 잡지 못할 수 있습니다. 반대로 DB 점검을 readiness에 넣으면 DB 장애 때 파드가 모두 함께 빠질 수 있습니다. 넣을지는 두 경우의 위험을 비교해 정해야 합니다.</p>
+</div>
+<div class="block"><h3>그 밖의 구성 판단</h3>
+<ul class="dots"><li>이미지 태그는 latest 대신 커밋 해시를 씁니다. 지금 떠 있는 이미지가 어느 커밋인지 바로 추적할 수 있습니다.</li><li>이미지는 Jenkins 서버에서 한 번만 빌드합니다. 앱 서버와 클러스터는 그 이미지를 받아 실행만 합니다.</li><li>CI 테스트는 H2와 더미 설정으로, 운영은 실제 DB와 환경변수로 나눴습니다. 그래서 운영 DB 설정 오류는 CI가 아니라 배포 확인 단계에서 잡혀야 했습니다(<a class="pref" href="#p6">P6</a>의 #7·#15).</li><li>EC2 Docker 단계에서는 Jenkins 서버와 앱 서버를 EC2 두 대로 나눴습니다. CI 서버에서 앱 서버로 들어오는 SSH는 IP 대신 CI 서버의 보안 그룹(ci-sg)을 출처로 허용했습니다. CI 서버 IP가 바뀌어도 규칙을 고칠 필요가 없습니다. 보안 그룹 참조는 사설 IP로 오는 트래픽에만 적용됩니다. Ansible도 인벤토리에 적은 사설 IP로 앱 서버에 접속합니다(<a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/ansible/inventory.ini#L1-L2" target="_blank" rel="noopener">inventory.ini 1~2행</a>).</li><li>운영 DB 접속 정보는 앱 서버의 env 파일(<code>/opt/yeongjulog/app.env</code>, 권한 600)에서 읽게 했습니다.</li></ul>
+</div>
+</article>
+<article class="wrap chapter" id="p6">
+<div class="ch-head"><p class="eyebrow">P6 / 영주로그 CI/CD ②</p><h2>실패 네 가지를 일부러 만들고 멈추는 지점을 확인했습니다</h2></div>
+<div class="block"><h3>실패 시험 비교</h3>
+<div class="tbl-wrap"><table class="rt nw"><thead><tr><th scope="col">빌드</th><th scope="col">대상</th><th scope="col">일부러 한 조작</th><th scope="col">결과</th><th scope="col">커밋</th></tr></thead><tbody><tr><td data-label="빌드">#3(09-22)</td><td data-label="대상">EC2 Docker</td><td data-label="일부러 한 조작">HealthCheckTest 기대값을 UP에서 DOWN으로</td><td data-label="결과">Test 실패. Build Jar·Docker 단계 건너뜀(Deploy 단계를 넣기 전)</td><td data-label="커밋"><a href="https://github.com/junhasuh/yeongjuLog-BE/commit/5eba31c3d52ae2efd1bc46f2f303efcd5eb7fea2" target="_blank" rel="noopener">5eba31c</a></td></tr><tr><td data-label="빌드">#7(09-22)</td><td data-label="대상">EC2 Docker</td><td data-label="일부러 한 조작">운영 DB 환경변수 참조를 <code>DB_URL</code>에서 <code>DB_URLV2</code>로(H2 테스트는 통과)</td><td data-label="결과">헬스체크 20번 모두 실패(마지막 기록: Connection failure) → 직전 이미지 cfe545d로 재기동, rescued=1, 빌드 실패</td><td data-label="커밋"><a href="https://github.com/junhasuh/yeongjuLog-BE/commit/e2b8601b454baed6989cd1915eb6cc3a38079312" target="_blank" rel="noopener">e2b8601</a></td></tr><tr><td data-label="빌드">#15(09-23)</td><td data-label="대상">Kubernetes</td><td data-label="일부러 한 조작">참조를 <code>DB_URL</code>에서 <code>DB_URL_V3</code>로(H2 테스트는 통과)</td><td data-label="결과">rollout status 180초 시간 초과 → rollout undo, rescued=1 → Jenkins FAILURE</td><td data-label="커밋"><a href="https://github.com/junhasuh/yeongjuLog-BE/commit/a38db57d82cae6031cf5b1f93ba178689251f3e7" target="_blank" rel="noopener">a38db57</a></td></tr><tr><td data-label="빌드">#23(09-23)</td><td data-label="대상">Kubernetes</td><td data-label="일부러 한 조작">Quality Gate에 '전체 커버리지 80% 이상' 조건</td><td data-label="결과">전체 15.4%로 Quality Gate 실패. Build Jar·Docker Build·Deploy 스킵(신규 코드는 100%, 측정 대상 1줄)</td><td data-label="커밋"><a href="https://github.com/junhasuh/yeongjuLog-BE/commit/d6d3f301010d46e83e8cb147a1804ff8accaf2ef" target="_blank" rel="noopener">d6d3f30</a></td></tr></tbody></table></div>
+<p>#7 뒤에는 #8에서 환경변수 참조를 원복한 802b991을 정상 배포했습니다.</p>
+<figure class="fig"><div class="shot"><img src="assets/yeongju-b3-stages.png" width="1400" height="150" loading="lazy" alt="Jenkins 단계 화면: 빌드 #3, Test 실패 뒤 Build Jar와 Docker Build 건너뜀"></div><figcaption>#3 단계 화면(09-22): Test 실패 뒤 Build Jar·Docker 단계 건너뜀</figcaption></figure>
+<figure class="fig"><div class="shot"><img src="assets/yeongju-b7-rollback-log.png" width="1400" height="607" loading="lazy" alt="Jenkins 빌드 #7 콘솔 로그: 헬스체크 20번 실패, 이전 버전 자동 롤백, PLAY RECAP rescued=1"></div><figcaption>#7 콘솔 로그 끝부분: 헬스체크 20번 실패(attempts 20), 직전 이미지 cfe545d로 롤백, rescued=1</figcaption></figure>
+<figure class="fig"><div class="shot"><img src="assets/jenkins-stages.png" width="1150" height="117" loading="lazy" alt="Jenkins 단계 화면: 빌드 #23, Test·SonarQube 통과, Quality Gate 실패, 이후 단계 스킵"></div><figcaption>#23 단계 화면: Test·SonarQube 통과, Quality Gate 실패, 이후 단계 스킵</figcaption></figure>
+</div>
+<div class="block"><h3>#15 실행 로그 발췌</h3>
+<figure class="fig"><pre class="log">TASK [롤아웃 완료 대기 (최대 3분)] ****
+<span class="fail">fatal: [cp1]: FAILED!</span> =&gt; {"changed": true, "cmd": ["kubectl", "rollout", "status", "deployment/yeongjulog", "--timeout=180s"], "delta": "0:03:00.059044", …
+"stderr": "error: timed out waiting for the condition", …
+"stdout": "Waiting for deployment \"yeongjulog\" rollout to finish: 1 out of 2 new replicas have been updated...", …}
 
-      <figure class="fig">
-        <div class="seq">
-          <div class="seq-row">
-            <div class="node step"><span><span class="num">1</span>테스트</span><small>H2·테스트용 설정</small></div>
-            <div class="h-arrow"></div>
-            <div class="out">실패 → 후속 단계 중단</div>
-          </div>
-          <div class="seq-row">
-            <div class="node step"><span><span class="num">2</span>SonarQube 분석·품질 판정</span><small>설정한 코드 커버리지 기준 확인</small></div>
-            <div class="h-arrow"></div>
-            <div class="out">미달 → 후속 단계 중단</div>
-          </div>
-          <div class="seq-row">
-            <div class="node step"><span><span class="num">3</span>JAR·이미지 생성 및 업로드</span><small>커밋 해시로 배포 이미지 구분</small></div>
-            <div></div>
-            <div class="out none" aria-hidden="true"></div>
-          </div>
-          <div class="seq-row">
-            <div class="node step"><span><span class="num">4</span>Ansible → Kubernetes 배포</span><small>준비 상태·배포 완료 확인</small></div>
-            <div class="h-arrow"></div>
-            <div class="out">대기 초과 → 롤백·실패 전달</div>
-          </div>
-        </div>
-        <figcaption>개인적으로 추가한 CI/CD 흐름. 실패 지점에 따라 후속 단계 중단 또는 롤백을 실행합니다.</figcaption>
-      </figure>
+TASK [기동 실패 시 이전 버전으로 즉시 롤백] ****
+changed: [cp1]
 
-      <div class="block">
-        <h3>테스트 환경과 운영 설정 분리</h3>
-        <p>CI 테스트는 H2 데이터베이스와 테스트용 설정으로 실행하도록 구성했습니다. 운영 설정은 환경변수로 분리하고, 이미지에 커밋 해시를 붙여 배포 버전을 구분했습니다.</p>
-      </div>
-      <div class="block">
-        <h3>새 파드가 요청을 받을 준비가 됐는지 확인</h3>
-        <p>Deployment 매니페스트에 readinessProbe와 롤링 업데이트(<code>maxSurge 1</code>, <code>maxUnavailable 0</code>)를 설정했습니다. 배포 때는 Ansible이 <code>kubectl set image</code>로 이미지 태그만 바꾸고, 새 파드가 준비 상태가 돼야 기존 파드를 내립니다.</p>
-      </div>
-      <div class="block">
-        <h3>EC2 Docker 헬스체크와 Kubernetes readinessProbe</h3>
-        <p>EC2 Docker 배포 때는 DB와 상관없이 UP을 주던 <code>/v1/health</code> 대신 <code>/actuator/health</code>를 6초 간격으로 최대 20번 확인했습니다. 운영 DB 환경변수를 뺀 커밋에서 이 확인이 실패해 직전 이미지(<code>cfe545d</code>)로 돌아갔습니다. Kubernetes로 옮긴 뒤 readinessProbe는 <code>/actuator/health/readiness</code>를 봅니다.</p>
-      </div>
+TASK [파이프라인 실패 처리] ****
+<span class="fail">fatal: [cp1]: FAILED!</span> =&gt; {"changed": false, "msg": "a38db57 rollout 실패 → 자동 undo 완료"}
 
-      <nav class="refs" aria-label="영주로그 링크">
-        <a href="https://github.com/junhasuh/yeongjuLog-BE" target="_blank" rel="noopener">프로젝트 저장소</a>
-        <a href="https://policerjack.tistory.com/2" target="_blank" rel="noopener">구축 과정·실행 기록</a>
-      </nav>
-    </article>
-
-    <article class="wrap chapter">
-      <div class="ch-head">
-        <p class="eyebrow">02 / 영주로그 · 실패 시험 근거</p>
-        <h2>영주로그 실패 시험: 롤백·품질 게이트·빌드 누락</h2>
-      </div>
-
-      <div class="block" style="gap:10px">
-        <div class="tbl-wrap">
-          <table class="rt">
-            <thead><tr><th scope="col">단계</th><th scope="col">일부러 한 조작</th><th scope="col">결과</th><th scope="col">커밋</th></tr></thead>
-            <tbody>
-              <tr>
-                <td data-label="단계">① 테스트</td>
-                <td data-label="조작">HealthCheckTest 기대값을 UP → DOWN</td>
-                <td data-label="결과">Test 실패, JAR·이미지·배포 실행 안 됨</td>
-                <td data-label="커밋"><a class="mono" href="https://github.com/junhasuh/yeongjuLog-BE/commit/5eba31c" target="_blank" rel="noopener">5eba31c</a></td>
-              </tr>
-              <tr>
-                <td data-label="단계">② 품질 판정</td>
-                <td data-label="조작">품질 게이트에 '전체 커버리지 80% 이상'</td>
-                <td data-label="결과">전체 15.4%로 Quality Gate 실패, Build Jar·Docker Build·Deploy <span class="bad-txt">스킵</span>(신규 코드는 100%, 측정 대상 1줄)</td>
-                <td data-label="커밋"><a class="mono" href="https://github.com/junhasuh/yeongjuLog-BE/commit/d6d3f30" target="_blank" rel="noopener">d6d3f30</a></td>
-              </tr>
-              <tr>
-                <td data-label="단계">④ 배포</td>
-                <td data-label="조작">운영 DB 환경변수 참조를 DB_URL_V3로 변경(H2 테스트는 통과)</td>
-                <td data-label="결과">rollout status 180초 초과 → rescue의 rollout undo → Jenkins <span class="bad-txt">FAILURE</span></td>
-                <td data-label="커밋"><a class="mono" href="https://github.com/junhasuh/yeongjuLog-BE/commit/a38db57" target="_blank" rel="noopener">a38db57</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="note">undo 뒤 <code>/actuator/health</code> UP은 확인했지만, 모든 파드가 이전 이미지로 돌아왔는지는 따로 보지 않았습니다.</p>
-      </div>
-
-      <figure class="fig">
-        <h3 class="sub-label">④ 증거</h3>
-        <div>
-<pre class="log" aria-label="Ansible 롤백 작업 로그">TASK [기동 실패 시 이전 버전으로 즉시 롤백] ************************************
-changed: [cp1]</pre>
-<pre class="log" aria-label="Ansible PLAY RECAP">PLAY RECAP *********************************************************************
-cp1                        : ok=3    changed=2    unreachable=0    <span class="fail">failed=1</span>
-skipped=0    rescued=1    ignored=0</pre>
-<pre class="log" aria-label="Jenkins 최종 결과">ERROR: script returned exit code 2
-<span class="fail">Finished: FAILURE</span></pre>
-        </div>
-        <figcaption>실행 로그 발췌: 롤백 작업 실행과 최종 FAILURE. 중간 로그 일부 생략.</figcaption>
-      </figure>
-
-      <figure class="fig">
-        <h3 class="sub-label">② 증거</h3>
-        <div class="shot">
-          <img src="assets/jenkins-stages.png" width="1150" height="117" alt="Jenkins 단계 화면: Test·SonarQube 통과, Quality Gate 실패, Build Jar·Docker Build·Deploy 스킵">
-        </div>
-        <figcaption>Jenkins 단계 화면 발췌: Test·SonarQube 통과, Quality Gate 실패, 이후 단계 스킵.</figcaption>
-      </figure>
-
-      <div class="block" style="gap:12px">
-        <h3>막혔던 것</h3>
-        <div class="stuck">
-          <div>
-            <h4>빌드 #5</h4>
-            <p>빌드 #5 SUCCESS인데 Deploy 단계 없음 → <code>ansible/</code> 안에서 <code>git add .</code> 해서 Jenkinsfile 수정이 빠짐 → 이후 실행 단계와 서버 이미지까지 확인</p>
-          </div>
-          <div>
-            <h4>SonarQube CORS</h4>
-            <p>SonarQube 첫 분석에서 CORS 허용 출처 와일드카드가 보안 이슈 → 허용 출처 명시(Security C·1건 → A·0건)</p>
-          </div>
-        </div>
-      </div>
-
-      <nav class="refs" aria-label="영주로그 원본 기록 링크">
-        <a href="https://policerjack.tistory.com/2" target="_blank" rel="noopener">전체 구축 기록·원본 화면</a>
-      </nav>
-    </article>
+PLAY RECAP ****
+cp1 : ok=3 changed=2 unreachable=0 <span class="fail">failed=1</span> skipped=0 rescued=1 ignored=0
+…
+ERROR: script returned exit code 2
+<span class="fail">Finished: FAILURE</span></pre><figcaption>실행 로그 발췌: 롤백 작업 실행과 최종 FAILURE. 중간 로그 일부 생략. 별표 구분선은 줄였습니다.</figcaption></figure>
+<p>#15에서 실패가 잡힌 것은 운영 파드가 DB 주소를 찾지 못해 앱이 뜨지 않았기 때문입니다. 로그에는 새 버전 파드가 2개 중 1개만 바뀐 상태에서 대기가 끝났다고 남았습니다.</p>
+<details class="more"><summary>#15 콘솔 로그 원본 화면 2장</summary><div class="shots-2"><img src="assets/yeongju-b15-log-1.png" width="1000" height="1073" loading="lazy" alt="Jenkins 빌드 #15 콘솔 로그: rollout status 180초 시간 초과, 이전 버전으로 즉시 롤백 changed"><img src="assets/yeongju-b15-log-2.png" width="1000" height="1120" loading="lazy" alt="Jenkins 빌드 #15 콘솔 로그: 파이프라인 실패 처리, PLAY RECAP rescued=1, Finished: FAILURE"></div></details>
+</div>
+<div class="block"><h3>롤백 뒤에도 실패로 남긴 이유</h3>
+<p>롤백을 실행해도 배포 자체는 실패입니다. rescue만 두면 롤백이 성공했을 때 빌드도 성공으로 끝납니다. 그러면 개발자가 빌드 결과만 보고는 새 버전이 배포됐는지, 이전 버전으로 돌아갔는지 구별하기 어렵습니다. 그래서 rescue 마지막에 fail을 두어 롤백 뒤에도 빌드가 FAILURE로 남게 했습니다. 실패 메시지에는 어느 커밋이 실패했는지 나옵니다(<a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/ansible/k8s-deploy.yml#L11-L17" target="_blank" rel="noopener">k8s-deploy.yml 11~17행</a>).</p>
+</div>
+<div class="block"><h3>막혔던 것</h3>
+<p><strong>빌드 #5는 성공으로 끝났지만 배포가 되지 않았습니다.</strong> 앱 서버 컨테이너는 2시간 전에 만든 그대로였습니다. #5의 단계 화면에는 Deploy 단계가 아예 없었습니다. <code>ansible/</code> 폴더 안에서 <code>git add .</code>를 실행해 상위 폴더의 Jenkinsfile 수정이 커밋에서 빠진 것이 원인이었습니다. 실제로 <a href="https://github.com/junhasuh/yeongjuLog-BE/commit/66845d628dba84511ded46d430de933d6bb8923d" target="_blank" rel="noopener">66845d6</a>에는 Ansible 파일만 있습니다. Deploy 단계는 다음 커밋 <a href="https://github.com/junhasuh/yeongjuLog-BE/commit/cfe545d57bcc519974bf1a5d223ad71048415612" target="_blank" rel="noopener">cfe545d</a>에서 들어갔습니다. 저장소 루트에서 다시 커밋하자 앱 서버 컨테이너가 cfe545d 이미지로 바뀌었습니다. 이 일 뒤로는 빌드 성공 표시와 함께 실행된 단계와 서버의 이미지 태그를 확인했습니다.</p>
+<figure class="fig"><div class="shot"><img src="assets/yeongju-b5-stages.png" width="1400" height="148" loading="lazy" alt="Jenkins 단계 화면: 빌드 #5 성공, 단계는 Docker Build까지만 있고 Deploy 단계 없음"></div><figcaption>#5 단계 화면(09-22): 성공으로 끝났지만 Deploy 단계가 없음</figcaption></figure>
+<figure class="fig"><div class="shot"><img src="assets/yeongju-dockerps-cfe545d.png" width="1600" height="135" loading="lazy" alt="앱 서버 docker ps: seojunhayo/yeonjulog:cfe545d 컨테이너가 12초 전 생성"></div><figcaption>수정 뒤 앱 서버 <code>docker ps</code>: yeonjulog:cfe545d, 12초 전 생성</figcaption></figure>
+<p><strong>env 파일 permission denied.</strong> 앱 서버에서 <code>docker run</code>이 env 파일을 읽지 못했습니다. sudo로 만든 파일이라 소유자가 root였습니다. 소유자를 ubuntu로 바꾸고 권한을 600으로 두었습니다.</p>
+<p><strong>SonarQube 분석 실패와 보안 이슈.</strong> #18에서 SonarQube 분석 단계가 실패했습니다. 프로젝트 키를 명시한 <a href="https://github.com/junhasuh/yeongjuLog-BE/commit/2405faddd0efdb0c60a21a9d71764d0255c7f474" target="_blank" rel="noopener">2405fad</a> 뒤 #19에서 분석이 통과했습니다. 첫 분석에서는 CORS 허용 출처 와일드카드(<code>allowedOriginPatterns("*")</code>)가 보안 이슈로 잡혔습니다. 허용 출처를 명시하자 Security가 C·1건에서 A·0건으로 바뀌었습니다(<a href="https://github.com/junhasuh/yeongjuLog-BE/commit/20de3cc63fb38975b8891f82dd3535b153f58cf5" target="_blank" rel="noopener">20de3cc</a>).</p>
+</div>
+<div class="block"><h3>확인하지 못한 것</h3>
+<ul class="dots"><li>undo 뒤 /actuator/health UP은 확인했지만, 모든 파드가 이전 이미지로 돌아왔는지는 따로 보지 않았습니다.</li><li>롤링 업데이트 중 0.5초 간격으로 요청을 보내 응답이 끊기는지 지켜봤습니다. 요청 로그를 남기지 않아 무중단 여부를 수치로 쓰지 않습니다(시험용 커밋 <a href="https://github.com/junhasuh/yeongjuLog-BE/commit/166c9aaf2706650afbf1cedb9d5e5824f337fd9c" target="_blank" rel="noopener">166c9aa</a>·<a href="https://github.com/junhasuh/yeongjuLog-BE/commit/31ac12b0c0db6633627d7c168e188001173974e8" target="_blank" rel="noopener">31ac12b</a>).</li><li>EC2 Docker 단계는 컨테이너를 통째로 바꿔서 배포 중 서비스가 잠시 끊깁니다. 중단 시간은 측정하지 않았습니다.</li><li><code>ddl-auto: update</code>를 써서 이전 이미지로 돌아가도 DB 스키마는 되돌아가지 않습니다.</li><li>readinessProbe가 DB 상태를 반영하지 않을 수 있습니다(<a class="pref" href="#p5">P5</a> 헬스체크 절).</li></ul>
+</div>
+</article>
   </section>
 
-  <!-- ===== 03 기반 역량 ===== -->
   <section class="project" id="foundation" aria-label="기반 역량">
-    <article class="wrap chapter">
-      <div class="ch-head">
-        <p class="eyebrow">03 / 기반 역량 · Terraform 실습 및 CKA 기출 풀이</p>
-        <h2>Terraform으로 구성한 AWS 네트워크·IAM과 CKA 기출 장애</h2>
-      </div>
-
-      <div class="block" style="gap:16px">
-        <h3>Terraform AWS 네트워크·IAM 구성</h3>
-        <p>VPC·퍼블릭/프라이빗 서브넷·인터넷/NAT 게이트웨이·라우팅과 EC2용 IAM 역할·인스턴스 프로파일을 코드로 구성했습니다. IAM·S3 실습의 상태 파일은 S3 원격 백엔드로 옮기고 DynamoDB 테이블로 잠금을 걸었고, VPC 디렉터리는 로컬 상태로 남아 있습니다.</p>
-        <dl class="kv boxed">
-          <dt>발생</dt><dd>Terraform이 상태를 새로 읽다가(Refreshing state) <code>iam:GetRole</code>에서 AccessDenied</dd>
-          <dt>단서</dt><dd>직전에 <code>~/.aws/credentials</code>를 지웠는데 다른 AWS 명령은 계속 동작</dd>
-          <dt>확인</dt><dd><code>aws sts get-caller-identity</code> 결과가 IAM 사용자가 아니라 assumed-role</dd>
-          <dt>원인</dt><dd>자격 증명 파일이 사라지자 체인의 마지막인 인스턴스 메타데이터로 내려가, s3·dynamodb 권한만 있는 인스턴스 역할로 실행됨</dd>
-          <dt>조치</dt><dd>콘솔에서 역할에 조회 권한을 붙인 뒤 같은 코드로 통과</dd>
-        </dl>
-      </div>
-
-      <div class="block" style="gap:18px">
-        <h3>CKA 준비 중 기출 문제로 풀어본 장애</h3>
-        <div class="block">
-          <h4 class="sub-label" style="margin:0;font-size:.98rem;font-weight:500">파드가 Pending에 머무는 상황</h4>
-          <p><code>kubectl describe node</code>의 Allocated resources로 이미 잡힌 요청량을 보고, Allocatable에서 뺀 여유가 새 파드의 요청보다 작다는 걸 확인했습니다. 스케줄러는 실사용량이 아니라 선언된 요청량을 봅니다.</p>
-        </div>
-        <div class="block">
-          <h4 class="sub-label" style="margin:0;font-size:.98rem;font-weight:500">API 서버가 응답하지 않는 상황</h4>
-          <p><code>journalctl -u kubelet</code>로 kubelet 로그를 보고, kube-apiserver 정적 파드의 <code>--etcd-servers</code>가 etcd의 advertise-client-url과 다른 IP를 가리키던 것을 고쳤습니다.</p>
-        </div>
-      </div>
-
-      <p class="closing">CKA를 딴 뒤(2026.08) 영주로그를 Kubernetes로 옮기며 롤링 업데이트·readinessProbe·rollout undo를 직접 설정했습니다. 인스턴스 프로파일은 Terraform으로 만들어 봤지만, 영주로그 앱은 아직 S3 접근에 액세스 키를 환경변수로 받습니다. EC2 IAM 역할로 바꾸는 게 남은 일입니다.</p>
-
-      <nav class="refs" aria-label="기반 역량 링크">
-        <a href="https://github.com/junhasuh/aws-terraform-infra" target="_blank" rel="noopener">Terraform 저장소</a>
-        <a href="https://policerjack.tistory.com/" target="_blank" rel="noopener">기술 블로그</a>
-      </nav>
-    </article>
+<article class="wrap chapter" id="p7">
+<div class="ch-head"><p class="eyebrow">P7 / 기반 역량</p><h2>실습 저장소와 CKA 기출에서 원인을 좁힌 과정</h2></div>
+<p>Terraform은 개인 실습 저장소이고, Kubernetes 장애 사례는 CKA 준비 중 기출 문제로 풀어본 것입니다. 실서비스를 운영한 경험이 아닙니다.</p>
+<div class="block"><h3>Terraform 실습 저장소 — AWS 네트워크·IAM(<a href="https://github.com/junhasuh/aws-terraform-infra" target="_blank" rel="noopener">aws-terraform-infra</a>)</h3>
+<div class="tbl-wrap"><table class="rt nw"><thead><tr><th scope="col">구성 요소</th><th scope="col">설정</th><th scope="col">근거</th></tr></thead><tbody><tr><td data-label="구성 요소">VPC</td><td data-label="설정">10.0.0.0/16</td><td data-label="근거"><a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/02-vpc/vpc.tf#L12-L18" target="_blank" rel="noopener">vpc.tf 12~18행</a></td></tr><tr><td data-label="구성 요소">퍼블릭 서브넷</td><td data-label="설정">10.0.0.0/24, ap-northeast-2a, 퍼블릭 IP 자동 할당</td><td data-label="근거"><a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/02-vpc/vpc.tf#L20-L31" target="_blank" rel="noopener">vpc.tf 20~31행</a></td></tr><tr><td data-label="구성 요소">프라이빗 서브넷</td><td data-label="설정">10.0.10.0/24, ap-northeast-2a</td><td data-label="근거"><a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/02-vpc/vpc.tf#L33-L39" target="_blank" rel="noopener">vpc.tf 33~39행</a></td></tr><tr><td data-label="구성 요소">인터넷 게이트웨이</td><td data-label="설정">VPC에 연결</td><td data-label="근거"><a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/02-vpc/vpc.tf#L41-L45" target="_blank" rel="noopener">vpc.tf 41~45행</a></td></tr><tr><td data-label="구성 요소">NAT 게이트웨이</td><td data-label="설정">퍼블릭 서브넷에 EIP와 함께</td><td data-label="근거"><a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/02-vpc/vpc.tf#L47-L64" target="_blank" rel="noopener">vpc.tf 47~64행</a></td></tr><tr><td data-label="구성 요소">퍼블릭 라우트 →</td><td data-label="설정">0.0.0.0/0 → 인터넷 게이트웨이</td><td data-label="근거"><a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/02-vpc/vpc.tf#L81-L85" target="_blank" rel="noopener">vpc.tf 81~85행</a></td></tr><tr><td data-label="구성 요소">프라이빗 라우트 →</td><td data-label="설정">0.0.0.0/0 → NAT 게이트웨이</td><td data-label="근거"><a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/02-vpc/vpc.tf#L93-L97" target="_blank" rel="noopener">vpc.tf 93~97행</a></td></tr></tbody></table></div>
+<ul class="dots"><li>퍼블릭과 프라이빗을 가르는 것은 서브넷 이름이 아니라 라우트 테이블이 0.0.0.0/0을 어디로 보내느냐입니다.</li><li>처음에는 IGW 경로만 있으면 인터넷에 연결될 줄 알았습니다. IPv4로 IGW를 거쳐 통신하려면 인스턴스에 퍼블릭 IP도 있어야 했습니다. 그래서 <code>map_public_ip_on_launch</code>를 켰습니다(<a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/README.md#L39" target="_blank" rel="noopener">README 39행</a>).</li><li>서브넷과 NAT 게이트웨이를 같은 AZ에 두었습니다. 프라이빗 서브넷의 트래픽이 다른 AZ의 NAT를 거치면 요금이 붙기 때문입니다(<a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/02-vpc/vpc.tf#L6-L10" target="_blank" rel="noopener">vpc.tf 6~10행</a>).</li><li>라우트는 인라인 <code>route {}</code> 대신 <code>aws_route</code> 리소스로 통일했습니다. 같은 라우트 테이블에 두 방식을 섞으면 관리 대상이 충돌할 수 있기 때문입니다(<a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/README.md#L40" target="_blank" rel="noopener">README 40행</a>).</li><li>EC2용 IAM 역할은 신뢰 정책(역할을 맡을 주체)과 권한 정책(허용할 작업)을 나눠 선언했습니다. 역할은 인스턴스 프로파일을 거쳐 EC2에 붙습니다(<a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/04-iam-role/iam_role_hello.tf#L1-L56" target="_blank" rel="noopener">iam_role_hello.tf</a>).</li><li>IAM·S3 실습의 상태 파일은 S3 원격 백엔드로 옮기고 DynamoDB 테이블로 잠금을 걸었습니다. VPC 디렉터리는 로컬 상태로 남아 있습니다.</li></ul>
+</div>
+<div class="block"><h3>원인을 좁힌 과정</h3>
+<div class="tbl-wrap"><table class="rt"><thead><tr><th scope="col">상황</th><th scope="col">처음 본 것</th><th scope="col">확인</th><th scope="col">원인</th><th scope="col">조치</th></tr></thead><tbody><tr><td data-label="상황">Terraform 실습: 상태를 새로 읽다가(Refreshing state) <code>iam:GetRole</code>에서 AccessDenied</td><td data-label="처음 본 것">직전에 <code>~/.aws/credentials</code>를 지웠는데 다른 AWS 명령은 계속 동작</td><td data-label="확인"><code>aws sts get-caller-identity</code> 결과가 IAM 사용자가 아니라 assumed-role. 환경변수에 남은 키 없음</td><td data-label="원인">자격 증명 파일이 사라지자 체인의 마지막인 인스턴스 메타데이터로 내려가, s3·dynamodb 권한만 있는 인스턴스 역할로 실행됨</td><td data-label="조치">콘솔에서 역할에 조회 권한을 붙인 뒤 같은 코드로 통과</td></tr><tr><td data-label="상황">Terraform 실습: 그룹 멤버십에서 NoSuchEntity 404</td><td data-label="처음 본 것">그 사용자를 만드는 리소스가 같은 코드에 있음. 처음엔 이름 오타를 의심했지만 일치</td><td data-label="확인"><code>terraform state list</code> → 사용자는 생성돼 있었음</td><td data-label="원인">멤버십에 변수 문자열 목록을 넣어 참조 관계가 없었음. 두 리소스가 병렬로 실행됨</td><td data-label="조치">사용자 리소스의 속성 참조로 바꿔 순서를 강제(<a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/03-iam/devops_group.tf#L5-L11" target="_blank" rel="noopener">devops_group.tf 5~11행</a>)</td></tr><tr><td data-label="상황">CKA 기출: API 서버가 응답하지 않음</td><td data-label="처음 본 것">문제 지문의 '이전 클러스터가 외부 etcd 서버를 사용했다'는 단서</td><td data-label="확인"><code>journalctl -u kubelet</code>으로 kubelet 로그 확인</td><td data-label="원인">kube-apiserver의 <code>--etcd-servers</code>가 etcd의 advertise-client-urls와 다른 IP를 가리킴</td><td data-label="조치">정적 파드 매니페스트를 고친 뒤 <code>kubectl get pod -A</code> 조회 복구</td></tr><tr><td data-label="상황">CKA 기출: 이어서 kube-scheduler 정지(UnexpectedAdmissionError)</td><td data-label="처음 본 것">etcd 주소를 고친 뒤에도 스케줄러만 뜨지 않음</td><td data-label="확인"><code>/etc/kubernetes/manifests</code>의 kube-scheduler 매니페스트 확인</td><td data-label="원인">정적 파드는 스케줄러를 거치지 않고 kubelet이 직접 받아들임. CPU 요청이 노드 할당량보다 커서 kubelet이 거부</td><td data-label="조치">매니페스트의 요청량을 낮추고 kubelet 재시작. <code>kubectl edit</code>가 아니라 매니페스트를 고침</td></tr><tr><td data-label="상황">CKA 기출: 파드가 Pending</td><td data-label="처음 본 것">새 파드가 Pending에 머묾</td><td data-label="확인"><code>kubectl describe node</code>의 Allocated resources</td><td data-label="원인">Allocatable에서 기존 Requests를 뺀 여유가 새 파드 요청보다 작음. 스케줄러는 실사용량이 아니라 선언된 요청량을 봄</td><td data-label="조치">요청량 재설정</td></tr><tr><td data-label="상황">강의 실습: SSH 원격 실행이 exit 125</td><td data-label="처음 본 것">종료 코드 125는 <code>docker run</code> 자체의 실패</td><td data-label="확인">대상 컨테이너 안에서 데몬 연결 실패. <code>dockerd</code> 직접 실행에서 <code>invalid cross-device link</code></td><td data-label="원인">컨테이너의 OverlayFS에서 런타임 폴더 이름 변경이 막혀 데몬이 뜨지 못함</td><td data-label="조치">런타임 폴더를 정리하고 데몬 기동</td></tr><tr><td data-label="상황">강의 실습: 빌드는 성공했는데 브라우저 접속 불가</td><td data-label="처음 본 것">안쪽 컨테이너에서는 <code>curl</code> 응답 정상</td><td data-label="확인">바깥 컨테이너를 만들 때 연 포트 확인</td><td data-label="원인">DinD 구조라 안쪽 컨테이너의 8000 포트가 호스트까지 열려 있지 않음</td><td data-label="조치">호스트 도커 소켓을 공유하는 DooD로 바꿈</td></tr></tbody></table></div>
+<p>근거: <a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/TROUBLESHOOTING.md#L7-L45" target="_blank" rel="noopener">TROUBLESHOOTING #1</a> · <a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/TROUBLESHOOTING.md#L48-L97" target="_blank" rel="noopener">#2</a>, CKA 기출 풀이 노트, <a href="https://policerjack.tistory.com/3" target="_blank" rel="noopener">강의 실습 기록</a>. AccessDenied 조치 뒤 통과한 실행 로그는 첨부하지 못했습니다.</p>
+</div>
+<div class="block"><h3>군 복무 — 공군 전산장비정비병</h3>
+<p>인터넷 접속 불량이 들어오면 먼저 사무실 네트워크 장비의 다른 포트로 회선을 옮겨 연결했습니다. 그래도 안 되면 서버실에서 해당 PC로 가는 랜 케이블이 살아 있는지 확인했습니다. 노후 랜 케이블은 T568B 배열로 직접 만들고 랜 테스터로 결선을 확인했습니다.</p>
+</div>
+<div class="block"><h3>연결과 남은 일</h3>
+<p>CKA를 딴 뒤(2026.08) 영주로그를 Kubernetes로 옮겼습니다. 이때 롤링 업데이트·readinessProbe·rollout undo를 직접 설정했습니다. 인스턴스 프로파일은 Terraform으로 만들어 봤지만, 영주로그 앱은 아직 S3 접근에 액세스 키를 환경변수로 받습니다. EC2 IAM 역할로 바꾸는 게 남은 일입니다. Terraform 저장소의 IAM 사용자 인라인 정책과 EC2 역할의 <code>s3:*</code>·<code>dynamodb:*</code> 권한도 아직 넓게 열려 있습니다. NAT 게이트웨이는 시간당 과금이라 상시 유지하지 않고 코드만 남겼습니다.</p>
+</div>
+</article>
   </section>
 </main>
 
 <footer>
   <div class="wrap">
     <div>
-      <p class="f-name">서준하 · DevOps / Cloud Engineer</p>
+      <p class="f-name">서준하 · IT인프라(DevOps) 신입</p>
       <p><a class="mono f-email" href="mailto:jungjunhayo@gmail.com">jungjunhayo@gmail.com</a></p>
     </div>
     <div class="f-links">
