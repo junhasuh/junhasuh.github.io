@@ -1,656 +1,1385 @@
-<!doctype html>
-<html lang="ko">
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="IT인프라(DevOps) 신입 서준하의 포트폴리오. Cloud Run·온프레미스 배포 단계의 부분 실패 롤백 시험(Hibiscus), Jenkins·Ansible·Kubernetes 파이프라인 실패 시험(영주로그), GCP 권한 구성, Terraform 실습·CKA 기출 풀이.">
-<meta name="author" content="서준하 (Junha Suh)">
-<link rel="canonical" href="https://junhasuh.github.io/">
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="서준하 포트폴리오">
-<meta property="og:title" content="서준하 · IT인프라(DevOps) 신입 포트폴리오">
-<meta property="og:description" content="IT인프라(DevOps) 신입 서준하의 포트폴리오. Cloud Run·온프레미스 배포 단계의 부분 실패 롤백 시험(Hibiscus), Jenkins·Ansible·Kubernetes 파이프라인 실패 시험(영주로그), GCP 권한 구성, Terraform 실습·CKA 기출 풀이.">
-<meta property="og:url" content="https://junhasuh.github.io/">
-<meta property="og:image" content="https://junhasuh.github.io/assets/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:locale" content="ko_KR">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#fbfcfb" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0f1413" media="(prefers-color-scheme: dark)">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<style>
-/* base reset (the artifact host used to supply this) */
-html{-webkit-text-size-adjust:100%}
-body{margin:0}
-img{max-width:100%}
-[hidden]{display:none!important}
-</style>
-<title>서준하 포트폴리오</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600&display=swap">
-<style>
-/* Layout: one reading column (max 880px) that keeps the PDF's page rhythm; each PDF page becomes a chapter, diagrams are CSS grids that restack at phone width */
-:root{
-  --bg:#fbfcfb;
-  --surface:#f1f4f3;
-  --surface-ok:#eaf3f0;
-  --line-ok:#c8ddd6;
-  --surface-bad:#fbefeb;
-  --line-bad:#ecd2c8;
-  --bad:#a9432a;
-  --fg:#1a2421;
-  --muted:#5a6662;
-  --faint:#86908c;
-  --line:#dbe2df;
-  --accent:#0e6c5e;
-  --accent-soft:#0e6c5e1f;
-  --shot-bg:#ffffff;
-  --f-sans:"IBM Plex Sans KR","Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
-  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#0f1413; --surface:#171e1c; --surface-ok:#12221e; --line-ok:#24433b;
-    --surface-bad:#271915; --line-bad:#4a2c22; --bad:#ee9a82;
-    --fg:#e3eae7; --muted:#9ba8a3; --faint:#6e7a76; --line:#26302d;
-    --accent:#56c4ad; --accent-soft:#56c4ad24; --shot-bg:#ffffff;
-    color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#0f1413; --surface:#171e1c; --surface-ok:#12221e; --line-ok:#24433b;
-  --surface-bad:#271915; --line-bad:#4a2c22; --bad:#ee9a82;
-  --fg:#e3eae7; --muted:#9ba8a3; --faint:#6e7a76; --line:#26302d;
-  --accent:#56c4ad; --accent-soft:#56c4ad24; --shot-bg:#ffffff;
-  color-scheme:dark;
-}
-
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
-body{
-  background:var(--bg); color:var(--fg);
-  font-family:var(--f-sans); font-size:16px; line-height:1.75;
-  word-break:keep-all; overflow-wrap:anywhere;
-  -webkit-font-smoothing:antialiased;
-}
-h1,h2,h3,p,ul,ol,dl,dd,figure{margin:0}
-ul,ol{padding:0;list-style:none}
-a{color:var(--accent)}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
-code,.mono{font-family:var(--f-mono);font-size:.9em}
-.wrap{max-width:880px;margin-inline:auto;padding-inline:20px}
-
-/* ---------- top bar ---------- */
-.bar{
-  position:sticky; top:env(safe-area-inset-top,0px); z-index:10;
-  background:var(--bg);
-  background:color-mix(in srgb,var(--bg) 90%,transparent);
-  -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--line);
-}
-.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
-.bar-id{font-size:.82rem;color:var(--muted);white-space:nowrap}
-.bar-id b{color:var(--fg);font-weight:500}
-.bar nav{display:flex;gap:18px;font-size:.84rem}
-.bar nav a{color:var(--muted);text-decoration:none;white-space:nowrap}
-.bar nav a:hover{color:var(--accent)}
-@media (max-width:560px){.bar-id span{display:none}.bar nav{gap:14px}}
-
-/* ---------- hero ---------- */
-.hero{padding-block:48px 56px;display:flex;flex-direction:column;gap:40px}
-.kicker{font-size:.78rem;letter-spacing:.06em;color:var(--faint)}
-.idrow{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:28px}
-.who{display:flex;flex-direction:column;gap:10px}
-.name{font-size:clamp(2.4rem,7vw,3.2rem);font-weight:300;line-height:1.1;letter-spacing:-.01em}
-.role{color:var(--accent);font-size:1.05rem}
-.contact{display:grid;grid-template-columns:auto auto;gap:8px 18px;font-size:.9rem;align-items:center}
-.contact .c-val{font-family:var(--f-mono);font-size:.86rem;user-select:all}
-.contact .c-label{color:var(--faint);font-size:.78rem;letter-spacing:.04em}
-.contact-links{grid-column:1 / -1;display:flex;gap:20px;padding-top:4px}
-.contact-links a,.refs a,.proj-card .go,footer .f-links a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
-.c-item{display:flex;align-items:center;gap:8px}
-.copy{
-  font:inherit;font-size:.72rem;color:var(--muted);background:transparent;
-  border:1px solid var(--line);border-radius:4px;padding:1px 7px;cursor:pointer;line-height:1.6;
-}
-.copy:hover{color:var(--accent);border-color:var(--accent)}
-.headline{font-size:clamp(1.8rem,4.6vw,2.55rem);font-weight:300;line-height:1.3;text-wrap:balance;letter-spacing:-.01em}
-.lead{font-size:1.06rem;color:var(--fg);max-width:44em}
-
-.sub-label{font-size:.84rem;font-weight:600;color:var(--accent);letter-spacing:.02em}
-.proj-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-@media (max-width:720px){.proj-cards{grid-template-columns:1fr}}
-.proj-card{
-  display:flex;flex-direction:column;gap:8px;padding:22px 22px 20px;
-  background:var(--surface);border-radius:8px;color:var(--fg);text-decoration:none;
-  border:1px solid transparent;transition:border-color .15s;
-}
-.proj-card:hover{border-color:var(--line-ok)}
-.proj-card .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
-.proj-card h3{font-size:1.3rem;font-weight:400}
-.proj-card .go{font-size:.78rem;color:var(--accent);white-space:nowrap}
-.proj-card .meta{font-size:.8rem;color:var(--faint)}
-.proj-card .theme{font-size:.92rem;font-weight:500;color:var(--accent)}
-.proj-card p.body{font-size:.94rem;line-height:1.7}
-
-.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
-.skills > div{padding:4px 20px;border-left:1px solid var(--line);display:flex;flex-direction:column;gap:6px}
-.skills > div:first-child{border-left:0;padding-left:0}
-.skills h3{font-size:.98rem;font-weight:500}
-.skills h3 a{color:var(--fg);text-decoration:none;border-bottom:1px solid var(--line-ok)}
-.skills h3 a:hover{color:var(--accent);border-color:currentColor}
-.skills li{font-size:.9rem;color:var(--muted);line-height:1.6}
-.skills li a{color:inherit;text-decoration:underline;text-decoration-color:var(--line-ok);text-underline-offset:3px}
-.skills li a:hover{color:var(--accent)}
-@media (max-width:600px){
-  .skills{grid-template-columns:1fr;gap:14px}
-  .skills > div{border-left:0;padding:14px 0 0;border-top:1px solid var(--line)}
-  .skills > div:first-child{border-top:0;padding-top:0}
-}
-.creds{display:flex;flex-direction:column;gap:4px;padding-top:18px;border-top:1px solid var(--line)}
-.creds .certs{color:var(--accent);font-size:.94rem}
-.creds .edu{color:var(--muted);font-size:.88rem}
-
-/* ---------- chapters ---------- */
-.project{border-top:1.5px solid var(--fg);scroll-margin-top:50px}
-.chapter{padding-block:56px;display:flex;flex-direction:column;gap:30px;scroll-margin-top:56px}
-.chapter + .chapter{border-top:1px solid var(--line)}
-.ch-head{display:flex;flex-direction:column;gap:12px}
-.eyebrow{font-size:.78rem;font-weight:600;color:var(--accent);letter-spacing:.03em}
-.ch-head h2{font-size:clamp(1.6rem,4vw,2.15rem);font-weight:300;line-height:1.3;text-wrap:balance;letter-spacing:-.01em}
-.ch-meta{font-size:.85rem;color:var(--faint)}
-.block{display:flex;flex-direction:column;gap:12px}
-.block h3{font-size:1.1rem;font-weight:500;color:var(--accent);line-height:1.5}
-.note{font-size:.85rem;color:var(--muted)}
-.stack-tags{font-size:.82rem;color:var(--faint);font-family:var(--f-mono)}
-.refs{display:flex;flex-wrap:wrap;gap:10px 22px;font-size:.88rem}
-.refs a::after{content:" ↗";font-size:.8em}
-
-figure.fig{display:flex;flex-direction:column;gap:10px}
-figcaption{font-size:.8rem;color:var(--faint)}
-
-/* node primitives */
-.node{
-  border-radius:6px;border:1px solid var(--line-ok);background:var(--surface-ok);
-  color:var(--accent);padding:12px 14px;text-align:center;font-size:.92rem;line-height:1.5;
-}
-.node small{display:block;color:var(--muted);font-size:.78rem;margin-top:3px}
-.node.team{background:var(--surface);border-color:var(--line);color:var(--muted)}
-.node .tag{font-weight:600}
-.node .tag::after{content:"|";margin:0 .6em;font-weight:300;opacity:.5}
-
-/* page-2 fork flow */
-.flow{display:flex;flex-direction:column}
-.v-arrow{height:26px;position:relative}
-.v-arrow::before,.fork i::before,.join::after{
-  content:"";position:absolute;left:50%;top:0;bottom:6px;width:1.5px;margin-left:-.75px;background:var(--accent);
-}
-.v-arrow::after,.fork i::after,.join i{
-  content:"";position:absolute;left:50%;bottom:0;margin-left:-4.5px;
-  border-left:4.5px solid transparent;border-right:4.5px solid transparent;border-top:6px solid var(--accent);
-}
-.fork{height:34px;position:relative}
-.fork::before{content:"";position:absolute;left:50%;top:0;height:12px;width:1.5px;margin-left:-.75px;background:var(--accent)}
-.fork::after{content:"";position:absolute;top:12px;left:calc(25% - 4px);right:calc(25% - 4px);height:1.5px;background:var(--accent)}
-.fork i{position:absolute;top:12px;bottom:0;width:0}
-.fork i:first-child{left:calc(25% - 4px)}
-.fork i:last-child{left:calc(75% + 4px)}
-.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.join{height:34px;position:relative}
-.join::before{content:"";position:absolute;top:0;height:20px;left:calc(25% - 4px);right:calc(25% - 4px);border:1.5px solid var(--accent);border-top:0;border-radius:0 0 2px 2px}
-.join::after{top:20px}
-.join i{bottom:0}
-
-/* sequence: left steps with failure branches */
-.seq{display:flex;flex-direction:column;gap:22px}
-.seq-row{display:grid;grid-template-columns:minmax(0,1fr) 44px minmax(0,1fr);align-items:stretch}
-.seq .step{position:relative;display:flex;flex-direction:column;justify-content:center}
-.seq-row + .seq-row .step::before{
-  content:"";position:absolute;left:50%;top:-23px;height:17px;width:1.5px;margin-left:-.75px;background:var(--accent);
-}
-.seq-row + .seq-row .step::after{
-  content:"";position:absolute;left:50%;top:-8px;margin-left:-4.5px;
-  border-left:4.5px solid transparent;border-right:4.5px solid transparent;border-top:6px solid var(--accent);
-}
-.h-arrow{position:relative;align-self:center;height:10px;--c:var(--bad)}
-.h-arrow.ok{--c:var(--accent)}
-.h-arrow::before{content:"";position:absolute;left:8px;right:12px;top:50%;height:1.5px;margin-top:-.75px;background:var(--c)}
-.h-arrow::after{content:"";position:absolute;right:6px;top:50%;margin-top:-4.5px;border-top:4.5px solid transparent;border-bottom:4.5px solid transparent;border-left:6px solid var(--c)}
-.out{
-  border-radius:6px;padding:12px 14px;text-align:center;font-size:.92rem;line-height:1.5;
-  display:flex;align-items:center;justify-content:center;
-  border:1px solid var(--line-bad);background:var(--surface-bad);color:var(--bad);
-}
-.out.ok{border-color:var(--line-ok);background:var(--surface-ok);color:var(--accent)}
-.out.none{visibility:hidden}
-.step .num{font-family:var(--f-mono);margin-right:.5em}
-@media (max-width:520px){
-  .seq-row{grid-template-columns:minmax(0,1.1fr) 28px minmax(0,1fr)}
-  .node,.out{font-size:.84rem;padding:10px}
-  .h-arrow::before{left:4px;right:8px}.h-arrow::after{right:3px}
-}
-
-/* label/value rows */
-.kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px 22px}
-.kv dt{font-weight:600;color:var(--accent);font-size:.92rem;line-height:1.75}
-.kv dd{line-height:1.75}
-.kv.boxed{gap:0;border:1px solid var(--line);border-radius:8px;background:var(--surface);overflow:hidden}
-.kv.boxed dt,.kv.boxed dd{padding:11px 16px;border-top:1px solid var(--line);font-size:.92rem}
-.kv.boxed dt{background:var(--accent-soft)}
-.kv.boxed dt:first-of-type,.kv.boxed dd:first-of-type{border-top:0}
-
-/* timeline (page 4) */
-.tl{display:grid;grid-template-columns:88px minmax(0,1fr);gap:14px 12px;align-items:center}
-.tl-label{font-size:.85rem;color:var(--muted)}
-.tl-steps,.tl-track{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px}
-.tl-steps li{
-  position:relative;border:1px solid var(--line);background:var(--surface);border-radius:6px;
-  padding:10px 6px;font-size:.82rem;line-height:1.45;text-align:center;
-  display:flex;flex-direction:column;justify-content:center;min-height:72px;
-}
-.tl-steps li time{font-family:var(--f-mono);font-size:.8rem;display:block;color:var(--fg)}
-.tl-steps li.end{background:var(--surface-ok);border-color:var(--line-ok);color:var(--accent);font-family:var(--f-mono)}
-.tl-steps li + li::before{
-  content:"";position:absolute;left:-13px;top:50%;width:8px;height:1.5px;background:var(--fg);
-}
-.tl-steps li + li::after{
-  content:"";position:absolute;left:-6px;top:50%;margin-top:-3.5px;
-  border-top:3.5px solid transparent;border-bottom:3.5px solid transparent;border-left:4.5px solid var(--fg);
-}
-.tl-bar{grid-column:2 / 6;border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:8px;text-align:center;font-size:.86rem}
-.tl-note{font-size:.9rem}
-.tl-note b{font-weight:500;color:var(--accent)}
-@media (max-width:680px){
-  .tl{grid-template-columns:1fr;gap:6px}
-  .tl-label{padding-top:10px}
-  .tl-label:first-child{padding-top:0}
-  .tl-steps{grid-template-columns:1fr;gap:18px}
-  .tl-steps li{min-height:0;padding:9px 12px}
-  .tl-steps li + li::before{left:50%;top:-15px;width:1.5px;height:9px;margin-left:-.75px}
-  .tl-steps li + li::after{left:50%;top:-7px;margin-top:0;margin-left:-3.5px;border:0;border-left:3.5px solid transparent;border-right:3.5px solid transparent;border-top:4.5px solid var(--fg)}
-  .tl-track{display:block}
-}
-
-/* tables */
-.tbl-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:.9rem;line-height:1.6}
-th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
-th{background:var(--surface);font-weight:500;color:var(--muted);font-size:.84rem}
-table.nw td:first-child{white-space:nowrap}
-td a.mono{font-size:.86rem;white-space:nowrap;overflow-wrap:normal}
-@media (max-width:600px){
-  table.rt,table.rt tbody,table.rt tr,table.rt td{display:block}
-  table.rt thead{display:none}
-  table.rt tr{border:1px solid var(--line);border-radius:6px;margin-bottom:10px;overflow:hidden}
-  table.rt td{border:0;border-top:1px solid var(--line);white-space:normal;padding:9px 14px}
-  table.rt td:first-child{border-top:0;background:var(--surface);font-weight:500}
-  table.rt td:first-child::before{content:none}
-  table.rt td::before{content:attr(data-label);display:block;color:var(--faint);font-size:.74rem;font-weight:400;letter-spacing:.02em}
-}
-
-/* stats */
-.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.stat{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px}
-.stat span{font-size:.88rem}
-.stat b{font-size:1.9rem;font-weight:300;font-variant-numeric:tabular-nums;line-height:1}
-@media (max-width:520px){.stats{grid-template-columns:1fr}}
-.callout{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px;font-size:.9rem}
-
-/* evidence */
-.log{
-  margin:0;background:var(--surface);border:1px solid var(--line);border-radius:6px;
-  padding:14px 16px;overflow-x:auto;font-family:var(--f-mono);font-size:.82rem;line-height:1.75;
-  color:var(--fg);word-break:normal;overflow-wrap:normal;white-space:pre;
-}
-.log + .log{margin-top:6px}
-.log .fail{color:var(--bad)}
-.shot{overflow-x:auto;background:var(--shot-bg);border:1px solid var(--line);border-radius:6px;padding:10px 12px}
-.shot img{display:block;width:100%;min-width:540px;height:auto}
-.stuck{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-@media (max-width:640px){.stuck{grid-template-columns:1fr}}
-.stuck > div{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:6px}
-.stuck h4{margin:0;font-size:.9rem;font-weight:500;color:var(--muted)}
-.stuck p{font-size:.9rem;line-height:1.7}
-.bad-txt{color:var(--bad)}
-.closing{padding-top:22px;border-top:1px solid var(--line)}
-
-/* footer */
-footer{border-top:1.5px solid var(--fg);padding-block:36px 56px}
-footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px;font-size:.88rem;color:var(--muted)}
-footer .f-name{color:var(--fg);font-weight:500}
-footer .f-links{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 20px}
-
-/* ---------- added for the P1~P7 manuscript ---------- */
-.pref{text-decoration:underline;text-decoration-color:var(--line-ok);text-underline-offset:3px}
-ul.dots{display:flex;flex-direction:column;gap:6px}
-ul.dots li{position:relative;padding-left:1.1em}
-ul.dots li::before{content:"";position:absolute;left:.2em;top:.78em;width:5px;height:5px;border-radius:50%;background:var(--accent)}
-.ev-list{display:flex;flex-direction:column;gap:14px;padding:0;margin:0;list-style:none}
-.ev{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 16px;padding:22px 22px 20px;background:var(--surface);border-radius:8px}
-.ev-num{font-size:1.5rem;font-weight:300;color:var(--accent);line-height:1.3}
-.ev-body{display:flex;flex-direction:column;gap:8px;min-width:0}
-.ev h3{font-size:1.14rem;font-weight:500;line-height:1.5}
-.ev-meta{font-size:.82rem;color:var(--faint)}
-.ev .refs{padding-top:2px}
-.refs-label{color:var(--faint);font-size:.8rem;letter-spacing:.04em}
-@media (max-width:520px){.ev{grid-template-columns:1fr;padding:18px 16px}}
-.skill-group{display:flex;flex-direction:column;gap:8px}
-.sub-h{font-size:.92rem;font-weight:500;color:var(--muted)}
-.creds-kv{gap:6px 18px}
-.creds-kv dt{font-size:.88rem}
-.creds-kv dd{font-size:.94rem}
-.page-order a{color:inherit}
-.chapter > p{max-width:46em}
-.block > p{max-width:46em}
-details.more{border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:10px 14px}
-details.more summary{cursor:pointer;font-size:.88rem;color:var(--muted)}
-details.more[open] summary{margin-bottom:12px}
-details.more .tbl-wrap + .tbl-wrap{margin-top:12px}
-details.more table{background:var(--bg)}
-.shots-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.shots-2 img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:4px;background:#fff}
-@media (max-width:640px){.shots-2{grid-template-columns:1fr}}
-.shot.shot-tall img{min-width:0}
-.src-link{font-size:.86rem;color:var(--muted);border-left:2px solid var(--line-ok);padding:2px 0 2px 12px}
-.src-link span{color:var(--faint);font-size:.78rem;letter-spacing:.04em;margin-right:4px}
-.chain-wrap{display:flex;flex-direction:column;gap:8px}
-.chain-label{font-size:.84rem;color:var(--muted)}
-.chain{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:10px 22px;padding:0;margin:0;list-style:none}
-.chain li{position:relative;display:flex;align-items:center;justify-content:center;text-align:center;font-size:.84rem;line-height:1.5;padding:8px 10px;border-radius:6px;border:1px solid var(--line-ok);background:var(--surface-ok);color:var(--accent)}
-.chain li.bad{border-color:var(--line-bad);background:var(--surface-bad);color:var(--bad)}
-.chain li + li::before{content:"→";position:absolute;left:-17px;top:50%;transform:translateY(-50%);color:var(--faint);font-size:.9rem}
-@media (max-width:640px){
-  .chain{grid-auto-flow:row;grid-auto-columns:auto;grid-template-columns:1fr;gap:20px}
-  .chain li + li::before{content:"↓";left:50%;top:-19px;transform:translateX(-50%)}
-}
-.skills-t td:last-child{white-space:nowrap}
-table.rt th,table.rt td{overflow-wrap:break-word}
-@media (min-width:601px){table.rt th,table.rt td{min-width:6em}}
-.diagram .flow + .seq{margin-top:0}
-.v-arrow.lb{height:32px}
-.v-arrow .lbl{position:absolute;left:calc(50% + 12px);top:50%;transform:translateY(-55%);font-size:.76rem;color:var(--muted);white-space:nowrap;line-height:1}
-.node code{font-size:.84em;overflow-wrap:anywhere}
-.node .tag{font-weight:600}
-.seq .step > span{display:block}
-table code{overflow-wrap:anywhere}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>서준하 | Cloud · DevOps Engineer 포트폴리오</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #0f172a;
+      background-color: #f8fafc;
+      line-height: 1.6;
+      word-break: keep-all;
+    }
+    code, pre, .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .page-card {
+      background: #ffffff;
+      border-radius: 1rem;
+      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 1px 3px 0 rgba(15, 23, 42, 0.04);
+      border: 1px solid #e2e8f0;
+      margin-bottom: 2.5rem;
+      overflow: hidden;
+    }
+    .ext-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+      color: #2563eb;
+      font-weight: 500;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: #93c5fd;
+      transition: all 0.15s ease;
+    }
+    .ext-link:hover {
+      color: #1d4ed8;
+      text-decoration-color: #2563eb;
+    }
+    .step-active {
+      ring: 2px solid #2563eb;
+      background-color: #eff6ff !important;
+      border-color: #3b82f6 !important;
+    }
+    @media print {
+      body {
+        background: #ffffff;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .page-card {
+        box-shadow: none;
+        border: 1px solid #cbd5e1;
+        margin-bottom: 0;
+        page-break-after: always;
+        break-after: page;
+      }
+      .page-card:last-child {
+        page-break-after: auto;
+        break-after: auto;
+      }
+    }
+  </style>
 </head>
-<body>
-<header class="bar">
-  <div class="wrap">
-    <div class="bar-id"><b>서준하</b><span> / IT인프라(DevOps) 신입</span></div>
-    <nav aria-label="섹션">
-      <a href="#p2">Hibiscus</a>
-      <a href="#p5">영주로그</a>
-      <a href="#p7">기반 역량</a>
-    </nav>
-  </div>
-</header>
+<body class="min-h-screen antialiased selection:bg-blue-600 selection:text-white">
 
-<main>
-  <section class="wrap hero" id="p1" aria-label="소개">
-    <div class="idrow">
-      <div class="who">
-        <p class="kicker">PORTFOLIO / 2026.10</p>
-        <h1 class="name">서준하</h1>
-        <p class="role">IT인프라(DevOps) · 신입</p>
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 hidden items-center gap-2.5 rounded-xl bg-slate-900 px-4 py-3 text-sm font-medium text-white shadow-xl transition-all">
+    <span id="toast-icon" class="text-emerald-400">✓</span>
+    <span id="toast-msg">복사되었습니다.</span>
+  </div>
+
+  <!-- Top Sticky Navigation -->
+  <header class="no-print sticky top-0 z-40 border-b border-slate-200/90 bg-white/95 backdrop-blur-md">
+    <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6">
+      <div class="flex items-center gap-3">
+        <a href="#p1" class="flex items-center gap-2 text-base font-extrabold tracking-tight text-slate-900">
+          <span class="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-slate-900 text-xs font-bold text-white">서</span>
+          <span>서준하</span>
+          <span class="hidden rounded-md bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600 sm:inline-block">Cloud · DevOps 신입</span>
+        </a>
       </div>
-      <div class="contact">
-        <span class="c-label">EMAIL</span>
-        <span class="c-item"><a class="c-val" id="email-val" href="mailto:jungjunhayo@gmail.com">jungjunhayo@gmail.com</a><button class="copy" type="button" id="copy-email" data-target="email-val">복사</button></span>
-        <div class="contact-links">
-          <a href="https://github.com/junhasuh" target="_blank" rel="noopener">GitHub / junhasuh</a>
-          <a href="https://policerjack.tistory.com/" target="_blank" rel="noopener">기술 블로그</a>
+
+      <!-- Filter / Jump Nav -->
+      <nav class="flex flex-wrap items-center gap-1.5 text-xs font-semibold sm:text-sm" aria-label="섹션 내비게이션">
+        <button type="button" data-filter="all" class="nav-filter-btn rounded-lg bg-slate-900 px-2.5 py-1.5 text-white transition">전체 (P1~P7)</button>
+        <button type="button" data-filter="hibiscus" class="nav-filter-btn rounded-lg bg-indigo-50 px-2.5 py-1.5 text-indigo-700 hover:bg-indigo-100 transition">Hibiscus · 블루그린 배포</button>
+        <button type="button" data-filter="yeongju" class="nav-filter-btn rounded-lg bg-emerald-50 px-2.5 py-1.5 text-emerald-700 hover:bg-emerald-100 transition">영주로그 · K8s CI/CD</button>
+        <button type="button" data-filter="infra" class="nav-filter-btn rounded-lg bg-amber-50 px-2.5 py-1.5 text-amber-800 hover:bg-amber-100 transition">Terraform · K8s 복구</button>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="mx-auto max-w-5xl px-4 py-6 sm:px-6 sm:py-8">
+
+    <!-- =========================================================
+         PAGE 1: 핵심 요약 & 대표 프로젝트 한눈에 보기
+    ========================================================== -->
+    <article id="p1" data-section="summary" class="page-card border-t-4 border-t-slate-900 p-6 sm:p-10">
+      <!-- Page Top Meta -->
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-4 text-xs text-slate-500">
+        <span class="font-semibold text-slate-700">서준하 · Cloud / DevOps Engineer Portfolio</span>
+        <span class="font-mono font-semibold text-slate-500">01 / 07 · OVERVIEW</span>
+      </div>
+
+      <!-- Hero Header -->
+      <div class="mt-6 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+        <div>
+          <div class="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
+            <span>IT 인프라 · DevOps · Cloud Engineer (신입)</span>
+            <span class="text-slate-300">|</span>
+            <span>AWS SAA · CKA 보유</span>
+          </div>
+          <h1 class="mt-3 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
+            배포 실패가 사용자 장애로 번지지 않도록,<br class="hidden sm:inline" />
+            <span class="text-blue-600">사전 검증 관문과 자동 롤백 인프라</span>를 구축하는 엔지니어 서준하입니다.
+          </h1>
+          <p class="mt-3 max-w-3xl text-sm text-slate-600 sm:text-base">
+            클라우드(GCP·AWS)와 온프레미스, 쿠버네티스 환경에서 <strong>신규 버전을 트래픽 0% 상태로 먼저 검증(Blue/Green)</strong>하고, 전환 중 장애가 발생하면 <strong>이전 버전으로 자동 복구(Rollback·DR)</strong>되는 배포 시스템을 직접 구현하고 장애 주입 시험으로 검증했습니다.
+          </p>
+        </div>
+
+        <!-- Contact & Quick Links Box -->
+        <div class="flex shrink-0 flex-col gap-2 rounded-xl border border-slate-200 bg-slate-50 p-4 text-xs sm:min-w-[250px]">
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-semibold text-slate-500">EMAIL</span>
+            <div class="flex items-center gap-1.5">
+              <a href="mailto:jungjunhayo@gmail.com" class="font-mono font-medium text-slate-800 hover:underline">jungjunhayo@gmail.com</a>
+              <button type="button" id="btn-copy-email" class="no-print rounded bg-slate-200 px-1.5 py-0.5 text-[11px] font-semibold text-slate-700 hover:bg-slate-300">복사</button>
+            </div>
+          </div>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-semibold text-slate-500">GITHUB</span>
+            <a href="https://github.com/junhasuh" target="_blank" rel="noopener noreferrer" class="ext-link font-mono">github.com/junhasuh ↗</a>
+          </div>
+          <div class="flex items-center justify-between gap-2">
+            <span class="font-semibold text-slate-500">TECH BLOG</span>
+            <a href="https://policerjack.tistory.com/" target="_blank" rel="noopener noreferrer" class="ext-link">DevOps 항해일지 (Tistory) ↗</a>
+          </div>
+          <div class="flex items-center justify-between gap-2 border-t border-slate-200 pt-2 text-[11px] text-slate-600">
+            <span>가톨릭대 컴퓨터정보공학부 (27.02 졸업예정)</span>
+            <span>공군 만기전역</span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="block" style="gap:18px">
-      <h2 class="headline">배포가 실패할 때 어디까지 되돌릴지 먼저 정하고, 일부러 실패시켜 확인합니다.</h2>
-      <p class="lead">해커톤 6인 팀에서 온프레미스와 Cloud Run에 함께 배포하는 단계를 맡아 구현했습니다. 개인 프로젝트에서는 팀 백엔드를 포크해 Jenkins·Ansible·Kubernetes 배포 파이프라인을 구성했습니다.</p>
-    </div>
+      <!-- 3 Core Highlights (필살기 3선 — 맨 위 배치) -->
+      <div class="mt-8">
+        <div class="flex items-center justify-between">
+          <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500">핵심 검증 성과 (Core Highlights)</h2>
+          <span class="text-xs text-slate-400">실제 장애 주입 시험 및 코드·커밋 증거 기반</span>
+        </div>
+        <div class="mt-3 grid gap-4 md:grid-cols-3">
+          <!-- Highlight 1 -->
+          <div class="flex flex-col justify-between rounded-xl border border-indigo-200 bg-indigo-50/40 p-4">
+            <div>
+              <div class="flex items-center justify-between gap-2">
+                <span class="rounded-md bg-indigo-600 px-2 py-0.5 text-[11px] font-bold text-white">블루그린 배포 · DR 자동 복구</span>
+                <a href="#p3" class="text-xs font-semibold text-indigo-700 hover:underline">P2~P4 이동 ↓</a>
+              </div>
+              <h3 class="mt-2.5 text-sm font-bold text-slate-900">
+                온프레미스 장애(503) 주입 시 34초 내 Cloud Run 자동 롤백 및 무중단 유지
+              </h3>
+              <p class="mt-1.5 text-xs text-slate-600">
+                신규 버전을 트래픽 0% 상태에서 먼저 헬스 체크하고, 온프레미스 전환 중 503 장애를 유도했을 때 이미 전환된 Cloud Run을 이전 버전으로 자동 복구해 <strong>1초 간격 요청 109건 모두 HTTP 200</strong>을 유지했습니다.
+              </p>
+            </div>
+            <div class="mt-3 flex flex-wrap gap-2 border-t border-indigo-100 pt-2.5 text-[11px]">
+              <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/deploy.orchestrator.ts#L154-L229" target="_blank" rel="noopener noreferrer" class="ext-link">전환·롤백 코드 ↗</a>
+              <a href="https://policerjack.tistory.com/5" target="_blank" rel="noopener noreferrer" class="ext-link">구축 회고 4절 ↗</a>
+            </div>
+          </div>
 
-    <div class="block" style="gap:14px">
-      <h2 class="sub-label">대표 근거</h2>
-      <ol class="ev-list">
-        <li class="ev"><p class="ev-num" aria-hidden="true">①</p><div class="ev-body"><h3>온프레미스 전환을 일부러 실패시켜 Cloud Run 복귀를 확인했습니다</h3><p class="ev-meta">Hibiscus(<a class="pref" href="#p2">P2</a>~<a class="pref" href="#p4">P4</a>)</p><ul class="dots"><li>온프레미스 Agent가 쓰는 API만 503으로 막아 전환 작업을 실패시켰습니다.</li><li>Cloud Run은 14:01:22에 새 revision으로 바뀌었습니다. 14:01:56에는 이전 revision으로 돌아와 있었습니다(5초 간격 관측).</li><li>배포는 대표 경로를 바꾸기 전에 멈췄습니다. 그동안 공개 주소에 1초 간격으로 보낸 요청 109건은 모두 HTTP 200이었습니다.</li></ul><nav class="refs" aria-label="온프레미스 전환을 일부러 실패시켜 Cloud Run 복귀를 확인했습니다 확인 링크"><span class="refs-label">확인</span><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/deploy.orchestrator.ts#L154-L229" target="_blank" rel="noopener">전환·복구 코드</a><a href="https://policerjack.tistory.com/5" target="_blank" rel="noopener">구축 회고 4절</a></nav></div></li><li class="ev"><p class="ev-num" aria-hidden="true">②</p><div class="ev-body"><h3>Kubernetes 배포 실패를 되돌리고 빌드를 실패로 남겼습니다</h3><p class="ev-meta">영주로그 CI/CD(<a class="pref" href="#p5">P5</a>~<a class="pref" href="#p6">P6</a>)</p><ul class="dots"><li>운영 DB 환경변수 참조를 일부러 틀린 커밋 a38db57을 배포했습니다. H2로 도는 CI 테스트는 통과했습니다.</li><li><code>rollout status</code>가 180초를 기다린 뒤 시간 초과로 실패했습니다.</li><li>Ansible이 <code>rollout undo</code>를 실행했습니다. Jenkins 빌드는 FAILURE로 끝났습니다.</li></ul><nav class="refs" aria-label="Kubernetes 배포 실패를 되돌리고 빌드를 실패로 남겼습니다 확인 링크"><span class="refs-label">확인</span><a href="https://github.com/junhasuh/yeongjuLog-BE/commit/a38db57d82cae6031cf5b1f93ba178689251f3e7" target="_blank" rel="noopener">커밋 a38db57</a><a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/ansible/k8s-deploy.yml#L1-L17" target="_blank" rel="noopener">배포 플레이북</a><a href="https://policerjack.tistory.com/2" target="_blank" rel="noopener">구축 기록 3절</a></nav></div></li><li class="ev"><p class="ev-num" aria-hidden="true">③</p><div class="ev-body"><h3>배포 서버 계정에는 프로젝트 역할을 두 개만 주고, 서명 키는 그 계정만 읽게 했습니다</h3><p class="ev-meta">Hibiscus GCP 구성(<a class="pref" href="#p4">P4</a>)</p><ul class="dots"><li>백엔드 서비스 계정의 프로젝트 수준 역할은 Cloud Run Developer와 Logs Viewer 두 개입니다.</li><li>이미지 저장소 쓰기와 Cloud Run 실행 계정 사용 권한은 리소스 단위로만 주었습니다.</li><li>cosign 서명 키는 Secret Manager에 두었습니다. 읽기 권한(Secret Accessor)은 이 서비스 계정 하나에만 주었습니다.</li></ul><nav class="refs" aria-label="배포 서버 계정에는 프로젝트 역할을 두 개만 주고, 서명 키는 그 계정만 읽게 했습니다 확인 링크"><span class="refs-label">확인</span><a href="https://policerjack.tistory.com/5" target="_blank" rel="noopener">구축 회고 6절의 권한 화면</a></nav></div></li>
-      </ol>
-    </div>
+          <!-- Highlight 2 -->
+          <div class="flex flex-col justify-between rounded-xl border border-emerald-200 bg-emerald-50/40 p-4">
+            <div>
+              <div class="flex items-center justify-between gap-2">
+                <span class="rounded-md bg-emerald-600 px-2 py-0.5 text-[11px] font-bold text-white">K8s 무중단 CI/CD · 품질 게이트</span>
+                <a href="#p5" class="text-xs font-semibold text-emerald-700 hover:underline">P5~P6 이동 ↓</a>
+              </div>
+              <h3 class="mt-2.5 text-sm font-bold text-slate-900">
+                K8s 배포 180초 타임아웃 시 직전 파드 자동 복구(undo) 및 불량 빌드 차단
+              </h3>
+              <p class="mt-1.5 text-xs text-slate-600">
+                단위 테스트(H2)는 통과하지만 운영 DB 연결이 깨지는 커밋(<code>a38db57</code>)을 배포해, <code>readinessProbe</code> 180초 초과 시 <strong>Ansible이 <code>rollout undo</code>로 자동 롤백</strong>하고 빌드를 실패(FAILURE)로 남기는 흐름을 검증했습니다.
+              </p>
+            </div>
+            <div class="mt-3 flex flex-wrap gap-2 border-t border-emerald-100 pt-2.5 text-[11px]">
+              <a href="https://github.com/junhasuh/yeongjuLog-BE/commit/a38db57d82cae6031cf5b1f93ba178689251f3e7" target="_blank" rel="noopener noreferrer" class="ext-link">커밋 a38db57 ↗</a>
+              <a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/ansible/k8s-deploy.yml#L1-L17" target="_blank" rel="noopener noreferrer" class="ext-link">롤백 플레이북 ↗</a>
+              <a href="https://policerjack.tistory.com/2" target="_blank" rel="noopener noreferrer" class="ext-link">구축 기록 ↗</a>
+            </div>
+          </div>
 
-    <div class="block" style="gap:14px">
-      <h2 class="sub-label">기술</h2>
-      <div class="skill-group"><h3 class="sub-h">프로젝트에서 직접 다룸</h3><div class="tbl-wrap"><table class="rt nw skills-t"><thead><tr><th scope="col">영역</th><th scope="col">다룬 것</th><th scope="col">쪽</th></tr></thead><tbody><tr><td data-label="영역">배포 단계</td><td data-label="다룬 것">Cloud Run(revision·태그 트래픽 전환), cosign 서명 확인, gcloud·Bash 스크립트, TypeScript·NestJS·Vitest, Python</td><td data-label="쪽"><a class="pref" href="#p2">P2</a>~<a class="pref" href="#p3">P3</a></td></tr><tr><td data-label="영역">GCP 구성</td><td data-label="다룬 것">Compute Engine VM·방화벽, Caddy(HTTPS), systemd, Secret Manager, IAM 서비스 계정, Artifact Registry, Cloud SQL, Cloud NAT</td><td data-label="쪽"><a class="pref" href="#p4">P4</a></td></tr><tr><td data-label="영역">CI/CD</td><td data-label="다룬 것">Jenkins, SonarQube·JaCoCo, Docker, Ansible, Kubernetes(kubeadm, Deployment·Service·Secret·Probe)</td><td data-label="쪽"><a class="pref" href="#p5">P5</a>~<a class="pref" href="#p6">P6</a></td></tr><tr><td data-label="영역">AWS</td><td data-label="다룬 것">EC2·RDS 배포와 도메인 연결(팀 프로젝트), EC2(개인 CI 서버·앱 서버·클러스터 노드)</td><td data-label="쪽"><a class="pref" href="#p5">P5</a></td></tr></tbody></table></div></div><div class="skill-group"><h3 class="sub-h">실습·학습</h3><div class="tbl-wrap"><table class="rt skills-t"><thead><tr><th scope="col">영역</th><th scope="col">다룬 것</th><th scope="col">쪽</th></tr></thead><tbody><tr><td data-label="영역">Terraform 실습 저장소</td><td data-label="다룬 것">AWS VPC·서브넷·라우팅·NAT, IAM 역할·인스턴스 프로파일, S3 원격 상태</td><td data-label="쪽"><a class="pref" href="#p7">P7</a></td></tr><tr><td data-label="영역">CKA 기출 풀이</td><td data-label="다룬 것">컨트롤 플레인 장애, 자원 요청과 스케줄링</td><td data-label="쪽"><a class="pref" href="#p7">P7</a></td></tr><tr><td data-label="영역">Jenkins 강의 실습</td><td data-label="다룬 것">SSH 원격 실행, Docker 데몬, DinD·DooD</td><td data-label="쪽"><a class="pref" href="#p7">P7</a></td></tr></tbody></table></div></div>
-    </div>
+          <!-- Highlight 3 -->
+          <div class="flex flex-col justify-between rounded-xl border border-amber-200 bg-amber-50/40 p-4">
+            <div>
+              <div class="flex items-center justify-between gap-2">
+                <span class="rounded-md bg-amber-700 px-2 py-0.5 text-[11px] font-bold text-white">IaC 최소 권한 · 로그 기반 복구</span>
+                <a href="#p7" class="text-xs font-semibold text-amber-800 hover:underline">P7 이동 ↓</a>
+              </div>
+              <h3 class="mt-2.5 text-sm font-bold text-slate-900">
+                Terraform 원격 상태 잠금(S3·DynamoDB) 및 최소 권한 IAM·K8s 장애 복구
+              </h3>
+              <p class="mt-1.5 text-xs text-slate-600">
+                배포 서버 서비스 계정에 필수 역할 2개만 부여하고 서명 키를 Secret Manager로 격리했습니다. K8s 파드 <code>Pending</code>(리소스 한계 초과)과 API 서버 장애를 로그·수치 대조로 복구했습니다.
+              </p>
+            </div>
+            <div class="mt-3 flex flex-wrap gap-2 border-t border-amber-100 pt-2.5 text-[11px]">
+              <a href="https://github.com/junhasuh/aws-terraform-infra" target="_blank" rel="noopener noreferrer" class="ext-link">aws-terraform-infra ↗</a>
+              <a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/TROUBLESHOOTING.md#L7-L45" target="_blank" rel="noopener noreferrer" class="ext-link">TROUBLESHOOTING.md ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <div class="block" style="gap:10px">
-      <h2 class="sub-label">자격·학력·병역</h2>
-      <dl class="kv creds-kv"><dt>자격</dt><dd>AWS SAA(2026.02) · CKA(2026.08)</dd><dt>학력</dt><dd>가톨릭대학교 컴퓨터정보공학부 · 2027.02 졸업예정</dd><dt>병역</dt><dd>공군 전산장비정비병(<a class="pref" href="#p7">P7</a>)</dd></dl>
-      <p class="note page-order">페이지 순서: <a class="pref" href="#p2">P2</a>~<a class="pref" href="#p4">P4</a> Hibiscus · <a class="pref" href="#p5">P5</a>~<a class="pref" href="#p6">P6</a> 영주로그 CI/CD · <a class="pref" href="#p7">P7</a> 기반 역량</p>
-    </div>
-  </section>
+      <!-- Projects At a Glance (프로젝트 한눈에 보기: "Hibiscus - 블루그린 배포 인프라" 형식) -->
+      <div class="mt-8">
+        <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500">대표 프로젝트 한눈에 보기 (Projects Overview)</h2>
+        <div class="mt-3 space-y-3">
+          <!-- Project 1 Row -->
+          <div class="rounded-xl border border-slate-200 bg-white p-4 transition hover:border-indigo-300">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="rounded-md bg-indigo-600 px-2 py-0.5 text-xs font-bold text-white">PROJECT 01</span>
+                <a href="#p2" class="text-base font-extrabold text-slate-900 hover:text-indigo-600">
+                  Hibiscus - 클라우드·온프레미스 블루그린 배포 및 DR 인프라
+                </a>
+              </div>
+              <span class="font-mono text-xs text-slate-500">2026.09.28 ~ 10.04 · 소프트뱅크 해커톤 (6인 팀) · P2~P4</span>
+            </div>
+            <p class="mt-1.5 text-xs text-slate-600 sm:text-sm">
+              <strong>[맥락]</strong> 실제 HTTP 트래픽 재생 검증과 <code>cosign</code> 이미지 서명을 통과한 컨테이너만 GCP Cloud Run과 온프레미스 서버 양쪽에 무중단 배포하는 하이브리드 배포 플랫폼입니다.
+              <strong>[내 역할]</strong> 하이브리드 블루그린 배포 아키텍처 제안, 배포·자동 롤백 서버 구현(Python → NestJS 이식, PR #9·#18·#19·#26), GCP 인프라·IAM 최소 권한 구축을 전담했습니다.
+            </p>
+          </div>
 
-  <section class="project" id="hibiscus" aria-label="Hibiscus">
-<article class="wrap chapter" id="p2">
-<div class="ch-head"><p class="eyebrow">P2 / HIBISCUS ①</p><h2>양쪽 후보가 모두 통과해야 순서대로 전환합니다</h2></div>
-<div class="tbl-wrap"><table class="rt"><thead><tr><th scope="col">기간</th><th scope="col">인원</th><th scope="col">내 역할</th></tr></thead><tbody><tr><td data-label="기간">2026.09.28~10.04 · 소프트뱅크 해커톤 2026</td><td data-label="인원">6명</td><td data-label="내 역할">배포 단계(조율·부분 실패 롤백), GCP 실행 환경 구성, 팀 기능 연결</td></tr></tbody></table></div>
-<p>Hibiscus는 기록된 HTTP 요청으로 앱을 검증하는 배포 서비스입니다. 정책 판단·승인·서명을 거친 이미지만 Cloud Run이나 온프레미스에 배포합니다.</p>
-<p>하이브리드 배포 방향은 제가 초기 회의에서 제안했습니다. 실무에서 쓰는 환경과 비슷하다고 봤습니다. 한쪽에 장애가 나면 다른 쪽으로 넘길 수 있다는 점도 이유였습니다. 처음에는 배포 조율기를 Python으로 따로 만들었습니다. 팀 백엔드가 NestJS로 다시 정리되면서 조율기를 백엔드의 배포 단계로 옮겼습니다.</p>
-<div class="block"><h3>내가 한 것과 팀원이 한 것</h3>
-<div class="tbl-wrap"><table class="rt nw"><thead><tr><th scope="col">구분</th><th scope="col">한 일</th><th scope="col">근거</th></tr></thead><tbody><tr><td data-label="구분">본인</td><td data-label="한 일">Python 배포 조율기 v0, Cloud Run 후보·전환·롤백·정리 스크립트 작성</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/9" target="_blank" rel="noopener">PR #9</a></td></tr><tr><td data-label="구분">본인</td><td data-label="한 일">배포 전 서명 확인 추가</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/18" target="_blank" rel="noopener">PR #18</a></td></tr><tr><td data-label="구분">본인</td><td data-label="한 일">기존 백엔드의 배포 단계가 조율기를 호출하도록 연결</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/19" target="_blank" rel="noopener">PR #19</a></td></tr><tr><td data-label="구분">본인</td><td data-label="한 일">조율기를 NestJS 백엔드의 배포 단계로 이식. 온프레미스 Agent 작업 API 클라이언트와 대표 경로 전환 연결</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/26" target="_blank" rel="noopener">PR #26</a></td></tr><tr><td data-label="구분">본인</td><td data-label="한 일">배포 단계가 돌아갈 GCP 실행 환경 구성</td><td data-label="근거"><a class="pref" href="#p4">P4</a></td></tr><tr><td data-label="구분">팀원</td><td data-label="한 일">요청 재생 검사, 정책 엔진, 서명 생성, 프론트엔드</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/2a0d6298b594d7155aa97829830c4ef07f8107b1/README.md#L19-L29" target="_blank" rel="noopener">README 담당표</a></td></tr><tr><td data-label="구분">팀원</td><td data-label="한 일">온프레미스 Agent, 작업 전달, SSH 터널, Gateway, 라우팅, 헬스 모니터·자동 장애 전환, GitHub Webhook</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/2a0d6298b594d7155aa97829830c4ef07f8107b1/TASK.md#L1-L5" target="_blank" rel="noopener">팀원 작업 범위</a>, <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/commit/9417fd0ca1b6943e1edd5ec7b3ee53f5a178dff5" target="_blank" rel="noopener">장애 전환 커밋</a></td></tr></tbody></table></div>
-<p>본인 범위는 배포 조율·GCP 구성과 팀 기능 연결입니다. Agent·Gateway·서명 생성·자동 장애 전환 기능 자체는 팀원이 구현했습니다.</p>
-</div>
-<div class="block">
-<h3>양쪽에 배포할 때의 흐름</h3>
-<figure class="fig diagram">
-  <div class="flow" role="img" aria-label="A 팀 기능(요청 재생 검사, 정책 판단, 서명 생성)에서 서명 결과를 받아 B 배포 전 확인. 이어서 C Cloud Run 후보와 D 온프레미스 후보를 동시에 실행하고 E에서 판정. 모두 통과하면 F 전환, 이어서 G 대표 경로 전환. 각 단계에서 실패하면 held 또는 rolled_back으로 끝남">
-    <div class="node team"><span class="tag">A · 팀</span>요청 재생 검사 → 정책 판단 → 서명 생성</div>
-    <div class="v-arrow lb"><span class="lbl">서명 결과(JSON 파일)</span></div>
-    <div class="node"><span class="tag">B · 본인</span>배포 전 확인<small>실행 ID·digest 대조, 저장소·dry-run 서명 확인, <code>cosign verify -a run_id -a plan_hash</code></small></div>
-    <div class="fork"><i></i><i></i></div>
-    <div class="pair">
-      <div class="node"><span class="tag">C · 본인</span>Cloud Run 후보<small>트래픽 0% revision, <code>cand</code> 태그 주소로 헬스 검사</small></div>
-      <div class="node"><span class="tag">D</span>온프레미스 후보<small>Agent 작업 <code>&lt;run_id&gt;-candidate-01</code>, 기한 2분 · 본인: 조율·API 연동 / 팀: Agent</small></div>
-    </div>
-    <div class="join"><i></i></div>
-  </div>
-  <div class="seq">
-    <div class="seq-row">
-      <div class="node step"><span><span class="tag">E · 본인</span>판정</span><small>C·D의 검사 결과</small></div>
-      <div class="h-arrow"></div>
-      <div class="out">하나라도 실패하면 두 후보 정리 → held</div>
-    </div>
-    <div class="seq-row">
-      <div class="node step"><span><span class="tag">F · 본인</span>전환</span><small>모두 통과하면 Cloud Run 먼저, 다음 온프레미스(작업 기한 30초)</small></div>
-      <div class="h-arrow"></div>
-      <div class="out">온프레미스 전환 실패: Cloud Run 이전 revision 복귀, 온프레미스 후보 정리 → rolled_back</div>
-    </div>
-    <div class="seq-row">
-      <div class="node step"><span><span class="tag">G · 본인</span>대표 경로 전환</span><small>양쪽 전환 뒤. 온프레미스가 있으면 온프레미스, 없으면 Cloud Run</small></div>
-      <div class="h-arrow"></div>
-      <div class="out">대표 경로 전환 실패: 양쪽을 이전 상태로 되돌림 → rolled_back. 되돌리기에 실패하면 error</div>
-    </div>
-  </div>
-  <figcaption>대표 경로는 사용자가 접속하는 공개 주소가 가리키는 대상입니다. C와 D는 동시에 실행합니다. 두 검사를 모두 통과해야 F로 넘어갑니다.</figcaption>
-</figure>
-<p class="src-link"><span>원본 화면</span> <a href="https://policerjack.tistory.com/5" target="_blank" rel="noopener">구축 회고</a> 3·4절 — Hibiscus 콘솔의 배포 결과 화면. 전환(v17)과 보류(/healthz 404 때)</p>
-<details class="more"><summary>단계·연결별 근거(코드 행 링크)</summary><div class="tbl-wrap"><table class="rt nw"><thead><tr><th scope="col">상자</th><th scope="col">라벨</th><th scope="col">담당</th><th scope="col">근거</th></tr></thead><tbody><tr><td data-label="상자">A</td><td data-label="라벨">요청 재생 검사 → 정책 판단 → 서명 생성</td><td data-label="담당">팀</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/2a0d6298b594d7155aa97829830c4ef07f8107b1/README.md#L8-L29" target="_blank" rel="noopener">README 전체 흐름·담당표</a></td></tr><tr><td data-label="상자">B</td><td data-label="라벨">배포 전 확인: 실행 ID·digest 대조, 저장소·dry-run 서명 확인, <code>cosign verify -a run_id -a plan_hash</code></td><td data-label="담당">본인</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/deploy.orchestrator.ts#L76-L109" target="_blank" rel="noopener">조율기 76~109행</a>, <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/signature.verifier.ts#L27-L68" target="_blank" rel="noopener">서명 확인 27~68행</a></td></tr><tr><td data-label="상자">C</td><td data-label="라벨">Cloud Run 후보: 트래픽 0% revision, <code>cand</code> 태그 주소로 헬스 검사</td><td data-label="담당">본인</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/eae12bd199f0d85945ece5fb0c3a2bdfabba8321/deploy/cloudrun/candidate.sh#L13-L29" target="_blank" rel="noopener">candidate.sh 13~29행</a>, <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/deploy.orchestrator.ts#L111-L144" target="_blank" rel="noopener">조율기 111~144행</a></td></tr><tr><td data-label="상자">D</td><td data-label="라벨">온프레미스 후보: Agent 작업 <code>&lt;run_id&gt;-candidate-01</code>, 기한 2분</td><td data-label="담당">본인: 조율·API 연동 / 팀: Agent</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/onprem.client.ts#L19-L53" target="_blank" rel="noopener">onprem.client.ts 19~53행</a>, <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/config/configs/deploy.config.ts#L21-L26" target="_blank" rel="noopener">기한 설정 21~26행</a></td></tr><tr><td data-label="상자">E</td><td data-label="라벨">판정: 하나라도 실패하면 두 후보 정리 → held</td><td data-label="담당">본인</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/deploy.orchestrator.ts#L145-L152" target="_blank" rel="noopener">조율기 145~152행</a></td></tr><tr><td data-label="상자">F</td><td data-label="라벨">전환: Cloud Run 먼저, 다음 온프레미스(작업 기한 30초)</td><td data-label="담당">본인</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/deploy.orchestrator.ts#L154-L201" target="_blank" rel="noopener">조율기 154~201행</a></td></tr><tr><td data-label="상자">G</td><td data-label="라벨">대표 경로 전환: 온프레미스가 있으면 온프레미스, 없으면 Cloud Run</td><td data-label="담당">본인</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/deploy.orchestrator.ts#L213-L214" target="_blank" rel="noopener">조율기 213~214행</a></td></tr></tbody></table></div><div class="tbl-wrap"><table class="rt nw"><thead><tr><th scope="col">화살표</th><th scope="col">라벨</th><th scope="col">근거</th></tr></thead><tbody><tr><td data-label="화살표">A → B</td><td data-label="라벨">서명 결과(JSON 파일)</td><td data-label="근거">README 14행, 조율기 76~83행</td></tr><tr><td data-label="화살표">B → C, B → D</td><td data-label="라벨">동시에 실행</td><td data-label="근거">조율기 111~119행</td></tr><tr><td data-label="화살표">C, D → E</td><td data-label="라벨">검사 결과</td><td data-label="근거">조율기 133~144행</td></tr><tr><td data-label="화살표">E → F</td><td data-label="라벨">모두 통과</td><td data-label="근거">조율기 145~152행</td></tr><tr><td data-label="화살표">F → G</td><td data-label="라벨">양쪽 전환 뒤</td><td data-label="근거">조율기 213행</td></tr><tr><td data-label="화살표">F ⇢ 복구</td><td data-label="라벨">온프레미스 전환 실패: Cloud Run 이전 revision 복귀, 온프레미스 후보 정리 → rolled_back</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/deploy.orchestrator.ts#L202-L210" target="_blank" rel="noopener">조율기 202~210행</a></td></tr><tr><td data-label="화살표">G ⇢ 복구</td><td data-label="라벨">대표 경로 전환 실패: 양쪽을 이전 상태로 되돌림 → rolled_back. 되돌리기에 실패하면 error</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/deploy.orchestrator.ts#L215-L227" target="_blank" rel="noopener">조율기 215~227행</a></td></tr></tbody></table></div></details>
-</div>
-<div class="block"><h3>설계 판단</h3>
-<div class="tbl-wrap"><table class="rt nw"><thead><tr><th scope="col">상황</th><th scope="col">고른 방식</th><th scope="col">고르지 않은 방식</th><th scope="col">이유</th><th scope="col">대가</th></tr></thead><tbody><tr><td data-label="상황">한쪽 후보 실패</td><td data-label="고른 방식">두 후보를 정리하고 기존 버전 유지(held)</td><td data-label="고르지 않은 방식">통과한 쪽만 전환</td><td data-label="이유">한쪽만 새 버전이 되는 상태를 만들지 않으려고</td><td data-label="대가">한쪽 문제로 전체 배포가 보류됩니다</td></tr><tr><td data-label="상황">전환 순서</td><td data-label="고른 방식">Cloud Run → 온프레미스 → 대표 경로</td><td data-label="고르지 않은 방식">온프레미스 먼저</td><td data-label="이유">Cloud Run은 트래픽 비율만 바꾸면 되돌릴 수 있어 먼저 바꿨습니다. 대표 경로는 마지막에 바꿔 두 환경의 전환 시차가 사용자에게 드러나지 않게 했습니다.</td><td data-label="대가">온프레미스 전환이 실패하면 이미 바꾼 Cloud Run을 되돌려야 합니다(<a class="pref" href="#p3">P3</a>에서 시험)</td></tr><tr><td data-label="상황">같은 배포 재시도</td><td data-label="고른 방식">revision 이름에 digest 앞 12자와 실행 ID 해시 6자를 넣음. 같은 이름이 있으면 태그만 다시 붙임. 온프레미스 작업 ID는 <code>&lt;run_id&gt;-&lt;action&gt;-01</code>로 고정</td><td data-label="고르지 않은 방식">시도마다 새 이름</td><td data-label="이유">재시도해도 revision을 새로 만들지 않습니다. 서버가 재시작돼도 같은 작업의 결과를 이어서 기다립니다.</td><td data-label="대가">—</td></tr><tr><td data-label="상황">서명 확인</td><td data-label="고른 방식">실행 ID·정책 결정 해시까지 맞는 서명만 통과</td><td data-label="고르지 않은 방식">이미지 서명만 확인</td><td data-label="이유">다른 실행의 서명이면 후보를 만들기 전에 중단합니다.</td><td data-label="대가">—</td></tr></tbody></table></div>
-</div>
-</article>
-<article class="wrap chapter" id="p3">
-<div class="ch-head"><p class="eyebrow">P3 / HIBISCUS ②</p><h2>온프레미스 전환을 일부러 실패시켜 Cloud Run 복귀를 확인했습니다</h2></div>
-<p>rolled_back은 전환이 시작된 뒤에 실패해야만 나오는 결과입니다. 일부러 만들지 않으면 확인할 방법이 없어서, 2026-10-03에 실제 Cloud Run·온프레미스 환경에서 시험했습니다.</p>
-<div class="block"><h3>실패를 만드는 방법</h3>
-<div class="tbl-wrap"><table class="rt"><thead><tr><th scope="col">방법</th><th scope="col">예상 결과</th><th scope="col">선택</th></tr></thead><tbody><tr><td data-label="방법">앱 헬스 검사가 500을 반환</td><td data-label="예상 결과">후보 검사에서 걸려 held로 끝남. 전환 단계까지 가지 않음</td><td data-label="선택">쓰지 않음</td></tr><tr><td data-label="방법">Agent API가 401·403을 반환</td><td data-label="예상 결과">Agent가 스스로 종료함</td><td data-label="선택">쓰지 않음</td></tr><tr><td data-label="방법">Agent API만 503으로 차단</td><td data-label="예상 결과">Agent가 재시도하는 사이 전환 작업이 30초 기한을 넘김</td><td data-label="선택"><strong>사용</strong></td></tr></tbody></table></div>
-<p>Agent가 401·403에서 종료하는 동작은 <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/2a0d6298b594d7155aa97829830c4ef07f8107b1/onprem-agent/src/backend-client.ts#L97-L100" target="_blank" rel="noopener">팀원이 작성한 Agent 코드 97~100행</a>에서 확인했습니다.</p>
-<p>온프레미스 후보가 통과한 직후 VM의 Caddy에서 Agent가 쓰는 API만 503으로 막았습니다. 공개 주소와 상태 확인은 SSH 터널로 가므로 이 차단의 영향을 받지 않습니다. Cloud Run 되돌리기가 끝난 뒤 차단을 풀었습니다(차단 47초).</p>
-</div>
-<div class="block"><h3>타임라인</h3>
-<div class="tbl-wrap"><table class="rt nw"><thead><tr><th scope="col">시점</th><th scope="col">Cloud Run</th><th scope="col">온프레미스</th><th scope="col">공개 주소(대표 경로)</th></tr></thead><tbody><tr><td data-label="시점">후보 단계</td><td data-label="Cloud Run">후보 통과</td><td data-label="온프레미스">후보 통과. 직후 Agent API 503 차단 시작</td><td data-label="공개 주소(대표 경로)">기존 온프레미스가 응답</td></tr><tr><td data-label="시점">14:01:22</td><td data-label="Cloud Run">새 revision으로 바뀐 것을 관측</td><td data-label="온프레미스">전환 작업을 받지 못함</td><td data-label="공개 주소(대표 경로)">기존 온프레미스가 응답</td></tr><tr><td data-label="시점">작업 기한 30초 경과</td><td data-label="Cloud Run">—</td><td data-label="온프레미스">백엔드가 전환 실패로 판단</td><td data-label="공개 주소(대표 경로)">기존 온프레미스가 응답</td></tr><tr><td data-label="시점">14:01:56</td><td data-label="Cloud Run">이전 revision으로 돌아온 것을 관측</td><td data-label="온프레미스">후보 정리</td><td data-label="공개 주소(대표 경로)">기존 온프레미스가 응답</td></tr><tr><td data-label="시점">결과</td><td data-label="Cloud Run">배포 기록 rolled_back</td><td data-label="온프레미스">Cloud Run 복귀 뒤 차단 해제</td><td data-label="공개 주소(대표 경로)">1초 간격 요청 109건 모두 HTTP 200</td></tr></tbody></table></div>
-<div class="chain-wrap"><p class="chain-label">배포 기록의 단계 순서</p><ol class="chain"><li>후보 2개 성공</li><li>Cloud Run 전환 성공</li><li class="bad">온프레미스 전환 실패(기한 초과)</li><li>Cloud Run 되돌림 성공</li><li>온프레미스 후보 정리 성공</li></ol></div>
-<p class="src-link"><span>원본 화면</span> <a href="https://policerjack.tistory.com/5" target="_blank" rel="noopener">구축 회고</a> 4절 — 시간축 그림. 14:01:22 새 버전 100% 확인, 14:01:56 되돌림 확인, 공개 주소 109/109 응답 200</p>
-</div>
-<div class="block"><h3>이 수치를 읽는 법</h3>
-<ul class="dots"><li>공개 주소는 약 1초마다 요청했습니다(109회). Cloud Run 상태는 약 5초마다 gcloud로 확인했습니다(26회).</li><li>대표 경로는 테스트 전에 기록하고 테스트 뒤 콘솔에서 다시 확인했습니다. 경로는 그대로였습니다.</li><li>Cloud Run 상태는 5초 간격으로만 확인했습니다. 그래서 새 revision이 트래픽 100%를 받은 구간은 29~39초 범위로만 말할 수 있습니다.</li><li>30초는 Agent 전환 작업의 기한입니다. 전체 복구 시간이 아닙니다.</li><li>109건은 대표 경로를 바꾸기 전에 멈춘 이 시험 한 번의 관측입니다. 모든 배포의 무중단을 뜻하지 않습니다.</li><li>같은 실패 경로는 <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/specs/deploy-orchestrator.spec.ts#L255-L285" target="_blank" rel="noopener">단위 테스트</a>로도 정의해 두었습니다.</li></ul>
-</div>
-<div class="block"><h3>PR #26: 팀원 리뷰에서 드러난 결함 수정</h3>
-<p>팀원이 리뷰에서 재현해 지적한 결함입니다. 대표 경로 전환이 실패해도 결과가 activated로 남고 롤백이 호출되지 않았습니다(<a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/26#discussion_r4164102670" target="_blank" rel="noopener">리뷰 코멘트</a>). 원인은 순서였습니다. 양쪽 전환이 끝난 시점에 이미 성공을 기록하고, 그 뒤에 대표 경로를 바꾸고 있었습니다.</p>
-<div class="tbl-wrap"><table class="rt nw"><thead><tr><th scope="col">대표 경로 전환이 실패했을 때</th><th scope="col">수정 전</th><th scope="col">수정 후(본인)</th></tr></thead><tbody><tr><td data-label="대표 경로 전환이 실패했을 때">배포 기록</td><td data-label="수정 전">activated</td><td data-label="수정 후(본인)">rolled_back</td></tr><tr><td data-label="대표 경로 전환이 실패했을 때">롤백</td><td data-label="수정 전">호출되지 않음</td><td data-label="수정 후(본인)">Cloud Run은 이전 revision으로, 온프레미스는 이전 컨테이너로 되돌림</td></tr></tbody></table></div>
-<p>되돌릴 컨테이너가 없으면 error로 남겨 수동으로 처리합니다. 이 경우를 다루는 단위 테스트 3개와 통합 테스트 1개를 추가했습니다(<a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/specs/deploy-orchestrator.spec.ts#L287-L350" target="_blank" rel="noopener">단위 테스트 287~350행</a>, <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/test/deploy.e2e-spec.ts#L396-L436" target="_blank" rel="noopener">통합 테스트 396~436행</a>). 다른 팀원의 승인을 받아 병합했습니다(<a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/26#pullrequestreview-5393827637" target="_blank" rel="noopener">리뷰 승인</a>, <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/commit/882d4a766fce1bef0636f09e0d9dac78f43e4a73" target="_blank" rel="noopener">수정 커밋</a>).</p>
-</div>
-</article>
-<article class="wrap chapter" id="p4">
-<div class="ch-head"><p class="eyebrow">P4 / HIBISCUS ③</p><h2>GCP 실행 환경의 접근 경로와 권한을 구성했습니다</h2></div>
-<p>배포 단계가 실행될 백엔드 서버와 그 주변을 구성했습니다. 과정은 <a href="https://policerjack.tistory.com/5" target="_blank" rel="noopener">구축 회고 6절</a>에 화면과 함께 정리했습니다.</p>
-<p>백엔드는 Compute Engine VM에 올렸습니다. Agent SSH 터널 서버(TCP 2222), Docker 멀티 플랫폼 빌드, 상시 동작하는 작업 처리기, SQLite가 필요했기 때문입니다. 대신 VM이 단일 장애점이 됩니다.</p>
-<div class="block"><h3>구성 명세</h3>
-<div class="tbl-wrap"><table class="rt nw"><thead><tr><th scope="col">구성</th><th scope="col">설정</th><th scope="col">이유</th><th scope="col">근거</th></tr></thead><tbody><tr><td data-label="구성">백엔드 VM</td><td data-label="설정">e2-standard-4, Ubuntu 24.04, 고정 IP</td><td data-label="이유">위 문단</td><td data-label="근거">회고 6절</td></tr><tr><td data-label="구성">방화벽</td><td data-label="설정">80·443과 2222만 열기</td><td data-label="이유">80·443은 Gateway·API·콘솔, 2222는 Agent SSH 터널</td><td data-label="근거">회고 6절</td></tr><tr><td data-label="구성">백엔드 API 포트</td><td data-label="설정">8080은 백엔드가 VM 안에서 받는 포트. 127.0.0.1 전용이고 방화벽에도 열지 않음</td><td data-label="이유">외부 요청은 443에서 Caddy가 HTTPS로 받아 넘김. 8080을 밖에 열지 않아 HTTPS를 거치지 않고 백엔드에 닿는 경로가 없음</td><td data-label="근거"><a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/2a0d6298b594d7155aa97829830c4ef07f8107b1/frontend/.env.example#L7-L8" target="_blank" rel="noopener">팀원 설정 문서 7~8행</a></td></tr><tr><td data-label="구성">HTTPS</td><td data-label="설정">Caddy + Let's Encrypt</td><td data-label="이유">주소별 인증서 자동 발급</td><td data-label="근거">회고 6절</td></tr><tr><td data-label="구성">프로세스</td><td data-label="설정">systemd 서비스 등록</td><td data-label="이유">재부팅 뒤 실행, 프로세스 장애 시 재시작</td><td data-label="근거">수행 기록(공개 근거 없음)</td></tr><tr><td data-label="구성">비밀값</td><td data-label="설정">cosign 개인키·비밀번호와 GitHub 비밀값을 Secret Manager에 보관. 서명 키 읽기 권한(Secret Accessor)은 백엔드 서비스 계정 하나</td><td data-label="이유">실행할 때만 /run 아래 0700 폴더에 풀어 디스크에 남지 않게 함</td><td data-label="근거">회고 6절, 수행 기록</td></tr><tr><td data-label="구성">권한</td><td data-label="설정">프로젝트 수준 역할은 Cloud Run Developer·Logs Viewer 두 개. 이미지 저장소 쓰기와 Cloud Run 실행 계정 사용은 리소스 단위로만 부여</td><td data-label="이유">배포 작업에 필요한 범위로 제한</td><td data-label="근거">회고 6절</td></tr><tr><td data-label="구성">DB</td><td data-label="설정">Cloud SQL(MySQL) 공인 IP, 허용 IP 2개, TLS 필수</td><td data-label="이유">허용 IP는 Cloud NAT 고정 IP와 온프레미스 IP</td><td data-label="근거">회고 6절</td></tr><tr><td data-label="구성">출구 IP</td><td data-label="설정">Cloud NAT</td><td data-label="이유">Cloud Run은 출구 IP가 바뀌어 허용 목록에 넣을 고정 IP가 필요</td><td data-label="근거">회고 6절</td></tr><tr><td data-label="구성">VM의 저장소 접근</td><td data-label="설정">VM에 GitHub 자격 증명을 두지 않고 공개 저장소를 익명으로 받음</td><td data-label="이유">개인 계정 권한이 VM에 남지 않게</td><td data-label="근거">회고 6절</td></tr><tr><td data-label="구성">비용</td><td data-label="설정">10/1~10/5 사용액 약 1만 7천 원</td><td data-label="이유">무료 체험 크레딧으로 처리, 실제 청구 0원</td><td data-label="근거">회고 6절</td></tr></tbody></table></div>
-<p class="src-link"><span>원본 화면</span> <a href="https://policerjack.tistory.com/5" target="_blank" rel="noopener">구축 회고</a> 6절 — 서비스 계정 역할 화면과 Secret Manager 권한 화면</p>
-</div>
-<div class="block"><h3>막혔던 것</h3>
-<p><strong>Cloud Run에서만 <code>/healthz</code>가 404였습니다.</strong> 데모 앱의 첫 배포는 정책 단계에서 막혔습니다. 앱은 <code>/healthz</code>를 쓰는데 등록 기본값이 <code>/health</code>여서 테스트가 실패했습니다. 경로를 <code>/healthz</code>로 맞추자 이번에는 Cloud Run 후보 검사만 404를 세 번 받았습니다. 온프레미스 후보는 같은 이미지로 통과했습니다. Cloud Run은 z로 끝나는 일부 URL 경로를 예약해 두고 있어 요청이 컨테이너에 닿기 전에 404가 났습니다. 배포 단계는 두 후보를 정리하고 기존 버전을 유지했습니다(held). 앱에 <code>/health</code>를 추가하고 헬스 경로를 바꾼 뒤로는 같은 문제가 나지 않았습니다.</p>
-<div class="tbl-wrap"><table class="rt"><thead><tr><th scope="col">증상</th><th scope="col">원인</th><th scope="col">조치</th></tr></thead><tbody><tr><td data-label="증상">VM의 Docker 29에서 빌드 확인 실패</td><td data-label="원인">기본 containerd 스냅샷 저장소 때문에 이미지 ID가 index digest로 나옴</td><td data-label="조치">overlay2로 바꿈</td></tr><tr><td data-label="증상">새 앱 첫 배포에서 <code>--no-traffic</code> 거부</td><td data-label="원인">Cloud Run 서비스가 아직 없으면 <code>--no-traffic</code>으로 배포할 수 없음</td><td data-label="조치">서비스를 미리 만들어 둠. 이 과정은 아직 자동화하지 못함</td></tr><tr><td data-label="증상">Cloud Run 화면의 digest가 서명한 digest와 다름</td><td data-label="원인">amd64·arm64를 묶은 index digest로 서명하는데 Cloud Run은 amd64 digest를 기록</td><td data-label="조치">revision 이름에 index digest를 넣고, 실행 ID와 index digest를 환경변수(HIB_RUN_ID, HIB_DIGEST)로 남김(<a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/eae12bd199f0d85945ece5fb0c3a2bdfabba8321/deploy/cloudrun/candidate.sh#L1-L16" target="_blank" rel="noopener">candidate.sh 1~16행</a>)</td></tr></tbody></table></div>
-</div>
-<div class="block"><h3>데모 배포 기록</h3>
-<div class="stats"><div class="stat"><span>전환</span><b>8</b></div><div class="stat"><span>후보 단계 보류</span><b>8</b></div><div class="stat"><span>정책 차단</span><b>1</b></div></div>
-<p>배포 기록 DB의 데모 앱 배포 17건은 전환 8건, 후보 단계 보류 8건, 정책 차단 1건입니다. 보류 사유에는 헬스 경로 404와 후보 생성 실패가 있습니다. 해커톤 기간 데모 실행의 집계라서 성공률로 읽지 않습니다.</p>
-</div>
-<div class="block"><h3>한계</h3>
-<ul class="dots"><li>백엔드 VM이 단일 장애점입니다. 이미 배포된 앱은 각 위치에서 계속 동작합니다.</li><li>마지막 배포에서 대표 경로 전환이 SSH 포워드 열림보다 0.9초 빨랐습니다. 그 사이 들어온 요청은 502를 받을 수 있는 구간입니다. 실제로 502가 났는지는 확인하지 못했습니다.</li><li>자동 장애 전환(팀 기능) 뒤 온프레미스로 돌아오는 작업은 수동입니다.</li><li>부하가 걸린 상태의 전환·되돌림 시간은 측정하지 않았습니다.</li></ul>
-</div>
-</article>
-  </section>
+          <!-- Project 2 Row -->
+          <div class="rounded-xl border border-slate-200 bg-white p-4 transition hover:border-emerald-300">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="rounded-md bg-emerald-600 px-2 py-0.5 text-xs font-bold text-white">PROJECT 02</span>
+                <a href="#p5" class="text-base font-extrabold text-slate-900 hover:text-emerald-600">
+                  영주로그 (YeongjuLog) - Jenkins·Ansible·K8s 무중단 CI/CD 파이프라인
+                </a>
+              </div>
+              <span class="font-mono text-xs text-slate-500">팀 배포 2026.03~06 (4인) / 개인 CI/CD 고도화 2026.09 (1인) · P5~P6</span>
+            </div>
+            <p class="mt-1.5 text-xs text-slate-600 sm:text-sm">
+              <strong>[맥락]</strong> 영주시 공공데이터 기반 AI 관광 가이드 앱 백엔드(Spring Boot)에 코드 품질 검사와 쿠버네티스 무중단 배포·자동 롤백 체계를 구축한 프로젝트입니다.
+              <strong>[내 역할]</strong> 팀 프로젝트 당시 AWS EC2·RDS 배포를 맡았고, 이후 개인 저장소로 포크해 Jenkins·SonarQube·Ansible·Kubernetes(<code>kubeadm</code>) 기반 무중단 롤링 업데이트와 4가지 실패 주입 검증을 완수했습니다.
+            </p>
+          </div>
 
-  <section class="project" id="yeongjulog" aria-label="영주로그 CI/CD">
-<article class="wrap chapter" id="p5">
-<div class="ch-head"><p class="eyebrow">P5 / 영주로그 CI/CD ①</p><h2>실패한 단계에 따라 다음 단계를 막거나 되돌립니다</h2></div>
-<div class="tbl-wrap"><table class="rt"><thead><tr><th scope="col">구분</th><th scope="col">기간</th><th scope="col">인원</th><th scope="col">내 역할</th></tr></thead><tbody><tr><td data-label="구분">팀 프로젝트(창업동아리 팀)</td><td data-label="기간">2026.03~06</td><td data-label="인원">4명</td><td data-label="내 역할">EC2·RDS 배포, 도메인 연결</td></tr><tr><td data-label="구분">개인 CI/CD(팀 백엔드 포크)</td><td data-label="기간">2026.09.22~09.24(구축·검증 커밋 기준)</td><td data-label="인원">1명</td><td data-label="내 역할">파이프라인 구성, 실패 시험</td></tr></tbody></table></div>
-<p>영주로그는 영주시의 역사 탐방 서비스입니다. 앱 기능은 팀 작업물이라 성과에 넣지 않았습니다. CI/CD는 AI 대화로 단계별 안내를 받으며 구성했습니다. 각 단계가 실제로 동작했는지는 실행 화면과 커밋으로 확인했습니다.</p>
-<div class="block"><h3>파이프라인 명세</h3>
-<div class="tbl-wrap"><table class="rt nw"><thead><tr><th scope="col">순서</th><th scope="col">단계</th><th scope="col">실패하면</th><th scope="col">근거</th></tr></thead><tbody><tr><td data-label="순서">0</td><td data-label="단계">변경 감지: Jenkins Poll SCM, 2분 주기</td><td data-label="실패하면">—</td><td data-label="근거"><a href="https://policerjack.tistory.com/2" target="_blank" rel="noopener">구축 기록 2절</a></td></tr><tr><td data-label="순서">1</td><td data-label="단계">Init: 커밋 해시 앞 7자를 이미지 태그로 지정</td><td data-label="실패하면">—</td><td data-label="근거"><a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/Jenkinsfile#L15-L23" target="_blank" rel="noopener">Jenkinsfile 15~23행</a></td></tr><tr><td data-label="순서">2</td><td data-label="단계">Test: <code>./gradlew clean test</code>(H2·테스트용 설정)</td><td data-label="실패하면">이후 단계 실행 안 함</td><td data-label="근거"><a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/Jenkinsfile#L25-L36" target="_blank" rel="noopener">Jenkinsfile 25~36행</a></td></tr><tr><td data-label="순서">3</td><td data-label="단계">SonarQube 분석 → Quality Gate</td><td data-label="실패하면">기준 미달이면 파이프라인 중단</td><td data-label="근거"><a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/Jenkinsfile#L38-L54" target="_blank" rel="noopener">Jenkinsfile 38~54행</a></td></tr><tr><td data-label="순서">4</td><td data-label="단계">Build Jar → Docker 이미지 빌드·push(<code>seojunhayo/yeonjulog:&lt;커밋 해시&gt;</code>)</td><td data-label="실패하면">—</td><td data-label="근거"><a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/Jenkinsfile#L56-L75" target="_blank" rel="noopener">Jenkinsfile 56~75행</a></td></tr><tr><td data-label="순서">5a</td><td data-label="단계">Deploy(09-22, EC2 Docker): 현재 이미지 기록 → 새 이미지 pull → 컨테이너 교체 → <code>/actuator/health</code>를 6초 간격 최대 20번 확인</td><td data-label="실패하면">직전 이미지로 재기동한 뒤 실패 처리</td><td data-label="근거"><a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/ansible/deploy.yml#L11-L46" target="_blank" rel="noopener">deploy.yml 11~46행</a></td></tr><tr><td data-label="순서">5b</td><td data-label="단계">Deploy(09-23부터, Kubernetes): <code>kubectl set image</code> → <code>rollout status --timeout=180s</code></td><td data-label="실패하면"><code>rollout undo</code> 실행 뒤 실패 처리</td><td data-label="근거"><a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/Jenkinsfile#L76-L88" target="_blank" rel="noopener">Jenkinsfile 76~88행</a>, <a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/ansible/k8s-deploy.yml#L1-L17" target="_blank" rel="noopener">k8s-deploy.yml</a></td></tr></tbody></table></div>
-<p>Docker Hub 토큰과 SSH 키는 Jenkins Credentials에서 주입했습니다. 실행 로그에는 <code>****</code>로 가려져 나옵니다.</p>
-</div>
-<div class="block"><h3>배포 대상(Kubernetes) 명세</h3>
-<div class="tbl-wrap"><table class="rt"><thead><tr><th scope="col">항목</th><th scope="col">값</th><th scope="col">근거</th></tr></thead><tbody><tr><td data-label="항목">Deployment</td><td data-label="값">replicas 2, RollingUpdate maxSurge 1·maxUnavailable 0</td><td data-label="근거"><a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/k8s/deployment.yaml#L6-L11" target="_blank" rel="noopener">deployment.yaml 6~11행</a></td></tr><tr><td data-label="항목">readinessProbe</td><td data-label="값"><code>/actuator/health/readiness</code>, 20초 뒤부터 5초 간격</td><td data-label="근거"><a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/k8s/deployment.yaml#L36-L41" target="_blank" rel="noopener">36~41행</a></td></tr><tr><td data-label="항목">livenessProbe</td><td data-label="값"><code>/actuator/health/liveness</code>, 60초 뒤부터 10초 간격</td><td data-label="근거"><a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/k8s/deployment.yaml#L42-L47" target="_blank" rel="noopener">42~47행</a></td></tr><tr><td data-label="항목">운영 설정</td><td data-label="값">Secret <code>yeongju-env</code>를 envFrom으로 주입</td><td data-label="근거"><a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/k8s/deployment.yaml#L27-L29" target="_blank" rel="noopener">27~29행</a></td></tr><tr><td data-label="항목">Service</td><td data-label="값">NodePort 30080 → port 80 → 컨테이너 8080</td><td data-label="근거"><a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/k8s/deployment.yaml#L54-L60" target="_blank" rel="noopener">54~60행</a></td></tr></tbody></table></div>
-<p>클러스터는 EC2 위에 kubeadm으로 구성했습니다. 노드 수와 인스턴스 사양을 보여 주는 화면은 없습니다. 매니페스트 파일은 시험 다음 날인 09-24에 저장소에 올렸습니다.</p>
-<figure class="fig"><div class="shot"><img src="assets/yeongju-b22-stages.png" width="1400" height="151" loading="lazy" alt="Jenkins 단계 화면: 2026년 9월 23일 빌드 #22, Checkout부터 Deploy까지 모든 단계 통과"></div><figcaption>Jenkins 단계 화면(09-23): #22에서 Test부터 Deploy까지 정상 실행</figcaption></figure>
-</div>
-<div class="block"><h3>헬스체크를 바꾼 이유</h3>
-<div class="tbl-wrap"><table class="rt nw"><thead><tr><th scope="col"></th><th scope="col">기존 <code>/v1/health</code></th><th scope="col">바꾼 <code>/actuator/health</code></th></tr></thead><tbody><tr><td data-label="">DB 연결이 끊겼을 때</td><td data-label="기존 /v1/health">항상 UP(하드코딩)</td><td data-label="바꾼 /actuator/health">DB 점검이 실패하면 DOWN, HTTP 503</td></tr><tr><td data-label="">배포 확인 단계의 판정</td><td data-label="기존 /v1/health">실패를 잡지 못함</td><td data-label="바꾼 /actuator/health">상태 코드로 실패를 잡음</td></tr></tbody></table></div>
-<p>기존 <code>/v1/health</code>는 DB가 살아 있든 죽어 있든 UP을 돌려줬습니다. Actuator는 DataSource가 있으면 DB 헬스 점검을 자동으로 등록합니다. 점검이 실패하면 전체 상태를 DOWN으로 바꾸고 HTTP 503을 반환합니다. 배포 확인 단계는 HTTP 상태 코드로 성공을 판단합니다. 그래서 DB 상태가 상태 코드에 반영되는 <code>/actuator/health</code>로 기준을 바꿨습니다.</p>
-<p>Kubernetes로 옮긴 뒤 readinessProbe는 <code>/actuator/health/readiness</code>를 봅니다. 이 앱의 <a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/src/main/resources/application.yml#L1-L55" target="_blank" rel="noopener">설정 파일</a>에는 readiness 그룹 지정이 없어 Spring Boot 기본 구성을 따릅니다. 기본 readiness 그룹에는 DB 점검이 들어가지 않습니다. 그래서 기동한 뒤 DB 연결이 끊기는 상황은 readinessProbe가 잡지 못할 수 있습니다. 반대로 DB 점검을 readiness에 넣으면 DB 장애 때 파드가 모두 함께 빠질 수 있습니다. 넣을지는 두 경우의 위험을 비교해 정해야 합니다.</p>
-</div>
-<div class="block"><h3>그 밖의 구성 판단</h3>
-<ul class="dots"><li>이미지 태그는 latest 대신 커밋 해시를 씁니다. 지금 떠 있는 이미지가 어느 커밋인지 바로 추적할 수 있습니다.</li><li>이미지는 Jenkins 서버에서 한 번만 빌드합니다. 앱 서버와 클러스터는 그 이미지를 받아 실행만 합니다.</li><li>CI 테스트는 H2와 더미 설정으로, 운영은 실제 DB와 환경변수로 나눴습니다. 그래서 운영 DB 설정 오류는 CI가 아니라 배포 확인 단계에서 잡혀야 했습니다(<a class="pref" href="#p6">P6</a>의 #7·#15).</li><li>EC2 Docker 단계에서는 Jenkins 서버와 앱 서버를 EC2 두 대로 나눴습니다. CI 서버에서 앱 서버로 들어오는 SSH는 IP 대신 CI 서버의 보안 그룹(ci-sg)을 출처로 허용했습니다. CI 서버 IP가 바뀌어도 규칙을 고칠 필요가 없습니다. 보안 그룹 참조는 사설 IP로 오는 트래픽에만 적용됩니다. Ansible도 인벤토리에 적은 사설 IP로 앱 서버에 접속합니다(<a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/ansible/inventory.ini#L1-L2" target="_blank" rel="noopener">inventory.ini 1~2행</a>).</li><li>운영 DB 접속 정보는 앱 서버의 env 파일(<code>/opt/yeongjulog/app.env</code>, 권한 600)에서 읽게 했습니다.</li></ul>
-</div>
-</article>
-<article class="wrap chapter" id="p6">
-<div class="ch-head"><p class="eyebrow">P6 / 영주로그 CI/CD ②</p><h2>실패 네 가지를 일부러 만들고 멈추는 지점을 확인했습니다</h2></div>
-<div class="block"><h3>실패 시험 비교</h3>
-<div class="tbl-wrap"><table class="rt nw"><thead><tr><th scope="col">빌드</th><th scope="col">대상</th><th scope="col">일부러 한 조작</th><th scope="col">결과</th><th scope="col">커밋</th></tr></thead><tbody><tr><td data-label="빌드">#3(09-22)</td><td data-label="대상">EC2 Docker</td><td data-label="일부러 한 조작">HealthCheckTest 기대값을 UP에서 DOWN으로</td><td data-label="결과">Test 실패. Build Jar·Docker 단계 건너뜀(Deploy 단계를 넣기 전)</td><td data-label="커밋"><a href="https://github.com/junhasuh/yeongjuLog-BE/commit/5eba31c3d52ae2efd1bc46f2f303efcd5eb7fea2" target="_blank" rel="noopener">5eba31c</a></td></tr><tr><td data-label="빌드">#7(09-22)</td><td data-label="대상">EC2 Docker</td><td data-label="일부러 한 조작">운영 DB 환경변수 참조를 <code>DB_URL</code>에서 <code>DB_URLV2</code>로(H2 테스트는 통과)</td><td data-label="결과">헬스체크 20번 모두 실패(마지막 기록: Connection failure) → 직전 이미지 cfe545d로 재기동, rescued=1, 빌드 실패</td><td data-label="커밋"><a href="https://github.com/junhasuh/yeongjuLog-BE/commit/e2b8601b454baed6989cd1915eb6cc3a38079312" target="_blank" rel="noopener">e2b8601</a></td></tr><tr><td data-label="빌드">#15(09-23)</td><td data-label="대상">Kubernetes</td><td data-label="일부러 한 조작">참조를 <code>DB_URL</code>에서 <code>DB_URL_V3</code>로(H2 테스트는 통과)</td><td data-label="결과">rollout status 180초 시간 초과 → rollout undo, rescued=1 → Jenkins FAILURE</td><td data-label="커밋"><a href="https://github.com/junhasuh/yeongjuLog-BE/commit/a38db57d82cae6031cf5b1f93ba178689251f3e7" target="_blank" rel="noopener">a38db57</a></td></tr><tr><td data-label="빌드">#23(09-23)</td><td data-label="대상">Kubernetes</td><td data-label="일부러 한 조작">Quality Gate에 '전체 커버리지 80% 이상' 조건</td><td data-label="결과">전체 15.4%로 Quality Gate 실패. Build Jar·Docker Build·Deploy 스킵(신규 코드는 100%, 측정 대상 1줄)</td><td data-label="커밋"><a href="https://github.com/junhasuh/yeongjuLog-BE/commit/d6d3f301010d46e83e8cb147a1804ff8accaf2ef" target="_blank" rel="noopener">d6d3f30</a></td></tr></tbody></table></div>
-<p>#7 뒤에는 #8에서 환경변수 참조를 원복한 802b991을 정상 배포했습니다.</p>
-<figure class="fig"><div class="shot"><img src="assets/yeongju-b3-stages.png" width="1400" height="150" loading="lazy" alt="Jenkins 단계 화면: 빌드 #3, Test 실패 뒤 Build Jar와 Docker Build 건너뜀"></div><figcaption>#3 단계 화면(09-22): Test 실패 뒤 Build Jar·Docker 단계 건너뜀</figcaption></figure>
-<figure class="fig"><div class="shot"><img src="assets/yeongju-b7-rollback-log.png" width="1400" height="607" loading="lazy" alt="Jenkins 빌드 #7 콘솔 로그: 헬스체크 20번 실패, 이전 버전 자동 롤백, PLAY RECAP rescued=1"></div><figcaption>#7 콘솔 로그 끝부분: 헬스체크 20번 실패(attempts 20), 직전 이미지 cfe545d로 롤백, rescued=1</figcaption></figure>
-<figure class="fig"><div class="shot"><img src="assets/jenkins-stages.png" width="1150" height="117" loading="lazy" alt="Jenkins 단계 화면: 빌드 #23, Test·SonarQube 통과, Quality Gate 실패, 이후 단계 스킵"></div><figcaption>#23 단계 화면: Test·SonarQube 통과, Quality Gate 실패, 이후 단계 스킵</figcaption></figure>
-</div>
-<div class="block"><h3>#15 실행 로그 발췌</h3>
-<figure class="fig"><pre class="log">TASK [롤아웃 완료 대기 (최대 3분)] ****
-<span class="fail">fatal: [cp1]: FAILED!</span> =&gt; {"changed": true, "cmd": ["kubectl", "rollout", "status", "deployment/yeongjulog", "--timeout=180s"], "delta": "0:03:00.059044", …
-"stderr": "error: timed out waiting for the condition", …
-"stdout": "Waiting for deployment \"yeongjulog\" rollout to finish: 1 out of 2 new replicas have been updated...", …}
+          <!-- Project 3 Row -->
+          <div class="rounded-xl border border-slate-200 bg-white p-4 transition hover:border-amber-300">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="rounded-md bg-amber-700 px-2 py-0.5 text-xs font-bold text-white">PROJECT 03</span>
+                <a href="#p7" class="text-base font-extrabold text-slate-900 hover:text-amber-700">
+                  aws-terraform-infra - Terraform 기반 AWS 네트워크·IAM 코드형 인프라 및 K8s 트러블슈팅
+                </a>
+              </div>
+              <span class="font-mono text-xs text-slate-500">2026.07 ~ 2026.10 · 개인 실습 및 트러블슈팅 기록 · P7</span>
+            </div>
+            <p class="mt-1.5 text-xs text-slate-600 sm:text-sm">
+              <strong>[맥락]</strong> AWS VPC 네트워크(Public/Private 서브넷, IGW, NAT GW)와 IAM 권한을 Terraform 코드로 프로비저닝하고, S3 원격 상태 저장소와 DynamoDB 잠금(Lock)을 적용한 IaC 프로젝트 및 CKA 클러스터 장애 복구 기록입니다.
+            </p>
+          </div>
+        </div>
+      </div>
 
-TASK [기동 실패 시 이전 버전으로 즉시 롤백] ****
-changed: [cp1]
+      <!-- Clean Tech Stack & Certifications Table (기술 스택 표 하단 배치) -->
+      <div class="mt-8 grid gap-6 lg:grid-cols-3">
+        <div class="lg:col-span-2">
+          <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500">기술 스택 (Technical Skills)</h2>
+          <div class="mt-2.5 overflow-x-auto rounded-xl border border-slate-200">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-100 text-slate-700">
+                <tr>
+                  <th class="w-32 px-3.5 py-2.5 font-bold">분류</th>
+                  <th class="px-3.5 py-2.5 font-bold">보유 기술 및 프로젝트 활용 내용</th>
+                  <th class="w-16 px-3 py-2.5 text-center font-bold">관련 쪽</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200 bg-white">
+                <tr>
+                  <td class="px-3.5 py-2.5 font-bold text-slate-900">CI/CD · 배포 자동화</td>
+                  <td class="px-3.5 py-2.5 text-slate-700">
+                    <span class="font-semibold text-slate-900">Jenkins, Ansible, SonarQube, cosign</span> — Git SHA 태깅, Quality Gate 차단, 블루그린 배포 및 <code>rollout undo</code> 자동 롤백 구현
+                  </td>
+                  <td class="px-3 py-2.5 text-center font-mono text-slate-500">P2~P6</td>
+                </tr>
+                <tr>
+                  <td class="px-3.5 py-2.5 font-bold text-slate-900">컨테이너 · K8s</td>
+                  <td class="px-3.5 py-2.5 text-slate-700">
+                    <span class="font-semibold text-slate-900">Kubernetes (CKA), Docker</span> — <code>kubeadm</code> 클러스터 구축, RollingUpdate, <code>readinessProbe</code>/<code>livenessProbe</code>, 컨트롤 플레인·스케줄링 장애 복구
+                  </td>
+                  <td class="px-3 py-2.5 text-center font-mono text-slate-500">P5~P7</td>
+                </tr>
+                <tr>
+                  <td class="px-3.5 py-2.5 font-bold text-slate-900">클라우드 · IaC</td>
+                  <td class="px-3.5 py-2.5 text-slate-700">
+                    <span class="font-semibold text-slate-900">AWS (SAA), GCP, Terraform</span> — AWS VPC·EC2·RDS·IAM 구성, S3+DynamoDB 상태 잠금, GCP Cloud Run·GCE·Secret Manager·Cloud SQL·Caddy 구성
+                  </td>
+                  <td class="px-3 py-2.5 text-center font-mono text-slate-500">P2~P7</td>
+                </tr>
+                <tr>
+                  <td class="px-3.5 py-2.5 font-bold text-slate-900">백엔드 · 스크립트</td>
+                  <td class="px-3.5 py-2.5 text-slate-700">
+                    <span class="font-semibold text-slate-900">TypeScript (NestJS, Vitest), Python, Java (Spring Boot), Bash, Linux</span> — 배포 오케스트레이터 구현, 단위·통합 회귀 테스트, 자동화 스크립트 작성
+                  </td>
+                  <td class="px-3 py-2.5 text-center font-mono text-slate-500">P2~P6</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-TASK [파이프라인 실패 처리] ****
-<span class="fail">fatal: [cp1]: FAILED!</span> =&gt; {"changed": false, "msg": "a38db57 rollout 실패 → 자동 undo 완료"}
+        <!-- Certifications & Activities -->
+        <div>
+          <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500">자격증 및 주요 이력</h2>
+          <div class="mt-2.5 rounded-xl border border-slate-200 bg-white p-4 text-xs">
+            <ul class="space-y-3">
+              <li class="flex items-start justify-between gap-2 border-b border-slate-100 pb-2.5">
+                <div>
+                  <p class="font-bold text-slate-900">CKA (Certified Kubernetes Administrator)</p>
+                  <p class="text-slate-500">The Linux Foundation · ID: <code>LF-u1g8a9nv9n</code></p>
+                </div>
+                <span class="shrink-0 rounded bg-blue-50 px-2 py-0.5 font-mono font-semibold text-blue-700">2026.08</span>
+              </li>
+              <li class="flex items-start justify-between gap-2 border-b border-slate-100 pb-2.5">
+                <div>
+                  <p class="font-bold text-slate-900">AWS Certified Solutions Architect – Associate</p>
+                  <p class="text-slate-500">Amazon Web Services (유효기간 ~2029.02)</p>
+                </div>
+                <span class="shrink-0 rounded bg-blue-50 px-2 py-0.5 font-mono font-semibold text-blue-700">2026.02</span>
+              </li>
+              <li class="flex items-start justify-between gap-2 border-b border-slate-100 pb-2.5">
+                <div>
+                  <p class="font-bold text-slate-900">중앙 IT 동아리 COMA 회장(25) · 총무(24)</p>
+                  <p class="text-slate-500">100명 규모 운영 매뉴얼 문서화 · 정기회의 참여 50% 증가</p>
+                </div>
+                <span class="shrink-0 font-mono text-slate-500">2024~26</span>
+              </li>
+              <li class="flex items-start justify-between gap-2">
+                <div>
+                  <p class="font-bold text-slate-900">구름톤 유니브 4기 대표 · OSSCA OpenStack</p>
+                  <p class="text-slate-500">시즌톤 본선 진출(LeafUp) · OpenStack-Helm 문서 분석</p>
+                </div>
+                <span class="shrink-0 font-mono text-slate-500">2025~26</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </article>
 
-PLAY RECAP ****
-cp1 : ok=3 changed=2 unreachable=0 <span class="fail">failed=1</span> skipped=0 rescued=1 ignored=0
-…
-ERROR: script returned exit code 2
-<span class="fail">Finished: FAILURE</span></pre><figcaption>실행 로그 발췌: 롤백 작업 실행과 최종 FAILURE. 중간 로그 일부 생략. 별표 구분선은 줄였습니다.</figcaption></figure>
-<p>#15에서 실패가 잡힌 것은 운영 파드가 DB 주소를 찾지 못해 앱이 뜨지 않았기 때문입니다. 로그에는 새 버전 파드가 2개 중 1개만 바뀐 상태에서 대기가 끝났다고 남았습니다.</p>
-<details class="more"><summary>#15 콘솔 로그 원본 화면 2장</summary><div class="shots-2"><img src="assets/yeongju-b15-log-1.png" width="1000" height="1073" loading="lazy" alt="Jenkins 빌드 #15 콘솔 로그: rollout status 180초 시간 초과, 이전 버전으로 즉시 롤백 changed"><img src="assets/yeongju-b15-log-2.png" width="1000" height="1120" loading="lazy" alt="Jenkins 빌드 #15 콘솔 로그: 파이프라인 실패 처리, PLAY RECAP rescued=1, Finished: FAILURE"></div></details>
-</div>
-<div class="block"><h3>롤백 뒤에도 실패로 남긴 이유</h3>
-<p>롤백을 실행해도 배포 자체는 실패입니다. rescue만 두면 롤백이 성공했을 때 빌드도 성공으로 끝납니다. 그러면 개발자가 빌드 결과만 보고는 새 버전이 배포됐는지, 이전 버전으로 돌아갔는지 구별하기 어렵습니다. 그래서 rescue 마지막에 fail을 두어 롤백 뒤에도 빌드가 FAILURE로 남게 했습니다. 실패 메시지에는 어느 커밋이 실패했는지 나옵니다(<a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/ansible/k8s-deploy.yml#L11-L17" target="_blank" rel="noopener">k8s-deploy.yml 11~17행</a>).</p>
-</div>
-<div class="block"><h3>막혔던 것</h3>
-<p><strong>빌드 #5는 성공으로 끝났지만 배포가 되지 않았습니다.</strong> 앱 서버 컨테이너는 2시간 전에 만든 그대로였습니다. #5의 단계 화면에는 Deploy 단계가 아예 없었습니다. <code>ansible/</code> 폴더 안에서 <code>git add .</code>를 실행해 상위 폴더의 Jenkinsfile 수정이 커밋에서 빠진 것이 원인이었습니다. 실제로 <a href="https://github.com/junhasuh/yeongjuLog-BE/commit/66845d628dba84511ded46d430de933d6bb8923d" target="_blank" rel="noopener">66845d6</a>에는 Ansible 파일만 있습니다. Deploy 단계는 다음 커밋 <a href="https://github.com/junhasuh/yeongjuLog-BE/commit/cfe545d57bcc519974bf1a5d223ad71048415612" target="_blank" rel="noopener">cfe545d</a>에서 들어갔습니다. 저장소 루트에서 다시 커밋하자 앱 서버 컨테이너가 cfe545d 이미지로 바뀌었습니다. 이 일 뒤로는 빌드 성공 표시와 함께 실행된 단계와 서버의 이미지 태그를 확인했습니다.</p>
-<figure class="fig"><div class="shot"><img src="assets/yeongju-b5-stages.png" width="1400" height="148" loading="lazy" alt="Jenkins 단계 화면: 빌드 #5 성공, 단계는 Docker Build까지만 있고 Deploy 단계 없음"></div><figcaption>#5 단계 화면(09-22): 성공으로 끝났지만 Deploy 단계가 없음</figcaption></figure>
-<figure class="fig"><div class="shot"><img src="assets/yeongju-dockerps-cfe545d.png" width="1600" height="135" loading="lazy" alt="앱 서버 docker ps: seojunhayo/yeonjulog:cfe545d 컨테이너가 12초 전 생성"></div><figcaption>수정 뒤 앱 서버 <code>docker ps</code>: yeonjulog:cfe545d, 12초 전 생성</figcaption></figure>
-<p><strong>env 파일 permission denied.</strong> 앱 서버에서 <code>docker run</code>이 env 파일을 읽지 못했습니다. sudo로 만든 파일이라 소유자가 root였습니다. 소유자를 ubuntu로 바꾸고 권한을 600으로 두었습니다.</p>
-<p><strong>SonarQube 분석 실패와 보안 이슈.</strong> #18에서 SonarQube 분석 단계가 실패했습니다. 프로젝트 키를 명시한 <a href="https://github.com/junhasuh/yeongjuLog-BE/commit/2405faddd0efdb0c60a21a9d71764d0255c7f474" target="_blank" rel="noopener">2405fad</a> 뒤 #19에서 분석이 통과했습니다. 첫 분석에서는 CORS 허용 출처 와일드카드(<code>allowedOriginPatterns("*")</code>)가 보안 이슈로 잡혔습니다. 허용 출처를 명시하자 Security가 C·1건에서 A·0건으로 바뀌었습니다(<a href="https://github.com/junhasuh/yeongjuLog-BE/commit/20de3cc63fb38975b8891f82dd3535b153f58cf5" target="_blank" rel="noopener">20de3cc</a>).</p>
-</div>
-<div class="block"><h3>확인하지 못한 것</h3>
-<ul class="dots"><li>undo 뒤 /actuator/health UP은 확인했지만, 모든 파드가 이전 이미지로 돌아왔는지는 따로 보지 않았습니다.</li><li>롤링 업데이트 중 0.5초 간격으로 요청을 보내 응답이 끊기는지 지켜봤습니다. 요청 로그를 남기지 않아 무중단 여부를 수치로 쓰지 않습니다(시험용 커밋 <a href="https://github.com/junhasuh/yeongjuLog-BE/commit/166c9aaf2706650afbf1cedb9d5e5824f337fd9c" target="_blank" rel="noopener">166c9aa</a>·<a href="https://github.com/junhasuh/yeongjuLog-BE/commit/31ac12b0c0db6633627d7c168e188001173974e8" target="_blank" rel="noopener">31ac12b</a>).</li><li>EC2 Docker 단계는 컨테이너를 통째로 바꿔서 배포 중 서비스가 잠시 끊깁니다. 중단 시간은 측정하지 않았습니다.</li><li><code>ddl-auto: update</code>를 써서 이전 이미지로 돌아가도 DB 스키마는 되돌아가지 않습니다.</li><li>readinessProbe가 DB 상태를 반영하지 않을 수 있습니다(<a class="pref" href="#p5">P5</a> 헬스체크 절).</li></ul>
-</div>
-</article>
-  </section>
+    <!-- =========================================================
+         PAGE 2: HIBISCUS (1/3) — 블루그린 배포 아키텍처 & 설계 이유
+    ========================================================== -->
+    <article id="p2" data-section="hibiscus" class="page-card border-l-4 border-l-indigo-600 p-6 sm:p-10">
+      <!-- Unified Project Identity Top Bar -->
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-indigo-100 pb-4">
+        <div class="flex items-center gap-2">
+          <span class="rounded-md bg-indigo-600 px-2.5 py-1 text-xs font-extrabold tracking-wide text-white">PROJECT 01 · HIBISCUS (1/3)</span>
+          <span class="text-xs font-semibold text-indigo-900">블루그린 배포 아키텍처 및 기술 선택 이유</span>
+        </div>
+        <span class="font-mono text-xs font-semibold text-slate-400">02 / 07 · HIBISCUS ARCHITECTURE</span>
+      </div>
 
-  <section class="project" id="foundation" aria-label="기반 역량">
-<article class="wrap chapter" id="p7">
-<div class="ch-head"><p class="eyebrow">P7 / 기반 역량</p><h2>실습 저장소와 CKA 기출에서 원인을 좁힌 과정</h2></div>
-<p>Terraform은 개인 실습 저장소이고, Kubernetes 장애 사례는 CKA 준비 중 기출 문제로 풀어본 것입니다. 실서비스를 운영한 경험이 아닙니다.</p>
-<div class="block"><h3>Terraform 실습 저장소 — AWS 네트워크·IAM(<a href="https://github.com/junhasuh/aws-terraform-infra" target="_blank" rel="noopener">aws-terraform-infra</a>)</h3>
-<div class="tbl-wrap"><table class="rt nw"><thead><tr><th scope="col">구성 요소</th><th scope="col">설정</th><th scope="col">근거</th></tr></thead><tbody><tr><td data-label="구성 요소">VPC</td><td data-label="설정">10.0.0.0/16</td><td data-label="근거"><a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/02-vpc/vpc.tf#L12-L18" target="_blank" rel="noopener">vpc.tf 12~18행</a></td></tr><tr><td data-label="구성 요소">퍼블릭 서브넷</td><td data-label="설정">10.0.0.0/24, ap-northeast-2a, 퍼블릭 IP 자동 할당</td><td data-label="근거"><a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/02-vpc/vpc.tf#L20-L31" target="_blank" rel="noopener">vpc.tf 20~31행</a></td></tr><tr><td data-label="구성 요소">프라이빗 서브넷</td><td data-label="설정">10.0.10.0/24, ap-northeast-2a</td><td data-label="근거"><a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/02-vpc/vpc.tf#L33-L39" target="_blank" rel="noopener">vpc.tf 33~39행</a></td></tr><tr><td data-label="구성 요소">인터넷 게이트웨이</td><td data-label="설정">VPC에 연결</td><td data-label="근거"><a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/02-vpc/vpc.tf#L41-L45" target="_blank" rel="noopener">vpc.tf 41~45행</a></td></tr><tr><td data-label="구성 요소">NAT 게이트웨이</td><td data-label="설정">퍼블릭 서브넷에 EIP와 함께</td><td data-label="근거"><a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/02-vpc/vpc.tf#L47-L64" target="_blank" rel="noopener">vpc.tf 47~64행</a></td></tr><tr><td data-label="구성 요소">퍼블릭 라우트 →</td><td data-label="설정">0.0.0.0/0 → 인터넷 게이트웨이</td><td data-label="근거"><a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/02-vpc/vpc.tf#L81-L85" target="_blank" rel="noopener">vpc.tf 81~85행</a></td></tr><tr><td data-label="구성 요소">프라이빗 라우트 →</td><td data-label="설정">0.0.0.0/0 → NAT 게이트웨이</td><td data-label="근거"><a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/02-vpc/vpc.tf#L93-L97" target="_blank" rel="noopener">vpc.tf 93~97행</a></td></tr></tbody></table></div>
-<ul class="dots"><li>퍼블릭과 프라이빗을 가르는 것은 서브넷 이름이 아니라 라우트 테이블이 0.0.0.0/0을 어디로 보내느냐입니다.</li><li>처음에는 IGW 경로만 있으면 인터넷에 연결될 줄 알았습니다. IPv4로 IGW를 거쳐 통신하려면 인스턴스에 퍼블릭 IP도 있어야 했습니다. 그래서 <code>map_public_ip_on_launch</code>를 켰습니다(<a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/README.md#L39" target="_blank" rel="noopener">README 39행</a>).</li><li>서브넷과 NAT 게이트웨이를 같은 AZ에 두었습니다. 프라이빗 서브넷의 트래픽이 다른 AZ의 NAT를 거치면 요금이 붙기 때문입니다(<a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/02-vpc/vpc.tf#L6-L10" target="_blank" rel="noopener">vpc.tf 6~10행</a>).</li><li>라우트는 인라인 <code>route {}</code> 대신 <code>aws_route</code> 리소스로 통일했습니다. 같은 라우트 테이블에 두 방식을 섞으면 관리 대상이 충돌할 수 있기 때문입니다(<a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/README.md#L40" target="_blank" rel="noopener">README 40행</a>).</li><li>EC2용 IAM 역할은 신뢰 정책(역할을 맡을 주체)과 권한 정책(허용할 작업)을 나눠 선언했습니다. 역할은 인스턴스 프로파일을 거쳐 EC2에 붙습니다(<a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/04-iam-role/iam_role_hello.tf#L1-L56" target="_blank" rel="noopener">iam_role_hello.tf</a>).</li><li>IAM·S3 실습의 상태 파일은 S3 원격 백엔드로 옮기고 DynamoDB 테이블로 잠금을 걸었습니다. VPC 디렉터리는 로컬 상태로 남아 있습니다.</li></ul>
-</div>
-<div class="block"><h3>원인을 좁힌 과정</h3>
-<div class="tbl-wrap"><table class="rt"><thead><tr><th scope="col">상황</th><th scope="col">처음 본 것</th><th scope="col">확인</th><th scope="col">원인</th><th scope="col">조치</th></tr></thead><tbody><tr><td data-label="상황">Terraform 실습: 상태를 새로 읽다가(Refreshing state) <code>iam:GetRole</code>에서 AccessDenied</td><td data-label="처음 본 것">직전에 <code>~/.aws/credentials</code>를 지웠는데 다른 AWS 명령은 계속 동작</td><td data-label="확인"><code>aws sts get-caller-identity</code> 결과가 IAM 사용자가 아니라 assumed-role. 환경변수에 남은 키 없음</td><td data-label="원인">자격 증명 파일이 사라지자 체인의 마지막인 인스턴스 메타데이터로 내려가, s3·dynamodb 권한만 있는 인스턴스 역할로 실행됨</td><td data-label="조치">콘솔에서 역할에 조회 권한을 붙인 뒤 같은 코드로 통과</td></tr><tr><td data-label="상황">Terraform 실습: 그룹 멤버십에서 NoSuchEntity 404</td><td data-label="처음 본 것">그 사용자를 만드는 리소스가 같은 코드에 있음. 처음엔 이름 오타를 의심했지만 일치</td><td data-label="확인"><code>terraform state list</code> → 사용자는 생성돼 있었음</td><td data-label="원인">멤버십에 변수 문자열 목록을 넣어 참조 관계가 없었음. 두 리소스가 병렬로 실행됨</td><td data-label="조치">사용자 리소스의 속성 참조로 바꿔 순서를 강제(<a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/03-iam/devops_group.tf#L5-L11" target="_blank" rel="noopener">devops_group.tf 5~11행</a>)</td></tr><tr><td data-label="상황">CKA 기출: API 서버가 응답하지 않음</td><td data-label="처음 본 것">문제 지문의 '이전 클러스터가 외부 etcd 서버를 사용했다'는 단서</td><td data-label="확인"><code>journalctl -u kubelet</code>으로 kubelet 로그 확인</td><td data-label="원인">kube-apiserver의 <code>--etcd-servers</code>가 etcd의 advertise-client-urls와 다른 IP를 가리킴</td><td data-label="조치">정적 파드 매니페스트를 고친 뒤 <code>kubectl get pod -A</code> 조회 복구</td></tr><tr><td data-label="상황">CKA 기출: 이어서 kube-scheduler 정지(UnexpectedAdmissionError)</td><td data-label="처음 본 것">etcd 주소를 고친 뒤에도 스케줄러만 뜨지 않음</td><td data-label="확인"><code>/etc/kubernetes/manifests</code>의 kube-scheduler 매니페스트 확인</td><td data-label="원인">정적 파드는 스케줄러를 거치지 않고 kubelet이 직접 받아들임. CPU 요청이 노드 할당량보다 커서 kubelet이 거부</td><td data-label="조치">매니페스트의 요청량을 낮추고 kubelet 재시작. <code>kubectl edit</code>가 아니라 매니페스트를 고침</td></tr><tr><td data-label="상황">CKA 기출: 파드가 Pending</td><td data-label="처음 본 것">새 파드가 Pending에 머묾</td><td data-label="확인"><code>kubectl describe node</code>의 Allocated resources</td><td data-label="원인">Allocatable에서 기존 Requests를 뺀 여유가 새 파드 요청보다 작음. 스케줄러는 실사용량이 아니라 선언된 요청량을 봄</td><td data-label="조치">요청량 재설정</td></tr><tr><td data-label="상황">강의 실습: SSH 원격 실행이 exit 125</td><td data-label="처음 본 것">종료 코드 125는 <code>docker run</code> 자체의 실패</td><td data-label="확인">대상 컨테이너 안에서 데몬 연결 실패. <code>dockerd</code> 직접 실행에서 <code>invalid cross-device link</code></td><td data-label="원인">컨테이너의 OverlayFS에서 런타임 폴더 이름 변경이 막혀 데몬이 뜨지 못함</td><td data-label="조치">런타임 폴더를 정리하고 데몬 기동</td></tr><tr><td data-label="상황">강의 실습: 빌드는 성공했는데 브라우저 접속 불가</td><td data-label="처음 본 것">안쪽 컨테이너에서는 <code>curl</code> 응답 정상</td><td data-label="확인">바깥 컨테이너를 만들 때 연 포트 확인</td><td data-label="원인">DinD 구조라 안쪽 컨테이너의 8000 포트가 호스트까지 열려 있지 않음</td><td data-label="조치">호스트 도커 소켓을 공유하는 DooD로 바꿈</td></tr></tbody></table></div>
-<p>근거: <a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/TROUBLESHOOTING.md#L7-L45" target="_blank" rel="noopener">TROUBLESHOOTING #1</a> · <a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/TROUBLESHOOTING.md#L48-L97" target="_blank" rel="noopener">#2</a>, CKA 기출 풀이 노트, <a href="https://policerjack.tistory.com/3" target="_blank" rel="noopener">강의 실습 기록</a>. AccessDenied 조치 뒤 통과한 실행 로그는 첨부하지 못했습니다.</p>
-</div>
-<div class="block"><h3>군 복무 — 공군 전산장비정비병</h3>
-<p>인터넷 접속 불량이 들어오면 먼저 사무실 네트워크 장비의 다른 포트로 회선을 옮겨 연결했습니다. 그래도 안 되면 서버실에서 해당 PC로 가는 랜 케이블이 살아 있는지 확인했습니다. 노후 랜 케이블은 T568B 배열로 직접 만들고 랜 테스터로 결선을 확인했습니다.</p>
-</div>
-<div class="block"><h3>연결과 남은 일</h3>
-<p>CKA를 딴 뒤(2026.08) 영주로그를 Kubernetes로 옮겼습니다. 이때 롤링 업데이트·readinessProbe·rollout undo를 직접 설정했습니다. 인스턴스 프로파일은 Terraform으로 만들어 봤지만, 영주로그 앱은 아직 S3 접근에 액세스 키를 환경변수로 받습니다. EC2 IAM 역할로 바꾸는 게 남은 일입니다. Terraform 저장소의 IAM 사용자 인라인 정책과 EC2 역할의 <code>s3:*</code>·<code>dynamodb:*</code> 권한도 아직 넓게 열려 있습니다. NAT 게이트웨이는 시간당 과금이라 상시 유지하지 않고 코드만 남겼습니다.</p>
-</div>
-</article>
-  </section>
-</main>
+      <!-- Clear Project Title & 3-Line Context Box -->
+      <div class="mt-5 rounded-2xl border border-indigo-200 bg-gradient-to-r from-indigo-50/80 via-white to-blue-50/50 p-5">
+        <div class="flex flex-wrap items-baseline justify-between gap-2">
+          <h2 class="text-xl font-extrabold text-slate-900 sm:text-2xl">
+            Hibiscus - 클라우드·온프레미스 블루그린 무중단 배포 및 DR 인프라
+          </h2>
+          <span class="font-mono text-xs font-semibold text-indigo-700">2026.09.28 ~ 10.04 · 소프트뱅크 해커톤 2026 (6인 팀)</span>
+        </div>
 
-<footer>
-  <div class="wrap">
-    <div>
-      <p class="f-name">서준하 · IT인프라(DevOps) 신입</p>
-      <p><a class="mono f-email" href="mailto:jungjunhayo@gmail.com">jungjunhayo@gmail.com</a></p>
-    </div>
-    <div class="f-links">
-      <a href="https://github.com/junhasuh" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://policerjack.tistory.com/" target="_blank" rel="noopener">기술 블로그</a>
-    </div>
-  </div>
-</footer>
+        <div class="mt-3 grid gap-2 text-xs text-slate-700 sm:grid-cols-3 sm:text-sm">
+          <div class="rounded-lg bg-white/90 p-3 shadow-sm border border-indigo-100">
+            <p class="text-[11px] font-bold uppercase text-indigo-600">어떤 프로젝트인가 (맥락)</p>
+            <p class="mt-1 text-xs leading-relaxed">클라우드(GCP Cloud Run)와 온프레미스 서버 두 곳에 컨테이너를 동시에 운영하며, 한쪽이 죽어도 반대편으로 즉시 우회(DR)되고 배포 실패 시 자동 롤백되는 하이브리드 무중단 배포 플랫폼입니다.</p>
+          </div>
+          <div class="rounded-lg bg-white/90 p-3 shadow-sm border border-indigo-100">
+            <p class="text-[11px] font-bold uppercase text-indigo-600">내 담당 역할 (DevOps / 배포 인프라)</p>
+            <p class="mt-1 text-xs leading-relaxed">하이브리드 블루그린 배포 구조 제안, <strong>배포·롤백 오케스트레이터 구현(Python v0 → NestJS 이식)</strong>, <code>cosign</code> 컨테이너 서명 검증, GCP 실행 인프라·보안 구성을 맡았습니다.</p>
+          </div>
+          <div class="rounded-lg bg-white/90 p-3 shadow-sm border border-indigo-100">
+            <p class="text-[11px] font-bold uppercase text-indigo-600">핵심 성과 (검증 결과)</p>
+            <p class="mt-1 text-xs leading-relaxed">트래픽 0% 사전 헬스 체크 후 순차 전환 구현 · 온프레미스 503 장애 주입 시험에서 <strong>34초 만에 Cloud Run 자동 복구 및 1초 간격 요청 109건 전부 HTTP 200 응답</strong>을 달성했습니다.</p>
+          </div>
+        </div>
 
-<script>
-(function(){
-  document.querySelectorAll('.copy').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      var el = document.getElementById(btn.getAttribute('data-target'));
-      if(!el) return;
-      var text = el.textContent.trim();
-      function selectIt(){
-        try{
-          var r = document.createRange(); r.selectNodeContents(el);
-          var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-          btn.textContent = '선택됨';
-        }catch(e){}
-        reset();
+        <!-- Tech Stack Badges -->
+        <div class="mt-3.5 flex flex-wrap items-center gap-1.5 pt-1">
+          <span class="text-[11px] font-bold text-slate-500 mr-1">기술 스택:</span>
+          <span class="rounded-md bg-slate-800 px-2 py-0.5 font-mono text-[11px] font-medium text-white">GCP Cloud Run</span>
+          <span class="rounded-md bg-slate-800 px-2 py-0.5 font-mono text-[11px] font-medium text-white">TypeScript · NestJS</span>
+          <span class="rounded-md bg-slate-800 px-2 py-0.5 font-mono text-[11px] font-medium text-white">Python · Bash</span>
+          <span class="rounded-md bg-slate-800 px-2 py-0.5 font-mono text-[11px] font-medium text-white">cosign (컨테이너 서명)</span>
+          <span class="rounded-md bg-slate-800 px-2 py-0.5 font-mono text-[11px] font-medium text-white">Docker · Artifact Registry</span>
+          <span class="rounded-md bg-slate-800 px-2 py-0.5 font-mono text-[11px] font-medium text-white">GCE · Caddy · Secret Manager</span>
+          <span class="rounded-md bg-slate-800 px-2 py-0.5 font-mono text-[11px] font-medium text-white">Vitest</span>
+        </div>
+      </div>
+
+      <!-- Visual Architecture Diagram (SVG with Numbered Badges ① ~ ④) -->
+      <div class="mt-6">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <h3 class="text-base font-bold text-slate-900">하이브리드 블루그린 배포 & 자동 롤백 아키텍처</h3>
+          <div class="no-print flex flex-wrap gap-1 text-[11px]">
+            <span class="text-slate-400 mr-1 self-center">단계 하이라이트:</span>
+            <button type="button" data-hib-step="all" class="hib-step-btn rounded bg-indigo-600 px-2 py-0.5 font-semibold text-white">전체</button>
+            <button type="button" data-hib-step="1" class="hib-step-btn rounded bg-slate-100 px-2 py-0.5 font-semibold text-slate-700 hover:bg-indigo-50">① 서명 검증</button>
+            <button type="button" data-hib-step="2" class="hib-step-btn rounded bg-slate-100 px-2 py-0.5 font-semibold text-slate-700 hover:bg-indigo-50">② 트래픽 0% 후보 검증</button>
+            <button type="button" data-hib-step="3" class="hib-step-btn rounded bg-slate-100 px-2 py-0.5 font-semibold text-slate-700 hover:bg-indigo-50">③ 순차 전환·자동 롤백</button>
+          </div>
+        </div>
+
+        <div class="mt-2.5 overflow-x-auto rounded-xl border border-slate-200 bg-slate-50/70 p-4">
+          <svg viewBox="0 0 920 320" class="w-full min-w-[720px] h-auto" role="img" aria-label="Hibiscus 하이브리드 블루그린 배포 아키텍처 다이어그램">
+            <defs>
+              <marker id="arrow-indigo" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#4f46e5" />
+              </marker>
+              <marker id="arrow-emerald" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669" />
+              </marker>
+              <marker id="arrow-rose" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#e11d48" />
+              </marker>
+            </defs>
+
+            <!-- Left: Team Pipeline & Artifact Registry -->
+            <rect x="15" y="25" width="185" height="125" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5" />
+            <text x="28" y="48" font-size="11" font-weight="700" fill="#475569">사전 검증 및 이미지 저장소</text>
+            <rect x="28" y="58" width="159" height="36" rx="6" fill="#f1f5f9" stroke="#cbd5e1" />
+            <text x="38" y="74" font-size="10.5" font-weight="600" fill="#334155">요청 재생 검사 · 정책 승인</text>
+            <text x="38" y="88" font-size="9.5" fill="#64748b">(팀원 구현 파트 → JSON 전달)</text>
+            <rect x="28" y="102" width="159" height="36" rx="6" fill="#eff6ff" stroke="#93c5fd" />
+            <text x="38" y="118" font-size="10.5" font-weight="700" fill="#1e40af">GCP Artifact Registry</text>
+            <text x="38" y="131" font-size="9.5" fill="#3b82f6">컨테이너 이미지 + cosign 서명</text>
+
+            <!-- User / Gateway Box (Bottom Left) -->
+            <rect x="15" y="175" width="185" height="120" rx="10" fill="#ffffff" stroke="#64748b" stroke-width="1.5" />
+            <text x="28" y="198" font-size="11" font-weight="700" fill="#0f172a">사용자 트래픽 진입점 (HTTPS)</text>
+            <rect x="28" y="208" width="159" height="40" rx="6" fill="#f8fafc" stroke="#cbd5e1" />
+            <text x="38" y="225" font-size="10.5" font-weight="700" fill="#0f172a">Caddy (443) + Gateway</text>
+            <text x="38" y="240" font-size="9.5" fill="#475569">대표 경로(Active Route) 라우팅</text>
+            <text x="28" y="268" font-size="9.5" font-weight="600" fill="#059669">• 평시: 온프레미스 우선 라우팅</text>
+            <text x="28" y="283" font-size="9.5" font-weight="600" fill="#4f46e5">• 장애 시: Cloud Run 자동 우회(DR)</text>
+
+            <!-- Center: My Scope (GCP VM - Deployment Orchestrator) -->
+            <rect x="240" y="15" width="305" height="285" rx="12" fill="#eef2ff" stroke="#4f46e5" stroke-width="2" />
+            <rect x="254" y="26" width="150" height="20" rx="4" fill="#4f46e5" />
+            <text x="262" y="40" font-size="10.5" font-weight="700" fill="#ffffff">본인 구현 범위 (GCP VM)</text>
+            <text x="412" y="40" font-size="10.5" font-weight="700" fill="#312e81">NestJS 배포 오케스트레이터</text>
+
+            <!-- Step 1 inside Center -->
+            <rect x="255" y="56" width="275" height="58" rx="8" fill="#ffffff" stroke="#6366f1" stroke-width="1.5" />
+            <circle cx="273" cy="75" r="10" fill="#4f46e5" />
+            <text x="269" y="79" font-size="11" font-weight="700" fill="#ffffff">1</text>
+            <text x="290" y="75" font-size="11.5" font-weight="700" fill="#1e1b4b">배포 전 cosign 이미지 서명·무결성 검증</text>
+            <text x="290" y="92" font-size="10" fill="#475569">Secret Manager 공개키로 digest · run_id · plan_hash 대조</text>
+            <text x="290" y="106" font-size="9.5" font-weight="600" fill="#e11d48">→ 미승인·변조 이미지면 컨테이너 생성 전 즉시 차단</text>
+
+            <!-- Step 2 inside Center -->
+            <rect x="255" y="124" width="275" height="68" rx="8" fill="#ffffff" stroke="#6366f1" stroke-width="1.5" />
+            <circle cx="273" cy="143" r="10" fill="#4f46e5" />
+            <text x="269" y="147" font-size="11" font-weight="700" fill="#ffffff">2</text>
+            <text x="290" y="143" font-size="11.5" font-weight="700" fill="#1e1b4b">양쪽 환경 블루그린 후보 배포 (트래픽 0%)</text>
+            <text x="290" y="160" font-size="10" fill="#475569">Cloud Run(cand 태그) · 온프레미스(Candidate) 동시 기동</text>
+            <text x="290" y="174" font-size="10" fill="#475569">실제 트래픽 유입 없이 /health 상태 검사 통과 여부 확인</text>
+            <text x="290" y="186" font-size="9.5" font-weight="600" fill="#e11d48">→ 한쪽이라도 실패 시 양쪽 후보 즉시 정리 후 기존 버전 유지(held)</text>
+
+            <!-- Step 3 inside Center -->
+            <rect x="255" y="202" width="275" height="84" rx="8" fill="#ffffff" stroke="#6366f1" stroke-width="1.5" />
+            <circle cx="273" cy="221" r="10" fill="#4f46e5" />
+            <text x="269" y="225" font-size="11" font-weight="700" fill="#ffffff">3</text>
+            <text x="290" y="221" font-size="11.5" font-weight="700" fill="#1e1b4b">순차 트래픽 전환 및 부분 실패 시 자동 롤백</text>
+            <text x="290" y="238" font-size="10" fill="#059669" font-weight="600">전환 순서: ① Cloud Run 전환 → ② 온프레미스 전환 → ③ 대표 경로</text>
+            <text x="290" y="254" font-size="10" fill="#475569">온프레미스(30초 기한)나 대표 경로 전환 실패 시,</text>
+            <text x="290" y="269" font-size="10" font-weight="700" fill="#e11d48">이미 바뀐 Cloud Run도 직전 Revision으로 즉시 롤백(rolled_back)</text>
+
+            <!-- Right Top: GCP Cloud Run (Blue/Green) -->
+            <rect x="595" y="20" width="310" height="130" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.8" />
+            <text x="610" y="42" font-size="11.5" font-weight="800" fill="#1d4ed8">환경 A · GCP Cloud Run (클라우드)</text>
+            <rect x="610" y="52" width="138" height="84" rx="7" fill="#eff6ff" stroke="#93c5fd" />
+            <text x="620" y="70" font-size="10.5" font-weight="700" fill="#1e40af">Blue (기존 Revision)</text>
+            <text x="620" y="86" font-size="9.5" fill="#334155">• 전환 전: 트래픽 100%</text>
+            <text x="620" y="101" font-size="9.5" fill="#e11d48" font-weight="600">• 롤백 시: 즉시 100% 복귀</text>
+            <rect x="756" y="52" width="138" height="84" rx="7" fill="#ecfdf5" stroke="#6ee7b7" />
+            <text x="766" y="70" font-size="10.5" font-weight="700" fill="#065f46">Green (신규 후보)</text>
+            <text x="766" y="86" font-size="9.5" fill="#334155">• 후보 단계: 트래픽 0%</text>
+            <text x="766" y="101" font-size="9.5" fill="#047857" font-weight="600">• cand 태그 /health 검증</text>
+            <text x="766" y="116" font-size="9.5" fill="#047857">• 통과 후 트래픽 100%</text>
+
+            <!-- Right Bottom: On-Premise Server (Blue/Green) -->
+            <rect x="595" y="170" width="310" height="130" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.8" />
+            <text x="610" y="192" font-size="11.5" font-weight="800" fill="#047857">환경 B · 온프레미스 서버 (SSH 리버스 터널 :2222)</text>
+            <rect x="610" y="202" width="138" height="84" rx="7" fill="#eff6ff" stroke="#93c5fd" />
+            <text x="620" y="220" font-size="10.5" font-weight="700" fill="#1e40af">Blue (기존 컨테이너)</text>
+            <text x="620" y="236" font-size="9.5" fill="#334155">• 운영 트래픽 처리 유지</text>
+            <text x="620" y="251" font-size="9.5" fill="#e11d48" font-weight="600">• 실패 시 기존 컨테이너 유지</text>
+            <rect x="756" y="202" width="138" height="84" rx="7" fill="#ecfdf5" stroke="#6ee7b7" />
+            <text x="766" y="220" font-size="10.5" font-weight="700" fill="#065f46">Green (신규 컨테이너)</text>
+            <text x="766" y="236" font-size="9.5" fill="#334155">• 격리 포트 기동·헬스 체크</text>
+            <text x="766" y="251" font-size="9.5" fill="#047857" font-weight="600">• 검증 통과 후 포트 전환</text>
+            <text x="766" y="266" font-size="9.5" fill="#64748b">• 전환 기한: 30초</text>
+
+            <!-- Arrows -->
+            <line x1="200" y1="85" x2="248" y2="85" stroke="#4f46e5" stroke-width="2" marker-end="url(#arrow-indigo)" />
+            <line x1="530" y1="150" x2="590" y2="95" stroke="#4f46e5" stroke-width="2" marker-end="url(#arrow-indigo)" />
+            <line x1="530" y1="168" x2="590" y2="230" stroke="#059669" stroke-width="2" marker-end="url(#arrow-emerald)" />
+            <line x1="255" y1="245" x2="205" y2="235" stroke="#e11d48" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arrow-rose)" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- Mapped Explanation Cards (① ~ ③) with Clear "Why" Decisions -->
+      <div class="mt-6 grid gap-4 md:grid-cols-3">
+        <!-- Card 1 -->
+        <div id="hib-card-1" class="rounded-xl border border-slate-200 bg-white p-4 transition">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-indigo-600 text-xs font-bold text-white">1</span>
+            <h4 class="text-sm font-bold text-slate-900">왜 배포 직전에 cosign 서명을 다시 검증했는가?</h4>
+          </div>
+          <ul class="mt-2.5 space-y-1.5 text-xs text-slate-600">
+            <li>• <strong>배경(Why):</strong> 이미지 태그만으로는 사전 검증(요청 재생·정책 승인)을 거친 이미지인지 보장할 수 없었습니다.</li>
+            <li>• <strong>구현(How):</strong> 배포 시작 전 <code>cosign verify</code>로 공개키 서명을 확인하고, 이미지 해시(digest)와 실행 ID(<code>run_id</code>), 정책 해시(<code>plan_hash</code>)가 일치할 때만 후보 컨테이너를 띄우도록 차단 관문을 두었습니다.</li>
+            <li class="pt-1">
+              <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/signature.verifier.ts#L27-L68" target="_blank" rel="noopener noreferrer" class="ext-link">서명 검증 코드(signature.verifier.ts) ↗</a>
+              <span class="mx-1 text-slate-300">|</span>
+              <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/18" target="_blank" rel="noopener noreferrer" class="ext-link">PR #18 ↗</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Card 2 -->
+        <div id="hib-card-2" class="rounded-xl border border-slate-200 bg-white p-4 transition">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-indigo-600 text-xs font-bold text-white">2</span>
+            <h4 class="text-sm font-bold text-slate-900">왜 Python 프로토타입을 NestJS 백엔드로 이식했는가?</h4>
+          </div>
+          <ul class="mt-2.5 space-y-1.5 text-xs text-slate-600">
+            <li>• <strong>배경(Why):</strong> 해커톤 초기 빠른 동작 검증을 위해 Python(<code>PR #9</code>)으로 배포 스크립트를 먼저 작성했으나, 팀의 메인 백엔드(NestJS)와 DB 상태·웹훅·에러 처리를 일원화해야 했습니다.</li>
+            <li>• <strong>구현(How):</strong> 배포 오케스트레이터를 NestJS 서비스(<code>PR #26</code>)로 재설계하여 온프레미스 Agent API 클라이언트와 Gateway 라우팅 전환을 한 트랜잭션 흐름으로 묶고, Vitest로 롤백 분기 단위·통합 테스트를 구축했습니다.</li>
+            <li class="pt-1">
+              <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/9" target="_blank" rel="noopener noreferrer" class="ext-link">Python v0 (PR #9) ↗</a>
+              <span class="mx-1 text-slate-300">|</span>
+              <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/26" target="_blank" rel="noopener noreferrer" class="ext-link">NestJS 통합 (PR #26) ↗</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Card 3 -->
+        <div id="hib-card-3" class="rounded-xl border border-slate-200 bg-white p-4 transition">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-indigo-600 text-xs font-bold text-white">3</span>
+            <h4 class="text-sm font-bold text-slate-900">왜 Cloud Run → 온프레미스 → 대표 경로 순으로 전환했는가?</h4>
+          </div>
+          <ul class="mt-2.5 space-y-1.5 text-xs text-slate-600">
+            <li>• <strong>배경(Why):</strong> 두 환경의 배포 완료 시점이 다를 때 한쪽만 구버전인 상태로 트래픽이 섞이거나, 중간 실패 시 복구가 꼬이는 문제를 막아야 했습니다.</li>
+            <li>• <strong>구현(How):</strong> 양쪽 모두 <strong>트래픽 0% 후보 상태</strong>에서 헬스 체크를 통과한 뒤에만 전환을 시작합니다. Revision 비율 조정만으로 즉시 복구 가능한 Cloud Run을 먼저 전환하고, 온프레미스 전환까지 성공한 뒤 마지막에 사용자 대표 경로(Gateway)를 바꿉니다.</li>
+            <li class="pt-1">
+              <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/eae12bd199f0d85945ece5fb0c3a2bdfabba8321/deploy/cloudrun/candidate.sh#L13-L29" target="_blank" rel="noopener noreferrer" class="ext-link">candidate.sh (0% 후보) ↗</a>
+              <span class="mx-1 text-slate-300">|</span>
+              <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/deploy.orchestrator.ts#L111-L227" target="_blank" rel="noopener noreferrer" class="ext-link">오케스트레이터 코드 ↗</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- =========================================================
+         PAGE 3: HIBISCUS (2/3) — 온프레미스 장애 주입(DR) 시험 & 코드 리뷰 개선
+    ========================================================== -->
+    <article id="p3" data-section="hibiscus" class="page-card border-l-4 border-l-indigo-600 p-6 sm:p-10">
+      <!-- Unified Project Identity Top Bar -->
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-indigo-100 pb-4">
+        <div class="flex items-center gap-2">
+          <span class="rounded-md bg-indigo-600 px-2.5 py-1 text-xs font-extrabold tracking-wide text-white">PROJECT 01 · HIBISCUS (2/3)</span>
+          <span class="text-xs font-semibold text-indigo-900">온프레미스 강제 장애(503) 주입 시험 및 롤백 결함 개선</span>
+        </div>
+        <span class="font-mono text-xs font-semibold text-slate-400">03 / 07 · HIBISCUS DR & ROLLBACK TEST</span>
+      </div>
+
+      <!-- Action Title -->
+      <div class="mt-5">
+        <h2 class="text-xl font-extrabold text-slate-900 sm:text-2xl">
+          온프레미스 전환 중 장애(503)를 강제로 주입해, Cloud Run 자동 롤백과 무중단(109건 전부 200)을 실증했습니다
+        </h2>
+        <p class="mt-1.5 text-xs text-slate-600 sm:text-sm">
+          해커톤의 핵심 평가 기준인 <strong>"배포 중 한쪽 환경에 장애가 발생했을 때 서비스 중단 없이 직전 버전으로 자동 복구(Rollback)되는가"</strong>를 검증하기 위해 실제 운영 환경(2026-10-03)에서 장애 주입 시험을 수행했습니다.
+        </p>
+      </div>
+
+      <!-- Visual Timeline SVG Diagram -->
+      <div class="mt-5 overflow-x-auto rounded-xl border border-indigo-200 bg-slate-900 p-5 text-white">
+        <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-700">
+          <span class="text-xs font-bold text-indigo-300">실환경 장애 주입 및 자동 롤백 관측 타임라인 (2026-10-03 14:01)</span>
+          <span class="rounded bg-emerald-500/20 px-2.5 py-0.5 font-mono text-xs font-bold text-emerald-300">공개 주소 1초 간격 요청 109건 → 109건 모두 HTTP 200 OK</span>
+        </div>
+
+        <svg viewBox="0 0 880 185" class="mt-3 w-full min-w-[680px] h-auto" role="img" aria-label="온프레미스 503 장애 주입 및 34초 자동 롤백 타임라인">
+          <!-- Timeline Base Line -->
+          <line x1="40" y1="85" x2="840" y2="85" stroke="#475569" stroke-width="3" />
+
+          <!-- Fault Injection Bar (47s) -->
+          <rect x="175" y="18" width="380" height="24" rx="5" fill="#be123c" />
+          <text x="200" y="34" font-size="10.5" font-weight="700" fill="#ffffff">⚡ 장애 주입: Caddy에서 온프레미스 Agent 폴링 API만 47초간 HTTP 503 차단</text>
+
+          <!-- Node 1 -->
+          <circle cx="80" cy="85" r="9" fill="#38bdf8" />
+          <text x="35" y="65" font-size="10.5" font-weight="700" fill="#bae6fd">후보 헬스 체크 통과</text>
+          <text x="35" y="112" font-size="9.5" fill="#cbd5e1">Cloud Run · 온프레미스</text>
+          <text x="35" y="126" font-size="9.5" fill="#cbd5e1">신규 후보(0%) 정상 확인</text>
+
+          <!-- Node 2 -->
+          <circle cx="250" cy="85" r="9" fill="#818cf8" />
+          <text x="205" y="65" font-size="11" font-weight="700" fill="#c7d2fe">14:01:22</text>
+          <text x="195" y="112" font-size="10" font-weight="700" fill="#ffffff">① Cloud Run 신규 전환</text>
+          <text x="195" y="126" font-size="9.5" fill="#cbd5e1">신규 Revision 트래픽 100%</text>
+          <text x="195" y="140" font-size="9.5" fill="#fca5a5">온프레미스 전환 요청 시작</text>
+
+          <!-- Node 3 -->
+          <circle cx="460" cy="85" r="9" fill="#f43f5e" />
+          <text x="405" y="65" font-size="10.5" font-weight="700" fill="#fda4af">전환 기한 30초 초과 감지</text>
+          <text x="395" y="112" font-size="10" font-weight="700" fill="#fda4af">② 온프레미스 전환 실패 판정</text>
+          <text x="395" y="126" font-size="9.5" fill="#cbd5e1">Agent가 503 재시도 중 타임아웃</text>
+          <text x="395" y="140" font-size="9.5" fill="#fde047">→ 즉시 자동 롤백 시퀀스 가동</text>
+
+          <!-- Node 4 -->
+          <circle cx="670" cy="85" r="9" fill="#10b981" />
+          <text x="630" y="65" font-size="11" font-weight="700" fill="#6ee7b7">14:01:56 (34초 후)</text>
+          <text x="600" y="112" font-size="10" font-weight="700" fill="#6ee7b7">③ Cloud Run 직전 버전 복귀 완료</text>
+          <text x="600" y="126" font-size="9.5" fill="#cbd5e1">이전 Revision 100% 복원 관측</text>
+          <text x="600" y="140" font-size="9.5" fill="#cbd5e1">온프레미스 후보 정리 · rolled_back</text>
+
+          <!-- Bottom Public Traffic Bar -->
+          <rect x="40" y="154" width="800" height="24" rx="5" fill="#064e3b" stroke="#10b981" stroke-width="1" />
+          <text x="160" y="170" font-size="10.5" font-weight="700" fill="#a7f3d0">✓ 사용자 대표 경로는 마지막 단계 전이라 기존 온프레미스 유지 → 시험 내내 1초 간격 요청 109건 무중단(HTTP 200)</text>
+        </svg>
+      </div>
+
+      <!-- Why 503 Blocked? (멘토링 피드백: 왜 하필 503만 차단했는지 이유를 구어체처럼 명확하게 설명) -->
+      <div class="mt-6 grid gap-4 md:grid-cols-2">
+        <div class="rounded-xl border border-slate-200 bg-white p-5">
+          <span class="rounded bg-indigo-100 px-2 py-0.5 text-xs font-bold text-indigo-800">시험 설계 이유 (Why 503?)</span>
+          <h3 class="mt-2 text-base font-bold text-slate-900">왜 장애 시험에서 온프레미스 Agent API만 503으로 차단했는가?</h3>
+          <p class="mt-2 text-xs text-slate-600 leading-relaxed">
+            이미 Cloud Run이 새 버전으로 넘어간 뒤 <strong>온프레미스 전환 단계에서 실패했을 때 Cloud Run까지 다시 이전 버전으로 롤백되는지</strong>를 시험해야 했습니다.
+          </p>
+          <ul class="mt-2.5 space-y-2 text-xs text-slate-700">
+            <li class="rounded-lg bg-slate-50 p-2.5">
+              <strong class="text-rose-600">• 앱 헬스 체크를 500으로 만들면 안 되는 이유:</strong> 전환 단계까지 가지도 않고 맨 앞의 '트래픽 0% 후보 검증 단계'에서 걸러져 배포가 보류(<code>held</code>)되므로 롤백 로직을 시험할 수 없습니다.
+            </li>
+            <li class="rounded-lg bg-slate-50 p-2.5">
+              <strong class="text-rose-600">• Agent API에 401/403을 주면 안 되는 이유:</strong> 인증 실패 코드를 받으면 온프레미스 Agent 프로세스가 스스로 종료되도록 구현되어 있었습니다(<a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/2a0d6298b594d7155aa97829830c4ef07f8107b1/onprem-agent/src/backend-client.ts#L97-L100" target="_blank" rel="noopener noreferrer" class="ext-link">Agent 코드 97~100행 ↗</a>).
+            </li>
+            <li class="rounded-lg bg-indigo-50/70 p-2.5 border border-indigo-100">
+              <strong class="text-indigo-900">• 해결(Agent API만 47초간 503 반환):</strong> 후보 검증이 끝난 직후 앞단 Caddy 리버스 프록시에서 Agent 폴링 API만 503으로 막아 Agent가 재시도하다가 <strong>전환 기한(30초)을 초과</strong>하게 만들었고, 그 즉시 Cloud Run이 이전 Revision으로 자동 복귀하는 것을 확인했습니다.
+            </li>
+          </ul>
+        </div>
+
+        <!-- PR #26 Code Review Defect Fix -->
+        <div class="flex flex-col justify-between rounded-xl border border-slate-200 bg-white p-5">
+          <div>
+            <span class="rounded bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-800">협업 및 코드 품질 개선 (PR #26)</span>
+            <h3 class="mt-2 text-base font-bold text-slate-900">대표 경로 전환 실패 시 롤백이 누락되던 상태 기록 순서 결함 수정</h3>
+            <p class="mt-2 text-xs text-slate-600 leading-relaxed">
+              Python 조율기를 NestJS로 이식(<a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/26" target="_blank" rel="noopener noreferrer" class="ext-link">PR #26 ↗</a>)할 당시, 팀원의 코드 리뷰(<a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/26#discussion_r4164102670" target="_blank" rel="noopener noreferrer" class="ext-link">리뷰 코멘트 ↗</a>)를 통해 마지막 단계의 예외 처리 결함을 발견하고 보완했습니다.
+            </p>
+            <div class="mt-3 space-y-2 text-xs">
+              <div class="rounded-lg border border-rose-200 bg-rose-50/50 p-2.5 text-slate-700">
+                <strong class="text-rose-700">[원인]</strong> Cloud Run과 온프레미스 전환 직후 배포 상태를 <code>activated</code>(성공)로 먼저 기록하고 그 뒤에 사용자 대표 경로(Gateway)를 변경해, 정작 대표 경로 전환이 실패해도 롤백이 호출되지 않았습니다.
+              </div>
+              <div class="rounded-lg border border-emerald-200 bg-emerald-50/50 p-2.5 text-slate-700">
+                <strong class="text-emerald-800">[해결 및 테스트 검증]</strong> 대표 경로 전환까지 마친 뒤에야 성공으로 기록하도록 순서를 바로잡고, 실패 시 양쪽 환경을 동시에 이전 버전으로 되돌린 뒤 <code>rolled_back</code>(복구 대상이 없으면 <code>error</code>)으로 기록하게 수정했습니다.
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-3 rounded-lg bg-slate-50 p-3 text-xs text-slate-700 border border-slate-200">
+            <p class="font-bold text-slate-900">작성한 자동화 회귀 테스트 (Vitest)</p>
+            <p class="mt-1 text-slate-600">① 양쪽 동시 롤백 및 <code>rolled_back</code> 기록 검증, ② 복구 컨테이너 부재 시 <code>error</code> 처리, ③ 롤백 중 하위 에러 발생 시 예외 처리까지 <strong>단위 테스트 3건·통합 테스트 1건</strong>을 추가해 승인·병합했습니다.</p>
+            <div class="mt-2 flex flex-wrap gap-3 text-[11px]">
+              <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/specs/deploy-orchestrator.spec.ts#L287-L350" target="_blank" rel="noopener noreferrer" class="ext-link">단위 테스트 (287~350행) ↗</a>
+              <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/test/deploy.e2e-spec.ts#L396-L436" target="_blank" rel="noopener noreferrer" class="ext-link">통합 테스트 (396~436행) ↗</a>
+              <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/26#pullrequestreview-5393827637" target="_blank" rel="noopener noreferrer" class="ext-link">리뷰 승인 ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- =========================================================
+         PAGE 4: HIBISCUS (3/3) — GCP 보안·인프라 구성 & 독립 트러블슈팅
+    ========================================================== -->
+    <article id="p4" data-section="hibiscus" class="page-card border-l-4 border-l-indigo-600 p-6 sm:p-10">
+      <!-- Unified Project Identity Top Bar -->
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-indigo-100 pb-4">
+        <div class="flex items-center gap-2">
+          <span class="rounded-md bg-indigo-600 px-2.5 py-1 text-xs font-extrabold tracking-wide text-white">PROJECT 01 · HIBISCUS (3/3)</span>
+          <span class="text-xs font-semibold text-indigo-900">GCP 실행 인프라·최소 권한 구성 및 배포 트러블슈팅</span>
+        </div>
+        <span class="font-mono text-xs font-semibold text-slate-400">04 / 07 · HIBISCUS GCP INFRA & TROUBLESHOOTING</span>
+      </div>
+
+      <div class="mt-5">
+        <h2 class="text-xl font-extrabold text-slate-900 sm:text-2xl">
+          외부 노출 포트를 최소화하고, 서명 키와 배포 권한을 리소스 단위로 분리한 GCP 인프라를 구축했습니다
+        </h2>
+      </div>
+
+      <!-- GCP Infrastructure Table -->
+      <div class="mt-4 overflow-x-auto rounded-xl border border-slate-200">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-indigo-50/70 text-indigo-950">
+            <tr>
+              <th class="w-36 px-4 py-2.5 font-bold">구분</th>
+              <th class="px-4 py-2.5 font-bold">구성 내용 및 보안 설정</th>
+              <th class="w-64 px-4 py-2.5 font-bold">설계 이유 및 트레이드오프</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200 bg-white">
+            <tr>
+              <td class="px-4 py-2.5 font-bold text-slate-900">Compute Engine & 방화벽</td>
+              <td class="px-4 py-2.5 text-slate-700">
+                <code>e2-standard-4</code> (Ubuntu 24.04, 고정 IP) · 외부 방화벽은 <code>80·443</code>(Caddy HTTPS)과 <code>2222</code>(온프레미스 Agent SSH 리버스 터널)만 개방하고, 백엔드 API(<code>8080</code>)는 <code>127.0.0.1</code> 내부 루프백으로 제한(<a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/2a0d6298b594d7155aa97829830c4ef07f8107b1/frontend/.env.example#L7-L8" target="_blank" rel="noopener noreferrer" class="ext-link">설정 근거 ↗</a>)
+              </td>
+              <td class="px-4 py-2.5 text-slate-600">상시 SSH 터널 유지 및 멀티 플랫폼 이미지 빌드를 위해 단일 VM 사용 (단일 장애점 한계는 인지)</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2.5 font-bold text-slate-900">IAM 최소 권한 분리</td>
+              <td class="px-4 py-2.5 text-slate-700">
+                백엔드 서비스 계정의 프로젝트 역할은 <code>Cloud Run Developer</code>와 <code>Logs Viewer</code> 2개만 부여. Artifact Registry 쓰기와 Cloud Run 실행 계정 권한은 <strong>해당 리소스 단위로만 제한</strong>(<a href="https://policerjack.tistory.com/5" target="_blank" rel="noopener noreferrer" class="ext-link">구축 회고 6절 권한 화면 ↗</a>)
+              </td>
+              <td class="px-4 py-2.5 text-slate-600">프로젝트 전체 Editor 권한 부여를 피하고 침해 시 영향 반경 최소화</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2.5 font-bold text-slate-900">Secret Manager 키 보호</td>
+              <td class="px-4 py-2.5 text-slate-700">
+                <code>cosign</code> 개인키·비밀번호·GitHub 웹훅 비밀값을 Secret Manager에 보관하고, 실행 시 메모리 기반 <code>/run</code> 하위 <code>0700</code> 폴더에만 마운트
+              </td>
+              <td class="px-4 py-2.5 text-slate-600">VM 디스크에 평문 개인키가 남지 않도록 차단 (<code>Secret Accessor</code>도 단일 계정에만 부여)</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-2.5 font-bold text-slate-900">Cloud SQL & Cloud NAT</td>
+              <td class="px-4 py-2.5 text-slate-700">
+                MySQL 공인 IP + TLS 암호화 필수 적용, 접근 허용 IP는 <strong>Cloud NAT 고정 출구 IP와 온프레미스 공인 IP 단 2개</strong>만 등록
+              </td>
+              <td class="px-4 py-2.5 text-slate-600">동적 IP 환경인 Cloud Run에서도 고정된 출구 IP로만 DB에 안전하게 접근하도록 통제</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Dedicated Troubleshooting Section (멘토링 피드백: 본문 중간에 섞여 있던 /healthz 404 등을 독립된 트러블슈팅 섹션으로 명확히 분리) -->
+      <div class="mt-7">
+        <div class="flex items-center justify-between">
+          <h3 class="text-base font-bold text-slate-900">Hibiscus 핵심 트러블슈팅 (Troubleshooting)</h3>
+          <span class="text-xs text-slate-500">데모 배포 총 17건 중 후보 단계에서 불량·오류 8건을 사전 차단해 운영 장애 0건 유지</span>
+        </div>
+
+        <div class="mt-3 grid gap-4 md:grid-cols-3">
+          <!-- TS 1: Cloud Run /healthz 404 -->
+          <div class="rounded-xl border border-slate-200 bg-slate-50/60 p-4">
+            <span class="inline-block rounded bg-rose-100 px-2 py-0.5 text-[11px] font-bold text-rose-800">Troubleshooting 01 · Cloud Run 예약 경로</span>
+            <h4 class="mt-2 text-sm font-bold text-slate-900">온프레미스에선 통과한 <code>/healthz</code>가 Cloud Run에서만 404를 반환한 문제</h4>
+            <ul class="mt-2 space-y-1.5 text-xs text-slate-600">
+              <li>• <strong>[상황]</strong> 동일한 컨테이너 이미지를 배포했는데 온프레미스 후보 검사는 통과하고 Cloud Run 후보에서만 <code>/healthz</code> 요청이 3회 연속 404로 실패했습니다.</li>
+              <li>• <strong>[원인]</strong> Cloud Run 프론트엔드 인프라가 <code>/healthz</code> 등 <code>z</code>로 끝나는 일부 시스템 경로를 내부 예약 경로로 가로채 컨테이너까지 요청이 전달되지 않는 제약이 있었습니다.</li>
+              <li>• <strong>[해결]</strong> 오케스트레이터가 즉시 양쪽 후보를 정리해 기존 버전을 보호(<code>held</code>)한 것을 확인한 뒤, 애플리케이션과 헬스 체크 경로를 <code>/health</code>로 변경해 해결했습니다.</li>
+            </ul>
+          </div>
+
+          <!-- TS 2: Docker 29 containerd snapshotter -->
+          <div class="rounded-xl border border-slate-200 bg-slate-50/60 p-4">
+            <span class="inline-block rounded bg-rose-100 px-2 py-0.5 text-[11px] font-bold text-rose-800">Troubleshooting 02 · 이미지 Digest 불일치</span>
+            <h4 class="mt-2 text-sm font-bold text-slate-900">Docker 29 환경에서 멀티 플랫폼 이미지 인덱스 Digest가 어긋나던 문제</h4>
+            <ul class="mt-2 space-y-1.5 text-xs text-slate-600">
+              <li>• <strong>[상황]</strong> <code>cosign</code>으로 서명한 이미지 digest와 배포 단계에서 조회한 레지스트리 digest가 일치하지 않아 서명 검증에서 거부되었습니다.</li>
+              <li>• <strong>[원인]</strong> GCP VM의 Docker 29 기본 <code>containerd</code> 스냅샷 저장소 설정이 멀티 아키텍처 인덱스 매니페스트를 다르게 처리해 발생한 문제였습니다.</li>
+              <li>• <strong>[해결]</strong> 스토리지 드라이버를 <code>overlay2</code>로 명시해 빌드·푸시 시점의 다이제스트 일관성을 확보했습니다.</li>
+            </ul>
+          </div>
+
+          <!-- TS 3: Cloud Run amd64 vs index digest tracking -->
+          <div class="rounded-xl border border-slate-200 bg-slate-50/60 p-4">
+            <span class="inline-block rounded bg-rose-100 px-2 py-0.5 text-[11px] font-bold text-rose-800">Troubleshooting 03 · 배포 버전 추적성</span>
+            <h4 class="mt-2 text-sm font-bold text-slate-900">Cloud Run 콘솔 표시 Digest(amd64)와 서명 Digest(index) 차이 해결</h4>
+            <ul class="mt-2 space-y-1.5 text-xs text-slate-600">
+              <li>• <strong>[상황]</strong> 멀티 아키텍처 이미지를 배포하면 Cloud Run은 실제 실행 아키텍처(<code>amd64</code>) digest를 표시해, 서명에 쓰인 상위 <code>index</code> digest와 대조하기 어려웠습니다.</li>
+              <li>• <strong>[해결]</strong> Revision 이름에 <code>digest 앞 12자 + 실행 ID 해시 6자</code>를 조합해 재시도 멱등성을 보장하고, <code>HIB_RUN_ID</code>·<code>HIB_DIGEST</code> 환경변수로 원본 인덱스 digest를 기록해 추적성을 확보했습니다(<a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/eae12bd199f0d85945ece5fb0c3a2bdfabba8321/deploy/cloudrun/candidate.sh#L1-L16" target="_blank" rel="noopener noreferrer" class="ext-link">candidate.sh 1~16행 ↗</a>).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- =========================================================
+         PAGE 5: 영주로그 CI/CD (1/2) — 파이프라인 아키텍처 & 무중단 배포 설계
+    ========================================================== -->
+    <article id="p5" data-section="yeongju" class="page-card border-l-4 border-l-emerald-600 p-6 sm:p-10">
+      <!-- Unified Project Identity Top Bar -->
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-emerald-100 pb-4">
+        <div class="flex items-center gap-2">
+          <span class="rounded-md bg-emerald-600 px-2.5 py-1 text-xs font-extrabold tracking-wide text-white">PROJECT 02 · 영주로그 CI/CD (1/2)</span>
+          <span class="text-xs font-semibold text-emerald-900">Jenkins · SonarQube · Ansible · Kubernetes 무중단 배포 파이프라인</span>
+        </div>
+        <span class="font-mono text-xs font-semibold text-slate-400">05 / 07 · YEONGJULOG K8S CI/CD</span>
+      </div>
+
+      <!-- Clear Project Title & 3-Line Context Box -->
+      <div class="mt-5 rounded-2xl border border-emerald-200 bg-gradient-to-r from-emerald-50/80 via-white to-teal-50/50 p-5">
+        <div class="flex flex-wrap items-baseline justify-between gap-2">
+          <h2 class="text-xl font-extrabold text-slate-900 sm:text-2xl">
+            영주로그 (YeongjuLog) - Jenkins·Ansible·K8s 무중단 CI/CD 및 자동 롤백 파이프라인
+          </h2>
+          <span class="font-mono text-xs font-semibold text-emerald-700">팀 배포 2026.03~06 (4인) · 개인 CI/CD 고도화 2026.09 (1인)</span>
+        </div>
+
+        <div class="mt-3 grid gap-2 text-xs text-slate-700 sm:grid-cols-3 sm:text-sm">
+          <div class="rounded-lg bg-white/90 p-3 shadow-sm border border-emerald-100">
+            <p class="text-[11px] font-bold uppercase text-emerald-700">어떤 프로젝트인가 (맥락)</p>
+            <p class="mt-1 text-xs leading-relaxed">영주시 공공데이터와 AI 페르소나를 결합한 관광 가이드 서비스(Spring Boot 3.2 · Java 17 · MySQL)의 백엔드 배포 인프라를 수동 배포에서 <strong>K8s 무중단 자동화 파이프라인</strong>으로 고도화한 프로젝트입니다.</p>
+          </div>
+          <div class="rounded-lg bg-white/90 p-3 shadow-sm border border-emerald-100">
+            <p class="text-[11px] font-bold uppercase text-emerald-700">내 담당 역할 (인프라 · CI/CD 전담)</p>
+            <p class="mt-1 text-xs leading-relaxed">팀 프로젝트 당시 AWS EC2·RDS 초기 배포를 담당했고, 종료 후 개인 저장소로 포크해 <strong>Jenkins · SonarQube · Ansible · Kubernetes(kubeadm)</strong> 파이프라인과 자동 롤백을 단독 구축했습니다.</p>
+          </div>
+          <div class="rounded-lg bg-white/90 p-3 shadow-sm border border-emerald-100">
+            <p class="text-[11px] font-bold uppercase text-emerald-700">핵심 성과 (검증 결과)</p>
+            <p class="mt-1 text-xs leading-relaxed">테스트·품질 미달 시 배포 사전 차단 · K8s 롤링 업데이트(<code>maxUnavailable: 0</code>) 무중단 전환 · <strong>DB 연결 불량 시 180초 감시 후 <code>rollout undo</code> 자동 롤백</strong>을 4가지 실패 시험으로 검증했습니다.</p>
+          </div>
+        </div>
+
+        <div class="mt-3.5 flex flex-wrap items-center gap-1.5 pt-1">
+          <span class="text-[11px] font-bold text-slate-500 mr-1">기술 스택:</span>
+          <span class="rounded-md bg-slate-800 px-2 py-0.5 font-mono text-[11px] font-medium text-white">Jenkins</span>
+          <span class="rounded-md bg-slate-800 px-2 py-0.5 font-mono text-[11px] font-medium text-white">Ansible</span>
+          <span class="rounded-md bg-slate-800 px-2 py-0.5 font-mono text-[11px] font-medium text-white">Kubernetes (kubeadm)</span>
+          <span class="rounded-md bg-slate-800 px-2 py-0.5 font-mono text-[11px] font-medium text-white">SonarQube · JaCoCo</span>
+          <span class="rounded-md bg-slate-800 px-2 py-0.5 font-mono text-[11px] font-medium text-white">Docker Hub</span>
+          <span class="rounded-md bg-slate-800 px-2 py-0.5 font-mono text-[11px] font-medium text-white">Spring Boot 3.2 · Actuator</span>
+          <span class="rounded-md bg-slate-800 px-2 py-0.5 font-mono text-[11px] font-medium text-white">AWS EC2 · RDS · H2</span>
+        </div>
+      </div>
+
+      <!-- Visual CI/CD Architecture Diagram with Mapped Numbers ①~④ (멘토링 피드백: 한 그림에 여러 경험을 번호로 매핑하고 아래에서 풀어주기) -->
+      <div class="mt-6">
+        <h3 class="text-base font-bold text-slate-900">파이프라인 아키텍처 및 단계별 경험 매핑 (①~④)</h3>
+        <div class="mt-2.5 overflow-x-auto rounded-xl border border-slate-200 bg-slate-50/70 p-4">
+          <svg viewBox="0 0 920 250" class="w-full min-w-[720px] h-auto" role="img" aria-label="영주로그 Jenkins Ansible Kubernetes CI/CD 아키텍처 다이어그램">
+            <defs>
+              <marker id="arrow-teal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669" />
+              </marker>
+            </defs>
+
+            <!-- Box 1: GitHub & Jenkins Test -->
+            <rect x="15" y="20" width="205" height="205" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.8" />
+            <circle cx="35" cy="42" r="11" fill="#059669" />
+            <text x="31" y="46" font-size="11" font-weight="700" fill="#ffffff">1</text>
+            <text x="52" y="46" font-size="11.5" font-weight="800" fill="#064e3b">CI 테스트 격리 (Jenkins)</text>
+            <rect x="28" y="60" width="179" height="44" rx="6" fill="#f8fafc" stroke="#cbd5e1" />
+            <text x="36" y="78" font-size="10" font-weight="700" fill="#334155">GitHub Poll SCM (2분 주기)</text>
+            <text x="36" y="94" font-size="9.5" fill="#64748b">커밋 해시 앞 7자 추출 (GIT_HASH)</text>
+            <rect x="28" y="114" width="179" height="55" rx="6" fill="#ecfdf5" stroke="#6ee7b7" />
+            <text x="36" y="132" font-size="10.5" font-weight="700" fill="#065f46">./gradlew clean test (H2)</text>
+            <text x="36" y="147" font-size="9.5" fill="#047857">운영 DB·실제 API 키 없이 인메모리 검증</text>
+            <text x="36" y="161" font-size="9.5" font-weight="700" fill="#e11d48">✗ 실패 시 빌드·배포 즉시 중단 (#3)</text>
+
+            <!-- Box 2: SonarQube Quality Gate -->
+            <rect x="245" y="20" width="205" height="205" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.8" />
+            <circle cx="265" cy="42" r="11" fill="#059669" />
+            <text x="261" y="46" font-size="11" font-weight="700" fill="#ffffff">2</text>
+            <text x="282" y="46" font-size="11.5" font-weight="800" fill="#064e3b">품질·보안 관문 (SonarQube)</text>
+            <rect x="258" y="60" width="179" height="48" rx="6" fill="#f8fafc" stroke="#cbd5e1" />
+            <text x="266" y="78" font-size="10" font-weight="700" fill="#334155">정적 분석 & JaCoCo 커버리지</text>
+            <text x="266" y="94" font-size="9.5" fill="#64748b">CORS 와일드카드 수정 → 보안 A등급</text>
+            <rect x="258" y="118" width="179" height="51" rx="6" fill="#ecfdf5" stroke="#6ee7b7" />
+            <text x="266" y="136" font-size="10.5" font-weight="700" fill="#065f46">waitForQualityGate</text>
+            <text x="266" y="151" font-size="9.5" fill="#047857">기준 미달 시 Docker 빌드 차단</text>
+            <text x="266" y="164" font-size="9.5" font-weight="700" fill="#e11d48">✗ 커버리지 미달 시 스킵 검증 (#23)</text>
+
+            <!-- Box 3: Single Image Build & Push -->
+            <rect x="475" y="20" width="185" height="205" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.8" />
+            <circle cx="495" cy="42" r="11" fill="#059669" />
+            <text x="491" y="46" font-size="11" font-weight="700" fill="#ffffff">3</text>
+            <text x="512" y="46" font-size="11.5" font-weight="800" fill="#064e3b">단일 이미지 빌드·태깅</text>
+            <rect x="488" y="60" width="159" height="109" rx="6" fill="#f8fafc" stroke="#cbd5e1" />
+            <text x="496" y="80" font-size="10" font-weight="700" fill="#0f172a">Docker Hub 레지스트리</text>
+            <text x="496" y="97" font-size="9.5" font-family="monospace" fill="#059669">yeonjulog:&lt;git-sha-7&gt;</text>
+            <text x="496" y="116" font-size="9.5" fill="#475569">• latest 태그 사용 배제</text>
+            <text x="496" y="132" font-size="9.5" fill="#475569">• CI 서버에서 1회만 빌드</text>
+            <text x="496" y="148" font-size="9.5" fill="#475569">• 어느 커밋이 운영 중인지</text>
+            <text x="496" y="161" font-size="9.5" fill="#475569">  즉시 역추적 및 롤백 가능</text>
+
+            <!-- Box 4: Ansible + Kubernetes Cluster -->
+            <rect x="685" y="20" width="220" height="205" rx="10" fill="#ffffff" stroke="#059669" stroke-width="2" />
+            <circle cx="705" cy="42" r="11" fill="#059669" />
+            <text x="701" y="46" font-size="11" font-weight="700" fill="#ffffff">4</text>
+            <text x="722" y="46" font-size="11.5" font-weight="800" fill="#064e3b">Ansible → K8s 무중단 배포</text>
+            <rect x="698" y="60" width="194" height="52" rx="6" fill="#ecfdf5" stroke="#6ee7b7" />
+            <text x="706" y="77" font-size="10" font-weight="700" fill="#065f46">RollingUpdate (replicas: 2)</text>
+            <text x="706" y="92" font-size="9.5" fill="#047857">maxSurge: 1, maxUnavailable: 0</text>
+            <text x="706" y="105" font-size="9.5" fill="#047857">readinessProbe(/actuator/health)</text>
+            <rect x="698" y="120" width="194" height="88" rx="6" fill="#fff1f2" stroke="#fda4af" />
+            <text x="706" y="138" font-size="10" font-weight="700" fill="#be123c">자동 롤백 (Ansible block/rescue)</text>
+            <text x="706" y="154" font-size="9.5" fill="#881337">• rollout status --timeout=180s 감시</text>
+            <text x="706" y="169" font-size="9.5" fill="#881337">• 기동 실패 시 rollout undo 즉시 실행</text>
+            <text x="706" y="184" font-size="9.5" font-weight="700" fill="#be123c">• 복구 후 fail 모듈로 빌드 FAILURE 처리</text>
+
+            <!-- Connectors -->
+            <line x1="220" y1="120" x2="240" y2="120" stroke="#059669" stroke-width="2" marker-end="url(#arrow-teal)" />
+            <line x1="450" y1="120" x2="470" y2="120" stroke="#059669" stroke-width="2" marker-end="url(#arrow-teal)" />
+            <line x1="660" y1="120" x2="680" y2="120" stroke="#059669" stroke-width="2" marker-end="url(#arrow-teal)" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- 4 Mapped Details Below Diagram -->
+      <div class="mt-5 grid gap-4 sm:grid-cols-2">
+        <div class="rounded-xl border border-slate-200 bg-white p-4">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-600 text-[11px] font-bold text-white">1</span>
+            <h4 class="text-sm font-bold text-slate-900">CI 테스트 환경(H2)과 운영 설정(K8s Secret) 완전 분리</h4>
+          </div>
+          <p class="mt-1.5 text-xs text-slate-600">
+            기존 저장소에는 설정 파일이 빠져 있고 실제 외부 API 키가 있어야만 테스트가 통과했습니다. CI 서버에 민감 정보를 두지 않기 위해 <code>src/test/resources/application.yml</code>에 H2 인메모리 DB와 더미 키를 구성해 빌드 시점 검증을 격리하고, 실제 운영 DB 정보는 K8s Secret(<code>yeongju-env</code>)으로만 주입했습니다(<a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/Jenkinsfile#L25-L36" target="_blank" rel="noopener noreferrer" class="ext-link">Jenkinsfile 25~36행 ↗</a>).
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-slate-200 bg-white p-4">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-600 text-[11px] font-bold text-white">2</span>
+            <h4 class="text-sm font-bold text-slate-900">하드코딩된 <code>/v1/health</code>를 Spring Boot Actuator로 교체한 이유</h4>
+          </div>
+          <p class="mt-1.5 text-xs text-slate-600">
+            기존의 <code>/v1/health</code> 컨트롤러는 DB가 끊겨도 무조건 <code>"UP"</code>을 반환해 장애 감지에 쓸 수 없었습니다. 실제 DB 연결 실패 시 <code>HTTP 503 DOWN</code>을 반환하는 <code>/actuator/health</code>로 헬스 체크를 교체하고, K8s <code>readinessProbe</code>와 <code>livenessProbe</code>에 연결했습니다(<a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/k8s/deployment.yaml#L36-L47" target="_blank" rel="noopener noreferrer" class="ext-link">deployment.yaml 36~47행 ↗</a>).
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-slate-200 bg-white p-4">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-600 text-[11px] font-bold text-white">3</span>
+            <h4 class="text-sm font-bold text-slate-900"><code>latest</code> 대신 Git Commit SHA 태깅 & 단일 빌드 원칙</h4>
+          </div>
+          <p class="mt-1.5 text-xs text-slate-600">
+            배포 서버마다 소스를 내려받아 빌드하면 아키텍처 불일치(Mac <code>arm64</code> vs EC2 <code>x86_64</code>)와 빌드 시간 낭비가 발생합니다. Jenkins에서 단 한 번 빌드해 <code>seojunhayo/yeonjulog:&lt;커밋해시7자&gt;</code>로 올리고, 운영 서버는 해당 이미지를 pull만 하도록 표준화했습니다(<a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/Jenkinsfile#L56-L75" target="_blank" rel="noopener noreferrer" class="ext-link">Jenkinsfile 56~75행 ↗</a>).
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-slate-200 bg-white p-4">
+          <div class="flex items-center gap-2">
+            <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-600 text-[11px] font-bold text-white">4</span>
+            <h4 class="text-sm font-bold text-slate-900">무중단 롤링 업데이트(<code>maxUnavailable: 0</code>) 및 180초 자동 롤백</h4>
+          </div>
+          <p class="mt-1.5 text-xs text-slate-600">
+            파드 2개를 운영하며 새 파드가 올라와 <code>readinessProbe</code>를 통과하기 전까지 기존 파드를 내리지 않도록 설정했습니다. 180초 안에 새 파드가 준비되지 않으면 Ansible <code>rescue</code> 블록이 <code>kubectl rollout undo</code>로 즉시 복구합니다(<a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/ansible/k8s-deploy.yml#L1-L17" target="_blank" rel="noopener noreferrer" class="ext-link">k8s-deploy.yml 1~17행 ↗</a>).
+          </p>
+        </div>
+      </div>
+
+      <!-- Normal Pipeline Execution Screenshot -->
+      <div class="mt-5 rounded-xl border border-slate-200 bg-slate-50 p-4">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+          <span class="text-xs font-bold text-slate-800">정상 파이프라인 완주 화면 (Jenkins Build #22 · 총 3분 27초 소요)</span>
+          <a href="https://policerjack.tistory.com/2" target="_blank" rel="noopener noreferrer" class="ext-link text-xs">구축 기록 전문 ↗</a>
+        </div>
+        <img src="https://junhasuh.github.io/assets/yeongju-b22-stages.png" alt="Jenkins 빌드 #22 정상 배포 완료 단계 화면" class="max-h-56 w-auto rounded-lg border border-slate-200 bg-white object-contain mx-auto" />
+      </div>
+    </article>
+
+    <!-- =========================================================
+         PAGE 6: 영주로그 CI/CD (2/2) — 4가지 실패 주입 시험 & 트러블슈팅
+    ========================================================== -->
+    <article id="p6" data-section="yeongju" class="page-card border-l-4 border-l-emerald-600 p-6 sm:p-10">
+      <!-- Unified Project Identity Top Bar -->
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-emerald-100 pb-4">
+        <div class="flex items-center gap-2">
+          <span class="rounded-md bg-emerald-600 px-2.5 py-1 text-xs font-extrabold tracking-wide text-white">PROJECT 02 · 영주로그 CI/CD (2/2)</span>
+          <span class="text-xs font-semibold text-emerald-900">4가지 실패 주입 시험 및 파이프라인 트러블슈팅</span>
+        </div>
+        <span class="font-mono text-xs font-semibold text-slate-400">06 / 07 · YEONGJULOG FAILURE TESTS</span>
+      </div>
+
+      <div class="mt-5">
+        <h2 class="text-xl font-extrabold text-slate-900 sm:text-2xl">
+          단위 테스트·품질 게이트·운영 DB 연결 장애까지 4가지 실패를 직접 주입해 차단과 롤백을 검증했습니다
+        </h2>
+        <p class="mt-1.5 text-xs text-slate-600 sm:text-sm">
+          정상 배포만 확인하는 데 그치지 않고, 각 관문이 의도한 대로 불량 코드를 막고 운영 장애 시 직전 버전으로 되돌리는지 커밋 단위로 재현했습니다.
+        </p>
+      </div>
+
+      <!-- 4 Failure Injection Table -->
+      <div class="mt-4 overflow-x-auto rounded-xl border border-slate-200">
+        <table class="w-full text-left text-xs">
+          <thead class="bg-emerald-50/70 text-emerald-950">
+            <tr>
+              <th class="w-28 px-3.5 py-2.5 font-bold">빌드 · 환경</th>
+              <th class="w-40 px-3.5 py-2.5 font-bold">검증 대상 관문</th>
+              <th class="px-3.5 py-2.5 font-bold">일부러 주입한 실패 조건</th>
+              <th class="px-3.5 py-2.5 font-bold">실제 관측 결과 및 복구 동작</th>
+              <th class="w-24 px-3 py-2.5 text-center font-bold">증거 커밋</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200 bg-white">
+            <tr>
+              <td class="px-3.5 py-2.5 font-mono font-bold text-slate-900">#3 (EC2)</td>
+              <td class="px-3.5 py-2.5 font-semibold text-slate-800">① 단위 테스트 관문</td>
+              <td class="px-3.5 py-2.5 text-slate-600"><code>HealthCheckTest</code> 기대값을 <code>UP → DOWN</code>으로 조작</td>
+              <td class="px-3.5 py-2.5 text-slate-700"><strong class="text-rose-600">Test 단계 즉시 중단</strong> · JAR 빌드·Docker 이미지 생성·배포 전체 스킵</td>
+              <td class="px-3 py-2.5 text-center font-mono">
+                <a href="https://github.com/junhasuh/yeongjuLog-BE/commit/5eba31c3d52ae2efd1bc46f2f303efcd5eb7fea2" target="_blank" rel="noopener noreferrer" class="ext-link">5eba31c ↗</a>
+              </td>
+            </tr>
+            <tr>
+              <td class="px-3.5 py-2.5 font-mono font-bold text-slate-900">#23 (K8s)</td>
+              <td class="px-3.5 py-2.5 font-semibold text-slate-800">② SonarQube 품질 게이트</td>
+              <td class="px-3.5 py-2.5 text-slate-600">Quality Gate 기준을 '전체 코드 커버리지 80% 이상'으로 상향</td>
+              <td class="px-3.5 py-2.5 text-slate-700">전체 커버리지 <code>15.4%</code> 판정으로 <strong class="text-rose-600">Quality Gate 실패</strong> → 후속 빌드·배포 전면 차단</td>
+              <td class="px-3 py-2.5 text-center font-mono">
+                <a href="https://github.com/junhasuh/yeongjuLog-BE/commit/d6d3f301010d46e83e8cb147a1804ff8accaf2ef" target="_blank" rel="noopener noreferrer" class="ext-link">d6d3f30 ↗</a>
+              </td>
+            </tr>
+            <tr>
+              <td class="px-3.5 py-2.5 font-mono font-bold text-slate-900">#7 (EC2)</td>
+              <td class="px-3.5 py-2.5 font-semibold text-slate-800">③ Docker 컨테이너 롤백</td>
+              <td class="px-3.5 py-2.5 text-slate-600">운영 <code>DB_URL</code>을 잘못된 변수명(<code>DB_URLV2</code>)으로 변경 (H2 테스트는 통과)</td>
+              <td class="px-3.5 py-2.5 text-slate-700"><code>/actuator/health</code> 6초 간격 20회 실패 → <strong class="text-emerald-700">직전 정상 이미지(<code>cfe545d</code>) 자동 재기동</strong></td>
+              <td class="px-3 py-2.5 text-center font-mono">
+                <a href="https://github.com/junhasuh/yeongjuLog-BE/commit/e2b8601b454baed6989cd1915eb6cc3a38079312" target="_blank" rel="noopener noreferrer" class="ext-link">e2b8601 ↗</a>
+              </td>
+            </tr>
+            <tr class="bg-emerald-50/30">
+              <td class="px-3.5 py-2.5 font-mono font-bold text-emerald-900">#15 (K8s)</td>
+              <td class="px-3.5 py-2.5 font-bold text-emerald-900">④ K8s 무중단 배포 & 자동 롤백</td>
+              <td class="px-3.5 py-2.5 text-slate-700">운영 DB 환경변수를 <code>DB_URL_V3</code>로 오기입 (CI 테스트 통과 후 운영 파드 기동 실패 유도)</td>
+              <td class="px-3.5 py-2.5 text-slate-800"><code>rollout status</code> 180초 타임아웃 → <strong class="text-emerald-700">Ansible <code>rescue</code>가 <code>rollout undo</code> 실행</strong>해 기존 파드 유지 후 Jenkins <code>FAILURE</code> 기록</td>
+              <td class="px-3 py-2.5 text-center font-mono">
+                <a href="https://github.com/junhasuh/yeongjuLog-BE/commit/a38db57d82cae6031cf5b1f93ba178689251f3e7" target="_blank" rel="noopener noreferrer" class="ext-link">a38db57 ↗</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Design Decision & Troubleshooting Grid -->
+      <div class="mt-6 grid gap-4 md:grid-cols-3">
+        <div class="rounded-xl border border-slate-200 bg-white p-4">
+          <span class="rounded bg-emerald-100 px-2 py-0.5 text-[11px] font-bold text-emerald-800">설계 판단 (Why fail after rescue?)</span>
+          <h3 class="mt-2 text-sm font-bold text-slate-900">롤백이 성공했는데도 왜 Jenkins 빌드를 FAILURE로 끝냈는가?</h3>
+          <p class="mt-1.5 text-xs text-slate-600 leading-relaxed">
+            Ansible에서 <code>rescue</code> 블록으로 <code>rollout undo</code>만 실행하고 끝내면, 복구 작업 자체가 성공했기 때문에 종료 코드가 <code>0</code>이 되어 <strong>Jenkins 빌드가 초록불(SUCCESS)로 표시되는 문제</strong>가 있었습니다. 개발자가 배포 실패 사실을 즉시 인지할 수 있도록 복구 직후 <code>fail</code> 모듈을 호출해 의도적으로 빌드를 <code>FAILURE</code>로 남겼습니다(<a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/ansible/k8s-deploy.yml#L11-L17" target="_blank" rel="noopener noreferrer" class="ext-link">k8s-deploy.yml 11~17행 ↗</a>).
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-slate-200 bg-white p-4">
+          <span class="rounded bg-rose-100 px-2 py-0.5 text-[11px] font-bold text-rose-800">Troubleshooting 01 · 보안 등급 개선</span>
+          <h3 class="mt-2 text-sm font-bold text-slate-900">SonarQube 보안 등급 C(1건) → CORS 허용 출처 명시로 A(0건) 달성</h3>
+          <p class="mt-1.5 text-xs text-slate-600 leading-relaxed">
+            첫 SonarQube 정적 분석에서 백엔드의 <code>allowedOriginPatterns("*")</code> 와일드카드 설정이 보안 취약점(Security Rating C)으로 검출되었습니다. 허용 출처 도메인을 명시적으로 제한하는 커밋(<a href="https://github.com/junhasuh/yeongjuLog-BE/commit/20de3cc63fb38975b8891f82dd3535b153f58cf5" target="_blank" rel="noopener noreferrer" class="ext-link">20de3cc ↗</a>)을 반영해 <strong>보안 등급을 A(취약점 0건)로 개선</strong>했습니다.
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-slate-200 bg-white p-4">
+          <span class="rounded bg-rose-100 px-2 py-0.5 text-[11px] font-bold text-rose-800">Troubleshooting 02 · Git 스테이징 범위</span>
+          <h3 class="mt-2 text-sm font-bold text-slate-900">빌드 #5 SUCCESS인데 Deploy 스테이지가 실행되지 않은 현상</h3>
+          <p class="mt-1.5 text-xs text-slate-600 leading-relaxed">
+            빌드 #5가 성공했는데도 컨테이너가 갱신되지 않았습니다. 확인 결과 하위 폴더(<code>ansible/</code>) 안에서 <code>git add .</code>를 실행해 상위 루트의 <code>Jenkinsfile</code> 수정분이 커밋(<a href="https://github.com/junhasuh/yeongjuLog-BE/commit/66845d628dba84511ded46d430de933d6bb8923d" target="_blank" rel="noopener noreferrer" class="ext-link">66845d6 ↗</a>)에서 누락된 것이 원인이었고, 루트 기준 재커밋(<a href="https://github.com/junhasuh/yeongjuLog-BE/commit/cfe545d57bcc519974bf1a5d223ad71048415612" target="_blank" rel="noopener noreferrer" class="ext-link">cfe545d ↗</a>)과 실행 이미지 해시 대조로 해결했습니다.
+          </p>
+        </div>
+      </div>
+
+      <!-- Evidence Screenshots & Expandable Console Logs -->
+      <div class="mt-5 grid gap-4 sm:grid-cols-2">
+        <div class="rounded-xl border border-slate-200 bg-slate-50 p-3.5">
+          <p class="text-xs font-bold text-slate-800 mb-2">증거 ① · SonarQube Quality Gate 미달 시 후속 단계 차단 화면 (#23)</p>
+          <img src="https://junhasuh.github.io/assets/jenkins-stages.png" alt="Quality Gate 실패 시 후속 단계 차단 화면" class="max-h-44 w-auto rounded border border-slate-200 bg-white object-contain mx-auto" />
+        </div>
+        <div class="rounded-xl border border-slate-200 bg-slate-50 p-3.5">
+          <p class="text-xs font-bold text-slate-800 mb-2">증거 ② · K8s 180초 타임아웃 후 rollout undo 실행 및 FAILURE 처리 (#15)</p>
+          <img src="https://junhasuh.github.io/assets/yeongju-b7-rollback-log.png" alt="Ansible 롤백 로그 화면" class="max-h-44 w-auto rounded border border-slate-200 bg-white object-contain mx-auto" />
+        </div>
+      </div>
+    </article>
+
+    <!-- =========================================================
+         PAGE 7: 기반 역량 — Terraform AWS IaC & K8s 장애 트러블슈팅
+    ========================================================== -->
+    <article id="p7" data-section="infra" class="page-card border-l-4 border-l-amber-600 p-6 sm:p-10">
+      <!-- Unified Project Identity Top Bar -->
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-amber-100 pb-4">
+        <div class="flex items-center gap-2">
+          <span class="rounded-md bg-amber-700 px-2.5 py-1 text-xs font-extrabold tracking-wide text-white">PROJECT 03 · TERRAFORM & K8S</span>
+          <span class="text-xs font-semibold text-amber-950">AWS 코드형 인프라(IaC) 설계 및 클러스터 원인 추적 트러블슈팅</span>
+        </div>
+        <span class="font-mono text-xs font-semibold text-slate-400">07 / 07 · TERRAFORM IaC & K8S TROUBLESHOOTING</span>
+      </div>
+
+      <!-- Clear Project Title & Context -->
+      <div class="mt-5 rounded-2xl border border-amber-200 bg-gradient-to-r from-amber-50/80 via-white to-slate-50 p-5">
+        <div class="flex flex-wrap items-baseline justify-between gap-2">
+          <h2 class="text-xl font-extrabold text-slate-900 sm:text-2xl">
+            aws-terraform-infra - Terraform 기반 AWS 네트워크·IAM 코드형 인프라 및 K8s 트러블슈팅
+          </h2>
+          <a href="https://github.com/junhasuh/aws-terraform-infra" target="_blank" rel="noopener noreferrer" class="ext-link font-mono text-xs">github.com/junhasuh/aws-terraform-infra ↗</a>
+        </div>
+        <p class="mt-2 text-xs text-slate-700 sm:text-sm">
+          콘솔 수동 설정으로 인한 이력 누락과 권한 과다 부여를 막기 위해 <strong>AWS VPC 네트워크·IAM 역할을 Terraform 코드로 모듈화</strong>하고, S3 원격 상태 저장소와 DynamoDB 상태 잠금(State Lock)을 적용했습니다. 장애를 마주했을 때는 추측으로 설정을 덮어쓰지 않고 <strong>① 실행 주체 → ② 설정 파일 → ③ 시스템 로그/자원 수치</strong> 순서로 원인을 좁혀 해결했습니다.
+        </p>
+      </div>
+
+      <!-- Visual Diagrams: Left = AWS VPC Terraform / Right = K8s Pod Pending Resource Troubleshooting (멘토링 피드백 반영: 표 대신 시각적 그림으로 상황 설명) -->
+      <div class="mt-6 grid gap-5 lg:grid-cols-2">
+        <!-- Diagram 1: Terraform AWS VPC & Remote State -->
+        <div class="rounded-xl border border-slate-200 bg-slate-50/70 p-4">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-sm font-bold text-slate-900">1. Terraform AWS 네트워크 & 원격 상태 아키텍처</h3>
+            <a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/02-vpc/vpc.tf#L6-L97" target="_blank" rel="noopener noreferrer" class="ext-link text-xs">vpc.tf 코드 ↗</a>
+          </div>
+          <svg viewBox="0 0 440 230" class="w-full h-auto rounded-lg bg-white border border-slate-200 p-2" role="img" aria-label="Terraform AWS VPC 아키텍처 다이어그램">
+            <!-- AWS VPC Box -->
+            <rect x="12" y="12" width="275" height="205" rx="8" fill="#f8fafc" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 2" />
+            <text x="22" y="30" font-size="10.5" font-weight="800" fill="#0f172a">AWS VPC (10.0.0.0/16) · ap-northeast-2a</text>
+
+            <!-- IGW -->
+            <rect x="22" y="40" width="255" height="28" rx="5" fill="#dbeafe" stroke="#60a5fa" />
+            <text x="80" y="58" font-size="10" font-weight="700" fill="#1e40af">Internet Gateway (0.0.0.0/0 라우팅)</text>
+
+            <!-- Public Subnet -->
+            <rect x="22" y="78" width="255" height="58" rx="6" fill="#ecfdf5" stroke="#34d399" />
+            <text x="32" y="95" font-size="10" font-weight="700" fill="#065f46">Public Subnet (10.0.0.0/24)</text>
+            <text x="32" y="110" font-size="9" fill="#047857">• map_public_ip_on_launch = true</text>
+            <text x="32" y="124" font-size="9" font-weight="600" fill="#065f46">• NAT Gateway (+ EIP) 배치</text>
+
+            <!-- Private Subnet -->
+            <rect x="22" y="146" width="255" height="60" rx="6" fill="#eff6ff" stroke="#93c5fd" />
+            <text x="32" y="163" font-size="10" font-weight="700" fill="#1e3a8a">Private Subnet (10.0.10.0/24)</text>
+            <text x="32" y="178" font-size="9" fill="#1e40af">• 외부 직접 접근 차단 (내부 워크로드 보호)</text>
+            <text x="32" y="192" font-size="9" fill="#1e40af">• 아웃바운드(0.0.0.0/0) → NAT GW 경유</text>
+
+            <!-- Right: Remote Backend & IAM -->
+            <rect x="298" y="12" width="130" height="98" rx="8" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5" />
+            <text x="308" y="30" font-size="10" font-weight="800" fill="#92400e">Terraform Backend</text>
+            <text x="308" y="48" font-size="9" font-weight="600" fill="#78350f">• S3 원격 상태 저장</text>
+            <text x="308" y="64" font-size="9" font-weight="600" fill="#78350f">• DynamoDB Lock</text>
+            <text x="308" y="80" font-size="8.5" fill="#92400e">동시 apply 충돌 방지</text>
+            <text x="308" y="94" font-size="8.5" fill="#92400e">및 상태 무결성 보장</text>
+
+            <rect x="298" y="120" width="130" height="97" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5" />
+            <text x="308" y="138" font-size="10" font-weight="800" fill="#1e293b">EC2 IAM Role 분리</text>
+            <text x="308" y="155" font-size="9" fill="#334155">• Role + Instance</text>
+            <text x="308" y="168" font-size="9" fill="#334155">  Profile 모듈화</text>
+            <text x="308" y="185" font-size="8.5" fill="#475569">• 리소스 속성 참조로</text>
+            <text x="308" y="198" font-size="8.5" fill="#475569">  생성 순서 보장</text>
+          </svg>
+        </div>
+
+        <!-- Diagram 2: K8s Pod Pending & Control Plane Troubleshooting -->
+        <div class="rounded-xl border border-slate-200 bg-slate-50/70 p-4">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-sm font-bold text-slate-900">2. K8s 파드 Pending(자원 한계 초과) 원인 분석 및 해결 구조</h3>
+            <span class="rounded bg-amber-100 px-2 py-0.5 text-[11px] font-bold text-amber-900">CKA & 클러스터 실습</span>
+          </div>
+          <svg viewBox="0 0 440 230" class="w-full h-auto rounded-lg bg-white border border-slate-200 p-2" role="img" aria-label="쿠버네티스 파드 Pending 리소스 할당량 초과 해결 다이어그램">
+            <!-- Node Allocatable Bar -->
+            <text x="16" y="26" font-size="10.5" font-weight="800" fill="#0f172a">문제 상황: 새로 배포한 파드가 노드에 배치되지 못하고 계속 Pending 상태로 멈춤</text>
+            <rect x="16" y="38" width="408" height="42" rx="6" fill="#f1f5f9" stroke="#94a3b8" />
+            <rect x="16" y="38" width="310" height="42" rx="6" fill="#cbd5e1" />
+            <text x="26" y="56" font-size="9.5" font-weight="700" fill="#1e293b">기존 파드들이 선점한 CPU 요청량 (Allocated resources)</text>
+            <text x="26" y="70" font-size="9" fill="#475569">kubectl describe node 로 확인한 현재 예약량</text>
+            <text x="334" y="56" font-size="9.5" font-weight="700" fill="#059669">남은 여유량</text>
+            <text x="334" y="70" font-size="8.5" fill="#047857">(Allocatable 잔여)</text>
+
+            <!-- Failing Request -->
+            <rect x="16" y="92" width="408" height="54" rx="6" fill="#fff1f2" stroke="#f43f5e" stroke-width="1.5" />
+            <text x="26" y="110" font-size="10" font-weight="700" fill="#be123c">✗ 원인: 신규 파드의 CPU 요청량(requests.cpu) &gt; 노드의 남은 수용 한계치</text>
+            <text x="26" y="125" font-size="9" fill="#881337">• 쿠버네티스 스케줄러는 실제 CPU 사용량이 아니라 매니페스트에 선언된 요청량(Requests) 합계를 기준으로 판단</text>
+            <text x="26" y="139" font-size="9" fill="#881337">• 노드가 받을 수 있는 잔여 한계치를 넘어서서 스케줄링 단계에서 거부(UnexpectedAdmissionError / Pending)</text>
+
+            <!-- Fixed Request -->
+            <rect x="16" y="156" width="408" height="60" rx="6" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5" />
+            <text x="26" y="174" font-size="10" font-weight="700" fill="#065f46">✓ 해결: 노드 가용 한계치(Allocatable - Allocated) 이하로 파드 Requests 수치 조정</text>
+            <text x="26" y="190" font-size="9" fill="#047857">• 매니페스트의 CPU 요청량을 노드 수용 범위 안으로 낮춘 뒤 kubelet 재시작 → 즉시 Running 전환 확인</text>
+            <text x="26" y="205" font-size="9" font-weight="600" fill="#065f46">• 교훈: 감으로 재설치하지 않고 describe node 수치와 로그부터 대조하는 트러블슈팅 기준 확립</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- 4 Concrete Root-Cause Troubleshooting Cases -->
+      <div class="mt-6">
+        <h3 class="text-base font-bold text-slate-900">실행 주체 · 설정 · 로그 대조로 해결한 4대 인프라 트러블슈팅</h3>
+        <div class="mt-3 grid gap-3.5 sm:grid-cols-2">
+          <!-- Case 1 -->
+          <div class="rounded-xl border border-slate-200 bg-white p-4">
+            <div class="flex items-center justify-between gap-2">
+              <span class="rounded bg-amber-100 px-2 py-0.5 text-[11px] font-bold text-amber-900">Terraform · AWS 자격 증명 체인</span>
+              <a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/TROUBLESHOOTING.md#L7-L45" target="_blank" rel="noopener noreferrer" class="ext-link text-xs">TROUBLESHOOTING #1 ↗</a>
+            </div>
+            <h4 class="mt-2 text-sm font-bold text-slate-900"><code>~/.aws/credentials</code> 삭제 후 <code>iam:GetRole</code>만 AccessDenied가 발생한 문제</h4>
+            <p class="mt-1.5 text-xs text-slate-600">
+              <strong>[단서 및 원인]</strong> 로컬 자격 증명 파일을 지웠는데도 S3·DynamoDB 명령은 계속 동작하고 <code>iam:GetRole</code>에서만 권한 오류가 났습니다. <code>aws sts get-caller-identity</code>로 현재 실행 주체를 조회한 결과, 자격 증명 체인의 마지막 단계인 <strong>EC2 인스턴스 메타데이터 역할(IMDS <code>assumed-role</code>)</strong>로 자동 전환되어 S3·DynamoDB 권한만 가진 상태로 실행되고 있음을 밝혀냈습니다.<br />
+              <strong>[조치]</strong> 전체 관리자 권한을 주는 대신 작업 서버의 인스턴스 역할에 필요한 IAM 조회 권한만 추가해 해결했습니다.
+            </p>
+          </div>
+
+          <!-- Case 2 -->
+          <div class="rounded-xl border border-slate-200 bg-white p-4">
+            <div class="flex items-center justify-between gap-2">
+              <span class="rounded bg-amber-100 px-2 py-0.5 text-[11px] font-bold text-amber-900">Terraform · 리소스 생성 순서(DAG)</span>
+              <a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/TROUBLESHOOTING.md#L48-L97" target="_blank" rel="noopener noreferrer" class="ext-link text-xs">TROUBLESHOOTING #2 ↗</a>
+            </div>
+            <h4 class="mt-2 text-sm font-bold text-slate-900">IAM 사용자 생성 전에 그룹 멤버십이 먼저 실행되어 <code>NoSuchEntity (404)</code> 발생</h4>
+            <p class="mt-1.5 text-xs text-slate-600">
+              <strong>[원인]</strong> <code>aws_iam_group_membership</code>에 사용자 이름을 단순 변수 문자열(<code>var.user_names</code>)로 넘기면, Terraform이 사용자 리소스와의 선후 의존 관계를 알지 못해 그룹 연결을 먼저 시도하다가 404 오류가 발생했습니다.<br />
+              <strong>[조치]</strong> 문자열 변수 대신 생성된 IAM 사용자 리소스의 속성(<code>aws_iam_user.this[*].name</code>)을 직접 참조하도록 수정해 암시적 의존성으로 생성 순서를 보장했습니다(<a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/03-iam/devops_group.tf#L5-L11" target="_blank" rel="noopener noreferrer" class="ext-link">devops_group.tf 5~11행 ↗</a>).
+            </p>
+          </div>
+
+          <!-- Case 3 -->
+          <div class="rounded-xl border border-slate-200 bg-white p-4">
+            <div class="flex items-center justify-between gap-2">
+              <span class="rounded bg-blue-100 px-2 py-0.5 text-[11px] font-bold text-blue-900">Kubernetes · 컨트롤 플레인 복구</span>
+              <span class="text-xs font-mono text-slate-400">CKA 실습</span>
+            </div>
+            <h4 class="mt-2 text-sm font-bold text-slate-900"><code>kubectl</code> 명령어가 먹통이 된 API 서버 무응답 장애 복구</h4>
+            <p class="mt-1.5 text-xs text-slate-600">
+              <strong>[단서 및 원인]</strong> API 서버가 죽어 <code>kubectl</code>을 쓸 수 없는 상황에서 <code>journalctl -u kubelet</code>으로 노드 데몬 로그를 먼저 추적했습니다. 그 결과 <code>kube-apiserver</code> 정적 파드 매니페스트의 <code>--etcd-servers</code> 주소가 실제 <code>etcd</code> 설정(<code>advertise-client-urls</code>)과 다른 IP를 가리켜 연결이 거부되고 있음을 확인했습니다.<br />
+              <strong>[조치]</strong> 정적 파드 매니페스트의 etcd IP를 실제 주소와 일치시켜 클러스터 제어를 즉시 복구했습니다.
+            </p>
+          </div>
+
+          <!-- Case 4 -->
+          <div class="rounded-xl border border-slate-200 bg-white p-4">
+            <div class="flex items-center justify-between gap-2">
+              <span class="rounded bg-blue-100 px-2 py-0.5 text-[11px] font-bold text-blue-900">Docker · Jenkins 컨테이너 네트워크</span>
+              <a href="https://policerjack.tistory.com/3" target="_blank" rel="noopener noreferrer" class="ext-link text-xs">실습 기록 ↗</a>
+            </div>
+            <h4 class="mt-2 text-sm font-bold text-slate-900">DinD(Docker-in-Docker) 환경에서 배포한 컨테이너 포트 접속 불가 해결</h4>
+            <p class="mt-1.5 text-xs text-slate-600">
+              <strong>[원인 및 조치]</strong> 컨테이너 내부의 독립 Docker 데몬(DinD)에서 앱 컨테이너를 띄우면 호스트 네트워크와 격리되어 외부 브라우저에서 접근할 수 없었습니다. 호스트의 <code>/var/run/docker.sock</code>을 공유하는 <strong>DooD(Docker-out-of-Docker)</strong> 구조로 전환해 호스트 레벨에서 컨테이너와 포트를 일관되게 관리하도록 개선했습니다. (공군 전산장비정비병 복무 시절에도 스위치 포트 → 서버실 패치 패널 → T568B 랜 케이블 직접 제작·결선 테스터 확인 순으로 계층별 원인을 좁혀 해결했습니다.)
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer inside Page 7 -->
+      <footer class="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-slate-200 pt-5 text-xs text-slate-500">
+        <div>
+          <span class="font-bold text-slate-800">서준하 (Junha Suh)</span> · Cloud / DevOps Engineer Portfolio · <a href="mailto:jungjunhayo@gmail.com" class="hover:underline">jungjunhayo@gmail.com</a>
+        </div>
+        <div class="flex items-center gap-4">
+          <a href="https://github.com/junhasuh" target="_blank" rel="noopener noreferrer" class="ext-link">GitHub (junhasuh) ↗</a>
+          <a href="https://policerjack.tistory.com/" target="_blank" rel="noopener noreferrer" class="ext-link">기술 블로그 (DevOps 항해일지) ↗</a>
+        </div>
+      </footer>
+    </article>
+
+  </main>
+
+  <script>
+    (function () {
+      var toast = document.getElementById('toast');
+      var toastMsg = document.getElementById('toast-msg');
+      var toastTimer = null;
+
+      function showToast(msg) {
+        if (!toast || !toastMsg) return;
+        toastMsg.textContent = msg;
+        toast.classList.remove('hidden');
+        toast.classList.add('flex');
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () {
+          toast.classList.add('hidden');
+          toast.classList.remove('flex');
+        }, 2600);
       }
-      function reset(){ setTimeout(function(){ btn.textContent = '복사'; }, 1600); }
-      if(navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(text).then(function(){ btn.textContent = '복사됨'; reset(); }, selectIt);
-      } else { selectIt(); }
-    });
-  });
-})();
-</script>
+
+      function copyText(text, successMessage) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () {
+            showToast(successMessage);
+          }).catch(function () {
+            fallbackCopy(text, successMessage);
+          });
+        } else {
+          fallbackCopy(text, successMessage);
+        }
+      }
+
+      function fallbackCopy(text, successMessage) {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand('copy');
+          showToast(successMessage);
+        } catch (e) {
+          showToast('복사에 실패했습니다.');
+        }
+        document.body.removeChild(ta);
+      }
+
+      // Copy Email
+      var btnCopyEmail = document.getElementById('btn-copy-email');
+      if (btnCopyEmail) {
+        btnCopyEmail.addEventListener('click', function () {
+          copyText('jungjunhayo@gmail.com', '이메일 주소(jungjunhayo@gmail.com)가 복사되었습니다.');
+        });
+      }
+
+      // Section Filter Navigation
+      var filterBtns = document.querySelectorAll('.nav-filter-btn');
+      var articles = document.querySelectorAll('article[data-section]');
+
+      filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var target = btn.getAttribute('data-filter');
+          filterBtns.forEach(function (b) {
+            b.classList.remove('bg-slate-900', 'text-white', 'ring-2', 'ring-slate-900');
+          });
+          btn.classList.add('ring-2', 'ring-slate-900');
+
+          articles.forEach(function (art) {
+            var sec = art.getAttribute('data-section');
+            if (target === 'all' || sec === target) {
+              art.classList.remove('hidden');
+            } else {
+              art.classList.add('hidden');
+            }
+          });
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      });
+
+      // Hibiscus Architecture Step Highlight
+      var hibBtns = document.querySelectorAll('.hib-step-btn');
+      var hibCards = [
+        document.getElementById('hib-card-1'),
+        document.getElementById('hib-card-2'),
+        document.getElementById('hib-card-3')
+      ];
+
+      hibBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var step = btn.getAttribute('data-hib-step');
+          hibBtns.forEach(function (b) {
+            b.classList.remove('bg-indigo-600', 'text-white');
+            b.classList.add('bg-slate-100', 'text-slate-700');
+          });
+          btn.classList.remove('bg-slate-100', 'text-slate-700');
+          btn.classList.add('bg-indigo-600', 'text-white');
+
+          hibCards.forEach(function (card, idx) {
+            if (!card) return;
+            card.classList.remove('step-active');
+            if (step !== 'all' && String(idx + 1) === step) {
+              card.classList.add('step-active');
+            }
+          });
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
