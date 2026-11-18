@@ -1013,10 +1013,9 @@
           <thead class="bg-emerald-50/70 text-emerald-950">
             <tr>
               <th class="w-28 px-3.5 py-2.5 font-bold">빌드 · 환경</th>
-              <th class="w-40 px-3.5 py-2.5 font-bold">검증 대상 관문</th>
+              <th class="w-44 px-3.5 py-2.5 font-bold">검증 대상 관문</th>
               <th class="px-3.5 py-2.5 font-bold">일부러 주입한 실패 조건</th>
               <th class="px-3.5 py-2.5 font-bold">실제 관측 결과 및 복구 동작</th>
-              <th class="w-24 px-3 py-2.5 text-center font-bold">증거 커밋</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-200 bg-white">
@@ -1025,36 +1024,24 @@
               <td class="px-3.5 py-2.5 font-semibold text-slate-800">① 단위 테스트 관문</td>
               <td class="px-3.5 py-2.5 text-slate-600"><code>HealthCheckTest</code> 기대값을 <code>UP → DOWN</code>으로 조작</td>
               <td class="px-3.5 py-2.5 text-slate-700"><strong class="text-rose-600">Test 단계 즉시 중단</strong> · JAR 빌드·Docker 이미지 생성·배포 전체 스킵</td>
-              <td class="px-3 py-2.5 text-center font-mono">
-                <a href="https://github.com/junhasuh/yeongjuLog-BE/commit/5eba31c3d52ae2efd1bc46f2f303efcd5eb7fea2" target="_blank" rel="noopener noreferrer" class="ext-link">5eba31c ↗</a>
-              </td>
             </tr>
             <tr>
               <td class="px-3.5 py-2.5 font-mono font-bold text-slate-900">#23 (K8s)</td>
               <td class="px-3.5 py-2.5 font-semibold text-slate-800">② SonarQube 품질 게이트</td>
               <td class="px-3.5 py-2.5 text-slate-600">Quality Gate 기준을 '전체 코드 커버리지 80% 이상'으로 상향</td>
               <td class="px-3.5 py-2.5 text-slate-700">전체 커버리지 <code>15.4%</code> 판정으로 <strong class="text-rose-600">Quality Gate 실패</strong> → 후속 빌드·배포 전면 차단</td>
-              <td class="px-3 py-2.5 text-center font-mono">
-                <a href="https://github.com/junhasuh/yeongjuLog-BE/commit/d6d3f301010d46e83e8cb147a1804ff8accaf2ef" target="_blank" rel="noopener noreferrer" class="ext-link">d6d3f30 ↗</a>
-              </td>
             </tr>
             <tr>
               <td class="px-3.5 py-2.5 font-mono font-bold text-slate-900">#7 (EC2)</td>
               <td class="px-3.5 py-2.5 font-semibold text-slate-800">③ Docker 컨테이너 롤백</td>
               <td class="px-3.5 py-2.5 text-slate-600">운영 <code>DB_URL</code>을 잘못된 변수명(<code>DB_URLV2</code>)으로 변경 (H2 테스트는 통과)</td>
               <td class="px-3.5 py-2.5 text-slate-700"><code>/actuator/health</code> 6초 간격 20회 실패 → <strong class="text-emerald-700">직전 정상 이미지(<code>cfe545d</code>) 자동 재기동</strong></td>
-              <td class="px-3 py-2.5 text-center font-mono">
-                <a href="https://github.com/junhasuh/yeongjuLog-BE/commit/e2b8601b454baed6989cd1915eb6cc3a38079312" target="_blank" rel="noopener noreferrer" class="ext-link">e2b8601 ↗</a>
-              </td>
             </tr>
             <tr class="bg-emerald-50/30">
               <td class="px-3.5 py-2.5 font-mono font-bold text-emerald-900">#15 (K8s)</td>
               <td class="px-3.5 py-2.5 font-bold text-emerald-900">④ K8s 무중단 배포 & 자동 롤백</td>
               <td class="px-3.5 py-2.5 text-slate-700">운영 DB 환경변수를 <code>DB_URL_V3</code>로 오기입 (CI 테스트 통과 후 운영 파드 기동 실패 유도)</td>
               <td class="px-3.5 py-2.5 text-slate-800"><code>rollout status</code> 180초 타임아웃 → <strong class="text-emerald-700">Ansible <code>rescue</code>가 <code>rollout undo</code> 실행</strong>해 기존 파드 유지 후 Jenkins <code>FAILURE</code> 기록</td>
-              <td class="px-3 py-2.5 text-center font-mono">
-                <a href="https://github.com/junhasuh/yeongjuLog-BE/commit/a38db57d82cae6031cf5b1f93ba178689251f3e7" target="_blank" rel="noopener noreferrer" class="ext-link">a38db57 ↗</a>
-              </td>
             </tr>
           </tbody>
         </table>
