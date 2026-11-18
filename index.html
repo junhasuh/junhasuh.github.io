@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>서준하 | Cloud · DevOps Engineer 포트폴리오</title>
+  <title>서준하 | Cloud · DevOps Engineer Portfolio</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,6 +15,7 @@
       background-color: #f8fafc;
       line-height: 1.6;
       word-break: keep-all;
+      overflow-wrap: break-word;
     }
     code, pre, .font-mono {
       font-family: 'JetBrains Mono', monospace;
@@ -43,7 +44,7 @@
       text-decoration-color: #2563eb;
     }
     .step-active {
-      ring: 2px solid #2563eb;
+      outline: 2px solid #2563eb;
       background-color: #eff6ff !important;
       border-color: #3b82f6 !important;
     }
@@ -83,18 +84,17 @@
         <a href="#p1" class="flex items-center gap-2 text-base font-extrabold tracking-tight text-slate-900">
           <span class="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-slate-900 text-xs font-bold text-white">서</span>
           <span>서준하</span>
-          <span class="hidden rounded-md bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600 sm:inline-block">Cloud · DevOps 신입</span>
+          <span class="hidden rounded-md bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600 sm:inline-block">Cloud · DevOps Engineer</span>
         </a>
       </div>
 
       <!-- Filter / Jump Nav -->
       <nav class="flex flex-wrap items-center gap-1.5 text-xs font-semibold sm:text-sm" aria-label="섹션 내비게이션">
-        <button type="button" data-filter="all" class="nav-filter-btn rounded-lg bg-slate-900 px-2.5 py-1.5 text-white transition">전체 (P1~P7)</button>
-        <button type="button" data-filter="hibiscus" class="nav-filter-btn rounded-lg bg-indigo-50 px-2.5 py-1.5 text-indigo-700 hover:bg-indigo-100 transition">Hibiscus · 블루그린 배포</button>
+        <button type="button" data-filter="all" class="nav-filter-btn rounded-lg bg-slate-900 px-2.5 py-1.5 text-white transition">All (P1~P7)</button>
+        <button type="button" data-filter="hibiscus" class="nav-filter-btn rounded-lg bg-indigo-50 px-2.5 py-1.5 text-indigo-700 hover:bg-indigo-100 transition">Hibiscus · Blue/Green 배포</button>
         <button type="button" data-filter="yeongju" class="nav-filter-btn rounded-lg bg-emerald-50 px-2.5 py-1.5 text-emerald-700 hover:bg-emerald-100 transition">영주로그 · K8s CI/CD</button>
-        <button type="button" data-filter="infra" class="nav-filter-btn rounded-lg bg-amber-50 px-2.5 py-1.5 text-amber-800 hover:bg-amber-100 transition">Terraform · K8s 복구</button>
+        <button type="button" data-filter="infra" class="nav-filter-btn rounded-lg bg-amber-50 px-2.5 py-1.5 text-amber-800 hover:bg-amber-100 transition">Terraform · K8s Troubleshooting</button>
       </nav>
-
     </div>
   </header>
 
@@ -102,10 +102,9 @@
   <main class="mx-auto max-w-5xl px-4 py-6 sm:px-6 sm:py-8">
 
     <!-- =========================================================
-         PAGE 1: 핵심 요약 & 대표 프로젝트 한눈에 보기
+         PAGE 1: OVERVIEW
     ========================================================== -->
     <article id="p1" data-section="summary" class="page-card border-t-4 border-t-slate-900 p-6 sm:p-10">
-      <!-- Page Top Meta -->
       <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-4 text-xs text-slate-500">
         <span class="font-semibold text-slate-700">서준하 · Cloud / DevOps Engineer Portfolio</span>
         <span class="font-mono font-semibold text-slate-500">01 / 07 · OVERVIEW</span>
@@ -115,20 +114,20 @@
       <div class="mt-6 flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
         <div>
           <div class="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
-            <span>IT 인프라 · DevOps · Cloud Engineer (신입)</span>
+            <span>Cloud · DevOps Engineer</span>
             <span class="text-slate-300">|</span>
-            <span>AWS SAA · CKA 보유</span>
+            <span>AWS SAA · CKA</span>
           </div>
           <h1 class="mt-3 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
-            배포 실패가 사용자 장애로 번지지 않도록,<br class="hidden sm:inline" />
-            <span class="text-blue-600">사전 검증 관문과 자동 롤백 인프라</span>를 구축하는 엔지니어 서준하입니다.
+            배포 실패가 서비스 장애로 번지지 않도록,<br class="hidden sm:inline" />
+            <span class="text-blue-600">사전 검증 관문과 자동 Rollback 인프라</span>를 구축하는 엔지니어 서준하입니다.
           </h1>
           <p class="mt-3 max-w-3xl text-sm text-slate-600 sm:text-base">
-            클라우드(GCP·AWS)와 온프레미스, 쿠버네티스 환경에서 <strong>신규 버전을 트래픽 0% 상태로 먼저 검증(Blue/Green)</strong>하고, 전환 중 장애가 발생하면 <strong>이전 버전으로 자동 복구(Rollback·DR)</strong>되는 배포 시스템을 직접 구현하고 장애 주입 시험으로 검증했습니다.
+            GCP·AWS·On-Premise·Kubernetes 환경에서 신규 버전을 트래픽 0% 상태로 사전 검증하는 <strong>Blue/Green 배포</strong>를 구현하고, 전환 중 장애 발생 시 직전 버전으로 복구되는 <strong>자동 Rollback 및 DR</strong> 체계를 Fault Injection 테스트로 검증했습니다.
           </p>
         </div>
 
-        <!-- Contact & Quick Links Box -->
+        <!-- Contact Box -->
         <div class="flex shrink-0 flex-col gap-2 rounded-xl border border-slate-200 bg-slate-50 p-4 text-xs sm:min-w-[250px]">
           <div class="flex items-center justify-between gap-2">
             <span class="font-semibold text-slate-500">EMAIL</span>
@@ -139,11 +138,11 @@
           </div>
           <div class="flex items-center justify-between gap-2">
             <span class="font-semibold text-slate-500">GITHUB</span>
-            <a href="https://github.com/junhasuh" target="_blank" rel="noopener noreferrer" class="ext-link font-mono">github.com/junhasuh ↗</a>
+            <a href="https://github.com/junhasuh" target="_blank" rel="noopener noreferrer" class="ext-link font-mono">github.com/junhasuh</a>
           </div>
           <div class="flex items-center justify-between gap-2">
             <span class="font-semibold text-slate-500">TECH BLOG</span>
-            <a href="https://policerjack.tistory.com/" target="_blank" rel="noopener noreferrer" class="ext-link">DevOps 항해일지 (Tistory) ↗</a>
+            <a href="https://policerjack.tistory.com/" target="_blank" rel="noopener noreferrer" class="ext-link">policerjack.tistory.com</a>
           </div>
           <div class="flex items-center justify-between gap-2 border-t border-slate-200 pt-2 text-[11px] text-slate-600">
             <span>가톨릭대 컴퓨터정보공학부 (27.02 졸업예정)</span>
@@ -152,171 +151,150 @@
         </div>
       </div>
 
-      <!-- 3 Core Highlights (필살기 3선 — 맨 위 배치) -->
+      <!-- Core Highlights -->
       <div class="mt-8">
         <div class="flex items-center justify-between">
-          <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500">핵심 검증 성과 (Core Highlights)</h2>
-          <span class="text-xs text-slate-400">실제 장애 주입 시험 및 코드·커밋 증거 기반</span>
+          <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500">Core Highlights</h2>
+          <span class="text-xs text-slate-400">실제 Fault Injection 테스트 및 메트릭·로그 검증 기반</span>
         </div>
         <div class="mt-3 grid gap-4 md:grid-cols-3">
-          <!-- Highlight 1 -->
           <div class="flex flex-col justify-between rounded-xl border border-indigo-200 bg-indigo-50/40 p-4">
             <div>
               <div class="flex items-center justify-between gap-2">
-                <span class="rounded-md bg-indigo-600 px-2 py-0.5 text-[11px] font-bold text-white">블루그린 배포 · DR 자동 복구</span>
-                <a href="#p3" class="text-xs font-semibold text-indigo-700 hover:underline">P2~P4 이동 ↓</a>
+                <span class="rounded-md bg-indigo-600 px-2 py-0.5 text-[11px] font-bold text-white">Blue/Green · Auto Rollback</span>
+                <a href="#p3" class="text-xs font-semibold text-indigo-700 hover:underline">P2~P4 ↓</a>
               </div>
               <h3 class="mt-2.5 text-sm font-bold text-slate-900">
-                온프레미스 장애(503) 주입 시 34초 내 Cloud Run 자동 롤백 및 무중단 유지
+                On-Premise 503 장애 주입 시 34초 내 Cloud Run 자동 Rollback 및 무중단 유지
               </h3>
               <p class="mt-1.5 text-xs text-slate-600">
-                신규 버전을 트래픽 0% 상태에서 먼저 헬스 체크하고, 온프레미스 전환 중 503 장애를 유도했을 때 이미 전환된 Cloud Run을 이전 버전으로 자동 복구해 <strong>1초 간격 요청 109건 모두 HTTP 200</strong>을 유지했습니다.
+                트래픽 0% 상태에서 Candidate Health Check를 통과시킨 뒤, On-Premise 전환 중 503 장애를 유도했을 때 선전환된 Cloud Run을 이전 Revision으로 자동 복구하여 <strong>1초 간격 요청 109건 전부 HTTP 200</strong>을 유지했습니다.
               </p>
-            </div>
-            <div class="mt-3 flex flex-wrap gap-2 border-t border-indigo-100 pt-2.5 text-[11px]">
-              <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/deploy.orchestrator.ts#L154-L229" target="_blank" rel="noopener noreferrer" class="ext-link">전환·롤백 코드 ↗</a>
-              <a href="https://policerjack.tistory.com/5" target="_blank" rel="noopener noreferrer" class="ext-link">구축 회고 4절 ↗</a>
             </div>
           </div>
 
-          <!-- Highlight 2 -->
           <div class="flex flex-col justify-between rounded-xl border border-emerald-200 bg-emerald-50/40 p-4">
             <div>
               <div class="flex items-center justify-between gap-2">
-                <span class="rounded-md bg-emerald-600 px-2 py-0.5 text-[11px] font-bold text-white">K8s 무중단 CI/CD · 품질 게이트</span>
-                <a href="#p5" class="text-xs font-semibold text-emerald-700 hover:underline">P5~P6 이동 ↓</a>
+                <span class="rounded-md bg-emerald-600 px-2 py-0.5 text-[11px] font-bold text-white">K8s CI/CD · Quality Gate</span>
+                <a href="#p5" class="text-xs font-semibold text-emerald-700 hover:underline">P5~P6 ↓</a>
               </div>
               <h3 class="mt-2.5 text-sm font-bold text-slate-900">
-                K8s 배포 180초 타임아웃 시 직전 파드 자동 복구(undo) 및 불량 빌드 차단
+                K8s Rollout 180초 Timeout 감지 시 rollout undo 자동 복구 및 불량 빌드 차단
               </h3>
               <p class="mt-1.5 text-xs text-slate-600">
-                단위 테스트(H2)는 통과하지만 운영 DB 연결이 깨지는 커밋(<code>a38db57</code>)을 배포해, <code>readinessProbe</code> 180초 초과 시 <strong>Ansible이 <code>rollout undo</code>로 자동 롤백</strong>하고 빌드를 실패(FAILURE)로 남기는 흐름을 검증했습니다.
+                H2 단위 테스트는 통과하지만 운영 DB 연결이 깨지는 커밋을 배포해, <code>readinessProbe</code> 180초 초과 시 <strong>Ansible이 <code>rollout undo</code>로 자동 Rollback</strong>하고 Jenkins 빌드를 <code>FAILURE</code>로 마감하는 파이프라인을 검증했습니다.
               </p>
-            </div>
-            <div class="mt-3 flex flex-wrap gap-2 border-t border-emerald-100 pt-2.5 text-[11px]">
-              <a href="https://github.com/junhasuh/yeongjuLog-BE/commit/a38db57d82cae6031cf5b1f93ba178689251f3e7" target="_blank" rel="noopener noreferrer" class="ext-link">커밋 a38db57 ↗</a>
-              <a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/ansible/k8s-deploy.yml#L1-L17" target="_blank" rel="noopener noreferrer" class="ext-link">롤백 플레이북 ↗</a>
-              <a href="https://policerjack.tistory.com/2" target="_blank" rel="noopener noreferrer" class="ext-link">구축 기록 ↗</a>
             </div>
           </div>
 
-          <!-- Highlight 3 -->
           <div class="flex flex-col justify-between rounded-xl border border-amber-200 bg-amber-50/40 p-4">
             <div>
               <div class="flex items-center justify-between gap-2">
-                <span class="rounded-md bg-amber-700 px-2 py-0.5 text-[11px] font-bold text-white">IaC 최소 권한 · 로그 기반 복구</span>
-                <a href="#p7" class="text-xs font-semibold text-amber-800 hover:underline">P7 이동 ↓</a>
+                <span class="rounded-md bg-amber-700 px-2 py-0.5 text-[11px] font-bold text-white">IaC · Least Privilege · K8s</span>
+                <a href="#p7" class="text-xs font-semibold text-amber-800 hover:underline">P7 ↓</a>
               </div>
               <h3 class="mt-2.5 text-sm font-bold text-slate-900">
-                Terraform 원격 상태 잠금(S3·DynamoDB) 및 최소 권한 IAM·K8s 장애 복구
+                Terraform State Lock 구성 및 최소 권한 IAM · K8s 클러스터 장애 복구
               </h3>
               <p class="mt-1.5 text-xs text-slate-600">
-                배포 서버 서비스 계정에 필수 역할 2개만 부여하고 서명 키를 Secret Manager로 격리했습니다. K8s 파드 <code>Pending</code>(리소스 한계 초과)과 API 서버 장애를 로그·수치 대조로 복구했습니다.
+                배포 서버 Service Account에 필수 Role 2개만 부여하고 서명 키를 Secret Manager로 격리했습니다. K8s Pod <code>Pending</code> 및 <code>kube-apiserver</code> 무응답 장애를 시스템 로그와 리소스 수치 대조로 복구했습니다.
               </p>
-            </div>
-            <div class="mt-3 flex flex-wrap gap-2 border-t border-amber-100 pt-2.5 text-[11px]">
-              <a href="https://github.com/junhasuh/aws-terraform-infra" target="_blank" rel="noopener noreferrer" class="ext-link">aws-terraform-infra ↗</a>
-              <a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/TROUBLESHOOTING.md#L7-L45" target="_blank" rel="noopener noreferrer" class="ext-link">TROUBLESHOOTING.md ↗</a>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Projects At a Glance (프로젝트 한눈에 보기: "Hibiscus - 블루그린 배포 인프라" 형식) -->
+      <!-- Projects Overview -->
       <div class="mt-8">
-        <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500">대표 프로젝트 한눈에 보기 (Projects Overview)</h2>
+        <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500">Projects Overview</h2>
         <div class="mt-3 space-y-3">
-          <!-- Project 1 Row -->
           <div class="rounded-xl border border-slate-200 bg-white p-4 transition hover:border-indigo-300">
             <div class="flex flex-wrap items-center justify-between gap-2">
               <div class="flex flex-wrap items-center gap-2">
                 <span class="rounded-md bg-indigo-600 px-2 py-0.5 text-xs font-bold text-white">PROJECT 01</span>
                 <a href="#p2" class="text-base font-extrabold text-slate-900 hover:text-indigo-600">
-                  Hibiscus - 클라우드·온프레미스 블루그린 배포 및 DR 인프라
+                  Hibiscus - 하이브리드 Blue/Green 무중단 배포 및 DR 인프라
                 </a>
               </div>
-              <span class="font-mono text-xs text-slate-500">2026.09.28 ~ 10.04 · 소프트뱅크 해커톤 (6인 팀) · P2~P4</span>
+              <span class="font-mono text-xs text-slate-500">2026.09.28 ~ 10.04 · SoftBank Hackathon (6인 팀) · P2~P4</span>
             </div>
             <p class="mt-1.5 text-xs text-slate-600 sm:text-sm">
-              <strong>[맥락]</strong> 실제 HTTP 트래픽 재생 검증과 <code>cosign</code> 이미지 서명을 통과한 컨테이너만 GCP Cloud Run과 온프레미스 서버 양쪽에 무중단 배포하는 하이브리드 배포 플랫폼입니다.
-              <strong>[내 역할]</strong> 하이브리드 블루그린 배포 아키텍처 제안, 배포·자동 롤백 서버 구현(Python → NestJS 이식, PR #9·#18·#19·#26), GCP 인프라·IAM 최소 권한 구축을 전담했습니다.
+              HTTP 트래픽 Replay 검증과 <code>cosign</code> 이미지 서명을 통과한 컨테이너를 GCP Cloud Run과 On-Premise 서버 양쪽에 무중단 배포하는 플랫폼입니다. 하이브리드 Blue/Green 아키텍처를 제안하고 배포·자동 Rollback Orchestrator 구현(Python → NestJS 이식) 및 GCP 인프라·IAM 구축을 전담했습니다.
             </p>
           </div>
 
-          <!-- Project 2 Row -->
           <div class="rounded-xl border border-slate-200 bg-white p-4 transition hover:border-emerald-300">
             <div class="flex flex-wrap items-center justify-between gap-2">
               <div class="flex flex-wrap items-center gap-2">
                 <span class="rounded-md bg-emerald-600 px-2 py-0.5 text-xs font-bold text-white">PROJECT 02</span>
                 <a href="#p5" class="text-base font-extrabold text-slate-900 hover:text-emerald-600">
-                  영주로그 (YeongjuLog) - Jenkins·Ansible·K8s 무중단 CI/CD 파이프라인
+                  영주로그 - Jenkins·Ansible·K8s 무중단 CI/CD 및 자동 Rollback 파이프라인
                 </a>
               </div>
               <span class="font-mono text-xs text-slate-500">팀 배포 2026.03~06 (4인) / 개인 CI/CD 고도화 2026.09 (1인) · P5~P6</span>
             </div>
             <p class="mt-1.5 text-xs text-slate-600 sm:text-sm">
-              <strong>[맥락]</strong> 영주시 공공데이터 기반 AI 관광 가이드 앱 백엔드(Spring Boot)에 코드 품질 검사와 쿠버네티스 무중단 배포·자동 롤백 체계를 구축한 프로젝트입니다.
-              <strong>[내 역할]</strong> 팀 프로젝트 당시 AWS EC2·RDS 배포를 맡았고, 이후 개인 저장소로 포크해 Jenkins·SonarQube·Ansible·Kubernetes(<code>kubeadm</code>) 기반 무중단 롤링 업데이트와 4가지 실패 주입 검증을 완수했습니다.
+              영주시 공공데이터 기반 AI 관광 가이드 백엔드(Spring Boot)에 정적 품질 게이트와 Kubernetes 무중단 배포·자동 Rollback 체계를 구축한 프로젝트입니다. 팀 프로젝트에서 AWS EC2·RDS 배포를 담당한 뒤, 개인 저장소로 포크해 Jenkins·SonarQube·Ansible·Kubernetes(<code>kubeadm</code>) 기반 RollingUpdate와 4가지 실패 주입 테스트를 구현했습니다.
             </p>
           </div>
 
-          <!-- Project 3 Row -->
           <div class="rounded-xl border border-slate-200 bg-white p-4 transition hover:border-amber-300">
             <div class="flex flex-wrap items-center justify-between gap-2">
               <div class="flex flex-wrap items-center gap-2">
                 <span class="rounded-md bg-amber-700 px-2 py-0.5 text-xs font-bold text-white">PROJECT 03</span>
                 <a href="#p7" class="text-base font-extrabold text-slate-900 hover:text-amber-700">
-                  aws-terraform-infra - Terraform 기반 AWS 네트워크·IAM 코드형 인프라 및 K8s 트러블슈팅
+                  aws-terraform-infra - Terraform 기반 AWS 네트워크·IAM IaC 및 K8s Troubleshooting
                 </a>
               </div>
-              <span class="font-mono text-xs text-slate-500">2026.07 ~ 2026.10 · 개인 실습 및 트러블슈팅 기록 · P7</span>
+              <span class="font-mono text-xs text-slate-500">2026.07 ~ 2026.10 · IaC 프로비저닝 및 클러스터 장애 복구 · P7</span>
             </div>
             <p class="mt-1.5 text-xs text-slate-600 sm:text-sm">
-              <strong>[맥락]</strong> AWS VPC 네트워크(Public/Private 서브넷, IGW, NAT GW)와 IAM 권한을 Terraform 코드로 프로비저닝하고, S3 원격 상태 저장소와 DynamoDB 잠금(Lock)을 적용한 IaC 프로젝트 및 CKA 클러스터 장애 복구 기록입니다.
+              AWS VPC 네트워크(Public/Private Subnet, IGW, NAT GW)와 IAM Role을 Terraform으로 모듈화하고, S3 Remote Backend와 DynamoDB State Lock을 구성한 IaC 프로젝트 및 CKA 클러스터 트러블슈팅 기록입니다.
             </p>
           </div>
         </div>
       </div>
 
-      <!-- Clean Tech Stack & Certifications Table (기술 스택 표 하단 배치) -->
+      <!-- Technical Skills & Certifications -->
       <div class="mt-8 grid gap-6 lg:grid-cols-3">
         <div class="lg:col-span-2">
-          <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500">기술 스택 (Technical Skills)</h2>
+          <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500">Technical Skills</h2>
           <div class="mt-2.5 overflow-x-auto rounded-xl border border-slate-200">
             <table class="w-full text-left text-xs">
               <thead class="bg-slate-100 text-slate-700">
                 <tr>
-                  <th class="w-32 px-3.5 py-2.5 font-bold">분류</th>
-                  <th class="px-3.5 py-2.5 font-bold">보유 기술 및 프로젝트 활용 내용</th>
-                  <th class="w-16 px-3 py-2.5 text-center font-bold">관련 쪽</th>
+                  <th class="w-36 px-3.5 py-2.5 font-bold">Category</th>
+                  <th class="px-3.5 py-2.5 font-bold">Stack & Implementation</th>
+                  <th class="w-16 px-3 py-2.5 text-center font-bold">Page</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-slate-200 bg-white">
                 <tr>
-                  <td class="px-3.5 py-2.5 font-bold text-slate-900">CI/CD · 배포 자동화</td>
+                  <td class="px-3.5 py-2.5 font-bold text-slate-900">CI/CD · Deployment</td>
                   <td class="px-3.5 py-2.5 text-slate-700">
-                    <span class="font-semibold text-slate-900">Jenkins, Ansible, SonarQube, cosign</span> — Git SHA 태깅, Quality Gate 차단, 블루그린 배포 및 <code>rollout undo</code> 자동 롤백 구현
+                    <span class="font-semibold text-slate-900">Jenkins, Ansible, SonarQube, cosign</span> — Git SHA 태깅, Quality Gate 차단, Blue/Green 배포 및 <code>rollout undo</code> 자동 Rollback 구현
                   </td>
                   <td class="px-3 py-2.5 text-center font-mono text-slate-500">P2~P6</td>
                 </tr>
                 <tr>
-                  <td class="px-3.5 py-2.5 font-bold text-slate-900">컨테이너 · K8s</td>
+                  <td class="px-3.5 py-2.5 font-bold text-slate-900">Container · K8s</td>
                   <td class="px-3.5 py-2.5 text-slate-700">
-                    <span class="font-semibold text-slate-900">Kubernetes (CKA), Docker</span> — <code>kubeadm</code> 클러스터 구축, RollingUpdate, <code>readinessProbe</code>/<code>livenessProbe</code>, 컨트롤 플레인·스케줄링 장애 복구
+                    <span class="font-semibold text-slate-900">Kubernetes (CKA), Docker</span> — <code>kubeadm</code> 클러스터 구축, RollingUpdate, <code>readinessProbe</code>/<code>livenessProbe</code>, Control Plane·Scheduling 장애 복구
                   </td>
                   <td class="px-3 py-2.5 text-center font-mono text-slate-500">P5~P7</td>
                 </tr>
                 <tr>
-                  <td class="px-3.5 py-2.5 font-bold text-slate-900">클라우드 · IaC</td>
+                  <td class="px-3.5 py-2.5 font-bold text-slate-900">Cloud · IaC</td>
                   <td class="px-3.5 py-2.5 text-slate-700">
-                    <span class="font-semibold text-slate-900">AWS (SAA), GCP, Terraform</span> — AWS VPC·EC2·RDS·IAM 구성, S3+DynamoDB 상태 잠금, GCP Cloud Run·GCE·Secret Manager·Cloud SQL·Caddy 구성
+                    <span class="font-semibold text-slate-900">AWS (SAA), GCP, Terraform</span> — AWS VPC·EC2·RDS·IAM 구성, S3+DynamoDB State Lock, GCP Cloud Run·GCE·Secret Manager·Cloud SQL·Caddy 구성
                   </td>
                   <td class="px-3 py-2.5 text-center font-mono text-slate-500">P2~P7</td>
                 </tr>
                 <tr>
-                  <td class="px-3.5 py-2.5 font-bold text-slate-900">백엔드 · 스크립트</td>
+                  <td class="px-3.5 py-2.5 font-bold text-slate-900">Backend · Scripting</td>
                   <td class="px-3.5 py-2.5 text-slate-700">
-                    <span class="font-semibold text-slate-900">TypeScript (NestJS, Vitest), Python, Java (Spring Boot), Bash, Linux</span> — 배포 오케스트레이터 구현, 단위·통합 회귀 테스트, 자동화 스크립트 작성
+                    <span class="font-semibold text-slate-900">TypeScript (NestJS, Vitest), Python, Java (Spring Boot), Bash, Linux</span> — Deployment Orchestrator 개발, 단위·E2E 테스트, 배포 스크립트 작성
                   </td>
                   <td class="px-3 py-2.5 text-center font-mono text-slate-500">P2~P6</td>
                 </tr>
@@ -325,9 +303,8 @@
           </div>
         </div>
 
-        <!-- Certifications & Activities -->
         <div>
-          <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500">자격증 및 주요 이력</h2>
+          <h2 class="text-sm font-bold uppercase tracking-wider text-slate-500">Certifications & Activities</h2>
           <div class="mt-2.5 rounded-xl border border-slate-200 bg-white p-4 text-xs">
             <ul class="space-y-3">
               <li class="flex items-start justify-between gap-2 border-b border-slate-100 pb-2.5">
@@ -340,21 +317,21 @@
               <li class="flex items-start justify-between gap-2 border-b border-slate-100 pb-2.5">
                 <div>
                   <p class="font-bold text-slate-900">AWS Certified Solutions Architect – Associate</p>
-                  <p class="text-slate-500">Amazon Web Services (유효기간 ~2029.02)</p>
+                  <p class="text-slate-500">Amazon Web Services (~2029.02)</p>
                 </div>
                 <span class="shrink-0 rounded bg-blue-50 px-2 py-0.5 font-mono font-semibold text-blue-700">2026.02</span>
               </li>
               <li class="flex items-start justify-between gap-2 border-b border-slate-100 pb-2.5">
                 <div>
                   <p class="font-bold text-slate-900">중앙 IT 동아리 COMA 회장(25) · 총무(24)</p>
-                  <p class="text-slate-500">100명 규모 운영 매뉴얼 문서화 · 정기회의 참여 50% 증가</p>
+                  <p class="text-slate-500">100명 규모 운영 매뉴얼화 · 정기회의 참여 50% 증가</p>
                 </div>
                 <span class="shrink-0 font-mono text-slate-500">2024~26</span>
               </li>
               <li class="flex items-start justify-between gap-2">
                 <div>
                   <p class="font-bold text-slate-900">구름톤 유니브 4기 대표 · OSSCA OpenStack</p>
-                  <p class="text-slate-500">시즌톤 본선 진출(LeafUp) · OpenStack-Helm 문서 분석</p>
+                  <p class="text-slate-500">시즌톤 본선 진출(LeafUp) · OpenStack-Helm 분석</p>
                 </div>
                 <span class="shrink-0 font-mono text-slate-500">2025~26</span>
               </li>
@@ -365,355 +342,336 @@
     </article>
 
     <!-- =========================================================
-         PAGE 2: HIBISCUS (1/3) — 블루그린 배포 아키텍처 & 설계 이유
+         PAGE 2: HIBISCUS (1/3) — Blue/Green Architecture & Design Decisions
     ========================================================== -->
     <article id="p2" data-section="hibiscus" class="page-card border-l-4 border-l-indigo-600 p-6 sm:p-10">
-      <!-- Unified Project Identity Top Bar -->
       <div class="flex flex-wrap items-center justify-between gap-2 border-b border-indigo-100 pb-4">
         <div class="flex items-center gap-2">
           <span class="rounded-md bg-indigo-600 px-2.5 py-1 text-xs font-extrabold tracking-wide text-white">PROJECT 01 · HIBISCUS (1/3)</span>
-          <span class="text-xs font-semibold text-indigo-900">블루그린 배포 아키텍처 및 기술 선택 이유</span>
+          <span class="text-xs font-semibold text-indigo-900">Blue/Green Architecture & Technical Decisions</span>
         </div>
         <span class="font-mono text-xs font-semibold text-slate-400">02 / 07 · HIBISCUS ARCHITECTURE</span>
       </div>
 
-      <!-- Clear Project Title & 3-Line Context Box -->
+      <!-- Project Header Box -->
       <div class="mt-5 rounded-2xl border border-indigo-200 bg-gradient-to-r from-indigo-50/80 via-white to-blue-50/50 p-5">
         <div class="flex flex-wrap items-baseline justify-between gap-2">
           <h2 class="text-xl font-extrabold text-slate-900 sm:text-2xl">
-            Hibiscus - 클라우드·온프레미스 블루그린 무중단 배포 및 DR 인프라
+            Hibiscus - 하이브리드 Blue/Green 무중단 배포 및 DR 인프라
           </h2>
-          <span class="font-mono text-xs font-semibold text-indigo-700">2026.09.28 ~ 10.04 · 소프트뱅크 해커톤 2026 (6인 팀)</span>
+          <span class="font-mono text-xs font-semibold text-indigo-700">2026.09.28 ~ 10.04 · SoftBank Hackathon 2026 (6인 팀)</span>
         </div>
 
-        <div class="mt-3 grid gap-2 text-xs text-slate-700 sm:grid-cols-3 sm:text-sm">
-          <div class="rounded-lg bg-white/90 p-3 shadow-sm border border-indigo-100">
-            <p class="text-[11px] font-bold uppercase text-indigo-600">어떤 프로젝트인가 (맥락)</p>
-            <p class="mt-1 text-xs leading-relaxed">클라우드(GCP Cloud Run)와 온프레미스 서버 두 곳에 컨테이너를 동시에 운영하며, 한쪽이 죽어도 반대편으로 즉시 우회(DR)되고 배포 실패 시 자동 롤백되는 하이브리드 무중단 배포 플랫폼입니다.</p>
+        <div class="mt-3 grid gap-2.5 text-xs text-slate-700 sm:grid-cols-3">
+          <div class="rounded-lg border border-indigo-100 bg-white/95 p-3 shadow-sm">
+            <p class="text-[11px] font-bold uppercase text-indigo-600">Service Overview</p>
+            <p class="mt-1 leading-relaxed">GCP Cloud Run과 On-Premise 서버 양쪽에 컨테이너를 동시 운영하며, 한쪽 환경 장애 시 즉시 Failover(DR)되고 배포 실패 시 자동 Rollback되는 하이브리드 배포 플랫폼입니다.</p>
           </div>
-          <div class="rounded-lg bg-white/90 p-3 shadow-sm border border-indigo-100">
-            <p class="text-[11px] font-bold uppercase text-indigo-600">내 담당 역할 (DevOps / 배포 인프라)</p>
-            <p class="mt-1 text-xs leading-relaxed">하이브리드 블루그린 배포 구조 제안, <strong>배포·롤백 오케스트레이터 구현(Python v0 → NestJS 이식)</strong>, <code>cosign</code> 컨테이너 서명 검증, GCP 실행 인프라·보안 구성을 맡았습니다.</p>
+          <div class="rounded-lg border border-indigo-100 bg-white/95 p-3 shadow-sm">
+            <p class="text-[11px] font-bold uppercase text-indigo-600">Role & Ownership</p>
+            <p class="mt-1 leading-relaxed">하이브리드 Blue/Green 배포 구조 제안, <strong>Deployment·Rollback Orchestrator 개발(Python v0 → NestJS 이식)</strong>, <code>cosign</code> 이미지 서명 검증, GCP 인프라·IAM 구성을 전담했습니다.</p>
           </div>
-          <div class="rounded-lg bg-white/90 p-3 shadow-sm border border-indigo-100">
-            <p class="text-[11px] font-bold uppercase text-indigo-600">핵심 성과 (검증 결과)</p>
-            <p class="mt-1 text-xs leading-relaxed">트래픽 0% 사전 헬스 체크 후 순차 전환 구현 · 온프레미스 503 장애 주입 시험에서 <strong>34초 만에 Cloud Run 자동 복구 및 1초 간격 요청 109건 전부 HTTP 200 응답</strong>을 달성했습니다.</p>
+          <div class="rounded-lg border border-indigo-100 bg-white/95 p-3 shadow-sm">
+            <p class="text-[11px] font-bold uppercase text-indigo-600">Key Impact</p>
+            <p class="mt-1 leading-relaxed">트래픽 0% Candidate Health Check 후 순차 전환 구현 · On-Premise 503 장애 주입 시험에서 <strong>34초 내 Cloud Run 자동 Rollback 및 요청 109건 전부 HTTP 200 응답</strong>을 달성했습니다.</p>
           </div>
         </div>
 
-        <!-- Tech Stack Badges -->
         <div class="mt-3.5 flex flex-wrap items-center gap-1.5 pt-1">
-          <span class="text-[11px] font-bold text-slate-500 mr-1">기술 스택:</span>
+          <span class="mr-1 text-[11px] font-bold text-slate-500">Tech Stack:</span>
           <span class="rounded-md bg-slate-800 px-2 py-0.5 font-mono text-[11px] font-medium text-white">GCP Cloud Run</span>
           <span class="rounded-md bg-slate-800 px-2 py-0.5 font-mono text-[11px] font-medium text-white">TypeScript · NestJS</span>
           <span class="rounded-md bg-slate-800 px-2 py-0.5 font-mono text-[11px] font-medium text-white">Python · Bash</span>
-          <span class="rounded-md bg-slate-800 px-2 py-0.5 font-mono text-[11px] font-medium text-white">cosign (컨테이너 서명)</span>
+          <span class="rounded-md bg-slate-800 px-2 py-0.5 font-mono text-[11px] font-medium text-white">cosign</span>
           <span class="rounded-md bg-slate-800 px-2 py-0.5 font-mono text-[11px] font-medium text-white">Docker · Artifact Registry</span>
           <span class="rounded-md bg-slate-800 px-2 py-0.5 font-mono text-[11px] font-medium text-white">GCE · Caddy · Secret Manager</span>
           <span class="rounded-md bg-slate-800 px-2 py-0.5 font-mono text-[11px] font-medium text-white">Vitest</span>
         </div>
       </div>
 
-      <!-- Visual Architecture Diagram (SVG with Numbered Badges ① ~ ④) -->
+      <!-- Responsive HTML/CSS Architecture Diagram (Zero Text Overflow Guaranteed) -->
       <div class="mt-6">
         <div class="flex flex-wrap items-center justify-between gap-2">
-          <h3 class="text-base font-bold text-slate-900">하이브리드 블루그린 배포 & 자동 롤백 아키텍처</h3>
+          <h3 class="text-base font-bold text-slate-900">Hybrid Blue/Green Deployment & Auto-Rollback Architecture</h3>
           <div class="no-print flex flex-wrap gap-1 text-[11px]">
-            <span class="text-slate-400 mr-1 self-center">단계 하이라이트:</span>
-            <button type="button" data-hib-step="all" class="hib-step-btn rounded bg-indigo-600 px-2 py-0.5 font-semibold text-white">전체</button>
-            <button type="button" data-hib-step="1" class="hib-step-btn rounded bg-slate-100 px-2 py-0.5 font-semibold text-slate-700 hover:bg-indigo-50">① 서명 검증</button>
-            <button type="button" data-hib-step="2" class="hib-step-btn rounded bg-slate-100 px-2 py-0.5 font-semibold text-slate-700 hover:bg-indigo-50">② 트래픽 0% 후보 검증</button>
-            <button type="button" data-hib-step="3" class="hib-step-btn rounded bg-slate-100 px-2 py-0.5 font-semibold text-slate-700 hover:bg-indigo-50">③ 순차 전환·자동 롤백</button>
+            <span class="mr-1 self-center text-slate-400">Step Highlight:</span>
+            <button type="button" data-hib-step="all" class="hib-step-btn rounded bg-indigo-600 px-2 py-0.5 font-semibold text-white">All</button>
+            <button type="button" data-hib-step="1" class="hib-step-btn rounded bg-slate-100 px-2 py-0.5 font-semibold text-slate-700 hover:bg-indigo-50">① cosign 검증</button>
+            <button type="button" data-hib-step="2" class="hib-step-btn rounded bg-slate-100 px-2 py-0.5 font-semibold text-slate-700 hover:bg-indigo-50">② Candidate 검증</button>
+            <button type="button" data-hib-step="3" class="hib-step-btn rounded bg-slate-100 px-2 py-0.5 font-semibold text-slate-700 hover:bg-indigo-50">③ 순차 전환·Rollback</button>
           </div>
         </div>
 
-        <div class="mt-2.5 overflow-x-auto rounded-xl border border-slate-200 bg-slate-50/70 p-4">
-          <svg viewBox="0 0 920 320" class="w-full min-w-[720px] h-auto" role="img" aria-label="Hibiscus 하이브리드 블루그린 배포 아키텍처 다이어그램">
-            <defs>
-              <marker id="arrow-indigo" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                <path d="M 0 1 L 10 5 L 0 9 z" fill="#4f46e5" />
-              </marker>
-              <marker id="arrow-emerald" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669" />
-              </marker>
-              <marker id="arrow-rose" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                <path d="M 0 1 L 10 5 L 0 9 z" fill="#e11d48" />
-              </marker>
-            </defs>
+        <div class="mt-2.5 rounded-xl border border-slate-200 bg-slate-50/80 p-4">
+          <div class="grid gap-4 lg:grid-cols-12 lg:items-stretch">
+            <!-- Left Column: Pre-check & Gateway (3 cols) -->
+            <div class="flex flex-col justify-between gap-3 lg:col-span-3">
+              <div class="rounded-xl border border-slate-300 bg-white p-3.5 shadow-sm">
+                <p class="text-[11px] font-bold uppercase tracking-wide text-slate-500">Upstream Pipeline & Registry</p>
+                <div class="mt-2 rounded-lg border border-slate-200 bg-slate-50 p-2.5 text-xs">
+                  <p class="font-bold text-slate-800">HTTP Replay · Policy Engine</p>
+                  <p class="mt-0.5 text-[11px] text-slate-500">팀원 구현 파트 → 검증 결과 JSON 전달</p>
+                </div>
+                <div class="mt-2 rounded-lg border border-blue-200 bg-blue-50/70 p-2.5 text-xs">
+                  <p class="font-bold text-blue-900">GCP Artifact Registry</p>
+                  <p class="mt-0.5 text-[11px] text-blue-700">Multi-arch Image + <code>cosign</code> Signature</p>
+                </div>
+              </div>
 
-            <!-- Left: Team Pipeline & Artifact Registry -->
-            <rect x="15" y="25" width="185" height="125" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5" />
-            <text x="28" y="48" font-size="11" font-weight="700" fill="#475569">사전 검증 및 이미지 저장소</text>
-            <rect x="28" y="58" width="159" height="36" rx="6" fill="#f1f5f9" stroke="#cbd5e1" />
-            <text x="38" y="74" font-size="10.5" font-weight="600" fill="#334155">요청 재생 검사 · 정책 승인</text>
-            <text x="38" y="88" font-size="9.5" fill="#64748b">(팀원 구현 파트 → JSON 전달)</text>
-            <rect x="28" y="102" width="159" height="36" rx="6" fill="#eff6ff" stroke="#93c5fd" />
-            <text x="38" y="118" font-size="10.5" font-weight="700" fill="#1e40af">GCP Artifact Registry</text>
-            <text x="38" y="131" font-size="9.5" fill="#3b82f6">컨테이너 이미지 + cosign 서명</text>
+              <div class="rounded-xl border border-slate-300 bg-white p-3.5 shadow-sm">
+                <p class="text-[11px] font-bold uppercase tracking-wide text-slate-500">User Traffic Ingress (HTTPS)</p>
+                <div class="mt-2 rounded-lg border border-slate-200 bg-slate-50 p-2.5 text-xs">
+                  <p class="font-bold text-slate-900">Caddy (443) + Gateway</p>
+                  <p class="mt-0.5 text-[11px] text-slate-600">Active Route 트래픽 라우팅</p>
+                </div>
+                <ul class="mt-2 space-y-1 text-[11px] font-semibold">
+                  <li class="text-emerald-700">• 평시: On-Premise 우선 라우팅</li>
+                  <li class="text-indigo-700">• 장애 시: Cloud Run 자동 Failover (DR)</li>
+                </ul>
+              </div>
+            </div>
 
-            <!-- User / Gateway Box (Bottom Left) -->
-            <rect x="15" y="175" width="185" height="120" rx="10" fill="#ffffff" stroke="#64748b" stroke-width="1.5" />
-            <text x="28" y="198" font-size="11" font-weight="700" fill="#0f172a">사용자 트래픽 진입점 (HTTPS)</text>
-            <rect x="28" y="208" width="159" height="40" rx="6" fill="#f8fafc" stroke="#cbd5e1" />
-            <text x="38" y="225" font-size="10.5" font-weight="700" fill="#0f172a">Caddy (443) + Gateway</text>
-            <text x="38" y="240" font-size="9.5" fill="#475569">대표 경로(Active Route) 라우팅</text>
-            <text x="28" y="268" font-size="9.5" font-weight="600" fill="#059669">• 평시: 온프레미스 우선 라우팅</text>
-            <text x="28" y="283" font-size="9.5" font-weight="600" fill="#4f46e5">• 장애 시: Cloud Run 자동 우회(DR)</text>
+            <!-- Center Column: My Scope - NestJS Orchestrator (5 cols) -->
+            <div class="rounded-xl border-2 border-indigo-600 bg-indigo-50/60 p-4 shadow-sm lg:col-span-5">
+              <div class="flex flex-wrap items-center justify-between gap-2">
+                <span class="rounded bg-indigo-600 px-2 py-0.5 text-[11px] font-bold text-white">본인 구현 범위 (GCP VM)</span>
+                <span class="font-mono text-xs font-bold text-indigo-950">NestJS Deployment Orchestrator</span>
+              </div>
 
-            <!-- Center: My Scope (GCP VM - Deployment Orchestrator) -->
-            <rect x="240" y="15" width="305" height="285" rx="12" fill="#eef2ff" stroke="#4f46e5" stroke-width="2" />
-            <rect x="254" y="26" width="150" height="20" rx="4" fill="#4f46e5" />
-            <text x="262" y="40" font-size="10.5" font-weight="700" fill="#ffffff">본인 구현 범위 (GCP VM)</text>
-            <text x="412" y="40" font-size="10.5" font-weight="700" fill="#312e81">NestJS 배포 오케스트레이터</text>
+              <div class="mt-3 space-y-2.5 text-xs">
+                <div class="rounded-lg border border-indigo-200 bg-white p-3">
+                  <div class="flex items-center gap-2">
+                    <span class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-indigo-600 text-[11px] font-bold text-white">1</span>
+                    <p class="font-bold text-slate-900">배포 전 cosign 서명 및 무결성 검증</p>
+                  </div>
+                  <p class="mt-1 pl-7 text-[11px] text-slate-600">Secret Manager 공개키로 <code>digest</code> · <code>run_id</code> · <code>plan_hash</code> 대조</p>
+                  <p class="mt-0.5 pl-7 text-[11px] font-semibold text-rose-600">→ 미승인·변조 이미지일 경우 컨테이너 생성 전 즉시 차단</p>
+                </div>
 
-            <!-- Step 1 inside Center -->
-            <rect x="255" y="56" width="275" height="58" rx="8" fill="#ffffff" stroke="#6366f1" stroke-width="1.5" />
-            <circle cx="273" cy="75" r="10" fill="#4f46e5" />
-            <text x="269" y="79" font-size="11" font-weight="700" fill="#ffffff">1</text>
-            <text x="290" y="75" font-size="11.5" font-weight="700" fill="#1e1b4b">배포 전 cosign 이미지 서명·무결성 검증</text>
-            <text x="290" y="92" font-size="10" fill="#475569">Secret Manager 공개키로 digest · run_id · plan_hash 대조</text>
-            <text x="290" y="106" font-size="9.5" font-weight="600" fill="#e11d48">→ 미승인·변조 이미지면 컨테이너 생성 전 즉시 차단</text>
+                <div class="rounded-lg border border-indigo-200 bg-white p-3">
+                  <div class="flex items-center gap-2">
+                    <span class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-indigo-600 text-[11px] font-bold text-white">2</span>
+                    <p class="font-bold text-slate-900">양쪽 환경 Blue/Green Candidate 배포 (트래픽 0%)</p>
+                  </div>
+                  <p class="mt-1 pl-7 text-[11px] text-slate-600">Cloud Run(<code>cand</code> 태그) · On-Premise(Candidate) 동시 기동 후 <code>/health</code> 점검</p>
+                  <p class="mt-0.5 pl-7 text-[11px] font-semibold text-rose-600">→ 한쪽이라도 실패 시 양쪽 Candidate 즉시 정리 후 기존 버전 유지(<code>held</code>)</p>
+                </div>
 
-            <!-- Step 2 inside Center -->
-            <rect x="255" y="124" width="275" height="68" rx="8" fill="#ffffff" stroke="#6366f1" stroke-width="1.5" />
-            <circle cx="273" cy="143" r="10" fill="#4f46e5" />
-            <text x="269" y="147" font-size="11" font-weight="700" fill="#ffffff">2</text>
-            <text x="290" y="143" font-size="11.5" font-weight="700" fill="#1e1b4b">양쪽 환경 블루그린 후보 배포 (트래픽 0%)</text>
-            <text x="290" y="160" font-size="10" fill="#475569">Cloud Run(cand 태그) · 온프레미스(Candidate) 동시 기동</text>
-            <text x="290" y="174" font-size="10" fill="#475569">실제 트래픽 유입 없이 /health 상태 검사 통과 여부 확인</text>
-            <text x="290" y="186" font-size="9.5" font-weight="600" fill="#e11d48">→ 한쪽이라도 실패 시 양쪽 후보 즉시 정리 후 기존 버전 유지(held)</text>
+                <div class="rounded-lg border border-indigo-200 bg-white p-3">
+                  <div class="flex items-center gap-2">
+                    <span class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-indigo-600 text-[11px] font-bold text-white">3</span>
+                    <p class="font-bold text-slate-900">순차 트래픽 전환 및 부분 실패 시 자동 Rollback</p>
+                  </div>
+                  <p class="mt-1 pl-7 text-[11px] font-semibold text-emerald-700">전환 순서: ① Cloud Run → ② On-Premise(30s Timeout) → ③ Gateway Route</p>
+                  <p class="mt-0.5 pl-7 text-[11px] font-semibold text-rose-600">→ ②·③ 실패 시 선전환된 Cloud Run도 직전 Revision으로 즉시 Rollback(<code>rolled_back</code>)</p>
+                </div>
+              </div>
+            </div>
 
-            <!-- Step 3 inside Center -->
-            <rect x="255" y="202" width="275" height="84" rx="8" fill="#ffffff" stroke="#6366f1" stroke-width="1.5" />
-            <circle cx="273" cy="221" r="10" fill="#4f46e5" />
-            <text x="269" y="225" font-size="11" font-weight="700" fill="#ffffff">3</text>
-            <text x="290" y="221" font-size="11.5" font-weight="700" fill="#1e1b4b">순차 트래픽 전환 및 부분 실패 시 자동 롤백</text>
-            <text x="290" y="238" font-size="10" fill="#059669" font-weight="600">전환 순서: ① Cloud Run 전환 → ② 온프레미스 전환 → ③ 대표 경로</text>
-            <text x="290" y="254" font-size="10" fill="#475569">온프레미스(30초 기한)나 대표 경로 전환 실패 시,</text>
-            <text x="290" y="269" font-size="10" font-weight="700" fill="#e11d48">이미 바뀐 Cloud Run도 직전 Revision으로 즉시 롤백(rolled_back)</text>
+            <!-- Right Column: Target Environments (4 cols) -->
+            <div class="flex flex-col justify-between gap-3 lg:col-span-4">
+              <div class="rounded-xl border-2 border-blue-600 bg-white p-3.5 shadow-sm">
+                <p class="text-xs font-extrabold text-blue-800">Target A · GCP Cloud Run</p>
+                <div class="mt-2 grid grid-cols-2 gap-2 text-[11px]">
+                  <div class="rounded-lg border border-blue-200 bg-blue-50/70 p-2.5">
+                    <p class="font-bold text-blue-900">Blue (기존 Revision)</p>
+                    <p class="mt-1 text-slate-600">• 평시 트래픽 100%</p>
+                    <p class="mt-0.5 font-semibold text-rose-600">• Rollback 시 100% 복귀</p>
+                  </div>
+                  <div class="rounded-lg border border-emerald-200 bg-emerald-50/70 p-2.5">
+                    <p class="font-bold text-emerald-900">Green (신규 후보)</p>
+                    <p class="mt-1 text-slate-600">• 초기 트래픽 0% 기동</p>
+                    <p class="mt-0.5 font-semibold text-emerald-700">• <code>/health</code> 통과 후 100%</p>
+                  </div>
+                </div>
+              </div>
 
-            <!-- Right Top: GCP Cloud Run (Blue/Green) -->
-            <rect x="595" y="20" width="310" height="130" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="1.8" />
-            <text x="610" y="42" font-size="11.5" font-weight="800" fill="#1d4ed8">환경 A · GCP Cloud Run (클라우드)</text>
-            <rect x="610" y="52" width="138" height="84" rx="7" fill="#eff6ff" stroke="#93c5fd" />
-            <text x="620" y="70" font-size="10.5" font-weight="700" fill="#1e40af">Blue (기존 Revision)</text>
-            <text x="620" y="86" font-size="9.5" fill="#334155">• 전환 전: 트래픽 100%</text>
-            <text x="620" y="101" font-size="9.5" fill="#e11d48" font-weight="600">• 롤백 시: 즉시 100% 복귀</text>
-            <rect x="756" y="52" width="138" height="84" rx="7" fill="#ecfdf5" stroke="#6ee7b7" />
-            <text x="766" y="70" font-size="10.5" font-weight="700" fill="#065f46">Green (신규 후보)</text>
-            <text x="766" y="86" font-size="9.5" fill="#334155">• 후보 단계: 트래픽 0%</text>
-            <text x="766" y="101" font-size="9.5" fill="#047857" font-weight="600">• cand 태그 /health 검증</text>
-            <text x="766" y="116" font-size="9.5" fill="#047857">• 통과 후 트래픽 100%</text>
-
-            <!-- Right Bottom: On-Premise Server (Blue/Green) -->
-            <rect x="595" y="170" width="310" height="130" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.8" />
-            <text x="610" y="192" font-size="11.5" font-weight="800" fill="#047857">환경 B · 온프레미스 서버 (SSH 리버스 터널 :2222)</text>
-            <rect x="610" y="202" width="138" height="84" rx="7" fill="#eff6ff" stroke="#93c5fd" />
-            <text x="620" y="220" font-size="10.5" font-weight="700" fill="#1e40af">Blue (기존 컨테이너)</text>
-            <text x="620" y="236" font-size="9.5" fill="#334155">• 운영 트래픽 처리 유지</text>
-            <text x="620" y="251" font-size="9.5" fill="#e11d48" font-weight="600">• 실패 시 기존 컨테이너 유지</text>
-            <rect x="756" y="202" width="138" height="84" rx="7" fill="#ecfdf5" stroke="#6ee7b7" />
-            <text x="766" y="220" font-size="10.5" font-weight="700" fill="#065f46">Green (신규 컨테이너)</text>
-            <text x="766" y="236" font-size="9.5" fill="#334155">• 격리 포트 기동·헬스 체크</text>
-            <text x="766" y="251" font-size="9.5" fill="#047857" font-weight="600">• 검증 통과 후 포트 전환</text>
-            <text x="766" y="266" font-size="9.5" fill="#64748b">• 전환 기한: 30초</text>
-
-            <!-- Arrows -->
-            <line x1="200" y1="85" x2="248" y2="85" stroke="#4f46e5" stroke-width="2" marker-end="url(#arrow-indigo)" />
-            <line x1="530" y1="150" x2="590" y2="95" stroke="#4f46e5" stroke-width="2" marker-end="url(#arrow-indigo)" />
-            <line x1="530" y1="168" x2="590" y2="230" stroke="#059669" stroke-width="2" marker-end="url(#arrow-emerald)" />
-            <line x1="255" y1="245" x2="205" y2="235" stroke="#e11d48" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arrow-rose)" />
-          </svg>
+              <div class="rounded-xl border-2 border-emerald-600 bg-white p-3.5 shadow-sm">
+                <p class="text-xs font-extrabold text-emerald-800">Target B · On-Premise (SSH Reverse Tunnel :2222)</p>
+                <div class="mt-2 grid grid-cols-2 gap-2 text-[11px]">
+                  <div class="rounded-lg border border-blue-200 bg-blue-50/70 p-2.5">
+                    <p class="font-bold text-blue-900">Blue (기존 컨테이너)</p>
+                    <p class="mt-1 text-slate-600">• 운영 트래픽 유지</p>
+                    <p class="mt-0.5 font-semibold text-rose-600">• 실패 시 컨테이너 유지</p>
+                  </div>
+                  <div class="rounded-lg border border-emerald-200 bg-emerald-50/70 p-2.5">
+                    <p class="font-bold text-emerald-900">Green (신규 컨테이너)</p>
+                    <p class="mt-1 text-slate-600">• 격리 포트 Health Check</p>
+                    <p class="mt-0.5 font-semibold text-emerald-700">• 검증 통과 후 포트 전환</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Mapped Explanation Cards (① ~ ③) with Clear "Why" Decisions -->
+      <!-- Mapped Explanation Cards (1 ~ 3) -->
       <div class="mt-6 grid gap-4 md:grid-cols-3">
-        <!-- Card 1 -->
         <div id="hib-card-1" class="rounded-xl border border-slate-200 bg-white p-4 transition">
           <div class="flex items-center gap-2">
-            <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-indigo-600 text-xs font-bold text-white">1</span>
+            <span class="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-indigo-600 text-xs font-bold text-white">1</span>
             <h4 class="text-sm font-bold text-slate-900">왜 배포 직전에 cosign 서명을 다시 검증했는가?</h4>
           </div>
           <ul class="mt-2.5 space-y-1.5 text-xs text-slate-600">
-            <li>• <strong>배경(Why):</strong> 이미지 태그만으로는 사전 검증(요청 재생·정책 승인)을 거친 이미지인지 보장할 수 없었습니다.</li>
-            <li>• <strong>구현(How):</strong> 배포 시작 전 <code>cosign verify</code>로 공개키 서명을 확인하고, 이미지 해시(digest)와 실행 ID(<code>run_id</code>), 정책 해시(<code>plan_hash</code>)가 일치할 때만 후보 컨테이너를 띄우도록 차단 관문을 두었습니다.</li>
-            <li class="pt-1">
-              <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/signature.verifier.ts#L27-L68" target="_blank" rel="noopener noreferrer" class="ext-link">서명 검증 코드(signature.verifier.ts) ↗</a>
-              <span class="mx-1 text-slate-300">|</span>
-              <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/18" target="_blank" rel="noopener noreferrer" class="ext-link">PR #18 ↗</a>
-            </li>
+            <li>• <strong>Why:</strong> 컨테이너 이미지 태그만으로는 앞단의 HTTP Replay 검증과 Policy 승인을 통과한 이미지인지 보장할 수 없었습니다.</li>
+            <li>• <strong>How:</strong> 배포 시작 전 <code>cosign verify</code>로 공개키 서명을 확인하고, 이미지 <code>digest</code>와 <code>run_id</code>, <code>plan_hash</code>가 일치할 때만 Candidate 컨테이너를 띄우도록 차단 관문을 구현했습니다.</li>
           </ul>
         </div>
 
-        <!-- Card 2 -->
         <div id="hib-card-2" class="rounded-xl border border-slate-200 bg-white p-4 transition">
           <div class="flex items-center gap-2">
-            <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-indigo-600 text-xs font-bold text-white">2</span>
+            <span class="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-indigo-600 text-xs font-bold text-white">2</span>
             <h4 class="text-sm font-bold text-slate-900">왜 Python 프로토타입을 NestJS 백엔드로 이식했는가?</h4>
           </div>
           <ul class="mt-2.5 space-y-1.5 text-xs text-slate-600">
-            <li>• <strong>배경(Why):</strong> 해커톤 초기 빠른 동작 검증을 위해 Python(<code>PR #9</code>)으로 배포 스크립트를 먼저 작성했으나, 팀의 메인 백엔드(NestJS)와 DB 상태·웹훅·에러 처리를 일원화해야 했습니다.</li>
-            <li>• <strong>구현(How):</strong> 배포 오케스트레이터를 NestJS 서비스(<code>PR #26</code>)로 재설계하여 온프레미스 Agent API 클라이언트와 Gateway 라우팅 전환을 한 트랜잭션 흐름으로 묶고, Vitest로 롤백 분기 단위·통합 테스트를 구축했습니다.</li>
-            <li class="pt-1">
-              <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/9" target="_blank" rel="noopener noreferrer" class="ext-link">Python v0 (PR #9) ↗</a>
-              <span class="mx-1 text-slate-300">|</span>
-              <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/26" target="_blank" rel="noopener noreferrer" class="ext-link">NestJS 통합 (PR #26) ↗</a>
-            </li>
+            <li>• <strong>Why:</strong> 해커톤 초기 빠른 검증을 위해 Python으로 배포 스크립트를 먼저 작성했으나, 팀의 메인 백엔드(NestJS)와 DB 상태 관리·Webhook 파이프라인·에러 처리를 일원화해야 했습니다.</li>
+            <li>• <strong>How:</strong> Orchestrator를 NestJS 모듈로 재설계하여 On-Premise Agent API 클라이언트와 Gateway 라우팅 전환을 단일 흐름으로 묶고, Vitest로 Rollback 분기 단위·E2E 테스트를 구축했습니다.</li>
           </ul>
         </div>
 
-        <!-- Card 3 -->
         <div id="hib-card-3" class="rounded-xl border border-slate-200 bg-white p-4 transition">
           <div class="flex items-center gap-2">
-            <span class="inline-flex h-6 w-6 items-center justify-center rounded-full bg-indigo-600 text-xs font-bold text-white">3</span>
-            <h4 class="text-sm font-bold text-slate-900">왜 Cloud Run → 온프레미스 → 대표 경로 순으로 전환했는가?</h4>
+            <span class="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-indigo-600 text-xs font-bold text-white">3</span>
+            <h4 class="text-sm font-bold text-slate-900">왜 Cloud Run → On-Premise → Gateway 순으로 전환했는가?</h4>
           </div>
           <ul class="mt-2.5 space-y-1.5 text-xs text-slate-600">
-            <li>• <strong>배경(Why):</strong> 두 환경의 배포 완료 시점이 다를 때 한쪽만 구버전인 상태로 트래픽이 섞이거나, 중간 실패 시 복구가 꼬이는 문제를 막아야 했습니다.</li>
-            <li>• <strong>구현(How):</strong> 양쪽 모두 <strong>트래픽 0% 후보 상태</strong>에서 헬스 체크를 통과한 뒤에만 전환을 시작합니다. Revision 비율 조정만으로 즉시 복구 가능한 Cloud Run을 먼저 전환하고, 온프레미스 전환까지 성공한 뒤 마지막에 사용자 대표 경로(Gateway)를 바꿉니다.</li>
-            <li class="pt-1">
-              <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/eae12bd199f0d85945ece5fb0c3a2bdfabba8321/deploy/cloudrun/candidate.sh#L13-L29" target="_blank" rel="noopener noreferrer" class="ext-link">candidate.sh (0% 후보) ↗</a>
-              <span class="mx-1 text-slate-300">|</span>
-              <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/deploy/deploy.orchestrator.ts#L111-L227" target="_blank" rel="noopener noreferrer" class="ext-link">오케스트레이터 코드 ↗</a>
-            </li>
+            <li>• <strong>Why:</strong> 두 환경의 배포 완료 시점이 다를 때 한쪽만 구버전인 상태로 트래픽이 섞이거나, 중간 실패 시 복구가 꼬이는 현상을 방지해야 했습니다.</li>
+            <li>• <strong>How:</strong> 양쪽 모두 <strong>트래픽 0% Candidate 상태</strong>에서 Health Check를 통과한 뒤에만 전환을 시작합니다. Revision 비율 조정만으로 즉시 복구 가능한 Cloud Run을 먼저 전환하고, On-Premise 전환까지 완료된 후 마지막에 Gateway Route를 바꿉니다.</li>
           </ul>
         </div>
       </div>
     </article>
 
     <!-- =========================================================
-         PAGE 3: HIBISCUS (2/3) — 온프레미스 장애 주입(DR) 시험 & 코드 리뷰 개선
+         PAGE 3: HIBISCUS (2/3) — Fault Injection (503) & Auto Rollback
     ========================================================== -->
     <article id="p3" data-section="hibiscus" class="page-card border-l-4 border-l-indigo-600 p-6 sm:p-10">
-      <!-- Unified Project Identity Top Bar -->
       <div class="flex flex-wrap items-center justify-between gap-2 border-b border-indigo-100 pb-4">
         <div class="flex items-center gap-2">
           <span class="rounded-md bg-indigo-600 px-2.5 py-1 text-xs font-extrabold tracking-wide text-white">PROJECT 01 · HIBISCUS (2/3)</span>
-          <span class="text-xs font-semibold text-indigo-900">온프레미스 강제 장애(503) 주입 시험 및 롤백 결함 개선</span>
+          <span class="text-xs font-semibold text-indigo-900">On-Premise 503 Fault Injection & Rollback Verification</span>
         </div>
         <span class="font-mono text-xs font-semibold text-slate-400">03 / 07 · HIBISCUS DR & ROLLBACK TEST</span>
       </div>
 
-      <!-- Action Title -->
       <div class="mt-5">
         <h2 class="text-xl font-extrabold text-slate-900 sm:text-2xl">
-          온프레미스 전환 중 장애(503)를 강제로 주입해, Cloud Run 자동 롤백과 무중단(109건 전부 200)을 실증했습니다
+          On-Premise 전환 중 503 장애를 강제 주입해, Cloud Run 자동 Rollback과 무중단 응답(109건 전부 HTTP 200)을 검증했습니다
         </h2>
         <p class="mt-1.5 text-xs text-slate-600 sm:text-sm">
-          해커톤의 핵심 평가 기준인 <strong>"배포 중 한쪽 환경에 장애가 발생했을 때 서비스 중단 없이 직전 버전으로 자동 복구(Rollback)되는가"</strong>를 검증하기 위해 실제 운영 환경(2026-10-03)에서 장애 주입 시험을 수행했습니다.
+          배포 도중 한쪽 환경에 장애가 발생했을 때 서비스 중단 없이 직전 버전으로 자동 Rollback되는지 증명하기 위해 실환경(2026-10-03)에서 Fault Injection 테스트를 수행했습니다.
         </p>
       </div>
 
-      <!-- Visual Timeline SVG Diagram -->
-      <div class="mt-5 overflow-x-auto rounded-xl border border-indigo-200 bg-slate-900 p-5 text-white">
-        <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-700">
-          <span class="text-xs font-bold text-indigo-300">실환경 장애 주입 및 자동 롤백 관측 타임라인 (2026-10-03 14:01)</span>
+      <!-- Responsive HTML Timeline Diagram (Zero Text Overflow Guaranteed) -->
+      <div class="mt-5 rounded-xl border border-indigo-200 bg-slate-900 p-5 text-white">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-700 pb-3">
+          <span class="text-xs font-bold text-indigo-300">Fault Injection & Auto-Rollback Timeline (2026-10-03 14:01)</span>
           <span class="rounded bg-emerald-500/20 px-2.5 py-0.5 font-mono text-xs font-bold text-emerald-300">공개 주소 1초 간격 요청 109건 → 109건 모두 HTTP 200 OK</span>
         </div>
 
-        <svg viewBox="0 0 880 185" class="mt-3 w-full min-w-[680px] h-auto" role="img" aria-label="온프레미스 503 장애 주입 및 34초 자동 롤백 타임라인">
-          <!-- Timeline Base Line -->
-          <line x1="40" y1="85" x2="840" y2="85" stroke="#475569" stroke-width="3" />
+        <div class="mt-3 rounded-lg bg-rose-700/90 px-3.5 py-2 text-xs font-bold text-white">
+          ⚡ Fault Injection: Candidate 통과 직후 Caddy Reverse Proxy에서 On-Premise Agent Polling API만 47초간 HTTP 503 차단
+        </div>
 
-          <!-- Fault Injection Bar (47s) -->
-          <rect x="175" y="18" width="380" height="24" rx="5" fill="#be123c" />
-          <text x="200" y="34" font-size="10.5" font-weight="700" fill="#ffffff">⚡ 장애 주입: Caddy에서 온프레미스 Agent 폴링 API만 47초간 HTTP 503 차단</text>
+        <div class="mt-4 grid gap-3 sm:grid-cols-4">
+          <div class="rounded-lg border border-slate-700 bg-slate-800/90 p-3">
+            <div class="flex items-center justify-between">
+              <span class="rounded bg-sky-500/20 px-2 py-0.5 font-mono text-[11px] font-bold text-sky-300">STEP 01</span>
+              <span class="font-mono text-[11px] text-slate-400">사전 검증</span>
+            </div>
+            <p class="mt-2 text-xs font-bold text-white">Candidate Health Check 통과</p>
+            <p class="mt-1 text-[11px] text-slate-300">Cloud Run · On-Premise 양쪽 신규 Candidate(트래픽 0%) 정상 기동 확인</p>
+          </div>
 
-          <!-- Node 1 -->
-          <circle cx="80" cy="85" r="9" fill="#38bdf8" />
-          <text x="35" y="65" font-size="10.5" font-weight="700" fill="#bae6fd">후보 헬스 체크 통과</text>
-          <text x="35" y="112" font-size="9.5" fill="#cbd5e1">Cloud Run · 온프레미스</text>
-          <text x="35" y="126" font-size="9.5" fill="#cbd5e1">신규 후보(0%) 정상 확인</text>
+          <div class="rounded-lg border border-indigo-500/50 bg-slate-800/90 p-3">
+            <div class="flex items-center justify-between">
+              <span class="rounded bg-indigo-500/20 px-2 py-0.5 font-mono text-[11px] font-bold text-indigo-300">STEP 02</span>
+              <span class="font-mono text-[11px] font-bold text-indigo-300">14:01:22</span>
+            </div>
+            <p class="mt-2 text-xs font-bold text-white">Cloud Run 신규 Revision 전환</p>
+            <p class="mt-1 text-[11px] text-slate-300">Cloud Run 신규 Revision 트래픽 100% 전환 완료 후 On-Premise 전환 요청 전송</p>
+          </div>
 
-          <!-- Node 2 -->
-          <circle cx="250" cy="85" r="9" fill="#818cf8" />
-          <text x="205" y="65" font-size="11" font-weight="700" fill="#c7d2fe">14:01:22</text>
-          <text x="195" y="112" font-size="10" font-weight="700" fill="#ffffff">① Cloud Run 신규 전환</text>
-          <text x="195" y="126" font-size="9.5" fill="#cbd5e1">신규 Revision 트래픽 100%</text>
-          <text x="195" y="140" font-size="9.5" fill="#fca5a5">온프레미스 전환 요청 시작</text>
+          <div class="rounded-lg border border-rose-500/60 bg-slate-800/90 p-3">
+            <div class="flex items-center justify-between">
+              <span class="rounded bg-rose-500/20 px-2 py-0.5 font-mono text-[11px] font-bold text-rose-300">STEP 03</span>
+              <span class="font-mono text-[11px] font-bold text-rose-300">Timeout 30s</span>
+            </div>
+            <p class="mt-2 text-xs font-bold text-rose-300">On-Premise 전환 실패 판정</p>
+            <p class="mt-1 text-[11px] text-slate-300">Agent가 503 응답을 재시도하는 사이 작업 기한(30초) 초과 → 자동 Rollback 트리거</p>
+          </div>
 
-          <!-- Node 3 -->
-          <circle cx="460" cy="85" r="9" fill="#f43f5e" />
-          <text x="405" y="65" font-size="10.5" font-weight="700" fill="#fda4af">전환 기한 30초 초과 감지</text>
-          <text x="395" y="112" font-size="10" font-weight="700" fill="#fda4af">② 온프레미스 전환 실패 판정</text>
-          <text x="395" y="126" font-size="9.5" fill="#cbd5e1">Agent가 503 재시도 중 타임아웃</text>
-          <text x="395" y="140" font-size="9.5" fill="#fde047">→ 즉시 자동 롤백 시퀀스 가동</text>
+          <div class="rounded-lg border border-emerald-500/60 bg-slate-800/90 p-3">
+            <div class="flex items-center justify-between">
+              <span class="rounded bg-emerald-500/20 px-2 py-0.5 font-mono text-[11px] font-bold text-emerald-300">STEP 04</span>
+              <span class="font-mono text-[11px] font-bold text-emerald-300">14:01:56 (+34s)</span>
+            </div>
+            <p class="mt-2 text-xs font-bold text-emerald-300">Cloud Run 직전 Revision 복귀</p>
+            <p class="mt-1 text-[11px] text-slate-300">이전 Revision 트래픽 100% 복원 및 On-Premise Candidate 정리 완료 (<code>rolled_back</code>)</p>
+          </div>
+        </div>
 
-          <!-- Node 4 -->
-          <circle cx="670" cy="85" r="9" fill="#10b981" />
-          <text x="630" y="65" font-size="11" font-weight="700" fill="#6ee7b7">14:01:56 (34초 후)</text>
-          <text x="600" y="112" font-size="10" font-weight="700" fill="#6ee7b7">③ Cloud Run 직전 버전 복귀 완료</text>
-          <text x="600" y="126" font-size="9.5" fill="#cbd5e1">이전 Revision 100% 복원 관측</text>
-          <text x="600" y="140" font-size="9.5" fill="#cbd5e1">온프레미스 후보 정리 · rolled_back</text>
-
-          <!-- Bottom Public Traffic Bar -->
-          <rect x="40" y="154" width="800" height="24" rx="5" fill="#064e3b" stroke="#10b981" stroke-width="1" />
-          <text x="160" y="170" font-size="10.5" font-weight="700" fill="#a7f3d0">✓ 사용자 대표 경로는 마지막 단계 전이라 기존 온프레미스 유지 → 시험 내내 1초 간격 요청 109건 무중단(HTTP 200)</text>
-        </svg>
+        <div class="mt-3 rounded-lg border border-emerald-500/40 bg-emerald-950/80 px-3.5 py-2 text-xs font-semibold text-emerald-200">
+          ✓ Gateway Route는 마지막 단계 전이라 기존 On-Premise 컨테이너를 유지 → 장애 주입 및 Rollback 전 과정에서 1초 간격 요청 109건 전부 HTTP 200 응답 유지
+        </div>
       </div>
 
-      <!-- Why 503 Blocked? (멘토링 피드백: 왜 하필 503만 차단했는지 이유를 구어체처럼 명확하게 설명) -->
+      <!-- Why 503 & PR #26 Fix -->
       <div class="mt-6 grid gap-4 md:grid-cols-2">
         <div class="rounded-xl border border-slate-200 bg-white p-5">
-          <span class="rounded bg-indigo-100 px-2 py-0.5 text-xs font-bold text-indigo-800">시험 설계 이유 (Why 503?)</span>
-          <h3 class="mt-2 text-base font-bold text-slate-900">왜 장애 시험에서 온프레미스 Agent API만 503으로 차단했는가?</h3>
-          <p class="mt-2 text-xs text-slate-600 leading-relaxed">
-            이미 Cloud Run이 새 버전으로 넘어간 뒤 <strong>온프레미스 전환 단계에서 실패했을 때 Cloud Run까지 다시 이전 버전으로 롤백되는지</strong>를 시험해야 했습니다.
+          <span class="rounded bg-indigo-100 px-2 py-0.5 text-xs font-bold text-indigo-800">Fault Injection Design (Why 503?)</span>
+          <h3 class="mt-2 text-base font-bold text-slate-900">왜 On-Premise Agent API만 503으로 차단했는가?</h3>
+          <p class="mt-2 text-xs leading-relaxed text-slate-600">
+            Cloud Run이 먼저 새 버전으로 전환된 직후, <strong>On-Premise 전환 단계에서 실패했을 때 Cloud Run까지 직전 버전으로 정확히 Rollback되는지</strong> 검증해야 했습니다.
           </p>
           <ul class="mt-2.5 space-y-2 text-xs text-slate-700">
             <li class="rounded-lg bg-slate-50 p-2.5">
-              <strong class="text-rose-600">• 앱 헬스 체크를 500으로 만들면 안 되는 이유:</strong> 전환 단계까지 가지도 않고 맨 앞의 '트래픽 0% 후보 검증 단계'에서 걸러져 배포가 보류(<code>held</code>)되므로 롤백 로직을 시험할 수 없습니다.
+              <strong class="text-rose-600">• 컨테이너 Health Check를 500으로 만들지 않은 이유:</strong> 전환 단계에 진입하기 전 앞단의 '트래픽 0% Candidate 검증 단계'에서 걸러져 보류(<code>held</code>)로 끝나므로 부분 전환 후 Rollback을 시험할 수 없습니다.
             </li>
             <li class="rounded-lg bg-slate-50 p-2.5">
-              <strong class="text-rose-600">• Agent API에 401/403을 주면 안 되는 이유:</strong> 인증 실패 코드를 받으면 온프레미스 Agent 프로세스가 스스로 종료되도록 구현되어 있었습니다(<a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/2a0d6298b594d7155aa97829830c4ef07f8107b1/onprem-agent/src/backend-client.ts#L97-L100" target="_blank" rel="noopener noreferrer" class="ext-link">Agent 코드 97~100행 ↗</a>).
+              <strong class="text-rose-600">• Agent API에 401/403을 주지 않은 이유:</strong> 인증 실패 응답 시 On-Premise Agent 프로세스가 즉시 종료되도록 설계되어 있었습니다.
             </li>
-            <li class="rounded-lg bg-indigo-50/70 p-2.5 border border-indigo-100">
-              <strong class="text-indigo-900">• 해결(Agent API만 47초간 503 반환):</strong> 후보 검증이 끝난 직후 앞단 Caddy 리버스 프록시에서 Agent 폴링 API만 503으로 막아 Agent가 재시도하다가 <strong>전환 기한(30초)을 초과</strong>하게 만들었고, 그 즉시 Cloud Run이 이전 Revision으로 자동 복귀하는 것을 확인했습니다.
+            <li class="rounded-lg border border-indigo-100 bg-indigo-50/70 p-2.5">
+              <strong class="text-indigo-900">• Agent API만 47초간 503 차단:</strong> Candidate 검증 통과 직후 Caddy에서 Agent Polling 경로만 503으로 차단해 <strong>전환 Timeout(30초)을 유도</strong>했고, 선전환됐던 Cloud Run이 이전 Revision으로 자동 복귀하는 것을 실증했습니다.
             </li>
           </ul>
         </div>
 
-        <!-- PR #26 Code Review Defect Fix -->
         <div class="flex flex-col justify-between rounded-xl border border-slate-200 bg-white p-5">
           <div>
-            <span class="rounded bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-800">협업 및 코드 품질 개선 (PR #26)</span>
-            <h3 class="mt-2 text-base font-bold text-slate-900">대표 경로 전환 실패 시 롤백이 누락되던 상태 기록 순서 결함 수정</h3>
-            <p class="mt-2 text-xs text-slate-600 leading-relaxed">
-              Python 조율기를 NestJS로 이식(<a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/26" target="_blank" rel="noopener noreferrer" class="ext-link">PR #26 ↗</a>)할 당시, 팀원의 코드 리뷰(<a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/26#discussion_r4164102670" target="_blank" rel="noopener noreferrer" class="ext-link">리뷰 코멘트 ↗</a>)를 통해 마지막 단계의 예외 처리 결함을 발견하고 보완했습니다.
+            <span class="rounded bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-800">Code Review & Defect Fix (PR #26)</span>
+            <h3 class="mt-2 text-base font-bold text-slate-900">Gateway Route 전환 실패 시 Rollback이 누락되던 상태 기록 결함 수정</h3>
+            <p class="mt-2 text-xs leading-relaxed text-slate-600">
+              Python Orchestrator를 NestJS로 이식할 당시 코드 리뷰 과정에서 마지막 단계의 예외 처리 결함을 발견해 수정했습니다.
             </p>
             <div class="mt-3 space-y-2 text-xs">
               <div class="rounded-lg border border-rose-200 bg-rose-50/50 p-2.5 text-slate-700">
-                <strong class="text-rose-700">[원인]</strong> Cloud Run과 온프레미스 전환 직후 배포 상태를 <code>activated</code>(성공)로 먼저 기록하고 그 뒤에 사용자 대표 경로(Gateway)를 변경해, 정작 대표 경로 전환이 실패해도 롤백이 호출되지 않았습니다.
+                <strong class="text-rose-700">Root Cause:</strong> Cloud Run과 On-Premise 전환 직후 배포 상태를 <code>activated</code>로 먼저 기록하고 그 뒤에 Gateway Route를 변경해, 정작 Route 전환이 실패해도 Rollback이 호출되지 않았습니다.
               </div>
               <div class="rounded-lg border border-emerald-200 bg-emerald-50/50 p-2.5 text-slate-700">
-                <strong class="text-emerald-800">[해결 및 테스트 검증]</strong> 대표 경로 전환까지 마친 뒤에야 성공으로 기록하도록 순서를 바로잡고, 실패 시 양쪽 환경을 동시에 이전 버전으로 되돌린 뒤 <code>rolled_back</code>(복구 대상이 없으면 <code>error</code>)으로 기록하게 수정했습니다.
+                <strong class="text-emerald-800">Fix & Verification:</strong> Gateway Route 전환까지 완료된 후 <code>activated</code>를 기록하도록 순서를 교정하고, 실패 시 양쪽 환경을 동시에 직전 버전으로 되돌린 뒤 <code>rolled_back</code>(복구 대상 부재 시 <code>error</code>)으로 기록하게 수정했습니다.
               </div>
             </div>
           </div>
 
-          <div class="mt-3 rounded-lg bg-slate-50 p-3 text-xs text-slate-700 border border-slate-200">
-            <p class="font-bold text-slate-900">작성한 자동화 회귀 테스트 (Vitest)</p>
-            <p class="mt-1 text-slate-600">① 양쪽 동시 롤백 및 <code>rolled_back</code> 기록 검증, ② 복구 컨테이너 부재 시 <code>error</code> 처리, ③ 롤백 중 하위 에러 발생 시 예외 처리까지 <strong>단위 테스트 3건·통합 테스트 1건</strong>을 추가해 승인·병합했습니다.</p>
-            <div class="mt-2 flex flex-wrap gap-3 text-[11px]">
-              <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/src/deployment/specs/deploy-orchestrator.spec.ts#L287-L350" target="_blank" rel="noopener noreferrer" class="ext-link">단위 테스트 (287~350행) ↗</a>
-              <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/882d4a766fce1bef0636f09e0d9dac78f43e4a73/backend-v2/test/deploy.e2e-spec.ts#L396-L436" target="_blank" rel="noopener noreferrer" class="ext-link">통합 테스트 (396~436행) ↗</a>
-              <a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/pull/26#pullrequestreview-5393827637" target="_blank" rel="noopener noreferrer" class="ext-link">리뷰 승인 ↗</a>
-            </div>
+          <div class="mt-3 rounded-lg border border-slate-200 bg-slate-50 p-3 text-xs text-slate-700">
+            <p class="font-bold text-slate-900">Regression Tests (Vitest)</p>
+            <p class="mt-1 text-slate-600">① 양쪽 동시 Rollback 및 <code>rolled_back</code> 상태 검증, ② 복구 컨테이너 부재 시 <code>error</code> 처리, ③ Rollback 중 하위 에러 발생 시 예외 처리까지 <strong>단위 테스트 3건·E2E 테스트 1건</strong>을 작성해 검증했습니다.</p>
           </div>
         </div>
       </div>
     </article>
 
     <!-- =========================================================
-         PAGE 4: HIBISCUS (3/3) — GCP 보안·인프라 구성 & 독립 트러블슈팅
+         PAGE 4: HIBISCUS (3/3) — GCP Infrastructure & Troubleshooting
     ========================================================== -->
     <article id="p4" data-section="hibiscus" class="page-card border-l-4 border-l-indigo-600 p-6 sm:p-10">
-      <!-- Unified Project Identity Top Bar -->
       <div class="flex flex-wrap items-center justify-between gap-2 border-b border-indigo-100 pb-4">
         <div class="flex items-center gap-2">
           <span class="rounded-md bg-indigo-600 px-2.5 py-1 text-xs font-extrabold tracking-wide text-white">PROJECT 01 · HIBISCUS (3/3)</span>
-          <span class="text-xs font-semibold text-indigo-900">GCP 실행 인프라·최소 권한 구성 및 배포 트러블슈팅</span>
+          <span class="text-xs font-semibold text-indigo-900">GCP Infrastructure · Least Privilege IAM · Troubleshooting</span>
         </div>
         <span class="font-mono text-xs font-semibold text-slate-400">04 / 07 · HIBISCUS GCP INFRA & TROUBLESHOOTING</span>
       </div>
@@ -729,126 +687,117 @@
         <table class="w-full text-left text-xs">
           <thead class="bg-indigo-50/70 text-indigo-950">
             <tr>
-              <th class="w-36 px-4 py-2.5 font-bold">구분</th>
-              <th class="px-4 py-2.5 font-bold">구성 내용 및 보안 설정</th>
-              <th class="w-64 px-4 py-2.5 font-bold">설계 이유 및 트레이드오프</th>
+              <th class="w-40 px-4 py-2.5 font-bold">Component</th>
+              <th class="px-4 py-2.5 font-bold">Configuration & Security Controls</th>
+              <th class="w-64 px-4 py-2.5 font-bold">Design Rationale & Trade-off</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-200 bg-white">
             <tr>
-              <td class="px-4 py-2.5 font-bold text-slate-900">Compute Engine & 방화벽</td>
+              <td class="px-4 py-2.5 font-bold text-slate-900">Compute Engine & Firewall</td>
               <td class="px-4 py-2.5 text-slate-700">
-                <code>e2-standard-4</code> (Ubuntu 24.04, 고정 IP) · 외부 방화벽은 <code>80·443</code>(Caddy HTTPS)과 <code>2222</code>(온프레미스 Agent SSH 리버스 터널)만 개방하고, 백엔드 API(<code>8080</code>)는 <code>127.0.0.1</code> 내부 루프백으로 제한(<a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/2a0d6298b594d7155aa97829830c4ef07f8107b1/frontend/.env.example#L7-L8" target="_blank" rel="noopener noreferrer" class="ext-link">설정 근거 ↗</a>)
+                <code>e2-standard-4</code> (Ubuntu 24.04, Static IP) · 외부 방화벽은 <code>80·443</code>(Caddy HTTPS)과 <code>2222</code>(On-Premise Agent SSH Reverse Tunnel)만 개방하고, 백엔드 API(<code>8080</code>)는 <code>127.0.0.1</code> Loopback으로 격리
               </td>
-              <td class="px-4 py-2.5 text-slate-600">상시 SSH 터널 유지 및 멀티 플랫폼 이미지 빌드를 위해 단일 VM 사용 (단일 장애점 한계는 인지)</td>
+              <td class="px-4 py-2.5 text-slate-600">상시 SSH 터널 유지 및 Multi-arch 이미지 빌드를 위해 단일 VM 구성 (SPOF 한계 인지)</td>
             </tr>
             <tr>
-              <td class="px-4 py-2.5 font-bold text-slate-900">IAM 최소 권한 분리</td>
+              <td class="px-4 py-2.5 font-bold text-slate-900">Least Privilege IAM</td>
               <td class="px-4 py-2.5 text-slate-700">
-                백엔드 서비스 계정의 프로젝트 역할은 <code>Cloud Run Developer</code>와 <code>Logs Viewer</code> 2개만 부여. Artifact Registry 쓰기와 Cloud Run 실행 계정 권한은 <strong>해당 리소스 단위로만 제한</strong>(<a href="https://policerjack.tistory.com/5" target="_blank" rel="noopener noreferrer" class="ext-link">구축 회고 6절 권한 화면 ↗</a>)
+                백엔드 Service Account의 프로젝트 레벨 Role은 <code>Cloud Run Developer</code>와 <code>Logs Viewer</code> 2개만 부여. Artifact Registry Push 및 Cloud Run 실행 계정 권한은 <strong>해당 리소스 단위로만 제한</strong>
               </td>
-              <td class="px-4 py-2.5 text-slate-600">프로젝트 전체 Editor 권한 부여를 피하고 침해 시 영향 반경 최소화</td>
+              <td class="px-4 py-2.5 text-slate-600">프로젝트 전체 Editor 권한 부여를 배제하여 침해 시 Blast Radius 최소화</td>
             </tr>
             <tr>
-              <td class="px-4 py-2.5 font-bold text-slate-900">Secret Manager 키 보호</td>
+              <td class="px-4 py-2.5 font-bold text-slate-900">Secret Manager</td>
               <td class="px-4 py-2.5 text-slate-700">
-                <code>cosign</code> 개인키·비밀번호·GitHub 웹훅 비밀값을 Secret Manager에 보관하고, 실행 시 메모리 기반 <code>/run</code> 하위 <code>0700</code> 폴더에만 마운트
+                <code>cosign</code> Private Key·Passphrase·GitHub Webhook Secret을 Secret Manager에 보관하고, 런타임에 메모리 기반 <code>/run</code> 하위 <code>0700</code> 디렉터리에만 마운트
               </td>
-              <td class="px-4 py-2.5 text-slate-600">VM 디스크에 평문 개인키가 남지 않도록 차단 (<code>Secret Accessor</code>도 단일 계정에만 부여)</td>
+              <td class="px-4 py-2.5 text-slate-600">VM 디스크에 평문 키가 남지 않도록 차단 (<code>Secret Accessor</code>도 단일 계정에만 부여)</td>
             </tr>
             <tr>
               <td class="px-4 py-2.5 font-bold text-slate-900">Cloud SQL & Cloud NAT</td>
               <td class="px-4 py-2.5 text-slate-700">
-                MySQL 공인 IP + TLS 암호화 필수 적용, 접근 허용 IP는 <strong>Cloud NAT 고정 출구 IP와 온프레미스 공인 IP 단 2개</strong>만 등록
+                MySQL Public IP + TLS 필수 적용, Authorized Networks에는 <strong>Cloud NAT 고정 Egress IP와 On-Premise IP 단 2개</strong>만 허용
               </td>
-              <td class="px-4 py-2.5 text-slate-600">동적 IP 환경인 Cloud Run에서도 고정된 출구 IP로만 DB에 안전하게 접근하도록 통제</td>
+              <td class="px-4 py-2.5 text-slate-600">Serverless 환경인 Cloud Run에서도 고정된 Egress IP로만 DB에 접근하도록 통제</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <!-- Dedicated Troubleshooting Section (멘토링 피드백: 본문 중간에 섞여 있던 /healthz 404 등을 독립된 트러블슈팅 섹션으로 명확히 분리) -->
+      <!-- Dedicated Troubleshooting Section -->
       <div class="mt-7">
-        <div class="flex items-center justify-between">
-          <h3 class="text-base font-bold text-slate-900">Hibiscus 핵심 트러블슈팅 (Troubleshooting)</h3>
-          <span class="text-xs text-slate-500">데모 배포 총 17건 중 후보 단계에서 불량·오류 8건을 사전 차단해 운영 장애 0건 유지</span>
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <h3 class="text-base font-bold text-slate-900">Hibiscus Troubleshooting</h3>
+          <span class="text-xs text-slate-500">데모 배포 17건 중 Candidate 단계에서 설정·경로 오류 8건 사전 차단 (운영 장애 0건)</span>
         </div>
 
         <div class="mt-3 grid gap-4 md:grid-cols-3">
-          <!-- TS 1: Cloud Run /healthz 404 -->
           <div class="rounded-xl border border-slate-200 bg-slate-50/60 p-4">
-            <span class="inline-block rounded bg-rose-100 px-2 py-0.5 text-[11px] font-bold text-rose-800">Troubleshooting 01 · Cloud Run 예약 경로</span>
-            <h4 class="mt-2 text-sm font-bold text-slate-900">온프레미스에선 통과한 <code>/healthz</code>가 Cloud Run에서만 404를 반환한 문제</h4>
-            <ul class="mt-2 space-y-1.5 text-xs text-slate-600">
-              <li>• <strong>[상황]</strong> 동일한 컨테이너 이미지를 배포했는데 온프레미스 후보 검사는 통과하고 Cloud Run 후보에서만 <code>/healthz</code> 요청이 3회 연속 404로 실패했습니다.</li>
-              <li>• <strong>[원인]</strong> Cloud Run 프론트엔드 인프라가 <code>/healthz</code> 등 <code>z</code>로 끝나는 일부 시스템 경로를 내부 예약 경로로 가로채 컨테이너까지 요청이 전달되지 않는 제약이 있었습니다.</li>
-              <li>• <strong>[해결]</strong> 오케스트레이터가 즉시 양쪽 후보를 정리해 기존 버전을 보호(<code>held</code>)한 것을 확인한 뒤, 애플리케이션과 헬스 체크 경로를 <code>/health</code>로 변경해 해결했습니다.</li>
-            </ul>
+            <span class="inline-block rounded bg-rose-100 px-2 py-0.5 text-[11px] font-bold text-rose-800">Troubleshooting 01 · Cloud Run Reserved Path</span>
+            <h4 class="mt-2 text-sm font-bold text-slate-900">On-Premise에선 통과한 <code>/healthz</code>가 Cloud Run에서만 404를 반환한 이슈</h4>
+            <p class="mt-2 text-xs leading-relaxed text-slate-600">
+              동일한 이미지를 배포했는데 On-Premise Candidate는 통과하고 Cloud Run Candidate에서만 <code>/healthz</code> 요청이 3회 연속 404로 실패했습니다. 확인 결과 Cloud Run 프론트엔드가 <code>/healthz</code> 등 <code>z</code>로 끝나는 경로를 내부 예약 경로로 가로채 컨테이너까지 요청이 도달하지 않는 제약이 있었고, Orchestrator가 즉시 양쪽 후보를 정리(<code>held</code>)한 뒤 엔드포인트를 <code>/health</code>로 변경해 해결했습니다.
+            </p>
           </div>
 
-          <!-- TS 2: Docker 29 containerd snapshotter -->
           <div class="rounded-xl border border-slate-200 bg-slate-50/60 p-4">
-            <span class="inline-block rounded bg-rose-100 px-2 py-0.5 text-[11px] font-bold text-rose-800">Troubleshooting 02 · 이미지 Digest 불일치</span>
-            <h4 class="mt-2 text-sm font-bold text-slate-900">Docker 29 환경에서 멀티 플랫폼 이미지 인덱스 Digest가 어긋나던 문제</h4>
-            <ul class="mt-2 space-y-1.5 text-xs text-slate-600">
-              <li>• <strong>[상황]</strong> <code>cosign</code>으로 서명한 이미지 digest와 배포 단계에서 조회한 레지스트리 digest가 일치하지 않아 서명 검증에서 거부되었습니다.</li>
-              <li>• <strong>[원인]</strong> GCP VM의 Docker 29 기본 <code>containerd</code> 스냅샷 저장소 설정이 멀티 아키텍처 인덱스 매니페스트를 다르게 처리해 발생한 문제였습니다.</li>
-              <li>• <strong>[해결]</strong> 스토리지 드라이버를 <code>overlay2</code>로 명시해 빌드·푸시 시점의 다이제스트 일관성을 확보했습니다.</li>
-            </ul>
+            <span class="inline-block rounded bg-rose-100 px-2 py-0.5 text-[11px] font-bold text-rose-800">Troubleshooting 02 · Manifest Digest Mismatch</span>
+            <h4 class="mt-2 text-sm font-bold text-slate-900">Docker 29 환경에서 Multi-arch Index Digest가 어긋나던 이슈</h4>
+            <p class="mt-2 text-xs leading-relaxed text-slate-600">
+              <code>cosign</code>으로 서명한 이미지 <code>digest</code>와 배포 단계에서 조회한 Registry <code>digest</code>가 일치하지 않아 서명 검증에서 거부되었습니다. GCP VM의 Docker 29 기본 <code>containerd</code> snapshotter 설정이 Multi-arch index manifest를 다르게 처리해 발생한 문제임을 확인하고, 스토리지 드라이버를 <code>overlay2</code>로 변경해 빌드·푸시 시점의 <code>digest</code> 일관성을 확보했습니다.
+            </p>
           </div>
 
-          <!-- TS 3: Cloud Run amd64 vs index digest tracking -->
           <div class="rounded-xl border border-slate-200 bg-slate-50/60 p-4">
-            <span class="inline-block rounded bg-rose-100 px-2 py-0.5 text-[11px] font-bold text-rose-800">Troubleshooting 03 · 배포 버전 추적성</span>
-            <h4 class="mt-2 text-sm font-bold text-slate-900">Cloud Run 콘솔 표시 Digest(amd64)와 서명 Digest(index) 차이 해결</h4>
-            <ul class="mt-2 space-y-1.5 text-xs text-slate-600">
-              <li>• <strong>[상황]</strong> 멀티 아키텍처 이미지를 배포하면 Cloud Run은 실제 실행 아키텍처(<code>amd64</code>) digest를 표시해, 서명에 쓰인 상위 <code>index</code> digest와 대조하기 어려웠습니다.</li>
-              <li>• <strong>[해결]</strong> Revision 이름에 <code>digest 앞 12자 + 실행 ID 해시 6자</code>를 조합해 재시도 멱등성을 보장하고, <code>HIB_RUN_ID</code>·<code>HIB_DIGEST</code> 환경변수로 원본 인덱스 digest를 기록해 추적성을 확보했습니다(<a href="https://github.com/SoftBank-Hackathon-Hibiscus/hibiscus/blob/eae12bd199f0d85945ece5fb0c3a2bdfabba8321/deploy/cloudrun/candidate.sh#L1-L16" target="_blank" rel="noopener noreferrer" class="ext-link">candidate.sh 1~16행 ↗</a>).</li>
-            </ul>
+            <span class="inline-block rounded bg-rose-100 px-2 py-0.5 text-[11px] font-bold text-rose-800">Troubleshooting 03 · Revision Idempotency</span>
+            <h4 class="mt-2 text-sm font-bold text-slate-900">Cloud Run 표시 Digest(amd64)와 서명 Digest(index) 차이 해결</h4>
+            <p class="mt-2 text-xs leading-relaxed text-slate-600">
+              Multi-arch 이미지를 배포하면 Cloud Run은 플랫폼별(<code>amd64</code>) <code>digest</code>를 표시해 서명에 사용된 상위 <code>index</code> <code>digest</code>와 대조하기 어려웠습니다. Revision 이름에 <code>digest 앞 12자 + run_id 해시 6자</code>를 조합해 재시도 멱등성을 보장하고, <code>HIB_RUN_ID</code>·<code>HIB_DIGEST</code> 환경변수로 원본 <code>index digest</code>를 기록해 추적성을 확보했습니다.
+            </p>
           </div>
         </div>
       </div>
     </article>
 
     <!-- =========================================================
-         PAGE 5: 영주로그 CI/CD (1/2) — 파이프라인 아키텍처 & 무중단 배포 설계
+         PAGE 5: 영주로그 CI/CD (1/2) — Pipeline Architecture & Zero-Downtime Design
     ========================================================== -->
     <article id="p5" data-section="yeongju" class="page-card border-l-4 border-l-emerald-600 p-6 sm:p-10">
-      <!-- Unified Project Identity Top Bar -->
       <div class="flex flex-wrap items-center justify-between gap-2 border-b border-emerald-100 pb-4">
         <div class="flex items-center gap-2">
           <span class="rounded-md bg-emerald-600 px-2.5 py-1 text-xs font-extrabold tracking-wide text-white">PROJECT 02 · 영주로그 CI/CD (1/2)</span>
-          <span class="text-xs font-semibold text-emerald-900">Jenkins · SonarQube · Ansible · Kubernetes 무중단 배포 파이프라인</span>
+          <span class="text-xs font-semibold text-emerald-900">Jenkins · SonarQube · Ansible · Kubernetes CI/CD Pipeline</span>
         </div>
         <span class="font-mono text-xs font-semibold text-slate-400">05 / 07 · YEONGJULOG K8S CI/CD</span>
       </div>
 
-      <!-- Clear Project Title & 3-Line Context Box -->
+      <!-- Project Header Box -->
       <div class="mt-5 rounded-2xl border border-emerald-200 bg-gradient-to-r from-emerald-50/80 via-white to-teal-50/50 p-5">
         <div class="flex flex-wrap items-baseline justify-between gap-2">
           <h2 class="text-xl font-extrabold text-slate-900 sm:text-2xl">
-            영주로그 (YeongjuLog) - Jenkins·Ansible·K8s 무중단 CI/CD 및 자동 롤백 파이프라인
+            영주로그 - Jenkins·Ansible·K8s 무중단 CI/CD 및 자동 Rollback 파이프라인
           </h2>
           <span class="font-mono text-xs font-semibold text-emerald-700">팀 배포 2026.03~06 (4인) · 개인 CI/CD 고도화 2026.09 (1인)</span>
         </div>
 
-        <div class="mt-3 grid gap-2 text-xs text-slate-700 sm:grid-cols-3 sm:text-sm">
-          <div class="rounded-lg bg-white/90 p-3 shadow-sm border border-emerald-100">
-            <p class="text-[11px] font-bold uppercase text-emerald-700">어떤 프로젝트인가 (맥락)</p>
-            <p class="mt-1 text-xs leading-relaxed">영주시 공공데이터와 AI 페르소나를 결합한 관광 가이드 서비스(Spring Boot 3.2 · Java 17 · MySQL)의 백엔드 배포 인프라를 수동 배포에서 <strong>K8s 무중단 자동화 파이프라인</strong>으로 고도화한 프로젝트입니다.</p>
+        <div class="mt-3 grid gap-2.5 text-xs text-slate-700 sm:grid-cols-3">
+          <div class="rounded-lg border border-emerald-100 bg-white/95 p-3 shadow-sm">
+            <p class="text-[11px] font-bold uppercase text-emerald-700">Service Overview</p>
+            <p class="mt-1 leading-relaxed">영주시 공공데이터와 AI 페르소나를 결합한 관광 가이드 백엔드(Spring Boot 3.2 · Java 17 · MySQL)의 배포 환경을 수동 배포에서 <strong>K8s 무중단 CI/CD 파이프라인</strong>으로 전환한 프로젝트입니다.</p>
           </div>
-          <div class="rounded-lg bg-white/90 p-3 shadow-sm border border-emerald-100">
-            <p class="text-[11px] font-bold uppercase text-emerald-700">내 담당 역할 (인프라 · CI/CD 전담)</p>
-            <p class="mt-1 text-xs leading-relaxed">팀 프로젝트 당시 AWS EC2·RDS 초기 배포를 담당했고, 종료 후 개인 저장소로 포크해 <strong>Jenkins · SonarQube · Ansible · Kubernetes(kubeadm)</strong> 파이프라인과 자동 롤백을 단독 구축했습니다.</p>
+          <div class="rounded-lg border border-emerald-100 bg-white/95 p-3 shadow-sm">
+            <p class="text-[11px] font-bold uppercase text-emerald-700">Role & Ownership</p>
+            <p class="mt-1 leading-relaxed">팀 프로젝트에서 AWS EC2·RDS 배포를 담당했고, 이후 개인 저장소로 포크해 <strong>Jenkins · SonarQube · Ansible · Kubernetes(kubeadm)</strong> 파이프라인과 자동 Rollback을 단독 구축했습니다.</p>
           </div>
-          <div class="rounded-lg bg-white/90 p-3 shadow-sm border border-emerald-100">
-            <p class="text-[11px] font-bold uppercase text-emerald-700">핵심 성과 (검증 결과)</p>
-            <p class="mt-1 text-xs leading-relaxed">테스트·품질 미달 시 배포 사전 차단 · K8s 롤링 업데이트(<code>maxUnavailable: 0</code>) 무중단 전환 · <strong>DB 연결 불량 시 180초 감시 후 <code>rollout undo</code> 자동 롤백</strong>을 4가지 실패 시험으로 검증했습니다.</p>
+          <div class="rounded-lg border border-emerald-100 bg-white/95 p-3 shadow-sm">
+            <p class="text-[11px] font-bold uppercase text-emerald-700">Key Impact</p>
+            <p class="mt-1 leading-relaxed">테스트·품질 미달 시 배포 사전 차단 · K8s RollingUpdate(<code>maxUnavailable: 0</code>) 무중단 전환 · <strong>DB 연결 불량 시 180초 감시 후 <code>rollout undo</code> 자동 Rollback</strong>을 4가지 실패 주입 시험으로 검증했습니다.</p>
           </div>
         </div>
 
         <div class="mt-3.5 flex flex-wrap items-center gap-1.5 pt-1">
-          <span class="text-[11px] font-bold text-slate-500 mr-1">기술 스택:</span>
+          <span class="mr-1 text-[11px] font-bold text-slate-500">Tech Stack:</span>
           <span class="rounded-md bg-slate-800 px-2 py-0.5 font-mono text-[11px] font-medium text-white">Jenkins</span>
           <span class="rounded-md bg-slate-800 px-2 py-0.5 font-mono text-[11px] font-medium text-white">Ansible</span>
           <span class="rounded-md bg-slate-800 px-2 py-0.5 font-mono text-[11px] font-medium text-white">Kubernetes (kubeadm)</span>
@@ -859,76 +808,89 @@
         </div>
       </div>
 
-      <!-- Visual CI/CD Architecture Diagram with Mapped Numbers ①~④ (멘토링 피드백: 한 그림에 여러 경험을 번호로 매핑하고 아래에서 풀어주기) -->
+      <!-- Responsive HTML/CSS CI/CD Pipeline Architecture (Zero Text Overflow Guaranteed) -->
       <div class="mt-6">
-        <h3 class="text-base font-bold text-slate-900">파이프라인 아키텍처 및 단계별 경험 매핑 (①~④)</h3>
-        <div class="mt-2.5 overflow-x-auto rounded-xl border border-slate-200 bg-slate-50/70 p-4">
-          <svg viewBox="0 0 920 250" class="w-full min-w-[720px] h-auto" role="img" aria-label="영주로그 Jenkins Ansible Kubernetes CI/CD 아키텍처 다이어그램">
-            <defs>
-              <marker id="arrow-teal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669" />
-              </marker>
-            </defs>
+        <h3 class="text-base font-bold text-slate-900">CI/CD Pipeline Architecture & Stage Mapping (①~④)</h3>
+        <div class="mt-2.5 rounded-xl border border-slate-200 bg-slate-50/80 p-4">
+          <div class="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
+            <!-- Stage 1 -->
+            <div class="flex flex-col justify-between rounded-xl border-2 border-emerald-600 bg-white p-3.5 shadow-sm">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-xs font-bold text-white">1</span>
+                  <p class="text-xs font-extrabold text-emerald-950">CI Test Isolation</p>
+                </div>
+                <div class="mt-2.5 rounded-lg border border-slate-200 bg-slate-50 p-2.5 text-[11px]">
+                  <p class="font-bold text-slate-800">GitHub Poll SCM (2분 주기)</p>
+                  <p class="mt-0.5 text-slate-500">Commit SHA 앞 7자 추출 (<code>GIT_HASH</code>)</p>
+                </div>
+                <div class="mt-2 rounded-lg border border-emerald-200 bg-emerald-50/70 p-2.5 text-[11px]">
+                  <p class="font-bold text-emerald-900"><code>./gradlew clean test</code> (H2)</p>
+                  <p class="mt-0.5 text-emerald-800">운영 DB·실제 API 키 없이 인메모리 검증</p>
+                </div>
+              </div>
+              <p class="mt-2.5 border-t border-slate-100 pt-2 text-[11px] font-bold text-rose-600">✗ 실패 시 후속 빌드·배포 즉시 중단 (#3)</p>
+            </div>
 
-            <!-- Box 1: GitHub & Jenkins Test -->
-            <rect x="15" y="20" width="205" height="205" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.8" />
-            <circle cx="35" cy="42" r="11" fill="#059669" />
-            <text x="31" y="46" font-size="11" font-weight="700" fill="#ffffff">1</text>
-            <text x="52" y="46" font-size="11.5" font-weight="800" fill="#064e3b">CI 테스트 격리 (Jenkins)</text>
-            <rect x="28" y="60" width="179" height="44" rx="6" fill="#f8fafc" stroke="#cbd5e1" />
-            <text x="36" y="78" font-size="10" font-weight="700" fill="#334155">GitHub Poll SCM (2분 주기)</text>
-            <text x="36" y="94" font-size="9.5" fill="#64748b">커밋 해시 앞 7자 추출 (GIT_HASH)</text>
-            <rect x="28" y="114" width="179" height="55" rx="6" fill="#ecfdf5" stroke="#6ee7b7" />
-            <text x="36" y="132" font-size="10.5" font-weight="700" fill="#065f46">./gradlew clean test (H2)</text>
-            <text x="36" y="147" font-size="9.5" fill="#047857">운영 DB·실제 API 키 없이 인메모리 검증</text>
-            <text x="36" y="161" font-size="9.5" font-weight="700" fill="#e11d48">✗ 실패 시 빌드·배포 즉시 중단 (#3)</text>
+            <!-- Stage 2 -->
+            <div class="flex flex-col justify-between rounded-xl border-2 border-emerald-600 bg-white p-3.5 shadow-sm">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-xs font-bold text-white">2</span>
+                  <p class="text-xs font-extrabold text-emerald-950">SonarQube Quality Gate</p>
+                </div>
+                <div class="mt-2.5 rounded-lg border border-slate-200 bg-slate-50 p-2.5 text-[11px]">
+                  <p class="font-bold text-slate-800">Static Analysis & JaCoCo</p>
+                  <p class="mt-0.5 text-slate-500">CORS Wildcard 제거 → Security A등급</p>
+                </div>
+                <div class="mt-2 rounded-lg border border-emerald-200 bg-emerald-50/70 p-2.5 text-[11px]">
+                  <p class="font-bold text-emerald-900"><code>waitForQualityGate</code></p>
+                  <p class="mt-0.5 text-emerald-800">품질 기준 미달 시 파이프라인 중단</p>
+                </div>
+              </div>
+              <p class="mt-2.5 border-t border-slate-100 pt-2 text-[11px] font-bold text-rose-600">✗ 커버리지 미달 시 Docker 빌드 스킵 (#23)</p>
+            </div>
 
-            <!-- Box 2: SonarQube Quality Gate -->
-            <rect x="245" y="20" width="205" height="205" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.8" />
-            <circle cx="265" cy="42" r="11" fill="#059669" />
-            <text x="261" y="46" font-size="11" font-weight="700" fill="#ffffff">2</text>
-            <text x="282" y="46" font-size="11.5" font-weight="800" fill="#064e3b">품질·보안 관문 (SonarQube)</text>
-            <rect x="258" y="60" width="179" height="48" rx="6" fill="#f8fafc" stroke="#cbd5e1" />
-            <text x="266" y="78" font-size="10" font-weight="700" fill="#334155">정적 분석 & JaCoCo 커버리지</text>
-            <text x="266" y="94" font-size="9.5" fill="#64748b">CORS 와일드카드 수정 → 보안 A등급</text>
-            <rect x="258" y="118" width="179" height="51" rx="6" fill="#ecfdf5" stroke="#6ee7b7" />
-            <text x="266" y="136" font-size="10.5" font-weight="700" fill="#065f46">waitForQualityGate</text>
-            <text x="266" y="151" font-size="9.5" fill="#047857">기준 미달 시 Docker 빌드 차단</text>
-            <text x="266" y="164" font-size="9.5" font-weight="700" fill="#e11d48">✗ 커버리지 미달 시 스킵 검증 (#23)</text>
+            <!-- Stage 3 -->
+            <div class="flex flex-col justify-between rounded-xl border-2 border-emerald-600 bg-white p-3.5 shadow-sm">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-xs font-bold text-white">3</span>
+                  <p class="text-xs font-extrabold text-emerald-950">Single Build & Git SHA Tag</p>
+                </div>
+                <div class="mt-2.5 rounded-lg border border-slate-200 bg-slate-50 p-2.5 text-[11px]">
+                  <p class="font-bold text-slate-800">Docker Hub Registry</p>
+                  <p class="mt-0.5 font-mono text-[10.5px] font-semibold text-emerald-700">yeonjulog:&lt;git-sha-7&gt;</p>
+                </div>
+                <ul class="mt-2 space-y-1 text-[11px] text-slate-600">
+                  <li>• <code>latest</code> 태그 사용 배제</li>
+                  <li>• CI 서버(x86_64)에서 1회만 빌드</li>
+                  <li>• 운영 중인 커밋 즉시 역추적 가능</li>
+                </ul>
+              </div>
+              <p class="mt-2.5 border-t border-slate-100 pt-2 text-[11px] font-semibold text-emerald-700">✓ 검증 통과 이미지와 배포 이미지 100% 일치</p>
+            </div>
 
-            <!-- Box 3: Single Image Build & Push -->
-            <rect x="475" y="20" width="185" height="205" rx="10" fill="#ffffff" stroke="#059669" stroke-width="1.8" />
-            <circle cx="495" cy="42" r="11" fill="#059669" />
-            <text x="491" y="46" font-size="11" font-weight="700" fill="#ffffff">3</text>
-            <text x="512" y="46" font-size="11.5" font-weight="800" fill="#064e3b">단일 이미지 빌드·태깅</text>
-            <rect x="488" y="60" width="159" height="109" rx="6" fill="#f8fafc" stroke="#cbd5e1" />
-            <text x="496" y="80" font-size="10" font-weight="700" fill="#0f172a">Docker Hub 레지스트리</text>
-            <text x="496" y="97" font-size="9.5" font-family="monospace" fill="#059669">yeonjulog:&lt;git-sha-7&gt;</text>
-            <text x="496" y="116" font-size="9.5" fill="#475569">• latest 태그 사용 배제</text>
-            <text x="496" y="132" font-size="9.5" fill="#475569">• CI 서버에서 1회만 빌드</text>
-            <text x="496" y="148" font-size="9.5" fill="#475569">• 어느 커밋이 운영 중인지</text>
-            <text x="496" y="161" font-size="9.5" fill="#475569">  즉시 역추적 및 롤백 가능</text>
-
-            <!-- Box 4: Ansible + Kubernetes Cluster -->
-            <rect x="685" y="20" width="220" height="205" rx="10" fill="#ffffff" stroke="#059669" stroke-width="2" />
-            <circle cx="705" cy="42" r="11" fill="#059669" />
-            <text x="701" y="46" font-size="11" font-weight="700" fill="#ffffff">4</text>
-            <text x="722" y="46" font-size="11.5" font-weight="800" fill="#064e3b">Ansible → K8s 무중단 배포</text>
-            <rect x="698" y="60" width="194" height="52" rx="6" fill="#ecfdf5" stroke="#6ee7b7" />
-            <text x="706" y="77" font-size="10" font-weight="700" fill="#065f46">RollingUpdate (replicas: 2)</text>
-            <text x="706" y="92" font-size="9.5" fill="#047857">maxSurge: 1, maxUnavailable: 0</text>
-            <text x="706" y="105" font-size="9.5" fill="#047857">readinessProbe(/actuator/health)</text>
-            <rect x="698" y="120" width="194" height="88" rx="6" fill="#fff1f2" stroke="#fda4af" />
-            <text x="706" y="138" font-size="10" font-weight="700" fill="#be123c">자동 롤백 (Ansible block/rescue)</text>
-            <text x="706" y="154" font-size="9.5" fill="#881337">• rollout status --timeout=180s 감시</text>
-            <text x="706" y="169" font-size="9.5" fill="#881337">• 기동 실패 시 rollout undo 즉시 실행</text>
-            <text x="706" y="184" font-size="9.5" font-weight="700" fill="#be123c">• 복구 후 fail 모듈로 빌드 FAILURE 처리</text>
-
-            <!-- Connectors -->
-            <line x1="220" y1="120" x2="240" y2="120" stroke="#059669" stroke-width="2" marker-end="url(#arrow-teal)" />
-            <line x1="450" y1="120" x2="470" y2="120" stroke="#059669" stroke-width="2" marker-end="url(#arrow-teal)" />
-            <line x1="660" y1="120" x2="680" y2="120" stroke="#059669" stroke-width="2" marker-end="url(#arrow-teal)" />
-          </svg>
+            <!-- Stage 4 -->
+            <div class="flex flex-col justify-between rounded-xl border-2 border-emerald-600 bg-white p-3.5 shadow-sm">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-xs font-bold text-white">4</span>
+                  <p class="text-xs font-extrabold text-emerald-950">Ansible → K8s Rollout</p>
+                </div>
+                <div class="mt-2.5 rounded-lg border border-emerald-200 bg-emerald-50/70 p-2.5 text-[11px]">
+                  <p class="font-bold text-emerald-900">RollingUpdate (<code>replicas: 2</code>)</p>
+                  <p class="mt-0.5 text-emerald-800"><code>maxSurge: 1</code>, <code>maxUnavailable: 0</code></p>
+                  <p class="mt-0.5 text-emerald-800"><code>readinessProbe</code> (<code>/actuator/health</code>)</p>
+                </div>
+                <div class="mt-2 rounded-lg border border-rose-200 bg-rose-50/70 p-2.5 text-[11px]">
+                  <p class="font-bold text-rose-800">Ansible <code>block / rescue</code></p>
+                  <p class="mt-0.5 text-rose-700">180s Timeout 시 <code>rollout undo</code> 실행</p>
+                </div>
+              </div>
+              <p class="mt-2.5 border-t border-slate-100 pt-2 text-[11px] font-bold text-rose-600">✗ 복구 후 <code>fail</code> 모듈로 FAILURE 기록 (#15)</p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -936,112 +898,110 @@
       <div class="mt-5 grid gap-4 sm:grid-cols-2">
         <div class="rounded-xl border border-slate-200 bg-white p-4">
           <div class="flex items-center gap-2">
-            <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-600 text-[11px] font-bold text-white">1</span>
-            <h4 class="text-sm font-bold text-slate-900">CI 테스트 환경(H2)과 운영 설정(K8s Secret) 완전 분리</h4>
+            <span class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-[11px] font-bold text-white">1</span>
+            <h4 class="text-sm font-bold text-slate-900">CI 테스트 환경(H2)과 운영 설정(K8s Secret) 분리</h4>
           </div>
           <p class="mt-1.5 text-xs text-slate-600">
-            기존 저장소에는 설정 파일이 빠져 있고 실제 외부 API 키가 있어야만 테스트가 통과했습니다. CI 서버에 민감 정보를 두지 않기 위해 <code>src/test/resources/application.yml</code>에 H2 인메모리 DB와 더미 키를 구성해 빌드 시점 검증을 격리하고, 실제 운영 DB 정보는 K8s Secret(<code>yeongju-env</code>)으로만 주입했습니다(<a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/Jenkinsfile#L25-L36" target="_blank" rel="noopener noreferrer" class="ext-link">Jenkinsfile 25~36행 ↗</a>).
+            기존 저장소에는 설정 파일이 제외되어 있고 실제 외부 API 키가 있어야만 스프링 컨텍스트 테스트가 통과했습니다. CI 서버에 민감 정보를 두지 않기 위해 <code>src/test/resources/application.yml</code>에 H2 인메모리 DB와 테스트용 더미 키를 구성해 빌드 검증을 격리하고, 운영 DB 정보는 K8s Secret(<code>yeongju-env</code>)으로 주입했습니다.
           </p>
         </div>
 
         <div class="rounded-xl border border-slate-200 bg-white p-4">
           <div class="flex items-center gap-2">
-            <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-600 text-[11px] font-bold text-white">2</span>
-            <h4 class="text-sm font-bold text-slate-900">하드코딩된 <code>/v1/health</code>를 Spring Boot Actuator로 교체한 이유</h4>
+            <span class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-[11px] font-bold text-white">2</span>
+            <h4 class="text-sm font-bold text-slate-900">하드코딩된 <code>/v1/health</code>를 Spring Boot Actuator로 교체</h4>
           </div>
           <p class="mt-1.5 text-xs text-slate-600">
-            기존의 <code>/v1/health</code> 컨트롤러는 DB가 끊겨도 무조건 <code>"UP"</code>을 반환해 장애 감지에 쓸 수 없었습니다. 실제 DB 연결 실패 시 <code>HTTP 503 DOWN</code>을 반환하는 <code>/actuator/health</code>로 헬스 체크를 교체하고, K8s <code>readinessProbe</code>와 <code>livenessProbe</code>에 연결했습니다(<a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/k8s/deployment.yaml#L36-L47" target="_blank" rel="noopener noreferrer" class="ext-link">deployment.yaml 36~47행 ↗</a>).
+            기존 <code>/v1/health</code> 엔드포인트는 DB가 끊겨도 무조건 <code>"UP"</code>을 반환해 장애 감지에 사용할 수 없었습니다. 실제 DB 연결 실패 시 <code>HTTP 503 DOWN</code>을 반환하는 <code>/actuator/health</code>로 Health Check를 교체하고, K8s <code>readinessProbe</code>와 <code>livenessProbe</code>에 연결했습니다.
           </p>
         </div>
 
         <div class="rounded-xl border border-slate-200 bg-white p-4">
           <div class="flex items-center gap-2">
-            <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-600 text-[11px] font-bold text-white">3</span>
-            <h4 class="text-sm font-bold text-slate-900"><code>latest</code> 대신 Git Commit SHA 태깅 & 단일 빌드 원칙</h4>
+            <span class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-[11px] font-bold text-white">3</span>
+            <h4 class="text-sm font-bold text-slate-900"><code>latest</code> 대신 Git Commit SHA 태깅 및 단일 빌드 원칙</h4>
           </div>
           <p class="mt-1.5 text-xs text-slate-600">
-            배포 서버마다 소스를 내려받아 빌드하면 아키텍처 불일치(Mac <code>arm64</code> vs EC2 <code>x86_64</code>)와 빌드 시간 낭비가 발생합니다. Jenkins에서 단 한 번 빌드해 <code>seojunhayo/yeonjulog:&lt;커밋해시7자&gt;</code>로 올리고, 운영 서버는 해당 이미지를 pull만 하도록 표준화했습니다(<a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/Jenkinsfile#L56-L75" target="_blank" rel="noopener noreferrer" class="ext-link">Jenkinsfile 56~75행 ↗</a>).
+            배포 대상 서버마다 소스를 내려받아 빌드하면 아키텍처 불일치(Mac <code>arm64</code> vs EC2 <code>x86_64</code>)와 빌드 시간 낭비가 발생합니다. Jenkins에서 단 1회 빌드해 <code>seojunhayo/yeonjulog:&lt;git-sha-7&gt;</code>로 푸시하고, 클러스터는 해당 태그만 배포하도록 표준화했습니다.
           </p>
         </div>
 
         <div class="rounded-xl border border-slate-200 bg-white p-4">
           <div class="flex items-center gap-2">
-            <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-600 text-[11px] font-bold text-white">4</span>
-            <h4 class="text-sm font-bold text-slate-900">무중단 롤링 업데이트(<code>maxUnavailable: 0</code>) 및 180초 자동 롤백</h4>
+            <span class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-[11px] font-bold text-white">4</span>
+            <h4 class="text-sm font-bold text-slate-900">RollingUpdate(<code>maxUnavailable: 0</code>) 및 180초 자동 Rollback</h4>
           </div>
           <p class="mt-1.5 text-xs text-slate-600">
-            파드 2개를 운영하며 새 파드가 올라와 <code>readinessProbe</code>를 통과하기 전까지 기존 파드를 내리지 않도록 설정했습니다. 180초 안에 새 파드가 준비되지 않으면 Ansible <code>rescue</code> 블록이 <code>kubectl rollout undo</code>로 즉시 복구합니다(<a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/ansible/k8s-deploy.yml#L1-L17" target="_blank" rel="noopener noreferrer" class="ext-link">k8s-deploy.yml 1~17행 ↗</a>).
+            Pod 2개를 운영하며 신규 Pod가 올라와 <code>readinessProbe</code>를 통과하기 전까지 기존 Pod를 종료하지 않도록 설정했습니다. 180초 안에 신규 Pod가 Ready 상태가 되지 않으면 Ansible <code>rescue</code> 블록이 <code>kubectl rollout undo</code>로 즉시 복구합니다.
           </p>
         </div>
       </div>
 
       <!-- Normal Pipeline Execution Screenshot -->
       <div class="mt-5 rounded-xl border border-slate-200 bg-slate-50 p-4">
-        <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-          <span class="text-xs font-bold text-slate-800">정상 파이프라인 완주 화면 (Jenkins Build #22 · 총 3분 27초 소요)</span>
-          <a href="https://policerjack.tistory.com/2" target="_blank" rel="noopener noreferrer" class="ext-link text-xs">구축 기록 전문 ↗</a>
+        <div class="mb-2 flex flex-wrap items-center justify-between gap-2">
+          <span class="text-xs font-bold text-slate-800">정상 파이프라인 실행 화면 (Jenkins Build #22 · 총 3분 27초 소요)</span>
         </div>
-        <img src="https://junhasuh.github.io/assets/yeongju-b22-stages.png" alt="Jenkins 빌드 #22 정상 배포 완료 단계 화면" class="max-h-56 w-auto rounded-lg border border-slate-200 bg-white object-contain mx-auto" />
+        <img src="https://junhasuh.github.io/assets/yeongju-b22-stages.png" alt="Jenkins 빌드 #22 정상 배포 완료 단계 화면" class="mx-auto max-h-56 w-auto rounded-lg border border-slate-200 bg-white object-contain" />
       </div>
     </article>
 
     <!-- =========================================================
-         PAGE 6: 영주로그 CI/CD (2/2) — 4가지 실패 주입 시험 & 트러블슈팅
+         PAGE 6: 영주로그 CI/CD (2/2) — 4 Failure Injection Tests & Troubleshooting
     ========================================================== -->
     <article id="p6" data-section="yeongju" class="page-card border-l-4 border-l-emerald-600 p-6 sm:p-10">
-      <!-- Unified Project Identity Top Bar -->
       <div class="flex flex-wrap items-center justify-between gap-2 border-b border-emerald-100 pb-4">
         <div class="flex items-center gap-2">
           <span class="rounded-md bg-emerald-600 px-2.5 py-1 text-xs font-extrabold tracking-wide text-white">PROJECT 02 · 영주로그 CI/CD (2/2)</span>
-          <span class="text-xs font-semibold text-emerald-900">4가지 실패 주입 시험 및 파이프라인 트러블슈팅</span>
+          <span class="text-xs font-semibold text-emerald-900">Failure Injection Verification & Pipeline Troubleshooting</span>
         </div>
         <span class="font-mono text-xs font-semibold text-slate-400">06 / 07 · YEONGJULOG FAILURE TESTS</span>
       </div>
 
       <div class="mt-5">
         <h2 class="text-xl font-extrabold text-slate-900 sm:text-2xl">
-          단위 테스트·품질 게이트·운영 DB 연결 장애까지 4가지 실패를 직접 주입해 차단과 롤백을 검증했습니다
+          Unit Test · Quality Gate · 운영 DB 연결 장애까지 4가지 실패를 직접 주입해 차단과 Rollback을 검증했습니다
         </h2>
         <p class="mt-1.5 text-xs text-slate-600 sm:text-sm">
-          정상 배포만 확인하는 데 그치지 않고, 각 관문이 의도한 대로 불량 코드를 막고 운영 장애 시 직전 버전으로 되돌리는지 커밋 단위로 재현했습니다.
+          정상 배포만 확인하는 데 그치지 않고, 각 파이프라인 관문이 의도한 대로 불량 빌드를 차단하고 운영 장애 시 직전 버전으로 되돌리는지 재현했습니다.
         </p>
       </div>
 
-      <!-- 4 Failure Injection Table -->
+      <!-- 4 Failure Injection Table (Without Commit Column) -->
       <div class="mt-4 overflow-x-auto rounded-xl border border-slate-200">
         <table class="w-full text-left text-xs">
           <thead class="bg-emerald-50/70 text-emerald-950">
             <tr>
-              <th class="w-28 px-3.5 py-2.5 font-bold">빌드 · 환경</th>
-              <th class="w-44 px-3.5 py-2.5 font-bold">검증 대상 관문</th>
-              <th class="px-3.5 py-2.5 font-bold">일부러 주입한 실패 조건</th>
-              <th class="px-3.5 py-2.5 font-bold">실제 관측 결과 및 복구 동작</th>
+              <th class="w-28 px-3.5 py-2.5 font-bold">Build · Target</th>
+              <th class="w-44 px-3.5 py-2.5 font-bold">Verification Gate</th>
+              <th class="px-3.5 py-2.5 font-bold">Injected Failure Condition</th>
+              <th class="px-3.5 py-2.5 font-bold">Observed Result & Recovery Behavior</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-200 bg-white">
             <tr>
               <td class="px-3.5 py-2.5 font-mono font-bold text-slate-900">#3 (EC2)</td>
-              <td class="px-3.5 py-2.5 font-semibold text-slate-800">① 단위 테스트 관문</td>
+              <td class="px-3.5 py-2.5 font-semibold text-slate-800">① Unit Test Gate</td>
               <td class="px-3.5 py-2.5 text-slate-600"><code>HealthCheckTest</code> 기대값을 <code>UP → DOWN</code>으로 조작</td>
-              <td class="px-3.5 py-2.5 text-slate-700"><strong class="text-rose-600">Test 단계 즉시 중단</strong> · JAR 빌드·Docker 이미지 생성·배포 전체 스킵</td>
+              <td class="px-3.5 py-2.5 text-slate-700"><strong class="text-rose-600">Test 스테이지 즉시 중단</strong> · JAR 빌드·Docker 이미지 생성·배포 전체 스킵</td>
             </tr>
             <tr>
               <td class="px-3.5 py-2.5 font-mono font-bold text-slate-900">#23 (K8s)</td>
-              <td class="px-3.5 py-2.5 font-semibold text-slate-800">② SonarQube 품질 게이트</td>
+              <td class="px-3.5 py-2.5 font-semibold text-slate-800">② SonarQube Quality Gate</td>
               <td class="px-3.5 py-2.5 text-slate-600">Quality Gate 기준을 '전체 코드 커버리지 80% 이상'으로 상향</td>
               <td class="px-3.5 py-2.5 text-slate-700">전체 커버리지 <code>15.4%</code> 판정으로 <strong class="text-rose-600">Quality Gate 실패</strong> → 후속 빌드·배포 전면 차단</td>
             </tr>
             <tr>
               <td class="px-3.5 py-2.5 font-mono font-bold text-slate-900">#7 (EC2)</td>
-              <td class="px-3.5 py-2.5 font-semibold text-slate-800">③ Docker 컨테이너 롤백</td>
+              <td class="px-3.5 py-2.5 font-semibold text-slate-800">③ Docker Container Rollback</td>
               <td class="px-3.5 py-2.5 text-slate-600">운영 <code>DB_URL</code>을 잘못된 변수명(<code>DB_URLV2</code>)으로 변경 (H2 테스트는 통과)</td>
               <td class="px-3.5 py-2.5 text-slate-700"><code>/actuator/health</code> 6초 간격 20회 실패 → <strong class="text-emerald-700">직전 정상 이미지(<code>cfe545d</code>) 자동 재기동</strong></td>
             </tr>
             <tr class="bg-emerald-50/30">
               <td class="px-3.5 py-2.5 font-mono font-bold text-emerald-900">#15 (K8s)</td>
-              <td class="px-3.5 py-2.5 font-bold text-emerald-900">④ K8s 무중단 배포 & 자동 롤백</td>
-              <td class="px-3.5 py-2.5 text-slate-700">운영 DB 환경변수를 <code>DB_URL_V3</code>로 오기입 (CI 테스트 통과 후 운영 파드 기동 실패 유도)</td>
-              <td class="px-3.5 py-2.5 text-slate-800"><code>rollout status</code> 180초 타임아웃 → <strong class="text-emerald-700">Ansible <code>rescue</code>가 <code>rollout undo</code> 실행</strong>해 기존 파드 유지 후 Jenkins <code>FAILURE</code> 기록</td>
+              <td class="px-3.5 py-2.5 font-bold text-emerald-900">④ K8s Auto Rollback</td>
+              <td class="px-3.5 py-2.5 text-slate-700">운영 DB 환경변수를 <code>DB_URL_V3</code>로 오기입 (CI 테스트 통과 후 운영 Pod 기동 실패 유도)</td>
+              <td class="px-3.5 py-2.5 text-slate-800"><code>rollout status</code> 180초 Timeout → <strong class="text-emerald-700">Ansible <code>rescue</code>가 <code>rollout undo</code> 실행</strong>해 기존 Pod 유지 후 Jenkins <code>FAILURE</code> 기록</td>
             </tr>
           </tbody>
         </table>
@@ -1050,211 +1010,222 @@
       <!-- Design Decision & Troubleshooting Grid -->
       <div class="mt-6 grid gap-4 md:grid-cols-3">
         <div class="rounded-xl border border-slate-200 bg-white p-4">
-          <span class="rounded bg-emerald-100 px-2 py-0.5 text-[11px] font-bold text-emerald-800">설계 판단 (Why fail after rescue?)</span>
-          <h3 class="mt-2 text-sm font-bold text-slate-900">롤백이 성공했는데도 왜 Jenkins 빌드를 FAILURE로 끝냈는가?</h3>
-          <p class="mt-1.5 text-xs text-slate-600 leading-relaxed">
-            Ansible에서 <code>rescue</code> 블록으로 <code>rollout undo</code>만 실행하고 끝내면, 복구 작업 자체가 성공했기 때문에 종료 코드가 <code>0</code>이 되어 <strong>Jenkins 빌드가 초록불(SUCCESS)로 표시되는 문제</strong>가 있었습니다. 개발자가 배포 실패 사실을 즉시 인지할 수 있도록 복구 직후 <code>fail</code> 모듈을 호출해 의도적으로 빌드를 <code>FAILURE</code>로 남겼습니다(<a href="https://github.com/junhasuh/yeongjuLog-BE/blob/29af8f737dbb0bc960dcf95d1f60530570567663/ansible/k8s-deploy.yml#L11-L17" target="_blank" rel="noopener noreferrer" class="ext-link">k8s-deploy.yml 11~17행 ↗</a>).
+          <span class="rounded bg-emerald-100 px-2 py-0.5 text-[11px] font-bold text-emerald-800">Pipeline Design · Explicit Failure</span>
+          <h3 class="mt-2 text-sm font-bold text-slate-900">Rollback이 성공했는데도 왜 Jenkins 빌드를 FAILURE로 끝냈는가?</h3>
+          <p class="mt-1.5 text-xs leading-relaxed text-slate-600">
+            Ansible에서 <code>rescue</code> 블록으로 <code>rollout undo</code>만 실행하고 끝내면 복구 태스크 자체가 성공으로 처리되어 종료 코드 <code>0</code>을 반환하고, <strong>Jenkins 빌드가 <code>SUCCESS</code>로 잘못 표시되는 문제</strong>가 있었습니다. 배포 실패 사실을 즉시 인지할 수 있도록 복구 직후 <code>fail</code> 모듈을 호출해 빌드를 <code>FAILURE</code>로 마감했습니다.
           </p>
         </div>
 
         <div class="rounded-xl border border-slate-200 bg-white p-4">
-          <span class="rounded bg-rose-100 px-2 py-0.5 text-[11px] font-bold text-rose-800">Troubleshooting 01 · 보안 등급 개선</span>
-          <h3 class="mt-2 text-sm font-bold text-slate-900">SonarQube 보안 등급 C(1건) → CORS 허용 출처 명시로 A(0건) 달성</h3>
-          <p class="mt-1.5 text-xs text-slate-600 leading-relaxed">
-            첫 SonarQube 정적 분석에서 백엔드의 <code>allowedOriginPatterns("*")</code> 와일드카드 설정이 보안 취약점(Security Rating C)으로 검출되었습니다. 허용 출처 도메인을 명시적으로 제한하는 커밋(<a href="https://github.com/junhasuh/yeongjuLog-BE/commit/20de3cc63fb38975b8891f82dd3535b153f58cf5" target="_blank" rel="noopener noreferrer" class="ext-link">20de3cc ↗</a>)을 반영해 <strong>보안 등급을 A(취약점 0건)로 개선</strong>했습니다.
+          <span class="rounded bg-rose-100 px-2 py-0.5 text-[11px] font-bold text-rose-800">Troubleshooting 01 · Security Rating</span>
+          <h3 class="mt-2 text-sm font-bold text-slate-900">SonarQube Security Rating C(1건) → CORS 허용 출처 명시로 A(0건) 개선</h3>
+          <p class="mt-1.5 text-xs leading-relaxed text-slate-600">
+            첫 SonarQube 정적 분석에서 백엔드의 <code>allowedOriginPatterns("*")</code> 와일드카드 설정이 보안 취약점(Security Rating C)으로 검출되었습니다. 허용 출처 도메인을 명시적으로 제한하도록 수정해 <strong>Security Rating을 A(취약점 0건)로 개선</strong>했습니다.
           </p>
         </div>
 
         <div class="rounded-xl border border-slate-200 bg-white p-4">
-          <span class="rounded bg-rose-100 px-2 py-0.5 text-[11px] font-bold text-rose-800">Troubleshooting 02 · Git 스테이징 범위</span>
-          <h3 class="mt-2 text-sm font-bold text-slate-900">빌드 #5 SUCCESS인데 Deploy 스테이지가 실행되지 않은 현상</h3>
-          <p class="mt-1.5 text-xs text-slate-600 leading-relaxed">
-            빌드 #5가 성공했는데도 컨테이너가 갱신되지 않았습니다. 확인 결과 하위 폴더(<code>ansible/</code>) 안에서 <code>git add .</code>를 실행해 상위 루트의 <code>Jenkinsfile</code> 수정분이 커밋(<a href="https://github.com/junhasuh/yeongjuLog-BE/commit/66845d628dba84511ded46d430de933d6bb8923d" target="_blank" rel="noopener noreferrer" class="ext-link">66845d6 ↗</a>)에서 누락된 것이 원인이었고, 루트 기준 재커밋(<a href="https://github.com/junhasuh/yeongjuLog-BE/commit/cfe545d57bcc519974bf1a5d223ad71048415612" target="_blank" rel="noopener noreferrer" class="ext-link">cfe545d ↗</a>)과 실행 이미지 해시 대조로 해결했습니다.
+          <span class="rounded bg-rose-100 px-2 py-0.5 text-[11px] font-bold text-rose-800">Troubleshooting 02 · Git Staging Scope</span>
+          <h3 class="mt-2 text-sm font-bold text-slate-900">Build #5 SUCCESS인데 Deploy 스테이지가 실행되지 않은 현상</h3>
+          <p class="mt-1.5 text-xs leading-relaxed text-slate-600">
+            Build #5가 성공했는데도 컨테이너가 갱신되지 않았습니다. 확인 결과 하위 디렉터리(<code>ansible/</code>)에서 <code>git add .</code>를 실행해 루트 경로의 <code>Jenkinsfile</code> 수정분이 커밋에서 누락된 것이 원인이었고, 루트 기준 재커밋과 실행 중인 컨테이너 이미지 해시 대조로 해결했습니다.
           </p>
         </div>
       </div>
 
-      <!-- Evidence Screenshots & Expandable Console Logs -->
+      <!-- Evidence Screenshots -->
       <div class="mt-5 grid gap-4 sm:grid-cols-2">
         <div class="rounded-xl border border-slate-200 bg-slate-50 p-3.5">
-          <p class="text-xs font-bold text-slate-800 mb-2">증거 ① · SonarQube Quality Gate 미달 시 후속 단계 차단 화면 (#23)</p>
-          <img src="https://junhasuh.github.io/assets/jenkins-stages.png" alt="Quality Gate 실패 시 후속 단계 차단 화면" class="max-h-44 w-auto rounded border border-slate-200 bg-white object-contain mx-auto" />
+          <p class="mb-2 text-xs font-bold text-slate-800">증거 ① · SonarQube Quality Gate 미달 시 후속 단계 차단 화면 (#23)</p>
+          <img src="https://junhasuh.github.io/assets/jenkins-stages.png" alt="Quality Gate 실패 시 후속 단계 차단 화면" class="mx-auto max-h-44 w-auto rounded border border-slate-200 bg-white object-contain" />
         </div>
         <div class="rounded-xl border border-slate-200 bg-slate-50 p-3.5">
-          <p class="text-xs font-bold text-slate-800 mb-2">증거 ② · K8s 180초 타임아웃 후 rollout undo 실행 및 FAILURE 처리 (#15)</p>
-          <img src="https://junhasuh.github.io/assets/yeongju-b7-rollback-log.png" alt="Ansible 롤백 로그 화면" class="max-h-44 w-auto rounded border border-slate-200 bg-white object-contain mx-auto" />
+          <p class="mb-2 text-xs font-bold text-slate-800">증거 ② · K8s 180초 Timeout 후 rollout undo 실행 및 FAILURE 처리 (#15)</p>
+          <img src="https://junhasuh.github.io/assets/yeongju-b7-rollback-log.png" alt="Ansible 롤백 로그 화면" class="mx-auto max-h-44 w-auto rounded border border-slate-200 bg-white object-contain" />
         </div>
       </div>
     </article>
 
     <!-- =========================================================
-         PAGE 7: 기반 역량 — Terraform AWS IaC & K8s 장애 트러블슈팅
+         PAGE 7: Terraform AWS IaC & K8s Troubleshooting
     ========================================================== -->
     <article id="p7" data-section="infra" class="page-card border-l-4 border-l-amber-600 p-6 sm:p-10">
-      <!-- Unified Project Identity Top Bar -->
       <div class="flex flex-wrap items-center justify-between gap-2 border-b border-amber-100 pb-4">
         <div class="flex items-center gap-2">
           <span class="rounded-md bg-amber-700 px-2.5 py-1 text-xs font-extrabold tracking-wide text-white">PROJECT 03 · TERRAFORM & K8S</span>
-          <span class="text-xs font-semibold text-amber-950">AWS 코드형 인프라(IaC) 설계 및 클러스터 원인 추적 트러블슈팅</span>
+          <span class="text-xs font-semibold text-amber-950">AWS IaC Provisioning & Kubernetes Root-Cause Troubleshooting</span>
         </div>
         <span class="font-mono text-xs font-semibold text-slate-400">07 / 07 · TERRAFORM IaC & K8S TROUBLESHOOTING</span>
       </div>
 
-      <!-- Clear Project Title & Context -->
+      <!-- Project Header Box -->
       <div class="mt-5 rounded-2xl border border-amber-200 bg-gradient-to-r from-amber-50/80 via-white to-slate-50 p-5">
         <div class="flex flex-wrap items-baseline justify-between gap-2">
           <h2 class="text-xl font-extrabold text-slate-900 sm:text-2xl">
-            aws-terraform-infra - Terraform 기반 AWS 네트워크·IAM 코드형 인프라 및 K8s 트러블슈팅
+            aws-terraform-infra - Terraform 기반 AWS 네트워크·IAM IaC 및 K8s Troubleshooting
           </h2>
-          <a href="https://github.com/junhasuh/aws-terraform-infra" target="_blank" rel="noopener noreferrer" class="ext-link font-mono text-xs">github.com/junhasuh/aws-terraform-infra ↗</a>
+          <span class="font-mono text-xs font-semibold text-amber-800">2026.07 ~ 2026.10 · Terraform · AWS · Kubernetes (CKA)</span>
         </div>
         <p class="mt-2 text-xs text-slate-700 sm:text-sm">
-          콘솔 수동 설정으로 인한 이력 누락과 권한 과다 부여를 막기 위해 <strong>AWS VPC 네트워크·IAM 역할을 Terraform 코드로 모듈화</strong>하고, S3 원격 상태 저장소와 DynamoDB 상태 잠금(State Lock)을 적용했습니다. 장애를 마주했을 때는 추측으로 설정을 덮어쓰지 않고 <strong>① 실행 주체 → ② 설정 파일 → ③ 시스템 로그/자원 수치</strong> 순서로 원인을 좁혀 해결했습니다.
+          콘솔 수동 작업으로 인한 설정 드리프트와 과도한 권한 부여를 방지하기 위해 <strong>AWS VPC 네트워크·IAM Role을 Terraform 코드로 모듈화</strong>하고, S3 Remote Backend와 DynamoDB State Lock을 적용했습니다. 클러스터 및 클라우드 장애 발생 시에는 추측으로 설정을 덮어쓰지 않고 <strong>① Caller Identity → ② Manifest/Config → ③ System Log & Resource Metrics</strong> 순서로 원인을 좁혀 복구했습니다.
         </p>
       </div>
 
-      <!-- Visual Diagrams: Left = AWS VPC Terraform / Right = K8s Pod Pending Resource Troubleshooting (멘토링 피드백 반영: 표 대신 시각적 그림으로 상황 설명) -->
+      <!-- Responsive HTML/CSS Diagrams: Left = AWS VPC Terraform / Right = K8s Pod Pending (Zero Text Overflow Guaranteed) -->
       <div class="mt-6 grid gap-5 lg:grid-cols-2">
         <!-- Diagram 1: Terraform AWS VPC & Remote State -->
-        <div class="rounded-xl border border-slate-200 bg-slate-50/70 p-4">
-          <div class="flex items-center justify-between mb-2">
-            <h3 class="text-sm font-bold text-slate-900">1. Terraform AWS 네트워크 & 원격 상태 아키텍처</h3>
-            <a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/02-vpc/vpc.tf#L6-L97" target="_blank" rel="noopener noreferrer" class="ext-link text-xs">vpc.tf 코드 ↗</a>
+        <div class="flex flex-col justify-between rounded-xl border border-slate-200 bg-slate-50/80 p-4">
+          <div>
+            <div class="mb-3 flex items-center justify-between gap-2">
+              <h3 class="text-sm font-bold text-slate-900">1. Terraform AWS VPC & Remote Backend 구조</h3>
+              <span class="rounded bg-amber-100 px-2 py-0.5 font-mono text-[11px] font-bold text-amber-900">AWS Provider v5</span>
+            </div>
+
+            <div class="grid gap-3 sm:grid-cols-12">
+              <!-- VPC Box (8 cols) -->
+              <div class="rounded-xl border-2 border-dashed border-slate-400 bg-white p-3 sm:col-span-8">
+                <p class="font-mono text-xs font-extrabold text-slate-900">AWS VPC (10.0.0.0/16) · ap-northeast-2a</p>
+
+                <div class="mt-2 rounded-lg border border-blue-200 bg-blue-50/80 px-2.5 py-1.5 text-center text-[11px] font-bold text-blue-900">
+                  Internet Gateway (<code>0.0.0.0/0</code> Routing)
+                </div>
+
+                <div class="mt-2 rounded-lg border border-emerald-300 bg-emerald-50/70 p-2.5 text-[11px]">
+                  <p class="font-bold text-emerald-950">Public Subnet (<code>10.0.0.0/24</code>)</p>
+                  <p class="mt-0.5 text-emerald-800">• <code>map_public_ip_on_launch = true</code></p>
+                  <p class="mt-0.5 font-semibold text-emerald-900">• NAT Gateway (+ EIP) 배치</p>
+                </div>
+
+                <div class="mt-2 rounded-lg border border-indigo-200 bg-indigo-50/70 p-2.5 text-[11px]">
+                  <p class="font-bold text-indigo-950">Private Subnet (<code>10.0.10.0/24</code>)</p>
+                  <p class="mt-0.5 text-indigo-900">• 외부 직접 접근 차단 (내부 워크로드 격리)</p>
+                  <p class="mt-0.5 text-indigo-900">• Outbound(<code>0.0.0.0/0</code>) → NAT GW 경유</p>
+                </div>
+              </div>
+
+              <!-- Remote Backend & IAM (4 cols) -->
+              <div class="flex flex-col justify-between gap-2.5 sm:col-span-4">
+                <div class="rounded-xl border border-amber-300 bg-amber-50/80 p-3 text-[11px]">
+                  <p class="font-extrabold text-amber-950">Remote Backend</p>
+                  <p class="mt-1 font-semibold text-amber-900">• S3 State Storage</p>
+                  <p class="mt-0.5 font-semibold text-amber-900">• DynamoDB Lock</p>
+                  <p class="mt-1 text-amber-800">동시 <code>apply</code> 충돌 방지 및 상태 무결성 보장</p>
+                </div>
+
+                <div class="rounded-xl border border-slate-300 bg-white p-3 text-[11px]">
+                  <p class="font-extrabold text-slate-900">EC2 IAM 모듈화</p>
+                  <p class="mt-1 text-slate-700">• IAM Role + Instance Profile 분리 설계</p>
+                  <p class="mt-1 text-slate-600">• 리소스 속성 참조로 DAG 생성 순서 보장</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <svg viewBox="0 0 440 230" class="w-full h-auto rounded-lg bg-white border border-slate-200 p-2" role="img" aria-label="Terraform AWS VPC 아키텍처 다이어그램">
-            <!-- AWS VPC Box -->
-            <rect x="12" y="12" width="275" height="205" rx="8" fill="#f8fafc" stroke="#475569" stroke-width="1.5" stroke-dasharray="4 2" />
-            <text x="22" y="30" font-size="10.5" font-weight="800" fill="#0f172a">AWS VPC (10.0.0.0/16) · ap-northeast-2a</text>
-
-            <!-- IGW -->
-            <rect x="22" y="40" width="255" height="28" rx="5" fill="#dbeafe" stroke="#60a5fa" />
-            <text x="80" y="58" font-size="10" font-weight="700" fill="#1e40af">Internet Gateway (0.0.0.0/0 라우팅)</text>
-
-            <!-- Public Subnet -->
-            <rect x="22" y="78" width="255" height="58" rx="6" fill="#ecfdf5" stroke="#34d399" />
-            <text x="32" y="95" font-size="10" font-weight="700" fill="#065f46">Public Subnet (10.0.0.0/24)</text>
-            <text x="32" y="110" font-size="9" fill="#047857">• map_public_ip_on_launch = true</text>
-            <text x="32" y="124" font-size="9" font-weight="600" fill="#065f46">• NAT Gateway (+ EIP) 배치</text>
-
-            <!-- Private Subnet -->
-            <rect x="22" y="146" width="255" height="60" rx="6" fill="#eff6ff" stroke="#93c5fd" />
-            <text x="32" y="163" font-size="10" font-weight="700" fill="#1e3a8a">Private Subnet (10.0.10.0/24)</text>
-            <text x="32" y="178" font-size="9" fill="#1e40af">• 외부 직접 접근 차단 (내부 워크로드 보호)</text>
-            <text x="32" y="192" font-size="9" fill="#1e40af">• 아웃바운드(0.0.0.0/0) → NAT GW 경유</text>
-
-            <!-- Right: Remote Backend & IAM -->
-            <rect x="298" y="12" width="130" height="98" rx="8" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5" />
-            <text x="308" y="30" font-size="10" font-weight="800" fill="#92400e">Terraform Backend</text>
-            <text x="308" y="48" font-size="9" font-weight="600" fill="#78350f">• S3 원격 상태 저장</text>
-            <text x="308" y="64" font-size="9" font-weight="600" fill="#78350f">• DynamoDB Lock</text>
-            <text x="308" y="80" font-size="8.5" fill="#92400e">동시 apply 충돌 방지</text>
-            <text x="308" y="94" font-size="8.5" fill="#92400e">및 상태 무결성 보장</text>
-
-            <rect x="298" y="120" width="130" height="97" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5" />
-            <text x="308" y="138" font-size="10" font-weight="800" fill="#1e293b">EC2 IAM Role 분리</text>
-            <text x="308" y="155" font-size="9" fill="#334155">• Role + Instance</text>
-            <text x="308" y="168" font-size="9" fill="#334155">  Profile 모듈화</text>
-            <text x="308" y="185" font-size="8.5" fill="#475569">• 리소스 속성 참조로</text>
-            <text x="308" y="198" font-size="8.5" fill="#475569">  생성 순서 보장</text>
-          </svg>
         </div>
 
-        <!-- Diagram 2: K8s Pod Pending & Control Plane Troubleshooting -->
-        <div class="rounded-xl border border-slate-200 bg-slate-50/70 p-4">
-          <div class="flex items-center justify-between mb-2">
-            <h3 class="text-sm font-bold text-slate-900">2. K8s 파드 Pending(자원 한계 초과) 원인 분석 및 해결 구조</h3>
-            <span class="rounded bg-amber-100 px-2 py-0.5 text-[11px] font-bold text-amber-900">CKA & 클러스터 실습</span>
+        <!-- Diagram 2: K8s Pod Pending Resource Troubleshooting (HTML/CSS Card Layout - Zero Overflow) -->
+        <div class="flex flex-col justify-between rounded-xl border border-slate-200 bg-slate-50/80 p-4">
+          <div>
+            <div class="mb-3 flex items-center justify-between gap-2">
+              <h3 class="text-sm font-bold text-slate-900">2. K8s Pod Pending 원인 분석 및 복구</h3>
+              <span class="rounded bg-blue-100 px-2 py-0.5 font-mono text-[11px] font-bold text-blue-900">CKA & K8s Cluster</span>
+            </div>
+
+            <div class="space-y-2.5 rounded-xl border border-slate-200 bg-white p-3.5 text-xs">
+              <!-- Capacity Visual Bar -->
+              <div>
+                <div class="flex items-center justify-between text-[11px] font-bold text-slate-700">
+                  <span>Node Allocatable CPU 현황 (<code>kubectl describe node</code>)</span>
+                  <span class="font-mono text-emerald-700">가용 여유분 부족</span>
+                </div>
+                <div class="mt-1.5 flex h-7 w-full overflow-hidden rounded-lg border border-slate-300 bg-slate-100 text-[10.5px] font-bold">
+                  <div class="flex w-3/4 items-center justify-center bg-slate-300 text-slate-800">
+                    기존 Pod 예약량 (Allocated resources)
+                  </div>
+                  <div class="flex w-1/4 items-center justify-center bg-emerald-100 text-emerald-900">
+                    잔여 Allocatable
+                  </div>
+                </div>
+              </div>
+
+              <!-- Cause Box -->
+              <div class="rounded-lg border border-rose-200 bg-rose-50/70 p-2.5">
+                <p class="font-bold text-rose-800">✗ Root Cause: 신규 Pod의 <code>requests.cpu</code> &gt; 노드의 잔여 Allocatable</p>
+                <p class="mt-1 text-[11px] leading-relaxed text-rose-900">
+                  <code>kube-scheduler</code>는 실제 CPU 사용량이 아니라 매니페스트에 선언된 <code>requests</code> 합계를 기준으로 노드를 배정합니다. 신규 Pod의 요청량이 노드 잔여 한계치를 초과해 <code>UnexpectedAdmissionError</code> 및 <code>Pending</code> 상태로 대기하고 있었습니다.
+                </p>
+              </div>
+
+              <!-- Resolution Box -->
+              <div class="rounded-lg border border-emerald-200 bg-emerald-50/70 p-2.5">
+                <p class="font-bold text-emerald-900">✓ Resolution: 노드 가용 한계치(<code>Allocatable - Allocated</code>) 이하로 Requests 조정</p>
+                <p class="mt-1 text-[11px] leading-relaxed text-emerald-800">
+                  <code>kubectl describe node</code>로 확인한 가용 수치 범위 안으로 매니페스트의 <code>requests.cpu</code>를 하향 조정하고 <code>kubelet</code>을 재시작해 즉시 <code>Running</code> 전환을 확인했습니다.
+                </p>
+              </div>
+            </div>
           </div>
-          <svg viewBox="0 0 440 230" class="w-full h-auto rounded-lg bg-white border border-slate-200 p-2" role="img" aria-label="쿠버네티스 파드 Pending 리소스 할당량 초과 해결 다이어그램">
-            <!-- Node Allocatable Bar -->
-            <text x="16" y="26" font-size="10.5" font-weight="800" fill="#0f172a">문제 상황: 새로 배포한 파드가 노드에 배치되지 못하고 계속 Pending 상태로 멈춤</text>
-            <rect x="16" y="38" width="408" height="42" rx="6" fill="#f1f5f9" stroke="#94a3b8" />
-            <rect x="16" y="38" width="310" height="42" rx="6" fill="#cbd5e1" />
-            <text x="26" y="56" font-size="9.5" font-weight="700" fill="#1e293b">기존 파드들이 선점한 CPU 요청량 (Allocated resources)</text>
-            <text x="26" y="70" font-size="9" fill="#475569">kubectl describe node 로 확인한 현재 예약량</text>
-            <text x="334" y="56" font-size="9.5" font-weight="700" fill="#059669">남은 여유량</text>
-            <text x="334" y="70" font-size="8.5" fill="#047857">(Allocatable 잔여)</text>
-
-            <!-- Failing Request -->
-            <rect x="16" y="92" width="408" height="54" rx="6" fill="#fff1f2" stroke="#f43f5e" stroke-width="1.5" />
-            <text x="26" y="110" font-size="10" font-weight="700" fill="#be123c">✗ 원인: 신규 파드의 CPU 요청량(requests.cpu) &gt; 노드의 남은 수용 한계치</text>
-            <text x="26" y="125" font-size="9" fill="#881337">• 쿠버네티스 스케줄러는 실제 CPU 사용량이 아니라 매니페스트에 선언된 요청량(Requests) 합계를 기준으로 판단</text>
-            <text x="26" y="139" font-size="9" fill="#881337">• 노드가 받을 수 있는 잔여 한계치를 넘어서서 스케줄링 단계에서 거부(UnexpectedAdmissionError / Pending)</text>
-
-            <!-- Fixed Request -->
-            <rect x="16" y="156" width="408" height="60" rx="6" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5" />
-            <text x="26" y="174" font-size="10" font-weight="700" fill="#065f46">✓ 해결: 노드 가용 한계치(Allocatable - Allocated) 이하로 파드 Requests 수치 조정</text>
-            <text x="26" y="190" font-size="9" fill="#047857">• 매니페스트의 CPU 요청량을 노드 수용 범위 안으로 낮춘 뒤 kubelet 재시작 → 즉시 Running 전환 확인</text>
-            <text x="26" y="205" font-size="9" font-weight="600" fill="#065f46">• 교훈: 감으로 재설치하지 않고 describe node 수치와 로그부터 대조하는 트러블슈팅 기준 확립</text>
-          </svg>
         </div>
       </div>
 
       <!-- 4 Concrete Root-Cause Troubleshooting Cases -->
       <div class="mt-6">
-        <h3 class="text-base font-bold text-slate-900">실행 주체 · 설정 · 로그 대조로 해결한 4대 인프라 트러블슈팅</h3>
+        <h3 class="text-base font-bold text-slate-900">Caller Identity · Config · System Log 대조로 해결한 4대 인프라 Troubleshooting</h3>
         <div class="mt-3 grid gap-3.5 sm:grid-cols-2">
-          <!-- Case 1 -->
           <div class="rounded-xl border border-slate-200 bg-white p-4">
             <div class="flex items-center justify-between gap-2">
-              <span class="rounded bg-amber-100 px-2 py-0.5 text-[11px] font-bold text-amber-900">Terraform · AWS 자격 증명 체인</span>
-              <a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/TROUBLESHOOTING.md#L7-L45" target="_blank" rel="noopener noreferrer" class="ext-link text-xs">TROUBLESHOOTING #1 ↗</a>
+              <span class="rounded bg-amber-100 px-2 py-0.5 text-[11px] font-bold text-amber-900">Terraform · AWS Credential Chain</span>
+              <span class="font-mono text-[11px] text-slate-400">IMDS assumed-role</span>
             </div>
-            <h4 class="mt-2 text-sm font-bold text-slate-900"><code>~/.aws/credentials</code> 삭제 후 <code>iam:GetRole</code>만 AccessDenied가 발생한 문제</h4>
-            <p class="mt-1.5 text-xs text-slate-600">
-              <strong>[단서 및 원인]</strong> 로컬 자격 증명 파일을 지웠는데도 S3·DynamoDB 명령은 계속 동작하고 <code>iam:GetRole</code>에서만 권한 오류가 났습니다. <code>aws sts get-caller-identity</code>로 현재 실행 주체를 조회한 결과, 자격 증명 체인의 마지막 단계인 <strong>EC2 인스턴스 메타데이터 역할(IMDS <code>assumed-role</code>)</strong>로 자동 전환되어 S3·DynamoDB 권한만 가진 상태로 실행되고 있음을 밝혀냈습니다.<br />
-              <strong>[조치]</strong> 전체 관리자 권한을 주는 대신 작업 서버의 인스턴스 역할에 필요한 IAM 조회 권한만 추가해 해결했습니다.
+            <h4 class="mt-2 text-sm font-bold text-slate-900"><code>~/.aws/credentials</code> 삭제 후 <code>iam:GetRole</code>만 AccessDenied가 발생한 이슈</h4>
+            <p class="mt-1.5 text-xs leading-relaxed text-slate-600">
+              로컬 자격 증명 파일을 삭제했는데도 S3·DynamoDB 명령은 정상 동작하고 <code>iam:GetRole</code>에서만 권한 오류가 발생했습니다. <code>aws sts get-caller-identity</code>로 호출 주체를 확인한 결과, Credential Chain의 마지막 단계인 <strong>EC2 Instance Metadata Service(IMDS <code>assumed-role</code>)</strong>로 자동 전환되어 S3·DynamoDB 권한만 가진 채 실행되고 있음을 확인했고, 작업 서버 Role에 필요한 IAM 조회 권한만 최소한으로 추가해 해결했습니다.
             </p>
           </div>
 
-          <!-- Case 2 -->
           <div class="rounded-xl border border-slate-200 bg-white p-4">
             <div class="flex items-center justify-between gap-2">
-              <span class="rounded bg-amber-100 px-2 py-0.5 text-[11px] font-bold text-amber-900">Terraform · 리소스 생성 순서(DAG)</span>
-              <a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/TROUBLESHOOTING.md#L48-L97" target="_blank" rel="noopener noreferrer" class="ext-link text-xs">TROUBLESHOOTING #2 ↗</a>
+              <span class="rounded bg-amber-100 px-2 py-0.5 text-[11px] font-bold text-amber-900">Terraform · Resource Dependency (DAG)</span>
+              <span class="font-mono text-[11px] text-slate-400">Implicit Dependency</span>
             </div>
-            <h4 class="mt-2 text-sm font-bold text-slate-900">IAM 사용자 생성 전에 그룹 멤버십이 먼저 실행되어 <code>NoSuchEntity (404)</code> 발생</h4>
-            <p class="mt-1.5 text-xs text-slate-600">
-              <strong>[원인]</strong> <code>aws_iam_group_membership</code>에 사용자 이름을 단순 변수 문자열(<code>var.user_names</code>)로 넘기면, Terraform이 사용자 리소스와의 선후 의존 관계를 알지 못해 그룹 연결을 먼저 시도하다가 404 오류가 발생했습니다.<br />
-              <strong>[조치]</strong> 문자열 변수 대신 생성된 IAM 사용자 리소스의 속성(<code>aws_iam_user.this[*].name</code>)을 직접 참조하도록 수정해 암시적 의존성으로 생성 순서를 보장했습니다(<a href="https://github.com/junhasuh/aws-terraform-infra/blob/8710fe8be6b41c2ee8b82cc6b8a7e57dadcc64bb/03-iam/devops_group.tf#L5-L11" target="_blank" rel="noopener noreferrer" class="ext-link">devops_group.tf 5~11행 ↗</a>).
+            <h4 class="mt-2 text-sm font-bold text-slate-900">IAM User 생성 전에 Group Membership이 먼저 실행되어 <code>NoSuchEntity (404)</code> 발생</h4>
+            <p class="mt-1.5 text-xs leading-relaxed text-slate-600">
+              <code>aws_iam_group_membership</code>에 사용자 이름을 단순 문자열 변수(<code>var.user_names</code>)로 전달하자, Terraform이 IAM User 리소스와의 선후 의존 관계를 파악하지 못해 그룹 연결을 먼저 호출하다가 404 오류가 발생했습니다. 문자열 변수 대신 생성된 리소스 속성(<code>aws_iam_user.this[*].name</code>)을 직접 참조하도록 수정해 DAG 생성 순서를 보장했습니다.
             </p>
           </div>
 
-          <!-- Case 3 -->
           <div class="rounded-xl border border-slate-200 bg-white p-4">
             <div class="flex items-center justify-between gap-2">
-              <span class="rounded bg-blue-100 px-2 py-0.5 text-[11px] font-bold text-blue-900">Kubernetes · 컨트롤 플레인 복구</span>
-              <span class="text-xs font-mono text-slate-400">CKA 실습</span>
+              <span class="rounded bg-blue-100 px-2 py-0.5 text-[11px] font-bold text-blue-900">Kubernetes · Control Plane Recovery</span>
+              <span class="font-mono text-[11px] text-slate-400">kubelet &amp; etcd</span>
             </div>
-            <h4 class="mt-2 text-sm font-bold text-slate-900"><code>kubectl</code> 명령어가 먹통이 된 API 서버 무응답 장애 복구</h4>
-            <p class="mt-1.5 text-xs text-slate-600">
-              <strong>[단서 및 원인]</strong> API 서버가 죽어 <code>kubectl</code>을 쓸 수 없는 상황에서 <code>journalctl -u kubelet</code>으로 노드 데몬 로그를 먼저 추적했습니다. 그 결과 <code>kube-apiserver</code> 정적 파드 매니페스트의 <code>--etcd-servers</code> 주소가 실제 <code>etcd</code> 설정(<code>advertise-client-urls</code>)과 다른 IP를 가리켜 연결이 거부되고 있음을 확인했습니다.<br />
-              <strong>[조치]</strong> 정적 파드 매니페스트의 etcd IP를 실제 주소와 일치시켜 클러스터 제어를 즉시 복구했습니다.
+            <h4 class="mt-2 text-sm font-bold text-slate-900"><code>kubectl</code> 명령이 먹통이 된 <code>kube-apiserver</code> 무응답 장애 복구</h4>
+            <p class="mt-1.5 text-xs leading-relaxed text-slate-600">
+              API 서버가 중단되어 <code>kubectl</code>을 사용할 수 없는 상황에서 <code>journalctl -u kubelet</code>으로 노드 데몬 로그를 먼저 추적했습니다. 그 결과 <code>kube-apiserver</code> Static Pod 매니페스트의 <code>--etcd-servers</code> 주소가 실제 <code>etcd</code> 설정(<code>advertise-client-urls</code>)과 다른 IP를 가리켜 연결이 거부되고 있음을 찾아내어 매니페스트의 IP를 교정해 즉시 복구했습니다.
             </p>
           </div>
 
-          <!-- Case 4 -->
           <div class="rounded-xl border border-slate-200 bg-white p-4">
             <div class="flex items-center justify-between gap-2">
-              <span class="rounded bg-blue-100 px-2 py-0.5 text-[11px] font-bold text-blue-900">Docker · Jenkins 컨테이너 네트워크</span>
-              <a href="https://policerjack.tistory.com/3" target="_blank" rel="noopener noreferrer" class="ext-link text-xs">실습 기록 ↗</a>
+              <span class="rounded bg-blue-100 px-2 py-0.5 text-[11px] font-bold text-blue-900">Docker · Jenkins Container Networking</span>
+              <span class="font-mono text-[11px] text-slate-400">DinD → DooD</span>
             </div>
-            <h4 class="mt-2 text-sm font-bold text-slate-900">DinD(Docker-in-Docker) 환경에서 배포한 컨테이너 포트 접속 불가 해결</h4>
-            <p class="mt-1.5 text-xs text-slate-600">
-              <strong>[원인 및 조치]</strong> 컨테이너 내부의 독립 Docker 데몬(DinD)에서 앱 컨테이너를 띄우면 호스트 네트워크와 격리되어 외부 브라우저에서 접근할 수 없었습니다. 호스트의 <code>/var/run/docker.sock</code>을 공유하는 <strong>DooD(Docker-out-of-Docker)</strong> 구조로 전환해 호스트 레벨에서 컨테이너와 포트를 일관되게 관리하도록 개선했습니다. (공군 전산장비정비병 복무 시절에도 스위치 포트 → 서버실 패치 패널 → T568B 랜 케이블 직접 제작·결선 테스터 확인 순으로 계층별 원인을 좁혀 해결했습니다.)
+            <h4 class="mt-2 text-sm font-bold text-slate-900">DinD 환경에서 배포한 컨테이너 포트 외부 접속 불가 해결</h4>
+            <p class="mt-1.5 text-xs leading-relaxed text-slate-600">
+              컨테이너 내부의 독립 Docker 데몬(DinD)에서 애플리케이션 컨테이너를 기동하면 호스트 네트워크와 격리되어 외부에서 접근할 수 없었습니다. 호스트의 <code>/var/run/docker.sock</code>을 마운트하는 <strong>DooD</strong> 구조로 전환해 호스트 레벨에서 컨테이너와 포트 바인딩을 일관되게 제어하도록 개선했습니다.
             </p>
           </div>
         </div>
       </div>
 
-      <!-- Footer inside Page 7 -->
+      <!-- Footer -->
       <footer class="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-slate-200 pt-5 text-xs text-slate-500">
         <div>
           <span class="font-bold text-slate-800">서준하 (Junha Suh)</span> · Cloud / DevOps Engineer Portfolio · <a href="mailto:jungjunhayo@gmail.com" class="hover:underline">jungjunhayo@gmail.com</a>
         </div>
         <div class="flex items-center gap-4">
-          <a href="https://github.com/junhasuh" target="_blank" rel="noopener noreferrer" class="ext-link">GitHub (junhasuh) ↗</a>
-          <a href="https://policerjack.tistory.com/" target="_blank" rel="noopener noreferrer" class="ext-link">기술 블로그 (DevOps 항해일지) ↗</a>
+          <a href="https://github.com/junhasuh" target="_blank" rel="noopener noreferrer" class="ext-link">GitHub (junhasuh)</a>
+          <a href="https://policerjack.tistory.com/" target="_blank" rel="noopener noreferrer" class="ext-link">Tech Blog (policerjack.tistory.com)</a>
         </div>
       </footer>
     </article>
